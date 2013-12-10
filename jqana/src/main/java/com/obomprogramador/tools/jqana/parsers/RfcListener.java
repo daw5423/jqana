@@ -1,3 +1,22 @@
+/**
+ * jQana - Open Source Java(TM) code quality analyzer.
+ * 
+ * Copyright 2013 Cleuton Sampaio de Melo Jr
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * Project website: http://www.jqana.com
+ */
 package com.obomprogramador.tools.jqana.parsers;
 
 import java.util.List;
@@ -15,6 +34,21 @@ import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ExpressionContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.MethodDeclarationContext;
 import com.obomprogramador.tools.jqana.model.Measurement;
 
+/**
+ * Implementation of JavaBaseListener (ANTLR4) that calculates a Response For Class metric.
+ * 
+ * How does it work?
+ * It counts plus one for:
+ * a) Each constructor of the class. If no constructor is found, then it counts one for the default "no-args" constructor;
+ * b) Each class' method;
+ * c) Each object instantiation (a constructor is invoked);
+ * d) Each method call (member or not).
+ * 
+ * Then the received Measurement instance is updated, and the Parser gets the value.
+ * 
+ * @author Cleuton Sampaio
+ *
+ */
 public class RfcListener extends JavaBaseListener {
 	
 	protected Logger logger;
@@ -23,6 +57,11 @@ public class RfcListener extends JavaBaseListener {
 	protected boolean aConstructorWasFound;
 	private   String previousExpression;
 
+	/**
+	 * Default constructor.
+	 * @param measurement the Measurement instance to use. Its "metricValue" property will be updated.
+	 * @param p The JavaParser used to parse the Tree.
+	 */
 	public RfcListener(Measurement measurement, JavaParser p) {
 		this.logger = LoggerFactory.getLogger(this.getClass());
 		this.measurement = measurement;

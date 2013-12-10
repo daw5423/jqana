@@ -1,3 +1,23 @@
+
+/**
+ * jQana - Open Source Java(TM) code quality analyzer.
+ * 
+ * Copyright 2013 Cleuton Sampaio de Melo Jr
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * Project website: http://www.jqana.com
+ */
 package com.obomprogramador.tools.jqana.parsers;
 
 import java.util.Arrays;
@@ -28,6 +48,21 @@ import com.obomprogramador.tools.jqana.antlrparser.JavaParser.VariableDeclarator
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.VariableDeclaratorsContext;
 import com.obomprogramador.tools.jqana.parsers.Member.MEMBER_TYPE;
 
+/**
+ * Implementation of JavaBaseListener (ANTLR4) that checks LCOM4 value for a class.
+ * 
+ * How does it work?
+ * It creates a class' members array, containing each method or variable. For each method, 
+ * the listener verifies any of its references, for example: referenced methods and variables, and so on.
+ * This array is returned to the parser, that calculated LCOM4.
+ * 
+ * It classifies each class member according to its MEMBER_TYPE.
+ * @see GobalConstants.MEMBER_TYPE
+ * 
+ *  
+ * @author Cleuton Sampaio.
+ *
+ */
 public class Lcom4Listener extends JavaBaseListener {
 
 	protected Logger logger;
@@ -43,6 +78,9 @@ public class Lcom4Listener extends JavaBaseListener {
 	}
 
 
+	/**
+	 * Get the field's name, which is a tricky task.
+	 */
 	@Override
 	public void enterFieldDeclaration(@NotNull FieldDeclarationContext ctx) {
 		String name = "";
@@ -77,6 +115,9 @@ public class Lcom4Listener extends JavaBaseListener {
 	}
 
 
+	/**
+	 * We add each method to the members array. Then we will check for references.
+	 */
 	@Override
 	public void enterMethodDeclaration(@NotNull MethodDeclarationContext ctx) {
 		String methodName = "<no name>";
@@ -104,11 +145,20 @@ public class Lcom4Listener extends JavaBaseListener {
 		this.membersTable.add(member);
 	}
 	
+	/**
+	 * This is a special inner listener, used to check for a method's references.
+	 * @author Cleuton Sampaio
+	 *
+	 */
 	class Lcom4MethodListener extends JavaBaseListener {
 		private Member member;
 		public Lcom4MethodListener(Member member) {
 			this.member = member;
 		}
+		
+		/**
+		 * We have to check any expression, looking for other methods and variables references.
+		 */
 		@Override
 		public void enterExpression(@NotNull ExpressionContext ctx) {
 			if (ctx.children.size() == 1) {
@@ -136,6 +186,10 @@ public class Lcom4Listener extends JavaBaseListener {
 
 	}
 
+	/**
+	 * Now, that we finished analysing the class, we need to verify each found method's referencies.
+	 * So, we instantiate our special listener and walk each method's tree.
+	 */
 	@Override
 	public void exitCompilationUnit(@NotNull CompilationUnitContext ctx) {
 		

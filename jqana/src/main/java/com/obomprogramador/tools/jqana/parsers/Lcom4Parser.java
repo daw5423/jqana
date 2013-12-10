@@ -1,3 +1,22 @@
+/**
+ * jQana - Open Source Java(TM) code quality analyzer.
+ * 
+ * Copyright 2013 Cleuton Sampaio de Melo Jr
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * Project website: http://www.jqana.com
+ */
 package com.obomprogramador.tools.jqana.parsers;
 
 import static com.obomprogramador.tools.jqana.context.GlobalConstants.LCOM4;
@@ -26,8 +45,13 @@ import com.obomprogramador.tools.jqana.model.Parser;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMeasurement;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 import com.obomprogramador.tools.jqana.parsers.Member.MEMBER_TYPE;
+
 /**
+ * This is a Parser implementation that checks for LCOM4 value.
+ * It uses a Listener that creates a class' members array. Then, it verifies the number of
+ * "Connected components" inside the class.
  * 
+ * @author Cleuton Sampaio
  *
  */
 public class Lcom4Parser implements Parser {

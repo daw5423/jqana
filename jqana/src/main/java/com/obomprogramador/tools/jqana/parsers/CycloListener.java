@@ -1,3 +1,22 @@
+/**
+ * jQana - Open Source Java(TM) code quality analyzer.
+ * 
+ * Copyright 2013 Cleuton Sampaio de Melo Jr
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * Project website: http://www.jqana.com
+ */
 package com.obomprogramador.tools.jqana.parsers;
 
 import java.util.ArrayDeque;
@@ -31,6 +50,19 @@ import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMeasurement;
 
+/**
+ * This is a JavaBaseListener (ANTLR4) implementation that calculates Cyclomatic Complexity
+ * measurement, according to McCabe's calculations (http://www.literateprogramming.com/mccabe.pdf).
+ * 
+ * The listener counts plus one for:
+ * a) Each method;
+ * b) Each switch label;
+ * c) Each occurence of: "catch", "do", "for", "else if", "if", "throws", "while";
+ * d) Each "return" statement that is not the last command of a method;
+ * 
+ * @author Cleuton Sampaio.
+ *
+ */
 public class CycloListener extends JavaBaseListener {
 	
 	
@@ -47,7 +79,12 @@ public class CycloListener extends JavaBaseListener {
 	protected Metric metric;
 
 	
-
+	/**
+	 * Default constructor. 
+	 * @param metric The metric being used for analysis.
+	 * @param measurement The expected measurement to return to the Parser.
+	 * @param parser Instance of JavaParser (ANTLR4) used to get the AST.
+	 */
 	public CycloListener(Metric metric, Measurement measurement, JavaParser parser) {
 		this.metric = metric;
 		this.measurement = measurement;
