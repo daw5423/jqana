@@ -30,7 +30,7 @@ public class TestRfc {
 		Context context = new Context();
 		context.setValidMetrics(new ArrayList<Metric>());
 		context.getValidMetrics().add(metric);
-		String uri = getSource("TesteRfc.java"); 
+		String uri = getSource("abc/TesteRfc.java"); 
 
 		Parser parser = new RfcParser(context);
 		Measurement mt = parser.parse( null, uri);

@@ -31,7 +31,7 @@ public class TestLcom4 {
 		context.setValidMetrics(new ArrayList<Metric>());
 		context.getValidMetrics().add(metric);
 		
-		String uri = getSource("TesteLcomMaiorQueUm.java"); 
+		String uri = getSource("abc/TesteLcomMaiorQueUm.java"); 
 		Parser parser = new Lcom4Parser(context);
 		Measurement mt = parser.parse( null, uri);
 		assertTrue(mt != null);
@@ -79,7 +79,7 @@ public class TestLcom4 {
 		Context context = new Context();
 		context.setValidMetrics(new ArrayList<Metric>());
 		context.getValidMetrics().add(metric);
-		String uri = getSource("TesteLCom4Um.java"); 
+		String uri = getSource("abc/TesteLCom4Um.java"); 
 		Parser parser = new Lcom4Parser(context);
 		Measurement mt = parser.parse( null, uri);
 		assertTrue(mt != null);

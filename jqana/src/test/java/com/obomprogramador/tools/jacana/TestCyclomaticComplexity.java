@@ -33,7 +33,7 @@ public class TestCyclomaticComplexity {
 		Context context = new Context();
 		context.setValidMetrics(new ArrayList<Metric>());
 		context.getValidMetrics().add(metric);
-		String uri = getSource("Teste2.java"); 
+		String uri = getSource("abc/Teste2.java"); 
 		
 		Parser parser = new CyclomaticComplexityParser(context);
 		Measurement mt = parser.parse( null, uri);

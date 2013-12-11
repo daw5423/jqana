@@ -122,7 +122,26 @@ public class JqanaMojo extends AbstractMavenReport {
 		sink.sectionTitle1();
 		sink.text(getBundle(locale).getString("report.packageTitle"));
 		sink.sectionTitle1_();
-		sink.text("There are " + (this.sourceDirectory.listFiles().length) + " source files.");
+		
+		int countSources = processSources(this.sourceDirectory.listFiles());
+		
+		sink.text("There are " + countSources + " source files.");
+	}
+
+	private int processSources(File[] listFiles) {
+		int count = 0;
+		for (int x=0; x<listFiles.length; x++) {
+			File file = listFiles[x];
+			if (file.isFile()) {
+				if (file.getName().contains(".java")) {
+					count++;
+				}
+				else {
+					count += processSources(file.listFiles());
+				}
+			}
+		}
+		return count;
 	}
 
 	@Override

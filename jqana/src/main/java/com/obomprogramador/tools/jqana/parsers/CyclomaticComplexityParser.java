@@ -92,8 +92,9 @@ public class CyclomaticComplexityParser implements Parser {
 	        walker.walk(cl, tree); 
 	        logger.debug("**** Complexidade: " + this.measurement.toString());
 		} catch (Exception e) {
+			logger.error("Parser: " + e.getMessage());
 			context.getErrors().push(e.getMessage());
-			logger.error(e.getMessage());
+			
 		}
             
 		return this.measurement;
