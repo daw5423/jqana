@@ -38,10 +38,10 @@ public class MaxLimitVerificationAlgorithm implements
 		this.maxLimit = maxLimit;
 	}
 
-	@Override
 	/**
 	 * Checks whether the metric's value is greater than the specified limit.
 	 */
+	@Override
 	public boolean verify(double value) {
 		boolean returnCode = false;
 		if (value > maxLimit) {

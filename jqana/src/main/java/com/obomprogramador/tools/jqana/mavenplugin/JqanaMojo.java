@@ -20,37 +20,27 @@
 package com.obomprogramador.tools.jqana.mavenplugin;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
+import org.apache.maven.doxia.sink.Sink;
 import org.apache.maven.doxia.siterenderer.Renderer;
 import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.reporting.AbstractMavenReport;
 import org.apache.maven.reporting.MavenReportException;
 
 /**
- * jQana - Open Source java source code quality analyzer.
- * 
- * Copyright 2013 Cleuton Sampaio de Melo Jr
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
  * This is the Mojo that implements jQana maven plugin.
  * 
  * @author Cleuton Sampaio
  *
  */
+@Mojo(name = "report")
 public class JqanaMojo extends AbstractMavenReport {
 	
     /**
@@ -60,7 +50,12 @@ public class JqanaMojo extends AbstractMavenReport {
      */
     @Parameter( defaultValue = "${project.reporting.outputDirectory}" )
     private File outputDirectory;
- 
+    
+    /**
+     * The source dir
+     */
+    @Parameter( defaultValue = "${project.build.sourceDirectory}" )
+    private File sourceDirectory;
     /**
      * The Maven Project.
      */
@@ -79,44 +74,73 @@ public class JqanaMojo extends AbstractMavenReport {
 
 	@Override
 	public String getDescription(Locale arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		return getBundle(arg0).getString( "report.description" );
 	}
 
 	@Override
 	public String getName(Locale arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		return getBundle(arg0).getString( "report.name" );
 	}
 
 	@Override
 	public String getOutputName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "jQana report";
 	}
 
 	@Override
-	protected void executeReport(Locale arg0) throws MavenReportException {
-		// TODO Auto-generated method stub
+	protected void executeReport(Locale locale) throws MavenReportException {
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, locale);
+		Date date = new Date();
+		String reportDate = df.format(date);
+		
+		Sink sink = getSink();
+	    sink.head();
+	    sink.title();
+	    sink.text(this.getName(locale));
+	    sink.title_();
+	    sink.head_();
+	    sink.body();
+	    createReportBegin(sink,reportDate,locale);
+	    reportPackageMetrics(sink,locale);
+	    sink.section1_();
+	    sink.body_();
+	    sink.flush();
+	    sink.close();
+	}
 
+	private void createReportBegin(Sink sink, String reportDate, Locale locale) {
+		sink.section1();
+		sink.sectionTitle1();
+		String rBegin = String.format(getBundle(locale).getString("report.begin"), this.getProject().getName());
+		sink.text(rBegin);
+		sink.sectionTitle1_();
+		sink.lineBreak();
+		sink.text(getBundle(locale).getString("report.dateHeader") + ": " + reportDate);
+	}
+
+	private void reportPackageMetrics(Sink sink, Locale locale) {
+		sink.sectionTitle1();
+		sink.text(getBundle(locale).getString("report.packageTitle"));
+		sink.sectionTitle1_();
+		sink.text("There are " + (this.sourceDirectory.listFiles().length) + " source files.");
 	}
 
 	@Override
 	protected String getOutputDirectory() {
-		// TODO Auto-generated method stub
-		return null;
+		return outputDirectory.getAbsolutePath();
 	}
 
 	@Override
 	protected MavenProject getProject() {
-		// TODO Auto-generated method stub
-		return null;
+		return project;
 	}
 
 	@Override
 	protected Renderer getSiteRenderer() {
-		// TODO Auto-generated method stub
-		return null;
+		return siteRenderer;
 	}
 
+    private ResourceBundle getBundle( Locale locale ) {
+        return ResourceBundle.getBundle( "report", locale, this.getClass().getClassLoader() );
+    }
 }
