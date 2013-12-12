@@ -19,6 +19,8 @@
  */
 package com.obomprogramador.tools.jqana.model;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAnyElement;
@@ -27,90 +29,104 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.obomprogramador.tools.jqana.context.GlobalConstants;
-import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMeasurement;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 
 /**
  * This represents a measurement taken from source code. It may have some inner measurements.
  * @author Cleuton Sampaio
  *
  */
-public abstract class Measurement {
+public class Measurement implements Comparable<Measurement>{
 	
-	/**
-	 * Metric getter.
-	 * @return metric associated with this measurement.
-	 */
-
-	public abstract Metric getMetric();
-	/**
-	 * Metric setter.
-	 * @param metric the metric associated with this measurement.
-	 */
-	public abstract void setMetric(Metric metric);
-	/**
-	 * Package name getter.
-	 * @return the package name of the class under analysis.
-	 */
-	public abstract String getPackageName();
-	/**
-	 * Package name setter.
-	 * @param packageName The package name of the class under analysis.
-	 */
-	public abstract void setPackageName(String packageName);
-	/**
-	 * Class name getter.
-	 * @return the name of the class under analysis.
-	 */
-	public abstract String getClassName();
-	/**
-	 * Class name setter.
-	 * @param className the name of the class under analysis.
-	 */
-	public abstract void setClassName(String className);
-	/**
-	 * Method name getter.
-	 * @return the name of the method under analysis.
-	 */
-	public abstract String getMethodName();
-	/**
-	 * Method name setter.
-	 * @param methodName the name of the method under analysis.
-	 */
-	public abstract void setMethodName(String methodName);
-	/**
-	 * Metric value getter.
-	 * @return current observed value of the metric under analysis.
-	 */
-	public abstract double getMetricValue();
-	/**
-	 * Metric value setter.
-	 * @param value of the metric under analysis.
-	 */
-	public abstract void setMetricValue(double value);
-	/**
-	 * Metric violation condition getter.
-	 * @return true if the metric is considered violated, according to its verification algorithm.
-	 */
-	public abstract boolean isViolated();
-	/**
-	 * Metric violation condition getter.
-	 * @param violated true if the metric is considered violated, according to its verification algorithm.
-	 */
-	public abstract void setViolated(boolean violated);
+	public static enum MEASUREMENT_TYPE {
+									PROJECT_MEASUREMENT,
+									PACKAGE_MEASUREMENT,
+									CLASS_MEASUREMENT,
+									METHOD_MEASUREMENT
+	};
+									
+	protected String name;
+	protected Date date;
+	protected MEASUREMENT_TYPE type;
+	protected List<MetricValue> metricValues;
+	protected List<Measurement> innerMeasurements;
 	
-	/**
-	 * Inner measurements getter. A measurement can have inner measurements, for example,
-	 * a Class can have methods and inner classes measurements.
-	 * @return The inner measurements' list.
-	 */
 	
-	public abstract List<Measurement> getInnerMeasurements();
-	/**
-	 * Inner measurements setter. A measurement can have inner measurements, for example,
-	 * a Class can have methods and inner classes measurements.
-	 * @param The inner measurements' list.
-	 */
-	public abstract void setInnerMeasurements(List<Measurement> measurements);
+	
+	public Measurement() {
+		super();
+		this.metricValues = new ArrayList<MetricValue>();
+		this.innerMeasurements = new ArrayList<Measurement>();
+	}
+	
+	public Measurement(String name, Date date, MEASUREMENT_TYPE type,
+			List<MetricValue> metricValues, List<Measurement> innerMeasurements) {
+		super();
+		this.name = name;
+		this.date = date;
+		this.type = type;
+		this.metricValues = new ArrayList<MetricValue>();
+		this.innerMeasurements = new ArrayList<Measurement>();
+		if (metricValues != null) {
+			this.metricValues = metricValues;	
+		}
+		if (innerMeasurements != null) {
+			this.innerMeasurements = innerMeasurements;
+		}
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public MEASUREMENT_TYPE getType() {
+		return type;
+	}
+	public void setType(MEASUREMENT_TYPE type) {
+		this.type = type;
+	}
+	public List<MetricValue> getMetricValues() {
+		return metricValues;
+	}
+	public void setMetricValues(List<MetricValue> metricValues) {
+		this.metricValues = metricValues;
+	}
+	public List<Measurement> getInnerMeasurements() {
+		return innerMeasurements;
+	}
+	public void setInnerMeasurements(List<Measurement> innerMeasurements) {
+		this.innerMeasurements = innerMeasurements;
+	}
+	@Override
+	public final int hashCode() {
+		return this.getName().hashCode();
+	}
+	@Override
+	public boolean equals(Object obj) {
+		return this.getName().equals(((Measurement) obj).getName());
+	}
+	@Override
+	public String toString() {
+		return "[Measurement. Name: " 
+				+ this.getName()
+				+ ", Type: " + this.getType().toString()
+				+ ", Metrics Values: "
+				+ " \r\n" + this.metricValues
+				+ ", Inner measurements: " 
+				+ "\r\n" + this.innerMeasurements
+				+ "]";
+	}
+	@Override
+	public int compareTo(Measurement o) {
+		return this.getName().compareTo(o.getName());
+	}
 
 }

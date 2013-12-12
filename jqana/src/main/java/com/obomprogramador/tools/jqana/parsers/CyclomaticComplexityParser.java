@@ -53,16 +53,18 @@ public class CyclomaticComplexityParser implements Parser {
 
 
 	protected Context context;
-	protected Measurement measurement;
 	protected Logger logger;
+	protected Measurement packageMeasurement;
+	protected Measurement measurement;
 	
 	/**
 	 * 
 	 */
-	public CyclomaticComplexityParser(Context context) {
+	public CyclomaticComplexityParser(Measurement packageMeasurement,Context context) {
 		super();
 		logger = LoggerFactory.getLogger(this.getClass());
 		this.context = context;
+		this.packageMeasurement = packageMeasurement;
 	}
 
 	/* (non-Javadoc)
@@ -76,7 +78,7 @@ public class CyclomaticComplexityParser implements Parser {
 	@Override
 	public Measurement parse(Class<?> clazz, String sourceCode)  {
 		
-		this.measurement = new ClassMeasurement();
+		this.measurement = new Measurement();
 		
 		JavaLexer lexer;
 		try {
@@ -91,6 +93,7 @@ public class CyclomaticComplexityParser implements Parser {
 	        metric = context.getValidMetrics().get(inx);
 	        CycloListener cl = new CycloListener(metric, this.measurement ,p);
 	        walker.walk(cl, tree); 
+	        updatePackageMeasurement();
 	        logger.debug("**** Complexidade: " + this.measurement.toString());
 		} catch (Exception e) {
 			logger.error("Parser: " + e.getMessage());
@@ -99,6 +102,14 @@ public class CyclomaticComplexityParser implements Parser {
 		}
             
 		return this.measurement;
+	}
+
+	private void updatePackageMeasurement() {
+		int indx = this.packageMeasurement.getInnerMeasurements().indexOf(measurement);
+		if (indx >= 0) {
+			
+		}
+		
 	}
 	
 
