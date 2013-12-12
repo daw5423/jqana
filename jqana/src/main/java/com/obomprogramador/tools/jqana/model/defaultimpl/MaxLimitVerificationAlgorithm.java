@@ -29,7 +29,7 @@ import com.obomprogramador.tools.jqana.model.LimitVerificationAlgorithm;
  * @author Cleuton Sampaio.
  *
  */
-public class MaxLimitVerificationAlgorithm implements
+public class MaxLimitVerificationAlgorithm extends
 		LimitVerificationAlgorithm {
 
 	private double maxLimit;

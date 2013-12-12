@@ -31,6 +31,8 @@ import org.antlr.v4.runtime.tree.ParseTree;
  */
 public class Member implements Comparable<Member> {
 	public enum MEMBER_TYPE {METHOD, VARIABLE, GETTER_SETTER};
+	public String packageName;
+	public String className;
 	public String name;
 	public MEMBER_TYPE type;
 	public Member targetVariable;

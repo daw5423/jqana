@@ -16,8 +16,10 @@ import com.obomprogramador.tools.jqana.context.GlobalConstants;
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
 import com.obomprogramador.tools.jqana.model.Parser;
+import com.obomprogramador.tools.jqana.model.defaultimpl.ClassMeasurement;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MethodMeasurement;
 import com.obomprogramador.tools.jqana.parsers.CyclomaticComplexityParser;
 
 import static com.obomprogramador.tools.jqana.context.GlobalConstants.*;
@@ -51,13 +53,13 @@ public class TestCyclomaticComplexity {
 		for (Measurement m2 : mt.getInnerMeasurements()) {
 			String line = ""; 
 			line += StringUtils.leftPad(line,identation);
-			switch (MEASUREMENT_TYPE.values()[m2.getMeasurementType()]) {
-			case CLASS_MEASUREMENT :
+			if (m2 instanceof ClassMeasurement) {
 				line += "Inner Class: " + m2.getClassName();
-				break;
-			case METHOD_MEASUREMENT:
-				line += "Method: " + m2.getMethodName();
 			}
+			else if (m2 instanceof MethodMeasurement) {
+					line += "Method: " + m2.getMethodName();
+			}
+			
 			line += ", Metric: "
 				+ m2.getMetric().getMetricName()
 				+ ", value: "

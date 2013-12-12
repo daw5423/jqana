@@ -22,7 +22,11 @@ package com.obomprogramador.tools.jqana.model.defaultimpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.obomprogramador.tools.jqana.context.GlobalConstants.MEASUREMENT_TYPE;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
 /**
@@ -31,16 +35,18 @@ import com.obomprogramador.tools.jqana.model.Metric;
  * @author Cleuton Sampaio
  *
  */
-public class DefaultMeasurement implements Measurement {
-
-	private Metric metric;
-	private String packageName;
-	private String className;
-	private String methodName;
-	private double metricValue;
-	private boolean violated;
-	private List<Measurement> innerMeasurements;
-	private MEASUREMENT_TYPE type;
+@XmlRootElement
+public abstract class DefaultMeasurement extends Measurement {
+	
+	protected Metric metric;
+	protected String packageName;
+	protected String className;
+	protected String methodName;
+	protected double metricValue;
+	protected boolean violated;
+	
+	protected List<Measurement> innerMeasurements;
+	
 	
 	
 	@Override
@@ -67,16 +73,18 @@ public class DefaultMeasurement implements Measurement {
 		this.innerMeasurements = new ArrayList<Measurement>();
 	}
 	
+	@XmlElement(type=DefaultMeasurement.class)
 	@Override
 	public List<Measurement> getInnerMeasurements() {
 		return innerMeasurements;
 	}
-
+	
 	@Override
 	public void setInnerMeasurements(List<Measurement> innerMeasurements) {
 		this.innerMeasurements = innerMeasurements;
 	}
 
+	@XmlElement(type=DefaultMetric.class)
 	@Override
 	public Metric getMetric() {
 		return this.metric;
@@ -137,14 +145,5 @@ public class DefaultMeasurement implements Measurement {
 		this.violated = violated;
 	}
 
-	@Override
-	public int getMeasurementType() {
-		return this.type.ordinal();
-	}
-
-	@Override
-	public void setMeasurementType(int type) {
-		this.type = MEASUREMENT_TYPE.values()[type];
-	}
-
+	
 }

@@ -28,10 +28,12 @@ import org.slf4j.LoggerFactory;
 
 import com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ClassDeclarationContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.CompilationUnitContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ConstructorDeclarationContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ExpressionContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.MethodDeclarationContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.PackageDeclarationContext;
 import com.obomprogramador.tools.jqana.model.Measurement;
 
 /**
@@ -56,6 +58,8 @@ public class RfcListener extends JavaBaseListener {
 	protected Measurement measurement;
 	protected boolean aConstructorWasFound;
 	private   String previousExpression;
+	protected String mainPackageName;
+	protected String mainClassName;
 
 	/**
 	 * Default constructor.
@@ -67,6 +71,26 @@ public class RfcListener extends JavaBaseListener {
 		this.measurement = measurement;
 		this.parser = p;
 	}
+
+	
+	
+	@Override
+	public void enterClassDeclaration(@NotNull ClassDeclarationContext ctx) {
+		int posCurly = ctx.getText().indexOf('{');
+		mainClassName = ctx.getText().substring(5,posCurly);
+		this.measurement.setClassName(mainClassName);
+	}
+
+
+
+	@Override
+	public void enterPackageDeclaration(@NotNull PackageDeclarationContext ctx) {
+		mainPackageName = ctx.getText().substring(7);
+		this.measurement.setPackageName(mainPackageName);
+		logger.debug(mainPackageName);
+	}
+
+
 
 	/**
 	 * Counts all constructors of the class. 

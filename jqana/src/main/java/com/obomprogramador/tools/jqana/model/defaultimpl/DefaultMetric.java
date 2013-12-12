@@ -19,6 +19,11 @@
  */
 package com.obomprogramador.tools.jqana.model.defaultimpl;
 
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import com.obomprogramador.tools.jqana.model.LimitVerificationAlgorithm;
 import com.obomprogramador.tools.jqana.model.Metric;
 
@@ -28,7 +33,8 @@ import com.obomprogramador.tools.jqana.model.Metric;
  * @author Cleuton Sampaio.
  *
  */
-public class DefaultMetric implements Metric, Comparable<Metric> {
+@XmlRootElement
+public class DefaultMetric extends Metric implements Comparable<Metric> {
 	
 	
 	private String metricName;
@@ -59,7 +65,7 @@ public class DefaultMetric implements Metric, Comparable<Metric> {
 	}
 
 
-
+	@XmlTransient
 	public LimitVerificationAlgorithm getLva() {
 		return lva;
 	}
@@ -105,7 +111,7 @@ public class DefaultMetric implements Metric, Comparable<Metric> {
 	}
 
 
-
+	@XmlTransient
 	@Override
 	public LimitVerificationAlgorithm getVerificationAlgorithm() {
 		return this.lva;

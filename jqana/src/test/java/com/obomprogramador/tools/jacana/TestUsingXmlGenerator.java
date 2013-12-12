@@ -20,17 +20,27 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
 
 import com.obomprogramador.tools.jqana.context.Context;
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
 import com.obomprogramador.tools.jqana.model.Parser;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
+import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultXmlGenerator;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm;
+import com.obomprogramador.tools.jqana.model.defaultimpl.PackageMeasurement;
+import com.obomprogramador.tools.jqana.model.defaultimpl.ProjectMeasurement;
 import com.obomprogramador.tools.jqana.parsers.CyclomaticComplexityParser;
+import com.obomprogramador.tools.jqana.parsers.Lcom4Parser;
+import com.obomprogramador.tools.jqana.parsers.RfcParser;
 
 public class TestUsingXmlGenerator {
 
@@ -38,37 +48,53 @@ public class TestUsingXmlGenerator {
 	private String rootTestResources = "unit-test-sources";
 	private List<Measurement> measurements;
 	private String currentFolderName;
+	private ProjectMeasurement project;
+	
 	@Test
 	public void test() {
 		measurements = new ArrayList<Measurement>();
 		try {
 			processPackages(this.getResourceListing(this.getClass(), rootTestResources));
+			DefaultXmlGenerator generator = new DefaultXmlGenerator();
+			Document report = generator.serialize(this.project);
+			
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		logger.debug(measurements.toString());
+		
 	}
 
 	private void processPackages(String[] strings) {
 		if (strings != null && strings.length > 0) {
 			for (int x=0; x<strings.length; x++) {
-				processSingleFolder(strings[x]);
+				PackageMeasurement packageMeasurement = new PackageMeasurement();
+				this.measurements.add(packageMeasurement);
+				processSingleFolder(packageMeasurement,strings[x]);
 			}
 		}
-
+		
+		project = new ProjectMeasurement();
+		project.setProjectName("unit-test-sources");
+		project.setInnerMeasurements(this.measurements);
 		
 	}
 	
-	private void processSingleFolder(String folderName) {
+	private void processSingleFolder(PackageMeasurement packageMeasurement, String folderName) {
 		try {
 			currentFolderName = rootTestResources + "/" + folderName;
 			String [] files = this.getResourceListing(this.getClass(), currentFolderName);
 			for (int x=0; x<files.length; x++) {
-				processMetrics(files[x]);
+				processMetrics(packageMeasurement, files[x]);
 			}
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
@@ -79,12 +105,12 @@ public class TestUsingXmlGenerator {
 		}
 	}
 
-	private void processMetrics(String sourceFile) {
+	private void processMetrics(PackageMeasurement packageMeasurement, String sourceFile) {
 		logger.debug("Source file: " + sourceFile);
 		
-		measurements.add(getCyclomaticMetric(sourceFile));
-		measurements.add(getLcom4Value(sourceFile));
-		measurements.add(getRfc(sourceFile));
+		packageMeasurement.getInnerMeasurements().add(getCyclomaticMetric(sourceFile));
+		packageMeasurement.getInnerMeasurements().add(getLcom4Value(sourceFile));
+		packageMeasurement.getInnerMeasurements().add(getRfc(sourceFile));
 		
 	}
 
@@ -98,7 +124,7 @@ public class TestUsingXmlGenerator {
 		context.getValidMetrics().add(metric);
 		String source = getSource(sourceFile); 
 		
-		Parser parser = new CyclomaticComplexityParser(context);
+		Parser parser = new RfcParser(context);
 		Measurement mt = parser.parse( null, source);
 		return mt;
 	}
@@ -142,7 +168,7 @@ public class TestUsingXmlGenerator {
 		context.getValidMetrics().add(metric);
 		String source = getSource(sourceFile); 
 		
-		Parser parser = new CyclomaticComplexityParser(context);
+		Parser parser = new Lcom4Parser(context);
 		Measurement mt = parser.parse( null, source);
 		return mt;
 	}

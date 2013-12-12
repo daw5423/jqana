@@ -18,40 +18,47 @@
  * Project website: http://www.jqana.com
  */
 package com.obomprogramador.tools.jqana.model;
+
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  * Represents a metric.
  * @author Cleuton Sampaio
  *
  */
-public interface Metric {
+
+public abstract class Metric {
 	/**
 	 * Metric name getter.
 	 * @return the metric's name.
 	 */
-	public String 	getMetricName();
+	public abstract String 	getMetricName();
 	/**
 	 * Metric name setter.
 	 * @param name the metric's name.
 	 */
-	public void     setMetricName(String name);
+	public abstract void     setMetricName(String name);
 	/**
 	 * Metric message getter.
 	 * @return the metric's violation message.
 	 */
-	public String   getMetricMessage();
+	public abstract String   getMetricMessage();
 	/**
 	 * Metric message setter.
 	 * @param message the metric's violation message.
 	 */
-	public void     setMetricMessage(String message);
+	public abstract void     setMetricMessage(String message);
 	/**
 	 * Metric's verification algorithm getter.
 	 * @return The Metric's verification algorithm.
 	 */
-	public LimitVerificationAlgorithm getVerificationAlgorithm();
+	
+	public abstract LimitVerificationAlgorithm getVerificationAlgorithm();
 	/**
 	 * Metric's verification algorithm setter.
 	 * @param lva The Metric's verification algorithm.
 	 */
-	public void     setVerificationAlgorithm(LimitVerificationAlgorithm lva);
+	public abstract void     setVerificationAlgorithm(LimitVerificationAlgorithm lva);
 }

@@ -21,19 +21,27 @@ package com.obomprogramador.tools.jqana.model;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import com.obomprogramador.tools.jqana.context.GlobalConstants;
+import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMeasurement;
+import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 
 /**
  * This represents a measurement taken from source code. It may have some inner measurements.
  * @author Cleuton Sampaio
  *
  */
-public interface Measurement {
+public abstract class Measurement {
 	
 	/**
 	 * Metric getter.
 	 * @return metric associated with this measurement.
 	 */
+
 	public abstract Metric getMetric();
 	/**
 	 * Metric setter.
@@ -90,23 +98,13 @@ public interface Measurement {
 	 * @param violated true if the metric is considered violated, according to its verification algorithm.
 	 */
 	public abstract void setViolated(boolean violated);
-	/**
-	 * Measurement type getter, according to the global constants.
-	 * @see GlobalConstants.MEASUREMENT_TYPE
-	 * @return GlobalConstants.MEASUREMENT_TYPE.ordinal()
-	 */
-	public abstract int getMeasurementType();
-	/**
-	 * Measurement type setter, according to the global constants.
-	 * @see GlobalConstants.MEASUREMENT_TYPE
-	 * @param type GlobalConstants.MEASUREMENT_TYPE.ordinal()
-	 */
-	public abstract void setMeasurementType(int type);
+	
 	/**
 	 * Inner measurements getter. A measurement can have inner measurements, for example,
 	 * a Class can have methods and inner classes measurements.
 	 * @return The inner measurements' list.
 	 */
+	
 	public abstract List<Measurement> getInnerMeasurements();
 	/**
 	 * Inner measurements setter. A measurement can have inner measurements, for example,

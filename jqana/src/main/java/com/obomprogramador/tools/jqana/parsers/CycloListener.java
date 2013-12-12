@@ -45,10 +45,11 @@ import com.obomprogramador.tools.jqana.antlrparser.JavaParser.MethodDeclarationC
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.PackageDeclarationContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.StatementContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.SwitchLabelContext;
-import com.obomprogramador.tools.jqana.context.GlobalConstants.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
+import com.obomprogramador.tools.jqana.model.defaultimpl.ClassMeasurement;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMeasurement;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MethodMeasurement;
 
 /**
  * This is a JavaBaseListener (ANTLR4) implementation that calculates Cyclomatic Complexity
@@ -77,7 +78,7 @@ public class CycloListener extends JavaBaseListener {
 	protected int returnCount;
 	protected Deque<Measurement> measurementsStack;
 	protected Metric metric;
-
+	protected String mainPackageName;
 	
 	/**
 	 * Default constructor. 
@@ -99,6 +100,7 @@ public class CycloListener extends JavaBaseListener {
 	public void enterPackageDeclaration(@NotNull PackageDeclarationContext ctx) {
 		String packageName = ctx.getText().substring(7);
 		measurement.setPackageName(packageName);
+		this.mainPackageName = packageName;
 		logger.debug(packageName);
 	}
 
@@ -132,13 +134,13 @@ public class CycloListener extends JavaBaseListener {
 		String className = ctx.getText().substring(5,posCurly);
 		
 		if (!this.measurementsStack.isEmpty()) {
-			this.measurement = new DefaultMeasurement();
+			this.measurement = new ClassMeasurement();
 			Measurement owner = this.measurementsStack.peek();
 			owner.getInnerMeasurements().add(measurement);
 		}
 		this.measurement.setMetric(this.metric);
-		this.measurement.setMeasurementType(MEASUREMENT_TYPE.CLASS_MEASUREMENT.ordinal());
 		this.measurement.setClassName(className);
+		this.measurement.setPackageName(mainPackageName);
 		this.measurementsStack.push(measurement);
 		
 	}
@@ -156,12 +158,11 @@ public class CycloListener extends JavaBaseListener {
 			}
 		}
 		Measurement classMeasurement = this.measurement;
-		this.measurement = new DefaultMeasurement();
+		this.measurement = new MethodMeasurement();
 		this.measurement.setClassName(classMeasurement.getClassName());
 		this.measurement.setPackageName(classMeasurement.getPackageName());
 		this.measurement.setMetric(classMeasurement.getMetric());
 		this.measurement.setMethodName(methodName);
-		this.measurement.setMeasurementType(MEASUREMENT_TYPE.METHOD_MEASUREMENT.ordinal());
 		this.measurement.setMetricValue(1);
 		classMeasurement.getInnerMeasurements().add(this.measurement);
 		this.measurementsStack.push(this.measurement);
@@ -263,11 +264,10 @@ public class CycloListener extends JavaBaseListener {
 		}
 	}
 
-	protected void initMeasurement(Measurement measurement2, MEASUREMENT_TYPE type) {
+	protected void initMeasurement(Measurement measurement2) {
 		measurement2.setPackageName("<default>");
 		measurement2.setClassName(null);
 		measurement2.setMetric(this.metric);
-		measurement2.setMeasurementType(type.ordinal());
 	}
 	
 	protected void verifyMethodViolation(Measurement measurement2) {

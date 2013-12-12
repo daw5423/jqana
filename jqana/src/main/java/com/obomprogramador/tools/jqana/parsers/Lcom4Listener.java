@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ClassDeclarationContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.CompilationUnitContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ExpressionContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.FieldDeclarationContext;
@@ -42,10 +43,13 @@ import com.obomprogramador.tools.jqana.antlrparser.JavaParser.LocalVariableDecla
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.LocalVariableDeclarationStatementContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.MethodBodyContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.MethodDeclarationContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.PackageDeclarationContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.StatementContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.VariableDeclaratorContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.VariableDeclaratorIdContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.VariableDeclaratorsContext;
+import com.obomprogramador.tools.jqana.model.Measurement;
+import com.obomprogramador.tools.jqana.model.defaultimpl.ClassMeasurement;
 import com.obomprogramador.tools.jqana.parsers.Member.MEMBER_TYPE;
 
 /**
@@ -70,12 +74,32 @@ public class Lcom4Listener extends JavaBaseListener {
 	protected JavaParser parser;
 	protected String [] prefixos = {"get", "set", "is", "has"};
 	protected List<String>getterSetterPrefix = Arrays.asList(prefixos);
+	protected String mainPackageName;
+	protected String mainClassName;
 	
 	public Lcom4Listener(List<Member> members, JavaParser p) {
 		this.logger = LoggerFactory.getLogger(this.getClass());
 		this.membersTable = members;
 		this.parser = p;
 	}
+
+	
+
+	@Override
+	public void enterClassDeclaration(@NotNull ClassDeclarationContext ctx) {
+		int posCurly = ctx.getText().indexOf('{');
+		mainClassName = ctx.getText().substring(5,posCurly);
+
+	}
+
+
+
+	@Override
+	public void enterPackageDeclaration(@NotNull PackageDeclarationContext ctx) {
+		mainPackageName = ctx.getText().substring(7);
+		logger.debug(mainPackageName);;
+	}
+
 
 
 	/**
@@ -109,7 +133,9 @@ public class Lcom4Listener extends JavaBaseListener {
 			}
 		}
 		Member member = new Member();
+		member.className = mainClassName;
 		member.name = name;
+		member.packageName = this.mainPackageName;
 		member.type = MEMBER_TYPE.VARIABLE;
 		this.membersTable.add(member);
 	}
@@ -139,7 +165,9 @@ public class Lcom4Listener extends JavaBaseListener {
 		}
 		
 		Member member = new Member();
+		member.className = mainClassName;
 		member.name = methodName;
+		member.packageName = this.mainPackageName;
 		member.type = MEMBER_TYPE.METHOD;
 		member.body = body;
 		this.membersTable.add(member);
@@ -165,6 +193,8 @@ public class Lcom4Listener extends JavaBaseListener {
 				String exprMember = ctx.getText();
 				logger.debug("Expression Member: " + exprMember);	
 				Member nMember = new Member();
+				member.className = mainClassName;
+				member.packageName = mainPackageName;
 				nMember.name = exprMember;
 				if (membersTable.contains(nMember)) {
 					if (!member.referencedMembers.contains(exprMember)) {

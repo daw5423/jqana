@@ -21,7 +21,14 @@ package com.obomprogramador.tools.jqana.model;
 
 import java.util.List;
 
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.PropertyException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
 import org.w3c.dom.Document;
+
+import com.obomprogramador.tools.jqana.model.defaultimpl.ProjectMeasurement;
 
 /**
  * Generate a XML Document with all metrics found.
@@ -31,54 +38,12 @@ import org.w3c.dom.Document;
 public interface XmlGenerator {
 	
 	/**
-	 * Generate a XML Document, according to the format:
+	 * Generate a XML Document from a measurement. It uses JAXB to do that.
 	 * 
-		<?xml version="1.0" encoding="UTF-8"?>
-		<jqana-report>
-		    <version></version>
-		    <date></date>
-		    <project></project>
-		    <package-summary>
-		        <package>
-		            <name></name>
-		            <metrics>
-		                <metric>
-		                    <name></name>
-		                    <value></value>
-		                    <violated></violated>
-		                    <message></message>
-		                </metric>
-		            </metrics>
-		        </package>
-		    </package-summary>
-		    <package-detail>
-		        <package>
-		            <class>
-		                <name></name>
-		                <metric>
-		                    <name></name>
-		                    <value></value>
-		                    <violated></violated>
-		                    <message></message>
-		                </metric>
-		                <methods>
-		                    <method>
-			                    <name></name>
-			                    <metric>
-			                    	<name></name>
-			                    	<value></value>
-			                    	<violated></violated>
-			                    	<message></message>
-			                	</metric>
-		                    </method>
-		                </methods>
-		            </class>
-		        </package>
-		    </package-detail>
-		</jqana-report>
 	 *
 	 * @param measurements List of measurements from the source project.
 	 * @return XML Document.
 	 */
-	public Document serialize(List<Measurement> measurements);
+
+	public Document serialize(Measurement measurement) throws JAXBException,ParserConfigurationException,TransformerException;
 }

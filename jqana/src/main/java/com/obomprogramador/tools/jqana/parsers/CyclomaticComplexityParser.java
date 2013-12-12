@@ -37,6 +37,7 @@ import com.obomprogramador.tools.jqana.context.Context;
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
 import com.obomprogramador.tools.jqana.model.Parser;
+import com.obomprogramador.tools.jqana.model.defaultimpl.ClassMeasurement;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMeasurement;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 
@@ -75,7 +76,7 @@ public class CyclomaticComplexityParser implements Parser {
 	@Override
 	public Measurement parse(Class<?> clazz, String sourceCode)  {
 		
-		this.measurement = new DefaultMeasurement();
+		this.measurement = new ClassMeasurement();
 		
 		JavaLexer lexer;
 		try {

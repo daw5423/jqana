@@ -21,6 +21,19 @@ package com.obomprogramador.tools.jqana.model.defaultimpl;
 
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.PropertyException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.w3c.dom.Document;
 
 import com.obomprogramador.tools.jqana.model.Measurement;
@@ -31,49 +44,6 @@ import com.obomprogramador.tools.jqana.model.XmlGenerator;
  * 
  * @see XmlGenerator
  * 
-		<?xml version="1.0" encoding="UTF-8"?>
-		<jqana-report>
-		    <version></version>
-		    <date></date>
-		    <project></project>
-		    <package-summary>
-		        <package>
-		            <name></name>
-		            <metrics>
-		                <metric>
-		                    <name></name>
-		                    <value></value>
-		                    <violated></violated>
-		                    <message></message>
-		                </metric>
-		            </metrics>
-		        </package>
-		    </package-summary>
-		    <package-detail>
-		        <package>
-		            <class>
-		                <name></name>
-		                <metric>
-		                    <name></name>
-		                    <value></value>
-		                    <violated></violated>
-		                    <message></message>
-		                </metric>
-		                <methods>
-		                    <method>
-			                    <name></name>
-			                    <metric>
-			                    	<name></name>
-			                    	<value></value>
-			                    	<violated></violated>
-			                    	<message></message>
-			                	</metric>
-		                    </method>
-		                </methods>
-		            </class>
-		        </package>
-		    </package-detail>
-		</jqana-report>  
  *
  * 
  * @author Cleuton Sampaio
@@ -91,10 +61,25 @@ public class DefaultXmlGenerator implements XmlGenerator {
 	 * The aggregated values are calculated as simple average, i.e.
 	 * the Class value for Cyclomatic Complexity is the average of it's
 	 * methods Cyclomatic Complexity metrics.
+	 * @throws JAXBException 
+	 * @throws ParserConfigurationException 
+	 * @throws TransformerException 
 	 */
 	@Override
-	public Document serialize(List<Measurement> measurements) {
-		Document report = null;
+	public Document serialize(Measurement measurement) throws JAXBException, ParserConfigurationException, TransformerException {
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	    dbf.setNamespaceAware(true);
+	    DocumentBuilder db = dbf.newDocumentBuilder();
+		Document report = db.newDocument();
+	    JAXBContext context = JAXBContext.newInstance(ProjectMeasurement.class);
+
+	    Marshaller m = context.createMarshaller();
+	    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+	    m.marshal((ProjectMeasurement)measurement, report);		
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer t = tf.newTransformer();
+        t.transform(new DOMSource(report), new StreamResult(System.out));
 		return report;
 	}
 
