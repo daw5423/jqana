@@ -49,7 +49,7 @@ import com.obomprogramador.tools.jqana.antlrparser.JavaParser.VariableDeclarator
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.VariableDeclaratorIdContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.VariableDeclaratorsContext;
 import com.obomprogramador.tools.jqana.model.Measurement;
-import com.obomprogramador.tools.jqana.model.defaultimpl.ClassMeasurement;
+
 import com.obomprogramador.tools.jqana.parsers.Member.MEMBER_TYPE;
 
 /**

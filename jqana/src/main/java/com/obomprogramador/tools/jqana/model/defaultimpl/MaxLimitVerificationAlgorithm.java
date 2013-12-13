@@ -37,6 +37,20 @@ public class MaxLimitVerificationAlgorithm extends
 		super();
 		this.maxLimit = maxLimit;
 	}
+	
+	public MaxLimitVerificationAlgorithm() {
+		super();
+	}
+	
+	
+
+	public double getMaxLimit() {
+		return maxLimit;
+	}
+
+	public void setMaxLimit(double maxLimit) {
+		this.maxLimit = maxLimit;
+	}
 
 	/**
 	 * Checks whether the metric's value is greater than the specified limit.

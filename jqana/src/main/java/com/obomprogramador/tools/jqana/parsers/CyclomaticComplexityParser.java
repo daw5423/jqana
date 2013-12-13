@@ -34,12 +34,15 @@ import org.slf4j.LoggerFactory;
 import com.obomprogramador.tools.jqana.antlrparser.JavaLexer;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
 import com.obomprogramador.tools.jqana.context.Context;
+import com.obomprogramador.tools.jqana.context.GlobalConstants;
 import com.obomprogramador.tools.jqana.model.Measurement;
+import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.Metric;
 import com.obomprogramador.tools.jqana.model.Parser;
-import com.obomprogramador.tools.jqana.model.defaultimpl.ClassMeasurement;
-import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMeasurement;
+
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 
 import static com.obomprogramador.tools.jqana.context.GlobalConstants.*;
 
@@ -56,6 +59,8 @@ public class CyclomaticComplexityParser implements Parser {
 	protected Logger logger;
 	protected Measurement packageMeasurement;
 	protected Measurement measurement;
+	protected Metric metric;
+	protected MetricValue metricValue;
 	
 	/**
 	 * 
@@ -65,6 +70,10 @@ public class CyclomaticComplexityParser implements Parser {
 		logger = LoggerFactory.getLogger(this.getClass());
 		this.context = context;
 		this.packageMeasurement = packageMeasurement;
+		this.metric = context.getCurrentMetric(context.getBundle().getString("metric.cc.name"));
+		if (this.metric == null) {
+			throw new IllegalArgumentException("Context is not valid. Metric is null.");
+		}
 	}
 
 	/* (non-Javadoc)
@@ -78,7 +87,11 @@ public class CyclomaticComplexityParser implements Parser {
 	@Override
 	public Measurement parse(Class<?> clazz, String sourceCode)  {
 		
-		this.measurement = new Measurement();
+		this.measurement = new Measurement(); // Class name will be set inside listener.
+		this.measurement.setType(MEASUREMENT_TYPE.CLASS_MEASUREMENT);
+		this.metricValue = new MetricValue();
+		this.metricValue.setName(this.metric.getMetricName());
+		this.measurement.getMetricValues().add(this.metricValue);
 		
 		JavaLexer lexer;
 		try {
@@ -87,11 +100,7 @@ public class CyclomaticComplexityParser implements Parser {
 			JavaParser p = new JavaParser(tokens);
 	        ParseTree tree = (ParseTree)(p.compilationUnit()); 
 	        ParseTreeWalker walker = new ParseTreeWalker();
-	        Metric metric = new DefaultMetric();
-	        metric.setMetricName(CYCLOMATIC_COMPLEXITY);
-	        int inx = context.getValidMetrics().indexOf(metric);
-	        metric = context.getValidMetrics().get(inx);
-	        CycloListener cl = new CycloListener(metric, this.measurement ,p);
+	        CycloListener cl = new CycloListener(this.metric, this.measurement ,p);
 	        walker.walk(cl, tree); 
 	        updatePackageMeasurement();
 	        logger.debug("**** Complexidade: " + this.measurement.toString());
@@ -105,9 +114,21 @@ public class CyclomaticComplexityParser implements Parser {
 	}
 
 	private void updatePackageMeasurement() {
-		int indx = this.packageMeasurement.getInnerMeasurements().indexOf(measurement);
+		int indx = this.packageMeasurement.getInnerMeasurements().indexOf(this.measurement);
 		if (indx >= 0) {
-			
+			Measurement classMeasurement = this.packageMeasurement.getInnerMeasurements().get(indx);
+			if (!classMeasurement.getMetricValues().contains(this.metricValue)) {
+				classMeasurement.getMetricValues().add(this.metricValue);
+			}
+			else {
+				indx = classMeasurement.getMetricValues().indexOf(this.metricValue);
+				classMeasurement.getMetricValues().remove(indx);
+				classMeasurement.getMetricValues().add(this.metricValue);
+			}
+		}
+		else {
+			this.packageMeasurement.getInnerMeasurements().add(this.measurement);
+			this.packageMeasurement.getMetricValues().add(this.metricValue);
 		}
 		
 	}

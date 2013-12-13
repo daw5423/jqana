@@ -128,5 +128,23 @@ public class Measurement implements Comparable<Measurement>{
 	public int compareTo(Measurement o) {
 		return this.getName().compareTo(o.getName());
 	}
+	
+	/**
+	 * Convenience method to return a metric value, based on its name.
+	 * @param metricName The metric name
+	 * @return Metric value or null, if it does not exist.
+	 */
+	public MetricValue getMetricValue(String metricName) {
+		MetricValue mv = new MetricValue();
+		mv.setName(metricName);
+		int indx = this.getMetricValues().indexOf(mv);
+		if (indx >= 0) {
+			mv = this.getMetricValues().get(indx);
+		}
+		else {
+			mv = null;
+		}
+		return mv;
+	}
 
 }

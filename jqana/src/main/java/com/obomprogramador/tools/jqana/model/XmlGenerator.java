@@ -28,7 +28,7 @@ import javax.xml.transform.TransformerException;
 
 import org.w3c.dom.Document;
 
-import com.obomprogramador.tools.jqana.model.defaultimpl.ProjectMeasurement;
+
 
 /**
  * Generate a XML Document with all metrics found.

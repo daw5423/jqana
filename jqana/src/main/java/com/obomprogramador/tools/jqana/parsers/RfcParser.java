@@ -39,8 +39,7 @@ import com.obomprogramador.tools.jqana.context.Context;
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
 import com.obomprogramador.tools.jqana.model.Parser;
-import com.obomprogramador.tools.jqana.model.defaultimpl.ClassMeasurement;
-import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMeasurement;
+
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 /**
  * Calculates the RFC - Response For Class, according to C&K definitions:
@@ -70,7 +69,7 @@ public class RfcParser implements Parser {
 
 	@Override
 	public Measurement parse(Class<?> clazz, String sourceCode) {
-		this.measurement = new ClassMeasurement();
+		this.measurement = new Measurement();
 		JavaLexer lexer;
 		try {
 			lexer = new JavaLexer(new ANTLRInputStream(sourceCode));
@@ -79,10 +78,10 @@ public class RfcParser implements Parser {
 	        ParseTree tree = (ParseTree)(p.compilationUnit()); 
 	        ParseTreeWalker walker = new ParseTreeWalker();
 	        Metric metric = new DefaultMetric();
-	        metric.setMetricName(RFC);
+	        //metric.setMetricName(RFC);
 	        int inx = context.getValidMetrics().indexOf(metric);
 	        metric = context.getValidMetrics().get(inx);
-	        this.measurement.setMetric(metric);
+	        //this.measurement.setMetric(metric);
 	        members = new ArrayList<Member>();
 	        RfcListener cl = new RfcListener(this.measurement,p);
 	        walker.walk(cl, tree); 

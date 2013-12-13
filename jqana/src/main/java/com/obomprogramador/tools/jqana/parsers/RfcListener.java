@@ -78,7 +78,7 @@ public class RfcListener extends JavaBaseListener {
 	public void enterClassDeclaration(@NotNull ClassDeclarationContext ctx) {
 		int posCurly = ctx.getText().indexOf('{');
 		mainClassName = ctx.getText().substring(5,posCurly);
-		this.measurement.setClassName(mainClassName);
+		//this.measurement.setClassName(mainClassName);
 	}
 
 
@@ -86,7 +86,7 @@ public class RfcListener extends JavaBaseListener {
 	@Override
 	public void enterPackageDeclaration(@NotNull PackageDeclarationContext ctx) {
 		mainPackageName = ctx.getText().substring(7);
-		this.measurement.setPackageName(mainPackageName);
+		//this.measurement.setPackageName(mainPackageName);
 		logger.debug(mainPackageName);
 	}
 
@@ -99,7 +99,7 @@ public class RfcListener extends JavaBaseListener {
 	public void enterConstructorDeclaration(
 			@NotNull ConstructorDeclarationContext ctx) {
 		aConstructorWasFound = true;
-		this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
+		//this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
 		this.previousExpression = null;
 	}
 	
@@ -111,7 +111,7 @@ public class RfcListener extends JavaBaseListener {
 	@Override
 	public void exitCompilationUnit(@NotNull CompilationUnitContext ctx) {
 		if (!this.aConstructorWasFound) {
-			this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
+			//this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
 		}
 	}
 
@@ -120,7 +120,7 @@ public class RfcListener extends JavaBaseListener {
 	 */
 	@Override
 	public void enterMethodDeclaration(@NotNull MethodDeclarationContext ctx) {
-		this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
+		//this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
 		this.previousExpression = null;
 	}
 	
@@ -157,7 +157,7 @@ public class RfcListener extends JavaBaseListener {
 				char previous = expression.charAt(pos - 1);
 				if (Character.isJavaIdentifierPart(previous)) {
 					logger.debug("Found Method or constructor call! ");
-					this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
+					//this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
 				}
 			}
 			start = pos + 1;

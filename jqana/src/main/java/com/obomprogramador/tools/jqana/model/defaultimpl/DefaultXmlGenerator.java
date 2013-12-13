@@ -52,7 +52,7 @@ import com.obomprogramador.tools.jqana.model.XmlGenerator;
 public class DefaultXmlGenerator implements XmlGenerator {
 
 	public DefaultXmlGenerator() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/**
@@ -71,12 +71,12 @@ public class DefaultXmlGenerator implements XmlGenerator {
 	    dbf.setNamespaceAware(true);
 	    DocumentBuilder db = dbf.newDocumentBuilder();
 		Document report = db.newDocument();
-	    JAXBContext context = JAXBContext.newInstance(ProjectMeasurement.class);
+	    JAXBContext context = JAXBContext.newInstance(Measurement.class);
 
 	    Marshaller m = context.createMarshaller();
 	    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-	    m.marshal((ProjectMeasurement)measurement, report);		
+	    m.marshal((Measurement)measurement, report);		
         TransformerFactory tf = TransformerFactory.newInstance();
         Transformer t = tf.newTransformer();
         t.transform(new DOMSource(report), new StreamResult(System.out));

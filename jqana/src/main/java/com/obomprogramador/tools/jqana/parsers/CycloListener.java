@@ -34,22 +34,20 @@ import org.slf4j.LoggerFactory;
 import com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.BlockContext;
-import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ClassBodyContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ClassDeclarationContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.CompilationUnitContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ConstructorDeclarationContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ExpressionContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.FormalParametersContext;
-import com.obomprogramador.tools.jqana.antlrparser.JavaParser.InnerCreatorContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.MethodBodyContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.MethodDeclarationContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.PackageDeclarationContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.StatementContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.SwitchLabelContext;
 import com.obomprogramador.tools.jqana.model.Measurement;
+import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.Metric;
-import com.obomprogramador.tools.jqana.model.defaultimpl.ClassMeasurement;
-import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMeasurement;
-import com.obomprogramador.tools.jqana.model.defaultimpl.MethodMeasurement;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 
 /**
  * This is a JavaBaseListener (ANTLR4) implementation that calculates Cyclomatic Complexity
@@ -79,6 +77,9 @@ public class CycloListener extends JavaBaseListener {
 	protected Deque<Measurement> measurementsStack;
 	protected Metric metric;
 	protected String mainPackageName;
+	protected MetricValue currentMetricValue;
+	protected boolean alreadyGotFirstClass;
+	protected String lastStatement;
 	
 	/**
 	 * Default constructor. 
@@ -92,21 +93,15 @@ public class CycloListener extends JavaBaseListener {
 		this.parser = parser;
 		this.logger = LoggerFactory.getLogger(this.getClass());
 		this.measurementsStack = new ArrayDeque<Measurement>();
+		this.currentMetricValue = this.getMetricValue(this.measurement);
+		if (this.currentMetricValue == null) {
+			throw new IllegalArgumentException("Measurement should have a MetricValue");
+		}
+				
 	}
 
 
 
-	@Override
-	public void enterPackageDeclaration(@NotNull PackageDeclarationContext ctx) {
-		String packageName = ctx.getText().substring(7);
-		measurement.setPackageName(packageName);
-		this.mainPackageName = packageName;
-		logger.debug(packageName);
-	}
-
-	
-	
-	
 	@Override
 	public void enterConstructorDeclaration(
 			@NotNull ConstructorDeclarationContext ctx) {
@@ -117,14 +112,11 @@ public class CycloListener extends JavaBaseListener {
 
 	@Override
 	public void exitClassDeclaration(@NotNull ClassDeclarationContext ctx) {
-		this.measurement = this.measurementsStack.pop();
 		this.verifyClassViolation(this.measurement);
-		if (!this.measurementsStack.isEmpty()) {
-			Measurement owner = this.measurementsStack.peek();
-			owner.setMetricValue(owner.getMetricValue() + this.measurement.getMetricValue());
-			this.measurement = owner;
-		}
+		logger.debug("*** (CC) EXITING CLASS. CC = " + this.currentMetricValue.getValue());
+		this.consolidateWithOwner();
 		this.previousExpression = null;
+		
 	}
 
 
@@ -133,16 +125,16 @@ public class CycloListener extends JavaBaseListener {
 		int posCurly = ctx.getText().indexOf('{');
 		String className = ctx.getText().substring(5,posCurly);
 		
-		if (!this.measurementsStack.isEmpty()) {
-			this.measurement = new ClassMeasurement();
-			Measurement owner = this.measurementsStack.peek();
-			owner.getInnerMeasurements().add(measurement);
+		if (!alreadyGotFirstClass) {
+			// It is the main class name
+			this.measurement.setName(className);
+			alreadyGotFirstClass = true;
 		}
-		this.measurement.setMetric(this.metric);
-		this.measurement.setClassName(className);
-		this.measurement.setPackageName(mainPackageName);
-		this.measurementsStack.push(measurement);
-		
+		else {
+			this.newMeasurement(className,MEASUREMENT_TYPE.CLASS_MEASUREMENT);
+		}
+		this.previousExpression = null;
+		logger.debug("*** (CC) ENTERING CLASS: " + className);
 	}
 
 
@@ -157,35 +149,22 @@ public class CycloListener extends JavaBaseListener {
 				break;
 			}
 		}
-		Measurement classMeasurement = this.measurement;
-		this.measurement = new MethodMeasurement();
-		this.measurement.setClassName(classMeasurement.getClassName());
-		this.measurement.setPackageName(classMeasurement.getPackageName());
-		this.measurement.setMetric(classMeasurement.getMetric());
-		this.measurement.setMethodName(methodName);
-		this.measurement.setMetricValue(1);
-		classMeasurement.getInnerMeasurements().add(this.measurement);
-		this.measurementsStack.push(this.measurement);
-		logger.debug("Entering method: " + methodName);
+		this.newMeasurement(methodName, MEASUREMENT_TYPE.METHOD_MEASUREMENT);
+		this.currentMetricValue.setValue(1);
 		this.previousExpression = null;
+		logger.debug("***** (CC) ENTERING METHOD: " + methodName);
 	}
 
 
 	@Override
-	public void exitMethodBody(@NotNull MethodBodyContext ctx) {
-		if (this.returnCount > 1) {
-			this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
-			logger.debug("PN: has more \"return\" statements ");
-		}
-		
-		this.measurement = this.measurementsStack.pop();
+	public void exitMethodDeclaration(@NotNull MethodDeclarationContext ctx) {
+
+		logger.debug("***** (CC) EXITING METHOD. CC = " + this.currentMetricValue.getValue());
 		this.verifyMethodViolation(this.measurement);
-		if (!this.measurementsStack.isEmpty()) {
-			Measurement owner = this.measurementsStack.peek();
-			owner.setMetricValue(owner.getMetricValue() + this.measurement.getMetricValue());
-			this.measurement = owner;
-		}
+		this.consolidateWithOwner();
+		this.lastStatement = null;
 	}
+
 
 
 
@@ -207,43 +186,87 @@ public class CycloListener extends JavaBaseListener {
 
 	private void checkExpression(ExpressionContext ctx) {
 		if (ctx.getText().charAt(0) != '\"' && ctx.getText().charAt(0) != '\'') {
+			
 			int count = countSymbols(ctx.getText(), ":");
-			this.measurement.setMetricValue(this.measurement.getMetricValue() + count);
 			if (count > 0) {
-				logger.debug("Ternaries found: " + ctx.getText());	
+				incMetricValue(count);
+				logger.debug("     - Ternaries found: " + count);
 			}
+
 			count = countSymbols(ctx.getText(), "||");
-			this.measurement.setMetricValue(this.measurement.getMetricValue() + count);
 			if (count > 0) {
-				logger.debug("OR found: " + ctx.getText());	
+				incMetricValue(count);
+				logger.debug("     - OR found: " + count);
 			}
 			count = countSymbols(ctx.getText(), "&&");
-			this.measurement.setMetricValue(this.measurement.getMetricValue() + count);
 			if (count > 0) {
-				logger.debug("AND found: " + ctx.getText());	
+				incMetricValue(count);
+				logger.debug("     - AND found: " + count);
 			}
 		}
 	}
 
+	protected MetricValue newMetricValue() {
+		MetricValue mv = new MetricValue();
+		mv.setName(this.metric.getMetricName());
+		this.currentMetricValue = mv;
+		return mv;
+	}
+
+	protected MetricValue getMetricValue(Measurement m) {
+		MetricValue mv = new MetricValue();
+		mv.setName(this.metric.getMetricName());
+		int indx = m.getMetricValues().indexOf(mv);
+		if (indx >= 0) {
+			mv = m.getMetricValues().get(indx);
+		}
+		else {
+			mv = null;
+		}
+		return mv;
+	}
 	
-
-
+	protected void consolidateWithOwner() {
+		if (!this.measurementsStack.isEmpty()) {
+			Measurement owner = this.measurementsStack.peek();
+			MetricValue ownerMV = this.getMetricValue(owner);
+			this.currentMetricValue = this.getMetricValue(this.measurement);
+			ownerMV.setValue(ownerMV.getValue() + this.currentMetricValue.getValue());
+			this.measurement = this.measurementsStack.pop();
+			this.currentMetricValue = getMetricValue(this.measurement);
+		}		
+	}
+	
+	protected void newMeasurement(String name, MEASUREMENT_TYPE type) {
+		this.measurementsStack.push(this.measurement);
+		this.measurement = new Measurement();
+		this.measurement.setName(name);
+		this.measurement.setType(type);
+		Measurement owner = this.measurementsStack.peek();
+		owner.getInnerMeasurements().add(this.measurement);
+		this.measurement.getMetricValues().add(newMetricValue());		
+	}
+	
+	protected void incMetricValue(int inc) {
+		this.currentMetricValue.setValue(this.currentMetricValue.getValue() + inc);
+	}
 
 	@Override
 	public void enterStatement(@NotNull StatementContext ctx) {
 		String tipo = ctx.getParent().start.getText();
-		if (tipo.equals("return")) {
-			returnCount++;
-			logger.debug("Maybe: " + tipo +  " >>>> "+  ctx.getText());
+		if (this.lastStatement != null) {
+			if (this.lastStatement.equals("return")) {
+				this.incMetricValue(1);
+				logger.debug("     - Return not last statement.");
+			}
 		}
+		this.lastStatement = tipo;
 	}
-
-
 
 	@Override
 	public void enterSwitchLabel(@NotNull SwitchLabelContext ctx) {
-		this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
-		logger.debug("PN: "+  ctx.getText());
+		incMetricValue(1);
+		logger.debug("     - swith label.");
 	}
 
 	private int countSymbols(String originalText, String whatToFind) {
@@ -259,25 +282,23 @@ public class CycloListener extends JavaBaseListener {
 		}
 		
 		if (listaNodes.contains(tipo)) {
-			this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
-			logger.debug("PN: " + tipo +  " >>>> "+  ctx.getText());
+			incMetricValue(1);
+			logger.debug("     - Predicate node: " + tipo);
 		}
 	}
 
-	protected void initMeasurement(Measurement measurement2) {
-		measurement2.setPackageName("<default>");
-		measurement2.setClassName(null);
-		measurement2.setMetric(this.metric);
-	}
 	
 	protected void verifyMethodViolation(Measurement measurement2) {
-		measurement2.setViolated(measurement2.getMetric().getVerificationAlgorithm().verify(measurement2.getMetricValue()));
+		this.currentMetricValue.setViolated(
+					this.metric.getVerificationAlgorithm().verify(this.currentMetricValue.getValue())
+				);
 	}
 	
 	protected void verifyClassViolation(Measurement measurement2) {
 		for (Measurement m : measurement2.getInnerMeasurements()) {
-			if (m.isViolated()) {
-				measurement2.setViolated(true);
+			MetricValue mv = this.getMetricValue(m);
+			if (mv.isViolated()) {
+				this.getMetricValue(measurement2).setViolated(true);
 				break;
 			}
 		}

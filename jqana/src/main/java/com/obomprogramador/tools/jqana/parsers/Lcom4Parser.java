@@ -19,7 +19,6 @@
  */
 package com.obomprogramador.tools.jqana.parsers;
 
-import static com.obomprogramador.tools.jqana.context.GlobalConstants.LCOM4;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -42,8 +41,7 @@ import com.obomprogramador.tools.jqana.context.Context;
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
 import com.obomprogramador.tools.jqana.model.Parser;
-import com.obomprogramador.tools.jqana.model.defaultimpl.ClassMeasurement;
-import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMeasurement;
+
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 import com.obomprogramador.tools.jqana.parsers.Member.MEMBER_TYPE;
 
@@ -75,7 +73,7 @@ public class Lcom4Parser implements Parser {
 
 	@Override
 	public Measurement parse(Class<?> clazz, String sourceCode) {
-		this.measurement = new ClassMeasurement();
+		this.measurement = new Measurement();
 		JavaLexer lexer;
 		try {
 			lexer = new JavaLexer(new ANTLRInputStream(sourceCode));
@@ -84,11 +82,11 @@ public class Lcom4Parser implements Parser {
 	        ParseTree tree = (ParseTree)(p.compilationUnit()); 
 	        ParseTreeWalker walker = new ParseTreeWalker();
 	        Metric metric = new DefaultMetric();
-	        metric.setMetricName(LCOM4);
+	        metric.setMetricName("");
 	        int inx = context.getValidMetrics().indexOf(metric);
 	        metric = context.getValidMetrics().get(inx);
-	        this.measurement.setMetric(metric);
-	        this.measurement.setMetricValue(1);
+	       // this.measurement.setMetric(metric);
+	        //this.measurement.setMetricValue(1);
 	        members = new ArrayList<Member>();
 	        Lcom4Listener cl = new Lcom4Listener(members,p);
 	        walker.walk(cl, tree); 
@@ -120,8 +118,8 @@ public class Lcom4Parser implements Parser {
 				}
 			}
 		}
-		this.measurement.setMetricValue(connectedComponents.size());
-		this.measurement.setViolated(this.measurement.getMetric().getVerificationAlgorithm().verify(this.measurement.getMetricValue()));
+		//this.measurement.setMetricValue(connectedComponents.size());
+		//this.measurement.setViolated(this.measurement.getMetric().getVerificationAlgorithm().verify(this.measurement.getMetricValue()));
 		logger.debug("Connected components: " + connectedComponents.toString());
 	}
 	
