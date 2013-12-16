@@ -42,7 +42,9 @@ import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
 import com.obomprogramador.tools.jqana.model.Parser;
 
+import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 import com.obomprogramador.tools.jqana.parsers.Member.MEMBER_TYPE;
 
 /**
@@ -59,11 +61,19 @@ public class Lcom4Parser implements Parser {
 	protected Measurement measurement;
 	protected Logger logger;
 	protected List<Member> members;
+	protected Measurement packageMeasurement;
+	protected Metric metric;
+	private MetricValue metricValue;
 
-	public Lcom4Parser(Context context) {
+	public Lcom4Parser(Measurement packageMeasurement, Context context) {
 		super();
 		logger = LoggerFactory.getLogger(this.getClass());
 		this.context = context;
+		this.packageMeasurement = packageMeasurement;
+		this.metric = context.getCurrentMetric(context.getBundle().getString("metric.lcom4.name"));
+		if (this.metric == null) {
+			throw new IllegalArgumentException("Context is not valid. Metric is null.");
+		}
 	}
 
 	@Override
@@ -73,7 +83,13 @@ public class Lcom4Parser implements Parser {
 
 	@Override
 	public Measurement parse(Class<?> clazz, String sourceCode) {
-		this.measurement = new Measurement();
+		
+		this.measurement = new Measurement(); // Class name will be set inside listener.
+		this.measurement.setType(MEASUREMENT_TYPE.CLASS_MEASUREMENT);
+		this.metricValue = new MetricValue();
+		this.metricValue.setName(this.metric.getMetricName());
+		this.measurement.getMetricValues().add(this.metricValue);
+		
 		JavaLexer lexer;
 		try {
 			lexer = new JavaLexer(new ANTLRInputStream(sourceCode));
@@ -81,16 +97,10 @@ public class Lcom4Parser implements Parser {
 			JavaParser p = new JavaParser(tokens);
 	        ParseTree tree = (ParseTree)(p.compilationUnit()); 
 	        ParseTreeWalker walker = new ParseTreeWalker();
-	        Metric metric = new DefaultMetric();
-	        metric.setMetricName("");
-	        int inx = context.getValidMetrics().indexOf(metric);
-	        metric = context.getValidMetrics().get(inx);
-	       // this.measurement.setMetric(metric);
-	        //this.measurement.setMetricValue(1);
+	        this.metricValue.setValue(1);
 	        members = new ArrayList<Member>();
 	        Lcom4Listener cl = new Lcom4Listener(members,p);
 	        walker.walk(cl, tree); 
-	        
 	        processComponents();
 	        logger.debug("**** LCOM4: " + this.measurement.toString());
 		} catch (Exception e) {
@@ -118,8 +128,16 @@ public class Lcom4Parser implements Parser {
 				}
 			}
 		}
-		//this.measurement.setMetricValue(connectedComponents.size());
-		//this.measurement.setViolated(this.measurement.getMetric().getVerificationAlgorithm().verify(this.measurement.getMetricValue()));
+		
+		if (this.members.size() > 0) {
+			this.measurement.setName(this.members.get(0).className);
+		}
+		this.metricValue.setValue(connectedComponents.size());
+		this.metricValue.setViolated(this.metric.getVerificationAlgorithm().verify(this.metricValue.getValue()));
+		if (this.metricValue.isViolated()) {
+			this.metricValue.setQtdElements(1);
+		}
+		updatePackageMeasurement();
 		logger.debug("Connected components: " + connectedComponents.toString());
 	}
 	
@@ -326,6 +344,66 @@ public class Lcom4Parser implements Parser {
 			return saida;
 		}
 		
+	}
+	
+	/* (non-javadoc)
+	 * 
+	 * LCOM4 > 1 means one low cohesion class. 
+	 * MetricValue for class is the number of "connected components" inside that class.
+	 * MetricValue for Package/project is the highest LCOM4 value found.
+	 * qtdElements for Pacakge/project is the quantity of classes that violates LCOM4 > 1.
+	 * 
+	 * We need to consolidate this class measurement into package measurement:
+	 * 1 - Add this class' measruement to package's measurements collection;
+	 * 2 - Add this class' metric value to package's metric values, calculating the average
+	 * 3 - See if the metricvalue is violated
+	 */
+	private void updatePackageMeasurement() {
+		
+		Measurement classMeasurement = null;
+		MetricValue mv = null;
+		MetricValue packageMv = null;
+		
+		// 1 - Add ths chass' measurements to the package's measurements collection:
+		
+		int indx = this.packageMeasurement.getInnerMeasurements().indexOf(this.measurement);
+		if (indx >= 0) {
+			// Collection of inner measurements already has a measurement of this class. Ok.
+			classMeasurement = this.packageMeasurement.getInnerMeasurements().get(indx);
+		}
+		else {
+			// It is the first measurement of this class:
+			classMeasurement = this.measurement;
+			this.packageMeasurement.getInnerMeasurements().add(this.measurement);
+		}
+		
+		// 2 - Add this class' metric value to package's metric values, calculating the average
+		
+		mv = classMeasurement.getMetricValue(context.getBundle().getString("metric.lcom4.name"));
+		if (this.packageMeasurement.getMetricValues().contains(mv)) {
+			// This package already contains a LCOM4 metric value, so, lets add to it:
+			int mvIndx = this.packageMeasurement.getMetricValues().indexOf(mv);
+			packageMv = this.packageMeasurement.getMetricValues().get(mvIndx);
+			
+			// For package and project metrics, the value is the highest LCOM4 value found:
+			if (mv.getValue() > packageMv.getValue()) {
+				packageMv.setValue(packageMv.getValue() + mv.getValue());
+			}
+			if (mv.isViolated()) {
+				packageMv.setQtdElements(packageMv.getQtdElements() + 1);
+			}
+			packageMv.setViolated(mv.isViolated());
+		}
+		else {
+			packageMv = new MetricValue();
+			packageMv.setName(mv.getName());
+			packageMv.setValue(mv.getValue());
+			if (mv.isViolated()) {
+				packageMv.setQtdElements(1);
+			}
+			packageMv.setViolated(mv.isViolated());
+			this.packageMeasurement.getMetricValues().add(packageMv);
+		}
 	}
 
 }

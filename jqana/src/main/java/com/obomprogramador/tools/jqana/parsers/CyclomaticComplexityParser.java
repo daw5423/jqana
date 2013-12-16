@@ -102,35 +102,64 @@ public class CyclomaticComplexityParser implements Parser {
 	        ParseTreeWalker walker = new ParseTreeWalker();
 	        CycloListener cl = new CycloListener(this.metric, this.measurement ,p);
 	        walker.walk(cl, tree); 
+	        // Compute the average:
+	        MetricValue mv = this.measurement.getMetricValue(context.getBundle().getString("metric.cc.name"));
+	        mv.setValue(mv.getValue() / mv.getQtdElements());
 	        updatePackageMeasurement();
 	        logger.debug("**** Complexidade: " + this.measurement.toString());
 		} catch (Exception e) {
 			logger.error("Parser: " + e.getMessage());
 			context.getErrors().push(e.getMessage());
-			
 		}
             
 		return this.measurement;
 	}
 
+	/* (non-javadoc
+	 * We need to consolidate this class measurement into package measurement:
+	 * 1 - Add this class' measruement to package's measurements collection;
+	 * 2 - Add this class' metric value to package's metric values, calculating the average
+	 * 3 - See if the metricvalue is violated
+	 */
 	private void updatePackageMeasurement() {
+		
+		Measurement classMeasurement = null;
+		MetricValue mv = null;
+		MetricValue packageMv = null;
+		
+		// 1 - Add ths chass' measurements to the package's measurements collection:
+		
 		int indx = this.packageMeasurement.getInnerMeasurements().indexOf(this.measurement);
 		if (indx >= 0) {
-			Measurement classMeasurement = this.packageMeasurement.getInnerMeasurements().get(indx);
-			if (!classMeasurement.getMetricValues().contains(this.metricValue)) {
-				classMeasurement.getMetricValues().add(this.metricValue);
-			}
-			else {
-				indx = classMeasurement.getMetricValues().indexOf(this.metricValue);
-				classMeasurement.getMetricValues().remove(indx);
-				classMeasurement.getMetricValues().add(this.metricValue);
-			}
+			// Collection of inner measurements already has a measurement of this class. Ok.
+			classMeasurement = this.packageMeasurement.getInnerMeasurements().get(indx);
 		}
 		else {
+			// It is the first measurement of this class:
+			classMeasurement = this.measurement;
 			this.packageMeasurement.getInnerMeasurements().add(this.measurement);
-			this.packageMeasurement.getMetricValues().add(this.metricValue);
 		}
 		
+		// 2 - Add this class' metric value to package's metric values, calculating the average
+		
+		mv = classMeasurement.getMetricValue(context.getBundle().getString("metric.cc.name"));
+		if (this.packageMeasurement.getMetricValues().contains(mv)) {
+			// This package already contains a CC metric value, so, lets add to it:
+			int mvIndx = this.packageMeasurement.getMetricValues().indexOf(mv);
+			packageMv = this.packageMeasurement.getMetricValues().get(mvIndx);
+			packageMv.setValue(packageMv.getValue() + mv.getValue());
+			packageMv.setQtdElements(packageMv.getQtdElements() + 1);
+			// Package average is calculated after all its classes.
+			packageMv.setViolated(mv.isViolated());
+		}
+		else {
+			packageMv = new MetricValue();
+			packageMv.setName(mv.getName());
+			packageMv.setValue(mv.getValue());
+			packageMv.setQtdElements(1);
+			packageMv.setViolated(mv.isViolated());
+			this.packageMeasurement.getMetricValues().add(packageMv);
+		}
 	}
 	
 

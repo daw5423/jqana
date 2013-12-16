@@ -167,7 +167,8 @@ public class TestUsingXmlGenerator {
 		context.getValidMetrics().add(metric);
 		String source = getSource(sourceFile); 
 		
-		Parser parser = new Lcom4Parser(context);
+		//Parser parser = new Lcom4Parser(context);
+		Parser parser = null;
 		Measurement mt = parser.parse( null, source);
 		return mt;
 	}

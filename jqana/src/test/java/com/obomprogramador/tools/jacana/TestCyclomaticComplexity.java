@@ -51,22 +51,31 @@ public class TestCyclomaticComplexity {
 	public void printPackage(int identation, Measurement mt) {
 		String line = ""; 
 		line += StringUtils.leftPad(line,identation);
+		MetricValue mv = mt.getMetricValue(context.getBundle().getString("metric.cc.name"));
 		switch (mt.getType()) {
 		case PACKAGE_MEASUREMENT:
 			line += "Package: " + mt.getName(); 
+			line += ", Metric: "
+					+ mv.getName()
+					+ ", value (avg): "
+					+ mv.getValue();
 			break;
 		case CLASS_MEASUREMENT:
-			line += "Class: " + mt.getName(); 
+			line += "Class: " + mt.getName();
+			line += ", Metric: "
+					+ mv.getName()
+					+ ", value (avg): "
+					+ mv.getValue();
 			break;
 		case METHOD_MEASUREMENT:
 			line += "Method: " + mt.getName(); 
+			line += ", Metric: "
+					+ mv.getName()
+					+ ", value: "
+					+ mv.getValue();
 		}
-		MetricValue mv = mt.getMetricValue(context.getBundle().getString("metric.cc.name"));
-		line += ", Metric: "
-			+ mv.getName()
-			+ ", value: "
-			+ mv.getValue()
-			+ ", violated: "
+		
+		line += ", violated: "
 			+ mv.isViolated();
 		System.out.println(line);
 		for (Measurement m2 : mt.getInnerMeasurements()) {

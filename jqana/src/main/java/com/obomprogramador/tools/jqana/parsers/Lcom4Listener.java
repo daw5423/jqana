@@ -76,6 +76,7 @@ public class Lcom4Listener extends JavaBaseListener {
 	protected List<String>getterSetterPrefix = Arrays.asList(prefixos);
 	protected String mainPackageName;
 	protected String mainClassName;
+	protected boolean alreadyGotMainClass;
 	
 	public Lcom4Listener(List<Member> members, JavaParser p) {
 		this.logger = LoggerFactory.getLogger(this.getClass());
@@ -87,8 +88,12 @@ public class Lcom4Listener extends JavaBaseListener {
 
 	@Override
 	public void enterClassDeclaration(@NotNull ClassDeclarationContext ctx) {
-		int posCurly = ctx.getText().indexOf('{');
-		mainClassName = ctx.getText().substring(5,posCurly);
+		if (!alreadyGotMainClass) {
+			int posCurly = ctx.getText().indexOf('{');
+			mainClassName = ctx.getText().substring(5,posCurly);
+			alreadyGotMainClass = true;
+		}
+		
 
 	}
 

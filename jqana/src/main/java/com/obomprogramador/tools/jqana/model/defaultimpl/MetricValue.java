@@ -4,6 +4,7 @@ public class MetricValue implements Comparable<MetricValue> {
 
 	protected String name;
 	protected double value;
+	protected int    qtdElements;
 	protected boolean violated;
 	
 	public MetricValue() {
@@ -24,6 +25,23 @@ public class MetricValue implements Comparable<MetricValue> {
 
 	public void setValue(double value) {
 		this.value = value;
+	}
+
+	
+	
+	@Override
+	public String toString() {
+		return "MetricValue [name=" + name + ", value=" + value
+				+ ", qtdElements=" + qtdElements + ", violated=" + violated
+				+ "]";
+	}
+
+	public int getQtdElements() {
+		return qtdElements;
+	}
+
+	public void setQtdElements(int qtdElements) {
+		this.qtdElements = qtdElements;
 	}
 
 	public boolean isViolated() {

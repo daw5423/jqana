@@ -7,35 +7,42 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
 import com.obomprogramador.tools.jqana.context.Context;
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
 import com.obomprogramador.tools.jqana.model.Parser;
+import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 import com.obomprogramador.tools.jqana.parsers.CyclomaticComplexityParser;
 import com.obomprogramador.tools.jqana.parsers.Lcom4Parser;
 
 public class TestLcom4 {
 
+	private Context context;
+
 	@Test
 	public void testLcom4Gt1() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		Metric metric = new DefaultMetric();
-		//metric.setMetricName(LCOM4);
-		MaxLimitVerificationAlgorithm mlva = new MaxLimitVerificationAlgorithm(1);
-		metric.setVerificationAlgorithm(mlva);
-		Context context = new Context();
-		context.setValidMetrics(new ArrayList<Metric>());
-		context.getValidMetrics().add(metric);
-		
-		String uri = getSource("abc/TesteLcomMaiorQueUm.java"); 
-		Parser parser = new Lcom4Parser(context);
+		context = new Context();
+		ResourceBundle bundle = ResourceBundle.getBundle("report");
+		context.setBundle(bundle);
+		String uri = getSource("unit-test-sources/abc/TesteLcomMaiorQueUm.java"); 
+		Measurement packageMeasurement = new Measurement();
+		packageMeasurement.setName("abc");
+		packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
+		Parser parser = new Lcom4Parser(packageMeasurement, context);
 		Measurement mt = parser.parse( null, uri);
 		assertTrue(mt != null);
-		//assertTrue(mt.getMetricValue() > 1);
+		MetricValue mv = packageMeasurement.getMetricValue(context.getBundle().getString("metric.lcom4.name"));
+		assertTrue(mv != null);
+		assertTrue(mv.getValue() != 0);
+		printPackage(4,packageMeasurement);
 	}
 	
 	private String getSource(String string) {
@@ -72,18 +79,55 @@ public class TestLcom4 {
 
 	@Test
 	public void testLcom4Eq1() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		Metric metric = new DefaultMetric();
-		//metric.setMetricName(LCOM4);
-		MaxLimitVerificationAlgorithm mlva = new MaxLimitVerificationAlgorithm(1);
-		metric.setVerificationAlgorithm(mlva);
-		Context context = new Context();
-		context.setValidMetrics(new ArrayList<Metric>());
-		context.getValidMetrics().add(metric);
-		String uri = getSource("abc/TesteLCom4Um.java"); 
-		Parser parser = new Lcom4Parser(context);
+		context = new Context();
+		ResourceBundle bundle = ResourceBundle.getBundle("report");
+		context.setBundle(bundle);
+		String uri = getSource("unit-test-sources/abc/TesteLCom4Um.java"); 
+		Measurement packageMeasurement = new Measurement();
+		packageMeasurement.setName("abc");
+		packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
+		Parser parser = new Lcom4Parser(packageMeasurement, context);
 		Measurement mt = parser.parse( null, uri);
 		assertTrue(mt != null);
-		//assertTrue(mt.getMetricValue() == 1);
+		MetricValue mv = packageMeasurement.getMetricValue(context.getBundle().getString("metric.lcom4.name"));
+		assertTrue(mv != null);
+		assertTrue(mv.getValue() == 1);
+		printPackage(4,packageMeasurement);
 	}
 
+	
+	public void printPackage(int identation, Measurement mt) {
+		String line = ""; 
+		line += StringUtils.leftPad(line,identation);
+		MetricValue mv = mt.getMetricValue(context.getBundle().getString("metric.lcom4.name"));
+		switch (mt.getType()) {
+		case PACKAGE_MEASUREMENT:
+			line += "Package: " + mt.getName(); 
+			line += ", Metric: "
+					+ mv.getName()
+					+ ", value (avg): "
+					+ mv.getValue();
+			break;
+		case CLASS_MEASUREMENT:
+			line += "Class: " + mt.getName();
+			line += ", Metric: "
+					+ mv.getName()
+					+ ", value (avg): "
+					+ mv.getValue();
+			break;
+		case METHOD_MEASUREMENT:
+			line += "Method: " + mt.getName(); 
+			line += ", Metric: "
+					+ mv.getName()
+					+ ", value: "
+					+ mv.getValue();
+		}
+		
+		line += ", violated: "
+			+ mv.isViolated();
+		System.out.println(line);
+		for (Measurement m2 : mt.getInnerMeasurements()) {
+			printPackage(identation + 4, m2);
+		}
+	}
 }

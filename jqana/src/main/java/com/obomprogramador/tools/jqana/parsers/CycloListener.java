@@ -232,6 +232,7 @@ public class CycloListener extends JavaBaseListener {
 			MetricValue ownerMV = this.getMetricValue(owner);
 			this.currentMetricValue = this.getMetricValue(this.measurement);
 			ownerMV.setValue(ownerMV.getValue() + this.currentMetricValue.getValue());
+			ownerMV.setQtdElements(ownerMV.getQtdElements() + 1);
 			this.measurement = this.measurementsStack.pop();
 			this.currentMetricValue = getMetricValue(this.measurement);
 		}		
