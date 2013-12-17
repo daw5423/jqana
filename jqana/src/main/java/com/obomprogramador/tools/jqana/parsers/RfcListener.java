@@ -19,8 +19,6 @@
  */
 package com.obomprogramador.tools.jqana.parsers;
 
-import java.util.List;
-
 import org.antlr.v4.runtime.misc.NotNull;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -33,8 +31,9 @@ import com.obomprogramador.tools.jqana.antlrparser.JavaParser.CompilationUnitCon
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ConstructorDeclarationContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ExpressionContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.MethodDeclarationContext;
-import com.obomprogramador.tools.jqana.antlrparser.JavaParser.PackageDeclarationContext;
+import com.obomprogramador.tools.jqana.context.Context;
 import com.obomprogramador.tools.jqana.model.Measurement;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 
 /**
  * Implementation of JavaBaseListener (ANTLR4) that calculates a Response For Class metric.
@@ -56,20 +55,25 @@ public class RfcListener extends JavaBaseListener {
 	protected Logger logger;
 	protected JavaParser parser;
 	protected Measurement measurement;
+	protected MetricValue metricValue;
 	protected boolean aConstructorWasFound;
-	private   String previousExpression;
+	protected   String previousExpression;
 	protected String mainPackageName;
 	protected String mainClassName;
+	protected Context context;
 
 	/**
 	 * Default constructor.
+	 * @param context 
 	 * @param measurement the Measurement instance to use. Its "metricValue" property will be updated.
 	 * @param p The JavaParser used to parse the Tree.
 	 */
-	public RfcListener(Measurement measurement, JavaParser p) {
+	public RfcListener(Context context, Measurement measurement, JavaParser p) {
 		this.logger = LoggerFactory.getLogger(this.getClass());
 		this.measurement = measurement;
 		this.parser = p;
+		this.context = context;
+		this.metricValue = this.measurement.getMetricValue(this.context.getBundle().getString("metric.rfc.name"));
 	}
 
 	
@@ -78,16 +82,7 @@ public class RfcListener extends JavaBaseListener {
 	public void enterClassDeclaration(@NotNull ClassDeclarationContext ctx) {
 		int posCurly = ctx.getText().indexOf('{');
 		mainClassName = ctx.getText().substring(5,posCurly);
-		//this.measurement.setClassName(mainClassName);
-	}
-
-
-
-	@Override
-	public void enterPackageDeclaration(@NotNull PackageDeclarationContext ctx) {
-		mainPackageName = ctx.getText().substring(7);
-		//this.measurement.setPackageName(mainPackageName);
-		logger.debug(mainPackageName);
+		this.measurement.setName(mainClassName);
 	}
 
 
@@ -99,7 +94,7 @@ public class RfcListener extends JavaBaseListener {
 	public void enterConstructorDeclaration(
 			@NotNull ConstructorDeclarationContext ctx) {
 		aConstructorWasFound = true;
-		//this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
+		this.metricValue.setValue(this.metricValue.getValue() + 1);
 		this.previousExpression = null;
 	}
 	
@@ -111,7 +106,7 @@ public class RfcListener extends JavaBaseListener {
 	@Override
 	public void exitCompilationUnit(@NotNull CompilationUnitContext ctx) {
 		if (!this.aConstructorWasFound) {
-			//this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
+			this.metricValue.setValue(this.metricValue.getValue() + 1);
 		}
 	}
 
@@ -120,7 +115,7 @@ public class RfcListener extends JavaBaseListener {
 	 */
 	@Override
 	public void enterMethodDeclaration(@NotNull MethodDeclarationContext ctx) {
-		//this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
+		this.metricValue.setValue(this.metricValue.getValue() + 1);
 		this.previousExpression = null;
 	}
 	
@@ -157,7 +152,7 @@ public class RfcListener extends JavaBaseListener {
 				char previous = expression.charAt(pos - 1);
 				if (Character.isJavaIdentifierPart(previous)) {
 					logger.debug("Found Method or constructor call! ");
-					//this.measurement.setMetricValue(this.measurement.getMetricValue() + 1);
+					this.metricValue.setValue(this.metricValue.getValue() + 1);
 				}
 			}
 			start = pos + 1;

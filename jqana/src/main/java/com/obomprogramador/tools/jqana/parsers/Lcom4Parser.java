@@ -35,9 +35,11 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener;
 import com.obomprogramador.tools.jqana.antlrparser.JavaLexer;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
 import com.obomprogramador.tools.jqana.context.Context;
+import com.obomprogramador.tools.jqana.model.AbstractMetricParser;
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
 import com.obomprogramador.tools.jqana.model.Parser;
@@ -55,61 +57,31 @@ import com.obomprogramador.tools.jqana.parsers.Member.MEMBER_TYPE;
  * @author Cleuton Sampaio
  *
  */
-public class Lcom4Parser implements Parser {
+public class Lcom4Parser extends AbstractMetricParser {
 	
-	protected Context context;
-	protected Measurement measurement;
-	protected Logger logger;
 	protected List<Member> members;
-	protected Measurement packageMeasurement;
-	protected Metric metric;
-	private MetricValue metricValue;
 
 	public Lcom4Parser(Measurement packageMeasurement, Context context) {
-		super();
-		logger = LoggerFactory.getLogger(this.getClass());
-		this.context = context;
-		this.packageMeasurement = packageMeasurement;
-		this.metric = context.getCurrentMetric(context.getBundle().getString("metric.lcom4.name"));
-		if (this.metric == null) {
-			throw new IllegalArgumentException("Context is not valid. Metric is null.");
-		}
+		super(packageMeasurement, context, "metric.lcom4.name");
+
 	}
 
-	@Override
-	public String getParserName() {
-		return this.getClass().getName();
-	}
 
 	@Override
-	public Measurement parse(Class<?> clazz, String sourceCode) {
-		
-		this.measurement = new Measurement(); // Class name will be set inside listener.
-		this.measurement.setType(MEASUREMENT_TYPE.CLASS_MEASUREMENT);
-		this.metricValue = new MetricValue();
-		this.metricValue.setName(this.metric.getMetricName());
-		this.measurement.getMetricValues().add(this.metricValue);
-		
-		JavaLexer lexer;
-		try {
-			lexer = new JavaLexer(new ANTLRInputStream(sourceCode));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			JavaParser p = new JavaParser(tokens);
-	        ParseTree tree = (ParseTree)(p.compilationUnit()); 
-	        ParseTreeWalker walker = new ParseTreeWalker();
-	        this.metricValue.setValue(1);
-	        members = new ArrayList<Member>();
-	        Lcom4Listener cl = new Lcom4Listener(members,p);
-	        walker.walk(cl, tree); 
-	        processComponents();
-	        logger.debug("**** LCOM4: " + this.measurement.toString());
-		} catch (Exception e) {
-			context.getErrors().push(e.getMessage());
-			logger.error(e.getMessage());
-		}
-            
-		return this.measurement;
+	public JavaBaseListener getListener(JavaParser p) {
+		this.metricValue.setValue(1);
+	    this.members = new ArrayList<Member>();
+	    Lcom4Listener cl = new Lcom4Listener(members,p);
+		return cl;
 	}
+
+	
+
+	@Override
+	public void afterProcessing() {
+		processComponents();
+	}
+
 
 	private void processComponents() {
 		List<Component> connectedComponents = new ArrayList<Component>();
@@ -346,64 +318,18 @@ public class Lcom4Parser implements Parser {
 		
 	}
 	
-	/* (non-javadoc)
-	 * 
-	 * LCOM4 > 1 means one low cohesion class. 
-	 * MetricValue for class is the number of "connected components" inside that class.
-	 * MetricValue for Package/project is the highest LCOM4 value found.
-	 * qtdElements for Pacakge/project is the quantity of classes that violates LCOM4 > 1.
-	 * 
-	 * We need to consolidate this class measurement into package measurement:
-	 * 1 - Add this class' measruement to package's measurements collection;
-	 * 2 - Add this class' metric value to package's metric values, calculating the average
-	 * 3 - See if the metricvalue is violated
-	 */
-	private void updatePackageMeasurement() {
-		
-		Measurement classMeasurement = null;
-		MetricValue mv = null;
-		MetricValue packageMv = null;
-		
-		// 1 - Add ths chass' measurements to the package's measurements collection:
-		
-		int indx = this.packageMeasurement.getInnerMeasurements().indexOf(this.measurement);
-		if (indx >= 0) {
-			// Collection of inner measurements already has a measurement of this class. Ok.
-			classMeasurement = this.packageMeasurement.getInnerMeasurements().get(indx);
+	@Override
+	public void updatePackageMetrics(MetricValue packageMv, MetricValue mv) {
+		// For package and project metrics, the value is the highest LCOM4 value found:
+		if (mv.getValue() > packageMv.getValue()) {
+			packageMv.setValue(packageMv.getValue() + mv.getValue());
 		}
-		else {
-			// It is the first measurement of this class:
-			classMeasurement = this.measurement;
-			this.packageMeasurement.getInnerMeasurements().add(this.measurement);
+		if (mv.isViolated()) {
+			packageMv.setQtdElements(packageMv.getQtdElements() + 1);
 		}
-		
-		// 2 - Add this class' metric value to package's metric values, calculating the average
-		
-		mv = classMeasurement.getMetricValue(context.getBundle().getString("metric.lcom4.name"));
-		if (this.packageMeasurement.getMetricValues().contains(mv)) {
-			// This package already contains a LCOM4 metric value, so, lets add to it:
-			int mvIndx = this.packageMeasurement.getMetricValues().indexOf(mv);
-			packageMv = this.packageMeasurement.getMetricValues().get(mvIndx);
-			
-			// For package and project metrics, the value is the highest LCOM4 value found:
-			if (mv.getValue() > packageMv.getValue()) {
-				packageMv.setValue(packageMv.getValue() + mv.getValue());
-			}
-			if (mv.isViolated()) {
-				packageMv.setQtdElements(packageMv.getQtdElements() + 1);
-			}
-			packageMv.setViolated(mv.isViolated());
-		}
-		else {
-			packageMv = new MetricValue();
-			packageMv.setName(mv.getName());
-			packageMv.setValue(mv.getValue());
-			if (mv.isViolated()) {
-				packageMv.setQtdElements(1);
-			}
-			packageMv.setViolated(mv.isViolated());
-			this.packageMeasurement.getMetricValues().add(packageMv);
-		}
+		packageMv.setViolated(mv.isViolated());
 	}
+	
+	
 
 }

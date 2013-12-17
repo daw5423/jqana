@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -33,9 +34,11 @@ import com.obomprogramador.tools.jqana.context.Context;
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
 import com.obomprogramador.tools.jqana.model.Parser;
+import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultXmlGenerator;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 
 import com.obomprogramador.tools.jqana.parsers.CyclomaticComplexityParser;
 import com.obomprogramador.tools.jqana.parsers.Lcom4Parser;
@@ -74,17 +77,19 @@ public class TestUsingXmlGenerator {
 	}
 
 	private void processPackages(String[] strings) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		Measurement packageMeasurement = null;
+		project = new Measurement();
+		project.setName("unit-test-sources");
+		project.setType(MEASUREMENT_TYPE.PROJECT_MEASUREMENT);
 		if (strings != null && strings.length > 0) {
 			for (int x=0; x<strings.length; x++) {
-				Measurement packageMeasurement = new Measurement();
-				this.measurements.add(packageMeasurement);
+				packageMeasurement = new Measurement();
+				packageMeasurement.setName(strings[x]);
+				packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
 				processSingleFolder(packageMeasurement,strings[x]);
+				project.getInnerMeasurements().add(packageMeasurement);
 			}
 		}
-		
-		project = new Measurement();
-		//project.setProjectName("unit-test-sources");
-		project.setInnerMeasurements(this.measurements);
 		
 	}
 	
@@ -93,7 +98,7 @@ public class TestUsingXmlGenerator {
 			currentFolderName = rootTestResources + "/" + folderName;
 			String [] files = this.getResourceListing(this.getClass(), currentFolderName);
 			for (int x=0; x<files.length; x++) {
-				processMetrics(packageMeasurement, files[x]);
+				processMetrics(packageMeasurement, currentFolderName + "/" + files[x]);
 			}
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
@@ -106,26 +111,20 @@ public class TestUsingXmlGenerator {
 
 	private void processMetrics(Measurement packageMeasurement, String sourceFile) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		logger.debug("Source file: " + sourceFile);
-		
-		packageMeasurement.getInnerMeasurements().add(getCyclomaticMetric(sourceFile));
-		//packageMeasurement.getInnerMeasurements().add(getLcom4Value(sourceFile));
-		//packageMeasurement.getInnerMeasurements().add(getRfc(sourceFile));
-		
+		String sourceCode = this.getSource(sourceFile);
+		processCyclomaticMetric(sourceCode, packageMeasurement);
+		processLcom4Metric(sourceCode, packageMeasurement);
+		processRfcMetric(sourceCode, packageMeasurement);
 	}
 
-	private Measurement getRfc(String sourceFile) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		Metric metric = new DefaultMetric();
-		//metric.setMetricName(RFC);
-		MaxLimitVerificationAlgorithm mlva = new MaxLimitVerificationAlgorithm(5);
-		metric.setVerificationAlgorithm(mlva);
+	private void processRfcMetric(String sourceFile, Measurement packageMeasurement) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		Context context = new Context();
-		context.setValidMetrics(new ArrayList<Metric>());
-		context.getValidMetrics().add(metric);
-		String source = getSource(sourceFile); 
+		ResourceBundle bundle = ResourceBundle.getBundle("report");
+		context.setBundle(bundle);
+		Parser parser = new RfcParser(packageMeasurement, context);
+		Measurement mt = parser.parse( null, sourceFile);
+		assertTrue(mt != null);
 		
-		Parser parser = new RfcParser(context);
-		Measurement mt = parser.parse( null, source);
-		return mt;
 	}
 
 	private String getSource(String sourceFile) {
@@ -154,39 +153,29 @@ public class TestUsingXmlGenerator {
 	}
 
 	private InputStream getStream(String sourceFile) {
-		return this.getClass().getClassLoader().getResourceAsStream(currentFolderName + "/" + sourceFile);
+		return this.getClass().getClassLoader().getResourceAsStream(sourceFile);
 	}
 
-	private Measurement getLcom4Value(String sourceFile) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		Metric metric = new DefaultMetric();
-		//metric.setMetricName(LCOM4);
-		MaxLimitVerificationAlgorithm mlva = new MaxLimitVerificationAlgorithm(5);
-		metric.setVerificationAlgorithm(mlva);
+	private void processLcom4Metric(String sourceFile, Measurement packageMeasurement) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		Context context = new Context();
-		context.setValidMetrics(new ArrayList<Metric>());
-		context.getValidMetrics().add(metric);
-		String source = getSource(sourceFile); 
+		ResourceBundle bundle = ResourceBundle.getBundle("report");
+		context.setBundle(bundle);
+		Parser parser = new Lcom4Parser(packageMeasurement, context);
+		Measurement mt = parser.parse( null, sourceFile);
+		assertTrue(mt != null);
 		
-		//Parser parser = new Lcom4Parser(context);
-		Parser parser = null;
-		Measurement mt = parser.parse( null, source);
-		return mt;
 	}
 
-	private Measurement getCyclomaticMetric(String sourceFile) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		Metric metric = new DefaultMetric();
-		//metric.setMetricName(CYCLOMATIC_COMPLEXITY);
-		MaxLimitVerificationAlgorithm mlva = new MaxLimitVerificationAlgorithm(5);
-		metric.setVerificationAlgorithm(mlva);
-		Context context = new Context();
-		context.setValidMetrics(new ArrayList<Metric>());
-		context.getValidMetrics().add(metric);
-		String source = getSource(sourceFile); 
+	private void processCyclomaticMetric(String sourceFile, Measurement packageMeasurement) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		
-		//Parser parser = new CyclomaticComplexityParser(context);
-		//Measurement mt = parser.parse( null, source);
-		//return mt;
-		return null;
+		Context context = new Context();
+		ResourceBundle bundle = ResourceBundle.getBundle("report");
+		context.setBundle(bundle);
+		Parser parser = new CyclomaticComplexityParser(packageMeasurement, context);
+		Measurement mt = parser.parse( null, sourceFile);
+		MetricValue mv = packageMeasurement.getMetricValue(context.getBundle().getString("metric.cc.name"));
+		assertTrue(mt != null);
+		
 	}
 
 	/**

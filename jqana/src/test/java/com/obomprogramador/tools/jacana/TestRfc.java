@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import org.junit.Test;
 
@@ -14,8 +15,10 @@ import com.obomprogramador.tools.jqana.context.Context;
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
 import com.obomprogramador.tools.jqana.model.Parser;
+import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 import com.obomprogramador.tools.jqana.parsers.Lcom4Parser;
 import com.obomprogramador.tools.jqana.parsers.RfcParser;
 
@@ -23,19 +26,18 @@ public class TestRfc {
 
 	@Test
 	public void test() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		Metric metric = new DefaultMetric();
-		//metric.setMetricName(RFC);
-		MaxLimitVerificationAlgorithm mlva = new MaxLimitVerificationAlgorithm(50);
-		metric.setVerificationAlgorithm(mlva);
 		Context context = new Context();
-		context.setValidMetrics(new ArrayList<Metric>());
-		context.getValidMetrics().add(metric);
-		String uri = getSource("abc/TesteRfc.java"); 
-
-		Parser parser = new RfcParser(context);
+		ResourceBundle bundle = ResourceBundle.getBundle("report");
+		context.setBundle(bundle);
+		String uri = getSource("unit-test-sources/abc/TesteRfc.java"); 
+		Measurement packageMeasurement = new Measurement();
+		packageMeasurement.setName("abc");
+		packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
+		Parser parser = new RfcParser(packageMeasurement, context);
 		Measurement mt = parser.parse( null, uri);
 		assertTrue(mt != null);
-		//assertTrue(mt.getMetricValue() != 0);
+		MetricValue mv = mt.getMetricValue(context.getBundle().getString("metric.rfc.name"));
+		assertTrue(mv.getValue() == 8);
 	}
 	
 	private String getSource(String string) {

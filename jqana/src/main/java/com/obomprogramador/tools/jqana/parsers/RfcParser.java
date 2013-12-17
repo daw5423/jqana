@@ -33,14 +33,18 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener;
 import com.obomprogramador.tools.jqana.antlrparser.JavaLexer;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
 import com.obomprogramador.tools.jqana.context.Context;
+import com.obomprogramador.tools.jqana.model.AbstractMetricParser;
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Metric;
 import com.obomprogramador.tools.jqana.model.Parser;
 
+import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 /**
  * Calculates the RFC - Response For Class, according to C&K definitions:
  * http://dl.acm.org/citation.cfm?id=117970
@@ -50,48 +54,19 @@ import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
  * @author Cleuton Sampaio
  *
  */
-public class RfcParser implements Parser {
+public class RfcParser extends AbstractMetricParser {
 
-	protected Context context;
-	protected Measurement measurement;
-	protected Logger logger;
-	protected List<Member> members;
+	public RfcParser(Measurement packageMeasurement, Context context) {
+		super(packageMeasurement,context,"metric.rfc.name");
+	}
+
+	@Override
+	public JavaBaseListener getListener(JavaParser p) {
+		JavaBaseListener jbl = new RfcListener(this.context, this.measurement, p);
+		return jbl;
+	}
 	
-	public RfcParser(Context context) {
-		logger = LoggerFactory.getLogger(this.getClass());
-		this.context = context;
-	}
+	
 
-	@Override
-	public String getParserName() {
-		return null;
-	}
-
-	@Override
-	public Measurement parse(Class<?> clazz, String sourceCode) {
-		this.measurement = new Measurement();
-		JavaLexer lexer;
-		try {
-			lexer = new JavaLexer(new ANTLRInputStream(sourceCode));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			JavaParser p = new JavaParser(tokens);
-	        ParseTree tree = (ParseTree)(p.compilationUnit()); 
-	        ParseTreeWalker walker = new ParseTreeWalker();
-	        Metric metric = new DefaultMetric();
-	        //metric.setMetricName(RFC);
-	        int inx = context.getValidMetrics().indexOf(metric);
-	        metric = context.getValidMetrics().get(inx);
-	        //this.measurement.setMetric(metric);
-	        members = new ArrayList<Member>();
-	        RfcListener cl = new RfcListener(this.measurement,p);
-	        walker.walk(cl, tree); 
-	        logger.debug("**** RFC: " + this.measurement.toString());
-		} catch (Exception e) {
-			context.getErrors().push(e.getMessage());
-			logger.error(e.getMessage());
-		}
-            
-		return this.measurement;
-	}
 
 }

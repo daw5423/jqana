@@ -25,6 +25,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -37,6 +38,7 @@ import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
  * @author Cleuton Sampaio
  *
  */
+@XmlRootElement
 public class Measurement implements Comparable<Measurement>{
 	
 	public static enum MEASUREMENT_TYPE {
@@ -49,7 +51,9 @@ public class Measurement implements Comparable<Measurement>{
 	protected String name;
 	protected Date date;
 	protected MEASUREMENT_TYPE type;
+	
 	protected List<MetricValue> metricValues;
+	
 	protected List<Measurement> innerMeasurements;
 	
 	
@@ -93,12 +97,18 @@ public class Measurement implements Comparable<Measurement>{
 	public void setType(MEASUREMENT_TYPE type) {
 		this.type = type;
 	}
+	
+	@XmlElementWrapper(name="metricsValues")
+	@XmlElement(name="metricValue")
 	public List<MetricValue> getMetricValues() {
 		return metricValues;
 	}
 	public void setMetricValues(List<MetricValue> metricValues) {
 		this.metricValues = metricValues;
 	}
+	
+	@XmlElementWrapper(name="innerMeasurements")
+	@XmlElement(name="measurement")
 	public List<Measurement> getInnerMeasurements() {
 		return innerMeasurements;
 	}
