@@ -61,6 +61,7 @@ public class RfcListener extends JavaBaseListener {
 	protected String mainPackageName;
 	protected String mainClassName;
 	protected Context context;
+	protected boolean alreadyFindMainClass;
 
 	/**
 	 * Default constructor.
@@ -80,9 +81,12 @@ public class RfcListener extends JavaBaseListener {
 	
 	@Override
 	public void enterClassDeclaration(@NotNull ClassDeclarationContext ctx) {
-		int posCurly = ctx.getText().indexOf('{');
-		mainClassName = ctx.getText().substring(5,posCurly);
-		this.measurement.setName(mainClassName);
+		if (!this.alreadyFindMainClass) {
+			int posCurly = ctx.getText().indexOf('{');
+			mainClassName = ctx.getText().substring(5,posCurly);
+			this.measurement.setName(mainClassName);
+			this.alreadyFindMainClass = true;
+		}
 	}
 
 

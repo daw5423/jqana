@@ -19,6 +19,8 @@
  */
 package com.obomprogramador.tools.jqana.mavenplugin;
 
+
+
 import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
@@ -33,6 +35,13 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.reporting.AbstractMavenReport;
 import org.apache.maven.reporting.MavenReportException;
+import org.w3c.dom.Document;
+
+import com.obomprogramador.tools.jqana.context.Context;
+import com.obomprogramador.tools.jqana.model.Measurement;
+import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultProjectProcessor;
+import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultXml2HtmlConverter;
+import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultXmlGenerator;
 
 /**
  * This is the Mojo that implements jQana maven plugin.
@@ -123,27 +132,20 @@ public class JqanaMojo extends AbstractMavenReport {
 		sink.text(getBundle(locale).getString("report.packageTitle"));
 		sink.sectionTitle1_();
 		
-		int countSources = processSources(this.sourceDirectory.listFiles());
-		
-		sink.text("There are " + countSources + " source files.");
-	}
-
-	private int processSources(File[] listFiles) {
-		int count = 0;
-		for (int x=0; x<listFiles.length; x++) {
-			File file = listFiles[x];
-			if (file.isFile()) {
-				if (file.getName().contains(".java")) {
-					count++;
-				}
-				else {
-					count += processSources(file.listFiles());
-				}
-			}
+		try {
+			DefaultProjectProcessor dpp = new DefaultProjectProcessor(new Context());
+			Measurement projectMeasurement = dpp.process(this.sourceDirectory.getName());
+			DefaultXmlGenerator generator = new DefaultXmlGenerator();
+			Document report = generator.serialize(projectMeasurement);
+			DefaultXml2HtmlConverter converter = new DefaultXml2HtmlConverter();
+			String output = converter.convert(generator.xml2String(report));
+			sink.rawText(output);
 		}
-		return count;
+		catch (Exception ex) {
+			getLog().error(ex);
+		}
 	}
-
+	
 	@Override
 	protected String getOutputDirectory() {
 		return outputDirectory.getAbsolutePath();
