@@ -1,5 +1,6 @@
 package com.obomprogramador.tools.jqana.model;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -27,5 +28,5 @@ public interface ProjectProcessor {
 	 * @throws InstantiationException 
 	 * @throws IllegalAccessException 
 	 */
-	public Measurement process(String projectRootFolderName) throws URISyntaxException, IOException, JAXBException, ParserConfigurationException, TransformerException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+	public Measurement process(String projectName, File projectSourceRoot) throws URISyntaxException, IOException, JAXBException, ParserConfigurationException, TransformerException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 }

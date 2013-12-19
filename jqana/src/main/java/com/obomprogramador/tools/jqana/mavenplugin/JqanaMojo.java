@@ -134,7 +134,9 @@ public class JqanaMojo extends AbstractMavenReport {
 		
 		try {
 			DefaultProjectProcessor dpp = new DefaultProjectProcessor(new Context());
-			Measurement projectMeasurement = dpp.process(this.sourceDirectory.getName());
+			dpp.setLog(getLog());
+			File sourceDir = new File(this.project.getModel().getBuild().getSourceDirectory().replace("\\", "/"));
+			Measurement projectMeasurement = dpp.process(this.getProject().getName(), sourceDir);
 			DefaultXmlGenerator generator = new DefaultXmlGenerator();
 			Document report = generator.serialize(projectMeasurement);
 			DefaultXml2HtmlConverter converter = new DefaultXml2HtmlConverter();

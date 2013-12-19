@@ -4,6 +4,7 @@ package com.obomprogramador.tools.jqana.model.defaultimpl;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,6 +22,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.maven.plugin.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -37,11 +40,22 @@ import com.obomprogramador.tools.jqana.parsers.RfcParser;
 public class DefaultProjectProcessor implements ProjectProcessor {
 
 	protected Context context;
-	protected String rootTestResources;
+	protected File projectSourceRoot;
 	protected String currentFolderName;
 	protected Measurement project;
 	protected Logger logger;
+	protected Log log;
+	protected enum MSG_TYPE {INFO, DEBUG, ERROR};
 	
+	
+	public Log getLog() {
+		return log;
+	}
+
+	public void setLog(Log log) {
+		this.log = log;
+	}
+
 	public DefaultProjectProcessor(Context context) {
 		super();
 		this.context = context;
@@ -49,23 +63,18 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 	}
 
 	@Override
-	public Measurement process(String projectRootFolderName) throws URISyntaxException, IOException, JAXBException, ParserConfigurationException, TransformerException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-		this.rootTestResources = projectRootFolderName;
+	public Measurement process(String projectName, File projectSourceRoot) throws URISyntaxException, IOException, JAXBException, ParserConfigurationException, TransformerException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+		this.projectSourceRoot = projectSourceRoot;
 		this.project = new Measurement();
-		this.project.setName(projectRootFolderName);
+		this.project.setName(projectName);
 		this.project.setType(MEASUREMENT_TYPE.PROJECT_MEASUREMENT);
 		
+		logMsg("**** Project: " + projectName + ", resources: " + projectSourceRoot.getPath(), MSG_TYPE.DEBUG);
 		try {
-			processPackages(this.getResourceListing(this.getClass(), rootTestResources));
+			processFolder(this.projectSourceRoot);
 			DefaultXmlGenerator generator = new DefaultXmlGenerator();
 			Document report = generator.serialize(this.project);
 			
-		} catch (URISyntaxException e) {
-			logger.error(e.getMessage());
-			throw(e);
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-			throw(e);
 		} catch (JAXBException e) {
 			logger.error(e.getMessage());
 			throw(e);
@@ -93,47 +102,48 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 	 * Process each package and add it's measurement to the project's measurement.
 	 * 
 	 */
-	protected void processPackages(String[] strings) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		Measurement packageMeasurement = null;
-		if (strings != null && strings.length > 0) {
-			for (int x=0; x<strings.length; x++) {
-				packageMeasurement = new Measurement();
-				packageMeasurement.setName(strings[x]);
-				packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
-				processSingleFolder(packageMeasurement,strings[x]);
-				project.getInnerMeasurements().add(packageMeasurement);
+	protected void processFolder(File sourceDir) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		boolean hasJavaFiles = false;
+		File [] listFiles = sourceDir.listFiles();
+		Measurement packageMeasurement = new Measurement();
+		packageMeasurement.setName(sourceDir.getName());
+		packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
+		logMsg("**** Pagkage: " + sourceDir.getName(), MSG_TYPE.DEBUG);
+		for (int x=0; x<listFiles.length; x++) {
+			File oneFile = listFiles[x];
+			if (oneFile.isFile()) {
+				if (isJavaFile(oneFile)) {
+					hasJavaFiles = true;
+				}
+				processMetrics(packageMeasurement,oneFile);
 			}
+			else {
+				// Is a directory (sub package)
+				processFolder(oneFile);
+			}
+		}
+		if (hasJavaFiles) {
+			// if this package has java files, then we add it to the project's measurements
+			project.getInnerMeasurements().add(packageMeasurement);
 		}
 		
 	}
 	
-	/* (non javadoc)
-	 * Process each package as a single folder, analyzing each source file.
-	 * 
-	 */
-	protected void processSingleFolder(Measurement packageMeasurement, String folderName) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		try {
-			currentFolderName = rootTestResources + "/" + folderName;
-			String [] files = this.getResourceListing(this.getClass(), currentFolderName);
-			for (int x=0; x<files.length; x++) {
-				processMetrics(packageMeasurement, currentFolderName + "/" + files[x]);
-			}
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	protected boolean isJavaFile(File oneFile) {
+		boolean returnCode = false;
+		if (FileUtils.getExtension(oneFile.getName()).equalsIgnoreCase("java")) {
+			returnCode = true;
 		}
+		return returnCode;
 	}
-	
+
 	/* (non javadoc)
 	 * Process the metric set for each source file.
 	 * 
 	 */
-	protected void processMetrics(Measurement packageMeasurement, String sourceFile) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		logger.debug("Source file: " + sourceFile);
-		String sourceCode = this.getSource(sourceFile);
+	protected void processMetrics(Measurement packageMeasurement, File oneFile) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		logger.debug("Source file: " + oneFile.getName());
+		String sourceCode = this.getSource(oneFile);
 		processCyclomaticMetric(sourceCode, packageMeasurement);
 		processLcom4Metric(sourceCode, packageMeasurement);
 		processRfcMetric(sourceCode, packageMeasurement);
@@ -177,11 +187,11 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 		
 	}
 	
-	protected String getSource(String sourceFile) {
+	protected String getSource(File oneFile) {
 		BufferedReader br = null;
 	    StringBuilder sb = new StringBuilder();
 	    try {
-	    	br = new BufferedReader(new InputStreamReader(getStream(sourceFile),"UTF-8"));
+	    	br = new BufferedReader(new InputStreamReader(new FileInputStream(oneFile),"UTF-8"));
 	        String line = br.readLine();
 
 	        while (line != null) {
@@ -206,56 +216,35 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 		return this.getClass().getClassLoader().getResourceAsStream(sourceFile);
 	}
 	
-	  /* (non javadoc)
-	   * List directory contents for a resource folder. Not recursive.
-	   * This is basically a brute-force implementation.
-	   * Works for regular files and also JARs.
-	   * 
-	   * @author Greg Briggs
-	   * @param clazz Any java class that lives in the same place as the resources you want.
-	   * @param path Should end with "/", but not start with one.
-	   * @return Just the name of each member item, not the full paths.
-	   * @throws URISyntaxException 
-	   * @throws IOException 
-	   */
-	  protected String[] getResourceListing(Class clazz, String path) throws URISyntaxException, IOException {
-	      URL dirURL = clazz.getClassLoader().getResource(path);
-	      if (dirURL != null && dirURL.getProtocol().equals("file")) {
-	        /* A file path: easy enough */
-	        return new File(dirURL.toURI()).list();
-	      } 
 
-	      if (dirURL == null) {
-	        /* 
-	         * In case of a jar file, we can't actually find a directory.
-	         * Have to assume the same jar as clazz.
-	         */
-	        String me = clazz.getName().replace(".", "/")+".class";
-	        dirURL = clazz.getClassLoader().getResource(me);
-	      }
-	      
-	      if (dirURL.getProtocol().equals("jar")) {
-	        /* A JAR path */
-	        String jarPath = dirURL.getPath().substring(5, dirURL.getPath().indexOf("!")); //strip out only the JAR file
-	        JarFile jar = new JarFile(URLDecoder.decode(jarPath, "UTF-8"));
-	        Enumeration<JarEntry> entries = jar.entries(); //gives ALL entries in jar
-	        Set<String> result = new HashSet<String>(); //avoid duplicates in case it is a subdirectory
-	        while(entries.hasMoreElements()) {
-	          String name = entries.nextElement().getName();
-	          if (name.startsWith(path)) { //filter according to the path
-	            String entry = name.substring(path.length());
-	            int checkSubdir = entry.indexOf("/");
-	            if (checkSubdir >= 0) {
-	              // if it is a subdirectory, we just return the directory name
-	              entry = entry.substring(0, checkSubdir);
-	            }
-	            result.add(entry);
-	          }
-	        }
-	        return result.toArray(new String[result.size()]);
-	      } 
-	        
-	      throw new UnsupportedOperationException("Cannot list files for URL "+dirURL);
+
+	  protected void logMsg(String msg, MSG_TYPE type) {
+		  if (this.log == null) {
+			  // using internal logger
+			  switch (type) {
+			  case INFO:
+				  logger.info(msg);
+				  break;
+			  case DEBUG:
+				  logger.debug(msg);
+				  break;
+			  case ERROR:
+				  logger.error(msg);
+			  }
+		  }
+		  else {
+			  // using maven plugin logger
+			  switch (type) {
+			  case INFO:
+				  this.log.info(msg);
+				  break;
+			  case DEBUG:
+				  this.log.debug(msg);
+				  break;
+			  case ERROR:
+				  this.log.error(msg);
+			  }
+		  }
 	  }
-
+	  
 }

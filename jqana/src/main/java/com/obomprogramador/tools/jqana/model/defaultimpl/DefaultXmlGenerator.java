@@ -79,9 +79,7 @@ public class DefaultXmlGenerator implements XmlGenerator {
 	    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 	    m.marshal((Measurement)measurement, report);		
-        TransformerFactory tf = TransformerFactory.newInstance();
-        Transformer t = tf.newTransformer();
-        t.transform(new DOMSource(report), new StreamResult(System.out));
+       
 		return report;
 	}
 	
@@ -89,6 +87,7 @@ public class DefaultXmlGenerator implements XmlGenerator {
 		TransformerFactory tf = TransformerFactory.newInstance();
 		Transformer transformer = tf.newTransformer();
 		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+		
 		StringWriter writer = new StringWriter();
 		transformer.transform(new DOMSource(report), new StreamResult(writer));
 		String output = writer.getBuffer().toString().replaceAll("\n|\r", "");
