@@ -120,7 +120,7 @@ public class JqanaMojo extends AbstractMavenReport {
 	private void createReportBegin(Sink sink, String reportDate, Locale locale) {
 		sink.section1();
 		sink.sectionTitle1();
-		String rBegin = String.format(getBundle(locale).getString("report.begin"), this.getProject().getName());
+		String rBegin = getBundle(locale).getString("report.begin");
 		sink.text(rBegin);
 		sink.sectionTitle1_();
 		sink.lineBreak();
@@ -129,7 +129,7 @@ public class JqanaMojo extends AbstractMavenReport {
 
 	private void reportPackageMetrics(Sink sink, Locale locale) {
 		sink.sectionTitle1();
-		sink.text(getBundle(locale).getString("report.packageTitle"));
+		sink.text(getBundle(locale).getString("report.projectTitle"));
 		sink.sectionTitle1_();
 		
 		try {
@@ -139,6 +139,7 @@ public class JqanaMojo extends AbstractMavenReport {
 			Measurement projectMeasurement = dpp.process(this.getProject().getName(), sourceDir);
 			DefaultXmlGenerator generator = new DefaultXmlGenerator();
 			Document report = generator.serialize(projectMeasurement);
+			getLog().debug(generator.xml2String(report));
 			DefaultXml2HtmlConverter converter = new DefaultXml2HtmlConverter();
 			String output = converter.convert(generator.xml2String(report));
 			sink.rawText(output);

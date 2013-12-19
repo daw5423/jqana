@@ -72,18 +72,7 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 		logMsg("**** Project: " + projectName + ", resources: " + projectSourceRoot.getPath(), MSG_TYPE.DEBUG);
 		try {
 			processFolder(this.projectSourceRoot);
-			DefaultXmlGenerator generator = new DefaultXmlGenerator();
-			Document report = generator.serialize(this.project);
 			
-		} catch (JAXBException e) {
-			logger.error(e.getMessage());
-			throw(e);
-		} catch (ParserConfigurationException e) {
-			logger.error(e.getMessage());
-			throw(e);
-		} catch (TransformerException e) {
-			logger.error(e.getMessage());
-			throw(e);
 		} catch (ClassNotFoundException e) {
 			logger.error(e.getMessage());
 			throw(e);
@@ -106,7 +95,7 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 		boolean hasJavaFiles = false;
 		File [] listFiles = sourceDir.listFiles();
 		Measurement packageMeasurement = new Measurement();
-		packageMeasurement.setName(sourceDir.getName());
+		packageMeasurement.setName(getPackageName(sourceDir));
 		packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
 		logMsg("**** Pagkage: " + sourceDir.getName(), MSG_TYPE.DEBUG);
 		for (int x=0; x<listFiles.length; x++) {
@@ -129,6 +118,19 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 		
 	}
 	
+	protected String getPackageName(File sourceDir) {
+		String packageName = null;
+		if (sourceDir.getName().equalsIgnoreCase("java")) {
+			packageName = "<default>";
+		}
+		else {
+			int inx = sourceDir.getPath().indexOf("java\\");
+			packageName = sourceDir.getPath().substring(inx + 5);
+			packageName = packageName.replace("\\", ".");
+		}
+		return packageName;
+	}
+
 	protected boolean isJavaFile(File oneFile) {
 		boolean returnCode = false;
 		if (FileUtils.getExtension(oneFile.getName()).equalsIgnoreCase("java")) {

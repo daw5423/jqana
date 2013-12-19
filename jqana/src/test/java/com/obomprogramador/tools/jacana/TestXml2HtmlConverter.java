@@ -21,7 +21,7 @@ public class TestXml2HtmlConverter {
 	@Test
 	public void test() {
 		Logger logger =LoggerFactory.getLogger(this.getClass());
-		String sourceXml = this.getSource("testreport.xml");
+		String sourceXml = this.getSource("test.xml");
 		DefaultXml2HtmlConverter converter = new DefaultXml2HtmlConverter();
 		try {
 			String output = converter.convert(sourceXml);
