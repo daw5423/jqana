@@ -128,9 +128,6 @@ public class JqanaMojo extends AbstractMavenReport {
 	}
 
 	private void reportPackageMetrics(Sink sink, Locale locale) {
-		sink.sectionTitle1();
-		sink.text(getBundle(locale).getString("report.projectTitle"));
-		sink.sectionTitle1_();
 		
 		try {
 			DefaultProjectProcessor dpp = new DefaultProjectProcessor(new Context());

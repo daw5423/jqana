@@ -104,7 +104,13 @@ public class Lcom4Parser extends AbstractMetricParser {
 		if (this.members.size() > 0) {
 			this.measurement.setName(this.members.get(0).className);
 		}
-		this.metricValue.setValue(connectedComponents.size());
+		if (connectedComponents.size() > 0) {
+			this.metricValue.setValue(connectedComponents.size());
+		}
+		else {
+			this.metricValue.setValue(1);
+		}
+		
 		this.metricValue.setViolated(this.metric.getVerificationAlgorithm().verify(this.metricValue.getValue()));
 		if (this.metricValue.isViolated()) {
 			this.metricValue.setQtdElements(1);

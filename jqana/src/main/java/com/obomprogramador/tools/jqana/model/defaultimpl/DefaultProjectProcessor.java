@@ -173,7 +173,7 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 		context.setBundle(bundle);
 		Parser parser = new Lcom4Parser(packageMeasurement, context);
 		Measurement mt = parser.parse( null, sourceFile);
-		
+		logger.debug(mt.toString());
 	}
 	
 	/* (non javadoc)
