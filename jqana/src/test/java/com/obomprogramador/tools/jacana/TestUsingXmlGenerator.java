@@ -40,7 +40,7 @@ public class TestUsingXmlGenerator {
 			DefaultXmlGenerator generator = new DefaultXmlGenerator();
 			Document report = generator.serialize(this.project);
 			assertTrue(report != null);
-			logger.debug(generator.xml2String(report));
+			logger.debug(generator.xml2String(report,true));
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}

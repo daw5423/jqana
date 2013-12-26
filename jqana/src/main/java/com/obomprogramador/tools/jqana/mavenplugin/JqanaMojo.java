@@ -21,11 +21,17 @@ package com.obomprogramador.tools.jqana.mavenplugin;
 
 
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import javax.xml.transform.TransformerException;
 
 import org.apache.maven.doxia.sink.Sink;
 import org.apache.maven.doxia.siterenderer.Renderer;
@@ -93,12 +99,14 @@ public class JqanaMojo extends AbstractMavenReport {
 
 	@Override
 	public String getOutputName() {
-		return "jQana report";
+		return "jqana-report";
 	}
+	
+	
 
 	@Override
 	protected void executeReport(Locale locale) throws MavenReportException {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, locale);
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String reportDate = df.format(date);
 		
@@ -111,6 +119,10 @@ public class JqanaMojo extends AbstractMavenReport {
 	    sink.body();
 	    createReportBegin(sink,reportDate,locale);
 	    reportPackageMetrics(sink,locale);
+	    sink.lineBreak();
+		sink.link(getBundle(locale).getString("jqana.link"));
+			sink.text(getBundle(locale).getString("jqana.url"));
+		sink.link_();
 	    sink.section1_();
 	    sink.body_();
 	    sink.flush();
@@ -125,6 +137,12 @@ public class JqanaMojo extends AbstractMavenReport {
 		sink.sectionTitle1_();
 		sink.lineBreak();
 		sink.text(getBundle(locale).getString("report.dateHeader") + ": " + reportDate);
+		String jqanaVersion = getBundle(locale).getString("jqana.version");
+		String jqanaRelease = getBundle(locale).getString("jqana.releaseDate");
+		sink.lineBreak();
+		sink.text(getBundle(locale).getString("report.jqana.version") + ": " + jqanaVersion);
+		sink.lineBreak();
+		sink.text(getBundle(locale).getString("report.jqana.release.date") + ": " + jqanaRelease);
 	}
 
 	private void reportPackageMetrics(Sink sink, Locale locale) {
@@ -136,9 +154,9 @@ public class JqanaMojo extends AbstractMavenReport {
 			Measurement projectMeasurement = dpp.process(this.getProject().getName(), sourceDir);
 			DefaultXmlGenerator generator = new DefaultXmlGenerator();
 			Document report = generator.serialize(projectMeasurement);
-			getLog().debug(generator.xml2String(report));
+			persistXml(report, generator);
 			DefaultXml2HtmlConverter converter = new DefaultXml2HtmlConverter();
-			String output = converter.convert(generator.xml2String(report));
+			String output = converter.convert(generator.xml2String(report,true));
 			sink.rawText(output);
 		}
 		catch (Exception ex) {
@@ -146,6 +164,31 @@ public class JqanaMojo extends AbstractMavenReport {
 		}
 	}
 	
+	private void persistXml(Document report, DefaultXmlGenerator generator) throws MavenReportException {
+		String targetPath = project.getBuild().getDirectory();
+		File outputDir = new File(targetPath + "\\jqana-output");
+		if (!outputDir.exists()) {
+			outputDir.mkdirs();
+		}
+		try {
+			String xmlOutput = generator.xml2String(report, false);
+			File outputXml = new File(outputDir.getPath() + "\\jqana.xml");
+			if (outputXml.exists()) {
+				outputXml.delete();
+			}
+			outputXml.createNewFile();
+			BufferedWriter bw = new BufferedWriter(new FileWriter(outputXml));
+			bw.append(xmlOutput);
+			bw.flush();
+			bw.close();
+			
+		} catch (TransformerException e) {
+			throw new MavenReportException("Xml transform error");
+		} catch (IOException e) {
+			throw new MavenReportException("Xml writing error");
+		}
+	}
+
 	@Override
 	protected String getOutputDirectory() {
 		return outputDirectory.getAbsolutePath();

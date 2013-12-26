@@ -83,11 +83,12 @@ public class DefaultXmlGenerator implements XmlGenerator {
 		return report;
 	}
 	
-	public String xml2String(Document report) throws TransformerException {
+	public String xml2String(Document report, boolean ommitXML) throws TransformerException {
 		TransformerFactory tf = TransformerFactory.newInstance();
 		Transformer transformer = tf.newTransformer();
-		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-		
+		if (ommitXML) {
+			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");	
+		}
 		StringWriter writer = new StringWriter();
 		transformer.transform(new DOMSource(report), new StreamResult(writer));
 		String output = writer.getBuffer().toString().replaceAll("\n|\r", "");

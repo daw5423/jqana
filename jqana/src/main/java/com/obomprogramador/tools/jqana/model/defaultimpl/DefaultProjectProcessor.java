@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -84,9 +85,11 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 			throw(e);
 		}
 		
+
 		return this.project;
 	}
 	
+
 	/* (non javadoc)
 	 * Process each package and add it's measurement to the project's measurement.
 	 * 
