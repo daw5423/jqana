@@ -30,7 +30,26 @@ public class TestCyclomaticComplexity {
 	private Context context;
 	
 	@Test
-	public void test() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public void test1() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		context = new Context();
+		ResourceBundle bundle = ResourceBundle.getBundle("report");
+		context.setBundle(bundle);
+		String uri = getSource("unit-test-sources/def/Teste.java"); 
+		Measurement packageMeasurement = new Measurement();
+		packageMeasurement.setName("abc");
+		packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
+		Parser parser = new CyclomaticComplexityParser(packageMeasurement, context);
+		Measurement mt = parser.parse( null, uri);
+		MetricValue mv = packageMeasurement.getMetricValue(context.getBundle().getString("metric.cc.name"));
+		assertTrue(mt != null);
+		assertTrue(mv.getValue() != 0);
+
+		printPackage(1, packageMeasurement);
+				
+	}
+	
+	@Test
+	public void test2() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		context = new Context();
 		ResourceBundle bundle = ResourceBundle.getBundle("report");
 		context.setBundle(bundle);
@@ -47,6 +66,27 @@ public class TestCyclomaticComplexity {
 		printPackage(1, packageMeasurement);
 				
 	}
+	
+	
+	@Test
+	public void test3() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		context = new Context();
+		ResourceBundle bundle = ResourceBundle.getBundle("report");
+		context.setBundle(bundle);
+		String uri = getSource("unit-test-sources/def/Blocks.java"); 
+		Measurement packageMeasurement = new Measurement();
+		packageMeasurement.setName("abc");
+		packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
+		Parser parser = new CyclomaticComplexityParser(packageMeasurement, context);
+		Measurement mt = parser.parse( null, uri);
+		MetricValue mv = packageMeasurement.getMetricValue(context.getBundle().getString("metric.cc.name"));
+		assertTrue(mt != null);
+		assertTrue(mv.getValue() != 0);
+
+		printPackage(1, packageMeasurement);
+				
+	}
+	
 	
 	public void printPackage(int identation, Measurement mt) {
 		String line = ""; 

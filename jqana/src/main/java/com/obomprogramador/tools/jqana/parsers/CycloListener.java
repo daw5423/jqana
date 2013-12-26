@@ -34,6 +34,8 @@ import org.slf4j.LoggerFactory;
 import com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.BlockContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.BlockStatementContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.CatchClauseContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ClassDeclarationContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.CompilationUnitContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ConstructorDeclarationContext;
@@ -42,6 +44,8 @@ import com.obomprogramador.tools.jqana.antlrparser.JavaParser.FormalParametersCo
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.MethodBodyContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.MethodDeclarationContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.PackageDeclarationContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ParExpressionContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.PrimaryContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.StatementContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.SwitchLabelContext;
 import com.obomprogramador.tools.jqana.model.Measurement;
@@ -66,7 +70,7 @@ public class CycloListener extends JavaBaseListener {
 	
 	
 	protected String [] predicateNodes = {
-			   "catch", "do", "for", "else if", "if", "throws", "while"
+			   "do", "for",  "throws", "while"
 		};
 	protected List<String> listaNodes = Arrays.asList(predicateNodes);
 	private Measurement measurement;
@@ -274,6 +278,24 @@ public class CycloListener extends JavaBaseListener {
 		return StringUtils.countMatches(originalText, whatToFind);
 	}
 
+	
+	/*
+	@Override
+	public void enterBlockStatement(@NotNull BlockStatementContext ctx) {
+		if (ctx.children.get(0) instanceof StatementContext) {
+			if (((StatementContext)ctx.children.get(0)).children.get(0) instanceof TerminalNodeImpl) {
+				String tipo = ((StatementContext)ctx.children.get(0)).children.get(0).toString();
+				if (listaNodes.contains(tipo)) {
+					incMetricValue(1);
+					logger.debug("     - Predicate node: " + tipo + " line: " + ctx.getText());
+				}
+			}
+		}
+	}
+	*/
+
+	
+
 	@Override
 	public void enterBlock(@NotNull BlockContext ctx) {
 		String tipo = ctx.getParent().start.getText();
@@ -284,11 +306,28 @@ public class CycloListener extends JavaBaseListener {
 		
 		if (listaNodes.contains(tipo)) {
 			incMetricValue(1);
-			logger.debug("     - Predicate node: " + tipo);
+			logger.debug("     - Predicate node: " + tipo + " line: " + ctx.getText());
 		}
 	}
 
 	
+	@Override
+	public void enterParExpression(@NotNull ParExpressionContext ctx) {
+		if (ctx.getParent().start.getText().equals("if")) {
+			incMetricValue(1);
+			logger.debug("     - Predicate node IF: " + ctx.getText());
+		}
+	}
+
+
+	@Override
+	public void enterCatchClause(@NotNull CatchClauseContext ctx) {
+		incMetricValue(1);
+		logger.debug("     - Catch node: ");
+	}
+
+
+
 	protected void verifyMethodViolation(Measurement measurement2) {
 		this.currentMetricValue.setViolated(
 					this.metric.getVerificationAlgorithm().verify(this.currentMetricValue.getValue())
