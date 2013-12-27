@@ -154,7 +154,9 @@ public abstract class AbstractMetricParser implements Parser {
 	public void updatePackageMetrics(MetricValue packageMv, MetricValue mv) {
 		packageMv.setValue(packageMv.getValue() + mv.getValue());
 		packageMv.setQtdElements(packageMv.getQtdElements() + 1);
-		packageMv.setViolated(mv.isViolated());
+		if (mv.isViolated()) {
+			packageMv.setViolated(true);
+		}
 	}
 
 	private MetricValue getMetricValueForClass(Measurement classMeasurement) {

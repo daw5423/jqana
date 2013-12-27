@@ -7,6 +7,14 @@ import java.util.Date;
 public class TesteRfc {
 
 	public void metodo1() {
+		for (int x=1; x < Math.round(10.5); x++) {
+			
+		}
+		
+		int x = 10;
+		if ((2 * (x - 1)) > 10) {
+			
+		}
 		System.out.println(new Date());
 	}
 	

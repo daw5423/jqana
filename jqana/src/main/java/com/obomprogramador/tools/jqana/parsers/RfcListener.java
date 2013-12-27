@@ -87,6 +87,7 @@ public class RfcListener extends JavaBaseListener {
 			this.measurement.setName(mainClassName);
 			this.alreadyFindMainClass = true;
 		}
+		this.previousExpression = null;
 	}
 
 
@@ -112,6 +113,7 @@ public class RfcListener extends JavaBaseListener {
 		if (!this.aConstructorWasFound) {
 			this.metricValue.setValue(this.metricValue.getValue() + 1);
 		}
+		this.previousExpression = null;
 	}
 
 	/**
@@ -155,7 +157,7 @@ public class RfcListener extends JavaBaseListener {
 			if (pos > start) {
 				char previous = expression.charAt(pos - 1);
 				if (Character.isJavaIdentifierPart(previous)) {
-					logger.debug("Found Method or constructor call! ");
+					logger.debug("Found Method or constructor call! " + ctx.getText());
 					this.metricValue.setValue(this.metricValue.getValue() + 1);
 				}
 			}

@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.AnnotationContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ClassDeclarationContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.CompilationUnitContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ExpressionContext;
@@ -77,6 +78,7 @@ public class Lcom4Listener extends JavaBaseListener {
 	protected String mainPackageName;
 	protected String mainClassName;
 	protected boolean alreadyGotMainClass;
+	protected boolean overrideAnnotation;
 	
 	public Lcom4Listener(List<Member> members, JavaParser p) {
 		this.logger = LoggerFactory.getLogger(this.getClass());
@@ -146,6 +148,17 @@ public class Lcom4Listener extends JavaBaseListener {
 	}
 
 
+	
+	
+	@Override
+	public void enterAnnotation(@NotNull AnnotationContext ctx) {
+		if (ctx.getText().equals("@Override")) {
+			this.overrideAnnotation = true;
+		}
+	}
+
+
+
 	/**
 	 * We add each method to the members array. Then we will check for references.
 	 */
@@ -169,13 +182,21 @@ public class Lcom4Listener extends JavaBaseListener {
 			}
 		}
 		
-		Member member = new Member();
-		member.className = mainClassName;
-		member.name = methodName;
-		member.packageName = this.mainPackageName;
-		member.type = MEMBER_TYPE.METHOD;
-		member.body = body;
-		this.membersTable.add(member);
+		if (this.overrideAnnotation) {
+			logger.debug("*** Inherited method ignored: " + methodName);
+		}
+		else {
+			logger.debug("- Method found: " + methodName);
+			Member member = new Member();
+			member.className = mainClassName;
+			member.name = methodName;
+			member.packageName = this.mainPackageName;
+			member.type = MEMBER_TYPE.METHOD;
+			member.body = body;
+			this.membersTable.add(member);			
+		}
+
+		this.overrideAnnotation = false;
 	}
 	
 	/**

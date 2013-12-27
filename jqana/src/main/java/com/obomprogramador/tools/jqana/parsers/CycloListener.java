@@ -70,7 +70,7 @@ public class CycloListener extends JavaBaseListener {
 	
 	
 	protected String [] predicateNodes = {
-			   "do", "for",  "throws", "while"
+			   "do", "for",  "throw", "while"
 		};
 	protected List<String> listaNodes = Arrays.asList(predicateNodes);
 	private Measurement measurement;
@@ -84,6 +84,7 @@ public class CycloListener extends JavaBaseListener {
 	protected MetricValue currentMetricValue;
 	protected boolean alreadyGotFirstClass;
 	protected String lastStatement;
+	protected int constructorNumber = 1;
 	
 	/**
 	 * Default constructor. 
@@ -110,6 +111,24 @@ public class CycloListener extends JavaBaseListener {
 	public void enterConstructorDeclaration(
 			@NotNull ConstructorDeclarationContext ctx) {
 		this.previousExpression = null;
+		String methodName = "<Constructor " + this.constructorNumber++ + ">";
+		this.newMeasurement(methodName, MEASUREMENT_TYPE.METHOD_MEASUREMENT);
+		this.currentMetricValue.setValue(1);
+		this.previousExpression = null;
+		logger.debug("***** (CC) ENTERING CONSTUCTOR: " + methodName);
+	}
+	
+	
+
+
+
+	@Override
+	public void exitConstructorDeclaration(
+			@NotNull ConstructorDeclarationContext ctx) {
+		logger.debug("***** (CC) EXITING CONSTRUCTOR. CC = " + this.currentMetricValue.getValue());
+		this.verifyMethodViolation(this.measurement);
+		this.consolidateWithOwner();
+		this.lastStatement = null;
 	}
 
 
@@ -270,29 +289,19 @@ public class CycloListener extends JavaBaseListener {
 
 	@Override
 	public void enterSwitchLabel(@NotNull SwitchLabelContext ctx) {
-		incMetricValue(1);
-		logger.debug("     - swith label.");
+		if (!ctx.children.get(0).toString().equals("default")) {
+			incMetricValue(1);
+			logger.debug("     - swith label.");
+		}
+		else {
+			logger.debug("     - *** default label ignored.");
+		}
+
 	}
 
 	private int countSymbols(String originalText, String whatToFind) {
 		return StringUtils.countMatches(originalText, whatToFind);
 	}
-
-	
-	/*
-	@Override
-	public void enterBlockStatement(@NotNull BlockStatementContext ctx) {
-		if (ctx.children.get(0) instanceof StatementContext) {
-			if (((StatementContext)ctx.children.get(0)).children.get(0) instanceof TerminalNodeImpl) {
-				String tipo = ((StatementContext)ctx.children.get(0)).children.get(0).toString();
-				if (listaNodes.contains(tipo)) {
-					incMetricValue(1);
-					logger.debug("     - Predicate node: " + tipo + " line: " + ctx.getText());
-				}
-			}
-		}
-	}
-	*/
 
 	
 

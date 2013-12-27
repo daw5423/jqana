@@ -1,16 +1,28 @@
-package abc;
+package com.obomprogramador.tools.jqana_test.it_project_1.p1;
 
-public class TesteLCom4Um {
+public class TesteLCom4Um extends TesteSuperclass {
 
 	public int x = 0;
 	public int y = 0;
+	public int zpto11 = 0;
 	
 	public TesteLCom4Um() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public int metodoA() {
 		return metodoB() + 2;
+	}
+	
+	
+	// This method shoud nod be considered for LCOM4 calculation
+	@Override
+	public int metodoHerdado1 (int xpto11) {
+		return zpto11 * xpto11;
+	}
+	
+	public int chamaHerdado() {
+		return metodoHerdado1(4);
 	}
 	
 	public int metodoB() {

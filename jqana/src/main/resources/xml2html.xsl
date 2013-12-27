@@ -5,9 +5,9 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		<table style="width: 100%;">
 		<tr>
 		<th style="text-align:left; width: 50%">Package name</th>
-		<th>CC</th>
-		<th>LCOM4</th>
-		<th>RFC</th>
+		<th>CC (average)</th>
+		<th>LCOM4 (highest)</th>
+		<th>RFC (average)</th>
 		</tr>
 			<xsl:for-each select="innerMeasurements/measurement">
                     <tr>
@@ -50,7 +50,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                  	<table  style="width: 100%;">
 					<tr>
 					<th style="text-align:left; width: 50%">Class name</th>
-					<th>CC</th>
+					<th>CC (average)</th>
 					<th>LCOM4</th>
 					<th>RFC</th>
 					</tr>

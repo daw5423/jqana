@@ -328,12 +328,12 @@ public class Lcom4Parser extends AbstractMetricParser {
 	public void updatePackageMetrics(MetricValue packageMv, MetricValue mv) {
 		// For package and project metrics, the value is the highest LCOM4 value found:
 		if (mv.getValue() > packageMv.getValue()) {
-			packageMv.setValue(packageMv.getValue() + mv.getValue());
+			packageMv.setValue(mv.getValue());
 		}
 		if (mv.isViolated()) {
-			packageMv.setQtdElements(packageMv.getQtdElements() + 1);
+			packageMv.setViolated(true);
 		}
-		packageMv.setViolated(mv.isViolated());
+		
 	}
 	
 	

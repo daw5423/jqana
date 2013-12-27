@@ -85,10 +85,21 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 			throw(e);
 		}
 		
+		updatePackagesAggregates();
 
 		return this.project;
 	}
 	
+
+	protected void updatePackagesAggregates() {
+		for (Measurement m : this.project.getInnerMeasurements()) {
+			MetricValue mv = m.getMetricValue(this.context.getBundle().getString("metric.cc.name"));
+			mv.setValue((double)mv.getValue() / (double)mv.getQtdElements());
+			mv = m.getMetricValue(this.context.getBundle().getString("metric.rfc.name"));
+			mv.setValue((double)mv.getValue() / (double)mv.getQtdElements());
+		}
+		
+	}
 
 	/* (non javadoc)
 	 * Process each package and add it's measurement to the project's measurement.
@@ -117,6 +128,7 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 		if (hasJavaFiles) {
 			// if this package has java files, then we add it to the project's measurements
 			project.getInnerMeasurements().add(packageMeasurement);
+			
 		}
 		
 	}

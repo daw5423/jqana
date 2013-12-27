@@ -9,6 +9,13 @@ public class Blocks {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		if (x > y) {
+			x = y;
+		}
+	}
+	
+	public Blocks() {
+		this(1,2,3);
 	}
 	
 	public int teste(int a) {
@@ -34,7 +41,27 @@ public class Blocks {
 					a = a - t;
 				}
 			}
-		} while (xpto)
+		} while (xpto);
+		
+		// This switch counts as 3:
+		switch(a) {
+		case 1:
+			break;
+		case 2:
+			return 1; // Count as 1
+		case 3:
+			break;
+		default:
+			break;
+		}
+		
+		// This switch count as 2
+		switch(this.y) {
+		case 1: 
+			return 2; // count as 1
+		case 2: 
+			break;
+		}
 		
 		return a * 2;
 	}
