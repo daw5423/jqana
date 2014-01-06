@@ -102,6 +102,12 @@
       <version>2.2</version>
     </dependency>
     
+    <dependency>
+		<groupId>org.apache.bcel</groupId>
+		<artifactId>bcel</artifactId>
+		<version>5.2</version>
+	</dependency>
+    
   </dependencies>
 
   <build>

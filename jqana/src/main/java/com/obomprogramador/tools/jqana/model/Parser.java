@@ -38,5 +38,5 @@ public interface Parser {
 	 * @param sourceCode source code to analyze.
 	 * @return instance of measurement. 
 	 */
-	public Measurement parse(Class<?> clazz, String sourceCode); 
+	public Measurement parse(String compiledName, String sourceCode); 
 }

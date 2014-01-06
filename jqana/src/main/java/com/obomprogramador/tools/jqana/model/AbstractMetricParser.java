@@ -44,7 +44,7 @@ public abstract class AbstractMetricParser implements Parser {
 	}
 
 	@Override
-	public Measurement parse(Class<?> clazz, String sourceCode) {
+	public Measurement parse(String compiledClassPath, String sourceCode)  {
 		this.measurement = new Measurement(); // Class name will be set inside listener.
 		this.measurement.setType(MEASUREMENT_TYPE.CLASS_MEASUREMENT);
 		this.metricValue = new MetricValue();

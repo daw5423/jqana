@@ -8,48 +8,48 @@ public class TesteLcomMaiorQueUm {
 	private int x;
 	private int y;
 	
-	public TesteLcomMaiorQueUm() {
+	public TesteLcomMaiorQueUm() { //+1
 
 	}
 	
-	public int getX() {
+	public int getX() { //+0 
 		return x;
 		
 	}
 	
-	public void setX(int x) {
+	public void setX(int x) { //+0
 		this.x = x;
 	}
 	
-	public int getY() {
+	public int getY() {//+0
 		return this.y;
 	}
 	
-	public void setY(int y) {
+	public void setY(int y) {//+0
 		this.y = y;
 	}
 	
 	public void metodoA() {
-		System.out.println( metodoB () + 1);
+		System.out.println( metodoB () + 1); // +1 +1
 	}
 	
-	public int metodoB() {
+	public int metodoB() { //+1
 		int a = x + 2 * x;
 		return a;
 	}
 	
-	public void metodoC() {
+	public void metodoC() { //+1
 		y = 1;
 	}
 	
-	public void metodoD() {
+	public void metodoD() {//+1
 		setY(1);
-		if ( metodoE () < 0 ) {
+		if ( metodoE () < 0 ) {//+1
 			System.out.println("ERRO");
 		}
 	}
 	
-	public int metodoE() {
+	public int metodoE() {//+1
 		return 10;
 		
 	}
