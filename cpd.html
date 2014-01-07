@@ -12,7 +12,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>jqana - CPD Results</title>
+    <title>jQana - CPD Results</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -23,11 +23,11 @@
       </head>
   <body class="composite">
     <div id="banner">
-                    <span id="bannerLeft">
+                  <a href="http://www.jqana.com" id="bannerLeft">
     
-            jqana
+                                            <img src="images/jqana_logo.png" alt="" />
     
-            </span>
+            </a>
                     <div class="clear">
         <hr/>
       </div>
@@ -42,10 +42,9 @@
   
     
             <div class="xleft">
-        Last Published: 2013-12-09
+        Last Published: 2014-01-07
                       </div>
-            <div class="xright">            <a href="">jqana</a>
-            
+            <div class="xright">      
   
 
   
@@ -68,13 +67,18 @@
   
   
     
-                             <h5>Project Documentation</h5>
+                   <h5>jQana Project</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="index.html">Overview</a>
+          </li>
+          </ul>
+              <h5>Project Documentation</h5>
             <ul>
               
                 
               
-      
-            
       
             
       
@@ -147,7 +151,7 @@
     <div id="bodyColumn">
       <div id="contentBox">
         <div class="section"><h2>CPD Results</h2>
-<p>The following document contains the results of PMD's  <a class="externalLink" href="http://pmd.sourceforge.net/cpd.html">CPD</a> 5.0.2.</p>
+<p>The following document contains the results of PMD's  <a href="http://pmd.sourceforge.net/cpd.html" class="externalLink">CPD</a> 5.0.2.</p>
 </div>
 <div class="section"><h2>Duplications</h2>
 <table class="bodyTable"><tr class="a"><th>File</th>
@@ -419,49 +423,6 @@
 <table class="bodyTable"><tr class="a"><th>File</th>
 <th>Line</th>
 </tr>
-<tr class="b"><td>com\obomprogramador\tools\jqana\parsers\CyclomaticComplexityParser.java</td>
-<td>53</td>
-</tr>
-<tr class="a"><td>com\obomprogramador\tools\jqana\parsers\Lcom4Parser.java</td>
-<td>40</td>
-</tr>
-<tr class="b"><td colspan='2'><div class="source"><pre>	public CyclomaticComplexityParser(Context context) {
-		super();
-		logger = LoggerFactory.getLogger(this.getClass());
-		this.context = context;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.obomprogramador.tools.anacoja.model.Parser#getParserName()
-	 */
-	@Override
-	public String getParserName() {
-		return this.getClass().getName();
-	}
-
-	/* (non-Javadoc)
-	 * @see com.obomprogramador.tools.anacoja.model.Parser#parse(java.lang.Class, java.lang.String)
-	 */
-	@Override
-	public Measurement parse(Class&lt;?&gt; clazz, String sourceCode)  {
-		
-		this.measurement = new DefaultMeasurement();
-		
-		JavaLexer lexer;
-		try {
-			lexer = new JavaLexer(new ANTLRInputStream(sourceCode));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			JavaParser p = new JavaParser(tokens);
-	        ParseTree tree = (ParseTree)(p.compilationUnit()); 
-	        ParseTreeWalker walker = new ParseTreeWalker();
-	        Metric metric = new DefaultMetric();
-	        metric.setMetricName(CYCLOMATIC_COMPLEXITY);</pre>
-</div>
-</td></tr>
-</table>
-<table class="bodyTable"><tr class="a"><th>File</th>
-<th>Line</th>
-</tr>
 <tr class="b"><td>com\obomprogramador\tools\jqana\antlrparser\JavaParser.java</td>
 <td>4256</td>
 </tr>
@@ -555,8 +516,9 @@
     </div>
     <div id="footer">
       <div class="xright">&#169;  
-          2013
+          2014
     
+          O Bom Programador
           
   
 
