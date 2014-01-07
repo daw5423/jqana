@@ -16,7 +16,7 @@ The tool is a <a href="http://en.wikipedia.org/wiki/Free_and_open-source_softwar
 Authors
 -------
 
-The tool was originally created by <a href="https://plus.google.com/u/0/104840154989974387350/posts?tab=XX">Cleuton Sampaio</a>, but is an Open Source project, so anyone can join and help develop it. It is a project sponsored by the following Open Source communities:
+The tool was originally created by <a href="https://plus.google.com/u/0/104840154989974387350/posts?tab=XX">Cleuton Sampaio</a>, and Tiago Melo, but is an Open Source project, so anyone can join and help develop it. It is a project sponsored by the following Open Source communities:
 <li>
 <ul><a href="http://www.obomprogramador.com">O Bom Programador (the good programmer)</a></ul>
 <ul><a href="http://www.thecodebakers.org">The Code Bakers</a></ul>
@@ -24,3 +24,6 @@ The tool was originally created by <a href="https://plus.google.com/u/0/10484015
 
 How to use jQana
 ----------------
+
+To use and download jQana, please consult our <a href="http://cleuton.github.io/jqana/">Website</a>.
+
