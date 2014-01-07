@@ -84,6 +84,7 @@ public class Lcom4Parser extends AbstractMetricParser {
 
 
 	private void processComponents() {
+		this.measurement.setName(((Lcom4Listener)this.listener).mainClassName);
 		List<Component> connectedComponents = new ArrayList<Component>();
 		for (Member m : members) {
 			if (m.type == MEMBER_TYPE.METHOD) {

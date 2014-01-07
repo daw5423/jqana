@@ -52,7 +52,7 @@ public int print(Graphics g, PageFormat pf, int pagina)
 			if (contaLinhas > 30 || contaLinhas > 20) {
 				break;
 			}
-			else if (contaLinas > 19) {
+			else if (contaLinhas > 19) {
 				break;
 			}
 			g.drawString(relatorio.get(x), 40, 50 + contaLinhas * 14);

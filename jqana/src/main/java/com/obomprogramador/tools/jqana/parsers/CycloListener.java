@@ -51,6 +51,7 @@ import com.obomprogramador.tools.jqana.antlrparser.JavaParser.SwitchLabelContext
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.Metric;
+import com.obomprogramador.tools.jqana.model.defaultimpl.GetClassNameFromContext;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 
 /**
@@ -145,8 +146,7 @@ public class CycloListener extends JavaBaseListener {
 
 	@Override
 	public void enterClassDeclaration(@NotNull ClassDeclarationContext ctx) {
-		int posCurly = ctx.getText().indexOf('{');
-		String className = ctx.getText().substring(5,posCurly);
+		String className = GetClassNameFromContext.getClassName(ctx);
 		
 		if (!alreadyGotFirstClass) {
 			// It is the main class name

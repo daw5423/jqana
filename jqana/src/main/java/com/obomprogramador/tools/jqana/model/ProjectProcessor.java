@@ -17,7 +17,8 @@ public interface ProjectProcessor {
 	/**
 	 * This method parses the specified folder, processing each found package, 
 	 * and returning a project consolidated measurement.
-	 * @param projectRootFolderName Project's root folder name.
+	 * @param projectSourceRoot File. Source root directory.
+	 * @param projectObjectRoot File. Compiled classes directory.
 	 * @return Project consolidated measurement.
 	 * @throws URISyntaxException 
 	 * @throws IOException 
@@ -28,5 +29,5 @@ public interface ProjectProcessor {
 	 * @throws InstantiationException 
 	 * @throws IllegalAccessException 
 	 */
-	public Measurement process(String projectName, File projectSourceRoot) throws URISyntaxException, IOException, JAXBException, ParserConfigurationException, TransformerException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+	public Measurement process(String projectName, File projectSourceRoot, File projectObjectRoot) throws URISyntaxException, IOException, JAXBException, ParserConfigurationException, TransformerException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 }

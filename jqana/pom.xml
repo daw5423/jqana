@@ -30,6 +30,80 @@
 
   <name>jqana</name>
   <url>http://http://jqana.com</url>
+  
+  <licenses>
+	  <license>
+	    <name>The Apache Software License, Version 2.0</name>
+	    <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+	    <distribution>repo</distribution>
+	    <comments>A business-friendly OSS license</comments>
+	  </license>
+ </licenses>
+ 
+ <organization>
+    <name>O Bom Programador</name>
+    <url>http://obomprogramador.com</url>
+  </organization>
+  
+   <developers>
+    <developer>
+      <id>Cleuton</id>
+      <name>Cleuton Sampaio</name>
+      <email>cleuton.sampaio@thecodebakers.org</email>
+      <url>https://plus.google.com/u/0/104840154989974387350/posts</url>
+      <organization>The Code Bakers</organization>
+      <organizationUrl>http://www.thecodebakers.org</organizationUrl>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>-3</timezone>
+      <properties>
+        <picUrl>https://lh4.googleusercontent.com/-cYEvJMCGgZs/AAAAAAAAAAI/AAAAAAAAAAA/V_Op70AVxS8/s120-c/photo.jpg</picUrl>
+      </properties>
+    </developer>
+    <developer>
+      <id>Tiago</id>
+      <name>Tiago Melo</name>
+      <email></email>
+      <url></url>
+      <organization>The Code Bakers</organization>
+      <organizationUrl>http://www.thecodebakers.org</organizationUrl>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>-3</timezone>
+      <properties>
+        <picUrl></picUrl>
+      </properties>
+    </developer>    
+  </developers>
+  
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/cleuton/jqana/issues</url>
+  </issueManagement>  
+  
+  <mailingLists>
+    <mailingList>
+      <name>General Mailing List</name>
+      <subscribe>jqana@googlegroups.com</subscribe>
+      <unsubscribe>jqana+unsubscribe@googlegroups.com</unsubscribe>
+      <post>jqana@googlegroups.com</post>
+      <archive>https://groups.google.com/d/forum/jqana</archive>
+    </mailingList>
+  </mailingLists>  
+  
+ <scm>
+	<url>https://github.com/cleuton/jqana</url>
+    <connection>scm:git:git://github.com/cleuton/jqana.git</connection>
+    <developerConnection>scm:git:git@github.com:cleuton/jqana.git</developerConnection>  
+ </scm>  
+ 
+ <prerequisites>
+    <maven>2.2.1</maven>
+  </prerequisites>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -123,6 +197,18 @@
 				    <target>${source}</target>
 				</configuration>
           </plugin>
+          
+	      <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-surefire-plugin</artifactId>
+	        <version>2.16</version>
+	        <configuration>
+	          <excludes>
+	            <exclude>**/abc/*.java</exclude>
+	            <exclude>**/def/*.java</exclude>
+	          </excludes>
+	        </configuration>
+	      </plugin>          
           
 	      <plugin>
 		        <groupId>org.apache.maven.plugins</groupId>

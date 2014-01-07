@@ -25,7 +25,7 @@ public class RfcBcelParser extends AbstractMetricParser {
 
 	@Override
 	public Measurement parse(String compiledClassPath, String sourceCode) {
-		this.measurement = new Measurement(); // Class name will be set inside listener.
+		this.measurement = new Measurement(); 
 		this.measurement.setType(MEASUREMENT_TYPE.CLASS_MEASUREMENT);
 		this.metricValue = new MetricValue();
 		this.metricValue.setName(this.metric.getMetricName());
@@ -33,6 +33,7 @@ public class RfcBcelParser extends AbstractMetricParser {
 		try {
 			ClassParser cParser = new ClassParser(compiledClassPath);
 			JavaClass javaClass = cParser.parse();
+			this.measurement.setName(getClassNameFromJavaClass(javaClass));
 			RfcVisitor visitor = new RfcVisitor(javaClass);
 			DescendingVisitor classWalker = new DescendingVisitor(javaClass, visitor);
 			classWalker.visit();
@@ -46,7 +47,19 @@ public class RfcBcelParser extends AbstractMetricParser {
 		return measurement;
 	}
 
-	
+	protected String getClassNameFromJavaClass(JavaClass javaClass) {
+		String className = javaClass.getClassName();
+		int pos = className.lastIndexOf('.');
+		if (pos >= 0) {
+			className = className.substring(pos + 1);
+		}
+		return className;
+	}
+
+
+
+
+
 	class RfcVisitor extends EmptyVisitor {
 		private JavaClass javaClass;
 		private MetricValue mv;

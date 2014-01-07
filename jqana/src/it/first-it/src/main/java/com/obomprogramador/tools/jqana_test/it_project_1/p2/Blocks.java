@@ -1,4 +1,4 @@
-
+package com.obomprogramador.tools.jqana_test.it_project_1.p2;
 public class Blocks {
 
 	private int x;

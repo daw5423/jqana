@@ -8,16 +8,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.util.Enumeration;
-import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
@@ -27,21 +19,22 @@ import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
 
 import com.obomprogramador.tools.jqana.context.Context;
 import com.obomprogramador.tools.jqana.model.Measurement;
+import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.Parser;
 import com.obomprogramador.tools.jqana.model.ProjectProcessor;
-import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.parsers.CyclomaticComplexityParser;
 import com.obomprogramador.tools.jqana.parsers.Lcom4Parser;
+import com.obomprogramador.tools.jqana.parsers.RfcBcelParser;
 import com.obomprogramador.tools.jqana.parsers.RfcParser;
 
 public class DefaultProjectProcessor implements ProjectProcessor {
 
 	protected Context context;
 	protected File projectSourceRoot;
+	protected File projectObjectRoot;
 	protected String currentFolderName;
 	protected Measurement project;
 	protected Logger logger;
@@ -64,8 +57,9 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 	}
 
 	@Override
-	public Measurement process(String projectName, File projectSourceRoot) throws URISyntaxException, IOException, JAXBException, ParserConfigurationException, TransformerException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public Measurement process(String projectName, File projectSourceRoot, File projectObjectRoot) throws URISyntaxException, IOException, JAXBException, ParserConfigurationException, TransformerException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		this.projectSourceRoot = projectSourceRoot;
+		this.projectObjectRoot = projectObjectRoot;
 		this.project = new Measurement();
 		this.project.setName(projectName);
 		this.project.setType(MEASUREMENT_TYPE.PROJECT_MEASUREMENT);
@@ -163,7 +157,7 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 		String sourceCode = this.getSource(oneFile);
 		processCyclomaticMetric(sourceCode, packageMeasurement);
 		processLcom4Metric(sourceCode, packageMeasurement);
-		processRfcMetric(sourceCode, packageMeasurement);
+		processRfcMetric(oneFile, packageMeasurement);
 	}
 	
 	/* (non javadoc)
@@ -195,15 +189,22 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 	 * Analyzes RFC for a source file.
 	 * 
 	 */
-	private void processRfcMetric(String sourceFile, Measurement packageMeasurement) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	protected void processRfcMetric(File oneFile, Measurement packageMeasurement) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		Context context = new Context();
+		String objectPath = getObjectFilePath(oneFile);
 		ResourceBundle bundle = ResourceBundle.getBundle("report");
 		context.setBundle(bundle);
-		Parser parser = new RfcParser(packageMeasurement, context);
-		Measurement mt = parser.parse( null, sourceFile);
+		Parser parser = new RfcBcelParser(packageMeasurement, context);
+		Measurement mt = parser.parse(objectPath, null);
 		
 	}
 	
+	protected String getObjectFilePath(File oneFile) {
+		String objectPath = oneFile.getPath().replace(".java", ".class");
+		objectPath = objectPath.replace(this.projectSourceRoot.getPath(), this.projectObjectRoot.getPath());
+		return objectPath;
+	}
+
 	protected String getSource(File oneFile) {
 		BufferedReader br = null;
 	    StringBuilder sb = new StringBuilder();

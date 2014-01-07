@@ -4,7 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-
+/*
+ * RFC: 
+ * - Sonar: 9
+ * - RefactorIt: 6
+ * - cjkm: 9
+ * - jQana: 9
+ */
 public class Teste2 {
 
 	private int x;
@@ -21,6 +27,12 @@ public class Teste2 {
 				}
 			}
 			if (ab == 21) {
+				try {
+					(new abx()).carregar(5);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return 300;
 			}
 			return ab * 2;
@@ -28,6 +40,9 @@ public class Teste2 {
 	}
 	public static int metodo1(int a, int b) {
 		int retorno = 0;
+		Teste2 t2 = new Teste2();
+		Inner1 i1 = t2.new Inner1();
+		i1.teste(2);
 		JButton btn = new JButton();
 		btn.addActionListener(
 					new ActionListener() {

@@ -29,6 +29,7 @@ public class TestUsingXmlGenerator {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private String rootTestResources = "unit-test-sources";
+	private String compiledTestResources = "abc";
 	private Measurement project;
 	
 	@Test
@@ -36,7 +37,8 @@ public class TestUsingXmlGenerator {
 		try {
 			DefaultProjectProcessor dpp = new DefaultProjectProcessor(new Context());
 			File sourceDir = new File(this.getClass().getClassLoader().getResource(rootTestResources).toURI());
-			this.project = dpp.process("Teste", sourceDir);
+			File objectDir = sourceDir.getParentFile();
+			this.project = dpp.process("Teste", sourceDir, objectDir);
 			DefaultXmlGenerator generator = new DefaultXmlGenerator();
 			Document report = generator.serialize(this.project);
 			assertTrue(report != null);

@@ -1,4 +1,4 @@
-package com.obomprogramador.tools.jqana_test.it_project_1.p1;
+package abc;
 public class TesteSuperclass {
 
 	public TesteSuperclass() {

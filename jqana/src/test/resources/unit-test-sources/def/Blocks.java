@@ -1,4 +1,4 @@
-
+package def;
 public class Blocks {
 
 	private int x;

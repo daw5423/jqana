@@ -50,6 +50,7 @@ import com.obomprogramador.tools.jqana.antlrparser.JavaParser.VariableDeclarator
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.VariableDeclaratorIdContext;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser.VariableDeclaratorsContext;
 import com.obomprogramador.tools.jqana.model.Measurement;
+import com.obomprogramador.tools.jqana.model.defaultimpl.GetClassNameFromContext;
 
 import com.obomprogramador.tools.jqana.parsers.Member.MEMBER_TYPE;
 
@@ -76,7 +77,7 @@ public class Lcom4Listener extends JavaBaseListener {
 	protected String [] prefixos = {"get", "set", "is", "has"};
 	protected List<String>getterSetterPrefix = Arrays.asList(prefixos);
 	protected String mainPackageName;
-	protected String mainClassName;
+	public String mainClassName;
 	protected boolean alreadyGotMainClass;
 	protected boolean overrideAnnotation;
 	
@@ -91,8 +92,7 @@ public class Lcom4Listener extends JavaBaseListener {
 	@Override
 	public void enterClassDeclaration(@NotNull ClassDeclarationContext ctx) {
 		if (!alreadyGotMainClass) {
-			int posCurly = ctx.getText().indexOf('{');
-			mainClassName = ctx.getText().substring(5,posCurly);
+			mainClassName = GetClassNameFromContext.getClassName(ctx);
 			alreadyGotMainClass = true;
 		}
 		

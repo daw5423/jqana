@@ -31,7 +31,7 @@ public class TestRfc {
 		Context context = new Context();
 		ResourceBundle bundle = ResourceBundle.getBundle("report");
 		context.setBundle(bundle);
-		String uri = this.getClass().getClassLoader().getResource("compiled-test-classes/com/obomprogramador/tools/testerfc/TesteRFC/TesteRfc.class").getFile();
+		String uri = this.getClass().getClassLoader().getResource("abc/TesteRfc.class").getFile();
 				
 		Measurement packageMeasurement = new Measurement();
 		packageMeasurement.setName("abc");
@@ -41,7 +41,25 @@ public class TestRfc {
 		System.out.println(mt);
 		assertTrue(mt != null);
 		MetricValue mv = mt.getMetricValue(context.getBundle().getString("metric.rfc.name"));
-		assertTrue(mv.getValue() == 10);
+		assertTrue(mv.getValue() == 9);
+	}
+	
+	@Test
+	public void testInner()  throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
+		Context context = new Context();
+		ResourceBundle bundle = ResourceBundle.getBundle("report");
+		context.setBundle(bundle);
+		String uri = this.getClass().getClassLoader().getResource("abc/Teste2.class").getFile();
+				
+		Measurement packageMeasurement = new Measurement();
+		packageMeasurement.setName("abc");
+		packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
+		Parser parser = new RfcBcelParser(packageMeasurement, context);
+		Measurement mt = parser.parse( uri, null);
+		System.out.println(mt);
+		assertTrue(mt != null);
+		MetricValue mv = mt.getMetricValue(context.getBundle().getString("metric.rfc.name"));
+		assertTrue(mv.getValue() == 13);
 	}
 	
 	private String getSource(String string) {
