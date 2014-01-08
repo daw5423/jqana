@@ -1,4 +1,4 @@
-package com.obomprogramador.tools.jacana;
+                package com.obomprogramador.tools.jacana;
 
 import static org.junit.Assert.*;
 
@@ -70,6 +70,25 @@ public class TestCyclomaticComplexity {
 	
 	@Test
 	public void test3() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		context = new Context();
+		ResourceBundle bundle = ResourceBundle.getBundle("report");
+		context.setBundle(bundle);
+		String uri = getSource("unit-test-sources/abc/ClassAfilha.java"); 
+		Measurement packageMeasurement = new Measurement();
+		packageMeasurement.setName("abc");
+		packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
+		Parser parser = new CyclomaticComplexityParser(packageMeasurement, context);
+		Measurement mt = parser.parse( null, uri);
+		MetricValue mv = packageMeasurement.getMetricValue(context.getBundle().getString("metric.cc.name"));
+		assertTrue(mt != null);
+		assertTrue(mv.getValue() == 0);
+
+		printPackage(1, packageMeasurement);
+				
+	}
+	
+	@Test
+	public void testA() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		context = new Context();
 		ResourceBundle bundle = ResourceBundle.getBundle("report");
 		context.setBundle(bundle);

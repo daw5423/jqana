@@ -4,16 +4,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -29,7 +19,7 @@ public class TestUsingXmlGenerator {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private String rootTestResources = "unit-test-sources";
-	private String compiledTestResources = "abc";
+
 	private Measurement project;
 	
 	@Test

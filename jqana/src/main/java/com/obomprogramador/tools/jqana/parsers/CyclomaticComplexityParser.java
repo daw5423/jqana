@@ -77,6 +77,9 @@ public class CyclomaticComplexityParser extends AbstractMetricParser {
 	public void afterProcessing() {
 		// Compute the average:
         MetricValue mv = this.measurement.getMetricValue(context.getBundle().getString(this.metricResourceId));
+        if (mv.getQtdElements() == 0) {
+        	mv.setQtdElements(1);
+        }
         mv.setValue(mv.getValue() / mv.getQtdElements());
 	}
 

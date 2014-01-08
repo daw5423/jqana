@@ -16,10 +16,6 @@ package abc;
  * - Manual: 0
  * 
  */
+public class ClassB {
 
-public class ClassAfilha extends ClassA {
-
-	// +1 para o construtor default;
-	// O construtor default chama super(), então tem a chamada do construtor de Object: +1
-	
 }
