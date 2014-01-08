@@ -4,7 +4,7 @@ package abc;
  * - Sonar: 3
  * - RefactorIt: 
  * - CJKM: 
- * - Manual: 2 
+ * - Manual: 3 
  * - jQana: 
  * 
  * LCOM4:
@@ -19,7 +19,7 @@ package abc;
 public class TesteSuperclass { //CC soma: 2 média = 1
 
 	public TesteSuperclass() { 		//RFC+1   CC+1
-		
+		// RFC+1 para o super(), gerado pelo compilador
 	}
 	
 	public int metodoHerdado1 (int x) {		//RFC+1  CC+1

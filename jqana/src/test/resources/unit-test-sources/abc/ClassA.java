@@ -4,7 +4,7 @@ package abc;
  * - Sonar: 6
  * - RefactorIt: 4
  * - CJKM: 7
- * - Manual: 6
+ * - Manual: 7
  * - jQana: 
  * 
  * LCOM4:
@@ -17,14 +17,15 @@ package abc;
  * 
  */
 public class ClassA {
-	private ClassB classB = new ClassB();				// call (constructor of class B) => +1
-	public void doSomething () {						// method declaration => +1
-		System.out.println("doSomething");				// call (System.out.println(String)) => +1
+	
+												//RFC: + 2 (no-args + super())
+	
+	private ClassB classB = new ClassB();		//RFC: +1			
+	public void doSomething () {				//RFC: +1						
+		System.out.println("doSomething");		//RFC: +1				
 	}
-	public void doSomethingBasedOnClassB() {			// method declaration => +1
-		System.out.println(classB.toString());        // call (System.out.println (String)) => 0 because already counted on line 5 + call (toString) => +1
+	public void doSomethingBasedOnClassB() {			
+		System.out.println(classB.toString());  		//RFC: +2 (println e toString)
 	}
 }
 
-// default constructor of ClassA => +1
-// RFC = 6

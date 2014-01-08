@@ -4,7 +4,7 @@ package def;
  * - Sonar: 4
  * - RefactorIt: 
  * - CJKM: 
- * - Manual: 4 
+ * - Manual: 5 
  * - jQana: 
  * 
  * LCOM4:
@@ -23,6 +23,7 @@ public class Blocks {  //CC soma: 17 média = 5,7
 	private int z;
 	
 	public Blocks(int x, int y, int z) {			//RFC+1		//CC+1
+		//RFC +1 super();
 		this.x = x;
 		this.y = y;
 		this.z = z;

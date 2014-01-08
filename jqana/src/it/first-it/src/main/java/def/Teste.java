@@ -3,13 +3,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
+import java.util.ArrayList;
 import java.util.List;
 /*
  * RFC:
  * - Sonar: 9
  * - RefactorIt: 
  * - CJKM: 
- * - Manual: 10
+ * - Manual: 9
  * - jQana: 
  * 
  * LCOM4:
@@ -25,7 +26,8 @@ public class Teste { // CC soma: 10 média = 10
 	
 	private static final int PAGE_EXISTS = 0;
 	private static final int NO_SUCH_PAGE = 0;
-	private List<String> relatorio;
+	private List<String> relatorio = new ArrayList<String>();  //RFC+1 if you don't instantiate, the methods of ArrayList will not be 
+															  // count in RFC calculation
 	
 																//RFC+2 no-args const + super()
 

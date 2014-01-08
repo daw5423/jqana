@@ -4,7 +4,7 @@ package abc;
  * - Sonar: 6
  * - RefactorIt: 
  * - CJKM: 
- * - Manual: 14 
+ * - Manual: 16 
  * - jQana: 
  * 
  * LCOM4:
@@ -17,6 +17,8 @@ package abc;
  * 
  */
 public class TesteLcomMaiorQueUm { // CC soma: 11 média: 1,1 
+	
+	//RFC +2 (no-args + super())
 
 	private int [] z;
 	private int x;
