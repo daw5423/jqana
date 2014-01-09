@@ -22,6 +22,7 @@ import com.obomprogramador.tools.jqana.model.Parser;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
+import com.obomprogramador.tools.jqana.model.defaultimpl.RetriveTestResults;
 import com.obomprogramador.tools.jqana.parsers.CyclomaticComplexityParser;
 
 import static com.obomprogramador.tools.jqana.context.GlobalConstants.*;
@@ -29,31 +30,18 @@ import static com.obomprogramador.tools.jqana.context.GlobalConstants.*;
 public class TestCyclomaticComplexity {
 	
 	private Context context;
-	
-	public String[][] testClasses = {
-					{"abc","ClassA","1","1","7"},
-					{"abc","ClassAfilha","0","1","2"},
-					{"abc","ClassB","0","1","2"},
-					{"abc","ConstructorCountSelf","1","1","3"},
-					{"abc","DuplicateConstructor","1","1","5"},
-					{"abc","Teste2","14","1","13"},
-					{"abc","TesteLCom4Um","1.5","1","12"},
-					{"abc","TesteLcomMaiorQueUm","1.1","2","16"},
-					{"abc","TesteRfc","1.7","1","9"},
-					{"abc","TesteSuperclass","1","1","3"},
-					{"def","Blocks","5.7","1","5"},
-					{"def","Teste","10","1","9"}
-	};
-	
+
+	public String[][] testClasses;
 
 	@Test
 	public void testAllClassesCC() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		context = new Context();
+		testClasses = RetriveTestResults.getResults(context);
 		ResourceBundle bundle = ResourceBundle.getBundle("report");
 		context.setBundle(bundle);
 		for (int x=0; x<testClasses.length; x++) {
 			
-			String uri = getSource("unit-test-sources/" + testClasses[x][0] + "/" + testClasses[x][1] + ".java"); 
+			String uri = getSource("unit-test-sources/java/" + testClasses[x][0] + "/" + testClasses[x][1] + ".java"); 
 			Measurement packageMeasurement = new Measurement();
 			packageMeasurement.setName(testClasses[x][0]);
 			packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);

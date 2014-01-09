@@ -20,47 +20,42 @@ import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
+import com.obomprogramador.tools.jqana.model.defaultimpl.RetriveTestResults;
 import com.obomprogramador.tools.jqana.parsers.Lcom4Parser;
 import com.obomprogramador.tools.jqana.parsers.RfcBcelParser;
 import com.obomprogramador.tools.jqana.parsers.RfcParser;
 
 public class TestRfc {
+	
+	private Context context;
 
-	@Test
-	public void test() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
-		Context context = new Context();
-		ResourceBundle bundle = ResourceBundle.getBundle("report");
-		context.setBundle(bundle);
-		String uri = this.getClass().getClassLoader().getResource("abc/TesteRfc.class").getFile();
-				
-		Measurement packageMeasurement = new Measurement();
-		packageMeasurement.setName("abc");
-		packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
-		Parser parser = new RfcBcelParser(packageMeasurement, context);
-		Measurement mt = parser.parse( uri, null);
-		System.out.println(mt);
-		assertTrue(mt != null);
-		MetricValue mv = mt.getMetricValue(context.getBundle().getString("metric.rfc.name"));
-		assertTrue(mv.getValue() == 9);
-	}
+	
+	public String[][] testClasses;
 	
 	@Test
-	public void testInner()  throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
-		Context context = new Context();
+	public void testAllClassesRFC() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		context = new Context();
+		testClasses = RetriveTestResults.getResults(context);
 		ResourceBundle bundle = ResourceBundle.getBundle("report");
 		context.setBundle(bundle);
-		String uri = this.getClass().getClassLoader().getResource("abc/Teste2.class").getFile();
-				
-		Measurement packageMeasurement = new Measurement();
-		packageMeasurement.setName("abc");
-		packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
-		Parser parser = new RfcBcelParser(packageMeasurement, context);
-		Measurement mt = parser.parse( uri, null);
-		System.out.println(mt);
-		assertTrue(mt != null);
-		MetricValue mv = mt.getMetricValue(context.getBundle().getString("metric.rfc.name"));
-		assertTrue(mv.getValue() == 13);
+		for (int x=0; x<testClasses.length; x++) {
+			
+			String uri = this.getClass().getClassLoader().getResource(testClasses[x][0] + "/" + testClasses[x][1] + ".class").getFile();
+			Measurement packageMeasurement = new Measurement();
+			packageMeasurement.setName(testClasses[x][0]);
+			packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
+			Parser parser = new RfcBcelParser(packageMeasurement, context);
+			Measurement mt = parser.parse( uri, null);
+			MetricValue mv = packageMeasurement.getMetricValue(context.getBundle().getString("metric.rfc.name"));
+			assertTrue(mt != null);
+			double diffCC = Math.abs(mv.getValue() - Double.parseDouble(testClasses[x][4]));
+			System.out.println("Testing class: " + testClasses[x][0] + "." + testClasses[x][1] + " RFC: " + mv.getValue());
+			assertTrue(diffCC < 0.5);
+
+		}
 	}
+
+
 	
 	private String getSource(String string) {
 		String sourceUri = this.getClass().getClassLoader().getResource(string).getFile();

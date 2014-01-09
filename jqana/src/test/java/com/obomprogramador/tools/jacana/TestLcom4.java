@@ -20,30 +20,44 @@ import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
+import com.obomprogramador.tools.jqana.model.defaultimpl.RetriveTestResults;
 import com.obomprogramador.tools.jqana.parsers.CyclomaticComplexityParser;
 import com.obomprogramador.tools.jqana.parsers.Lcom4Parser;
 
 public class TestLcom4 {
 
 	private Context context;
+	
+	public String[][] testClasses;
 
+	
 	@Test
-	public void testLcom4Gt1() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public void testAllClassesLCOM4() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		context = new Context();
+		testClasses = RetriveTestResults.getResults(context);
 		ResourceBundle bundle = ResourceBundle.getBundle("report");
 		context.setBundle(bundle);
-		String uri = getSource("unit-test-sources/abc/TesteLcomMaiorQueUm.java"); 
-		Measurement packageMeasurement = new Measurement();
-		packageMeasurement.setName("abc");
-		packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
-		Parser parser = new Lcom4Parser(packageMeasurement, context);
-		Measurement mt = parser.parse( null, uri);
-		assertTrue(mt != null);
-		MetricValue mv = packageMeasurement.getMetricValue(context.getBundle().getString("metric.lcom4.name"));
-		assertTrue(mv != null);
-		assertTrue(mv.getValue() != 0);
-		printPackage(4,packageMeasurement);
+		for (int x=0; x<testClasses.length; x++) {
+			
+			String uri = getSource("unit-test-sources/java/" + testClasses[x][0] + "/" + testClasses[x][1] + ".java"); 
+			Measurement packageMeasurement = new Measurement();
+			packageMeasurement.setName(testClasses[x][0]);
+			packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
+			Parser parser = new Lcom4Parser(packageMeasurement, context);
+			Measurement mt = parser.parse( null, uri);
+			MetricValue mv = packageMeasurement.getMetricValue(context.getBundle().getString("metric.lcom4.name"));
+			assertTrue(mt != null);
+			double diffCC = Math.abs(mv.getValue() - Double.parseDouble(testClasses[x][3]));
+			System.out.println("Testing class: " + testClasses[x][0] + "." + testClasses[x][1] + " LCOM4: " + mv.getValue());
+			assertTrue(diffCC < 0.5);
+
+			printPackage(1, packageMeasurement);			
+		}
+		
+				
 	}
+
+
 	
 	private String getSource(String string) {
 		String sourceUri = this.getClass().getClassLoader().getResource(string).getFile();
@@ -77,23 +91,6 @@ public class TestLcom4 {
 	    return sb.toString();
 	}
 
-	@Test
-	public void testLcom4Eq1() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		context = new Context();
-		ResourceBundle bundle = ResourceBundle.getBundle("report");
-		context.setBundle(bundle);
-		String uri = getSource("unit-test-sources/abc/TesteLCom4Um.java"); 
-		Measurement packageMeasurement = new Measurement();
-		packageMeasurement.setName("abc");
-		packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
-		Parser parser = new Lcom4Parser(packageMeasurement, context);
-		Measurement mt = parser.parse( null, uri);
-		assertTrue(mt != null);
-		MetricValue mv = packageMeasurement.getMetricValue(context.getBundle().getString("metric.lcom4.name"));
-		assertTrue(mv != null);
-		assertTrue(mv.getValue() == 1);
-		printPackage(4,packageMeasurement);
-	}
 
 	
 	public void printPackage(int identation, Measurement mt) {
