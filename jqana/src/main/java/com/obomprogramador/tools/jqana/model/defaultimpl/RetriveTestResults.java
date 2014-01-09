@@ -21,6 +21,20 @@ public class RetriveTestResults {
 	 * @return String[][] String array.
 	 */
 	public static String[][] getResults(Context context) {
+		if (context == null) {
+			try {
+				context = new Context();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		String [] classes = context.getBundle().getString("test.results").split("@");
 		String [][] results = new String[classes.length][5];
 		for (int x=0; x<classes.length; x++) {

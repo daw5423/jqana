@@ -91,19 +91,21 @@ public class TestXml2HtmlConverter {
 					break;
 				}
 				StringBuilder tagClass = new StringBuilder();
-				tagClass.append("<a href=\"#" + classM.getName() + "\">" + classM.getName() + "</a></td><td style=\"text-align:center;\">");
+				tagClass.append("<a href=\"#" + classM.getName() + "\">" + classM.getName() + "</a></td>");
 				for (MetricValue mv : classM.getMetricValues()) {
-					String searchString = tagClass.toString() + classM.getMetricValues().get(0).getValue();
+					String appendString = "<td style=\"text-align:center;\">" + mv.getValue() + "</td>";
+					String searchString = tagClass.toString() + appendString;
 					if (!output.contains(searchString)) {
-						searchString = tagClass.toString() 
-							    + "<span style=\"font-weight:bold;color:red\">"
-								+ classM.getMetricValues().get(0).getValue();
+						appendString = "<td style=\"text-align:center;\"><span style=\"font-weight:bold;color:red\">"
+								+ mv.getValue() + "</span></td>";
+						searchString = tagClass.toString() + appendString;
 						if (!output.contains(searchString)) {
 							System.out.println("*** Metric missing for class: " + classM.getName() + " Metric: " + mv.getName());
 							result = false;
 							break;
 						}
 					}
+					tagClass.append(appendString);
 				}
 			}
 		}
