@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project name="jQana">
     <bannerLeft>
         <name>jQanaLogo</name>
@@ -8,7 +9,13 @@
         <menu name="jQana Project">
             <item name="Overview" href="index.html"/>
         </menu>
+		<menu name="Download">
+            <item name="Our maven repo" href="https://raw.github.com/cleuton/jqana/mvn-repo/"/>
+        </menu>        
         <menu ref="modules" />
         <menu ref="reports"/>
+        <menu name="Test coverage">
+            <item name="Jacoco report" href="jacoco/index.html"/>
+        </menu>
     </body>
 </project>

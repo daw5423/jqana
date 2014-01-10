@@ -1,3 +1,67 @@
+Introduction
+  
+  This plugin calculates and reports project metrics in the Maven Site of your Java project. It calculates CC (Cyclomatic Complexity), LCOM4 (Hitz & Montazeri), and RFC (Response For Class).
+  
+  jQana plugin was tested with maven 2 (2.1.1) and 3 (3.1.1).
+
+Goals Overview
+
+  This plugin has 2 goals:
+
+* jqana:help
+  
+  Display help information on jqana-maven-plugin.
+Call mvn jqana:help -Ddetail=true -Dgoal=<goal-name> to display parameter details.
+
+* jqana:report
+
+  This is the Mojo that implements jQana maven plugin, and the main goal, which generates the jQana report in your project's maven site.
+
+  
+Usage
+
+  To use jQana plugin, just configure your "pom.xml" file: add our maven repository and the plugin invocation. Then, you should do a 
+clean build: "mvn clean package", and then generate a site: "mvn site". The "site" maven phase does not trigger compilation of all classes, 
+and jQana needs the .class file for each .java file, so, you must compile all classes before running the "site" phase. 
+  
+  For questions, please use our mailing list (links in the left pane). If you find an error or defect, please use our issue tracker site (links in the left pane).
+
+Examples
+
+  jQana is not hosted in Maven Central repository yet, so you need to configure the temporary repository in your pom.xml.
+  
+  Here we have a basic example of using jQana:
+  
++--
+
+...
+
+<repositories>
+    <repository>
+        <id>jqana-mvn-repo</id>
+        <url>https://raw.github.com/cleuton/jqana/mvn-repo/</url>
+        <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+        </snapshots>
+    </repository>
+</repositories>
+
+...
+
+  <reporting>
+      <plugins>
+          <plugin>
+			<groupId>com.obomprogramador.tools</groupId>
+			<artifactId>jqana-maven-plugin</artifactId>
+			<version>0.0.1-SNAPSHOT</version>              
+          </plugin>
+      </plugins>
+  </reporting>
++--      
+  
+About the project itself
+
    Welcome to jQana project: A tool for quality analysis of Java projects.
  The jQana tool is a {{{http://en.wikipedia.org/wiki/Free_and_open-source_software}FOSS}} software, meaning that it will always be free and open source.
  It was created to generate reports with key design and implementation metrics: CC (Cyclomatic Complexity), LCOM4 (Lack of Cohesion of Methods - Hitz & Montazeri), and RFC (Response For Class).
@@ -10,13 +74,20 @@ hence its modular architecture, based third-party components, such as ANTLR, BCE
 
 Project testing
   
-  We created a basic test set, composed by unit and integration tests. We use Maven Invoker plugin for IT, using a BeanShell script to verify the generated report. 
+  We created a basic test set, composed by unit and integration tests. We use Maven Invoker plugin for IT, using a BeanShell script to verify the generated report.
   
+  To run only unit tests, just run "mvn clean test", to run integration-test with verification, run: "mvn clean verify". Unfortunately, we could not managed to
+merge integration-tests with site generation, including jacoco reporting, but we are still working on that. So, if you want to generate project site, run
+"mvn clean verify site" and you'll have it.
+
 
 Project status
 
   Beta (0.0.1-SNAPSHOT).
   
-  Currently the project is in its initial stage of development, and, although fully functional, with a reasonable set of tests, it is still considered an "alpha" or SNAPSHOT version in Maven jargon.
+  Currently the project is in its initial stage of development, and, although fully functional, with a reasonable set of tests, it is still considered an "Beta" or SNAPSHOT version in Maven jargon.
+  
+  We have released the first beta version, but we still working on to improve the source code. As we follow the TDD discipline, we considered that the project passed all tests, but it is necessary to refactor and improve the source code, 
+and improve the documentation. In spite of that, you can use jQana in your projects, and, if you find an error or problem, please
+open an issue. This will help us to improve the tool.
 
-  We are still working to refactor and improve the source code, and there are some outstanding issues, both documentation and implementation. If you want to get involved, this is the best time. Join our mailing list and ask to join the team.
