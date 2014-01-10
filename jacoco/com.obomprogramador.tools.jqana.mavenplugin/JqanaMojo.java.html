@@ -84,112 +84,112 @@ public class JqanaMojo extends AbstractMavenReport {
     protected Renderer siteRenderer;
 
 	public JqanaMojo() {
-<span class="fc" id="L87">		super();</span>
-<span class="fc" id="L88">	}</span>
+<span class="nc" id="L87">		super();</span>
+<span class="nc" id="L88">	}</span>
 
 	@Override
 	public String getDescription(Locale arg0) {
-<span class="fc" id="L92">		return getBundle(arg0).getString( &quot;report.description&quot; );</span>
+<span class="nc" id="L92">		return getBundle(arg0).getString( &quot;report.description&quot; );</span>
 	}
 
 	@Override
 	public String getName(Locale arg0) {
-<span class="fc" id="L97">		return getBundle(arg0).getString( &quot;report.name&quot; );</span>
+<span class="nc" id="L97">		return getBundle(arg0).getString( &quot;report.name&quot; );</span>
 	}
 
 	@Override
 	public String getOutputName() {
-<span class="fc" id="L102">		return &quot;jqana-report&quot;;</span>
+<span class="nc" id="L102">		return &quot;jqana-report&quot;;</span>
 	}
 	
 	
 
 	@Override
 	protected void executeReport(Locale locale) throws MavenReportException {
-<span class="fc" id="L109">		DateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span>
-<span class="fc" id="L110">		Date date = new Date();</span>
-<span class="fc" id="L111">		String reportDate = df.format(date);</span>
+<span class="nc" id="L109">		DateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span>
+<span class="nc" id="L110">		Date date = new Date();</span>
+<span class="nc" id="L111">		String reportDate = df.format(date);</span>
 		
-<span class="fc" id="L113">		Sink sink = getSink();</span>
-<span class="fc" id="L114">	    sink.head();</span>
-<span class="fc" id="L115">	    sink.title();</span>
-<span class="fc" id="L116">	    sink.text(this.getName(locale));</span>
-<span class="fc" id="L117">	    sink.title_();</span>
-<span class="fc" id="L118">	    sink.head_();</span>
-<span class="fc" id="L119">	    sink.body();</span>
-<span class="fc" id="L120">	    createReportBegin(sink,reportDate,locale);</span>
-<span class="fc" id="L121">	    reportPackageMetrics(sink,locale);</span>
-<span class="fc" id="L122">	    sink.lineBreak();</span>
-<span class="fc" id="L123">		sink.link(getBundle(locale).getString(&quot;jqana.link&quot;));</span>
-<span class="fc" id="L124">			sink.text(getBundle(locale).getString(&quot;jqana.url&quot;));</span>
-<span class="fc" id="L125">		sink.link_();</span>
-<span class="fc" id="L126">	    sink.section1_();</span>
-<span class="fc" id="L127">	    sink.body_();</span>
-<span class="fc" id="L128">	    sink.flush();</span>
-<span class="fc" id="L129">	    sink.close();</span>
-<span class="fc" id="L130">	}</span>
+<span class="nc" id="L113">		Sink sink = getSink();</span>
+<span class="nc" id="L114">	    sink.head();</span>
+<span class="nc" id="L115">	    sink.title();</span>
+<span class="nc" id="L116">	    sink.text(this.getName(locale));</span>
+<span class="nc" id="L117">	    sink.title_();</span>
+<span class="nc" id="L118">	    sink.head_();</span>
+<span class="nc" id="L119">	    sink.body();</span>
+<span class="nc" id="L120">	    createReportBegin(sink,reportDate,locale);</span>
+<span class="nc" id="L121">	    reportPackageMetrics(sink,locale);</span>
+<span class="nc" id="L122">	    sink.lineBreak();</span>
+<span class="nc" id="L123">		sink.link(getBundle(locale).getString(&quot;jqana.link&quot;));</span>
+<span class="nc" id="L124">			sink.text(getBundle(locale).getString(&quot;jqana.url&quot;));</span>
+<span class="nc" id="L125">		sink.link_();</span>
+<span class="nc" id="L126">	    sink.section1_();</span>
+<span class="nc" id="L127">	    sink.body_();</span>
+<span class="nc" id="L128">	    sink.flush();</span>
+<span class="nc" id="L129">	    sink.close();</span>
+<span class="nc" id="L130">	}</span>
 
 	private void createReportBegin(Sink sink, String reportDate, Locale locale) {
-<span class="fc" id="L133">		sink.section1();</span>
-<span class="fc" id="L134">		sink.sectionTitle1();</span>
-<span class="fc" id="L135">		String rBegin = getBundle(locale).getString(&quot;report.begin&quot;);</span>
-<span class="fc" id="L136">		sink.text(rBegin);</span>
-<span class="fc" id="L137">		sink.sectionTitle1_();</span>
-<span class="fc" id="L138">		sink.lineBreak();</span>
-<span class="fc" id="L139">		sink.text(getBundle(locale).getString(&quot;report.dateHeader&quot;) + &quot;: &quot; + reportDate);</span>
-<span class="fc" id="L140">		String jqanaVersion = getBundle(locale).getString(&quot;jqana.version&quot;);</span>
-<span class="fc" id="L141">		String jqanaRelease = getBundle(locale).getString(&quot;jqana.releaseDate&quot;);</span>
-<span class="fc" id="L142">		sink.lineBreak();</span>
-<span class="fc" id="L143">		sink.text(getBundle(locale).getString(&quot;report.jqana.version&quot;) + &quot;: &quot; + jqanaVersion);</span>
-<span class="fc" id="L144">		sink.lineBreak();</span>
-<span class="fc" id="L145">		sink.text(getBundle(locale).getString(&quot;report.jqana.release.date&quot;) + &quot;: &quot; + jqanaRelease);</span>
-<span class="fc" id="L146">	}</span>
+<span class="nc" id="L133">		sink.section1();</span>
+<span class="nc" id="L134">		sink.sectionTitle1();</span>
+<span class="nc" id="L135">		String rBegin = getBundle(locale).getString(&quot;report.begin&quot;);</span>
+<span class="nc" id="L136">		sink.text(rBegin);</span>
+<span class="nc" id="L137">		sink.sectionTitle1_();</span>
+<span class="nc" id="L138">		sink.lineBreak();</span>
+<span class="nc" id="L139">		sink.text(getBundle(locale).getString(&quot;report.dateHeader&quot;) + &quot;: &quot; + reportDate);</span>
+<span class="nc" id="L140">		String jqanaVersion = getBundle(locale).getString(&quot;jqana.version&quot;);</span>
+<span class="nc" id="L141">		String jqanaRelease = getBundle(locale).getString(&quot;jqana.releaseDate&quot;);</span>
+<span class="nc" id="L142">		sink.lineBreak();</span>
+<span class="nc" id="L143">		sink.text(getBundle(locale).getString(&quot;report.jqana.version&quot;) + &quot;: &quot; + jqanaVersion);</span>
+<span class="nc" id="L144">		sink.lineBreak();</span>
+<span class="nc" id="L145">		sink.text(getBundle(locale).getString(&quot;report.jqana.release.date&quot;) + &quot;: &quot; + jqanaRelease);</span>
+<span class="nc" id="L146">	}</span>
 
 	private void reportPackageMetrics(Sink sink, Locale locale) {
 		
 		try {
-<span class="fc" id="L151">			DefaultProjectProcessor dpp = new DefaultProjectProcessor(new Context());</span>
-<span class="fc" id="L152">			dpp.setLog(getLog());</span>
-<span class="fc" id="L153">			File sourceDir = new File(this.project.getModel().getBuild().getSourceDirectory().replace(&quot;\\&quot;, &quot;/&quot;));</span>
-<span class="fc" id="L154">			File objectDir = new File(this.project.getBuild().getDirectory() + &quot;/classes&quot;);</span>
-<span class="fc" id="L155">			getLog().debug(&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt; ObjectDir: &quot; + objectDir.getPath());</span>
-<span class="fc" id="L156">			Measurement projectMeasurement = dpp.process(this.getProject().getName(), sourceDir, objectDir);</span>
-<span class="fc" id="L157">			DefaultXmlGenerator generator = new DefaultXmlGenerator();</span>
-<span class="fc" id="L158">			Document report = generator.serialize(projectMeasurement);</span>
-<span class="fc" id="L159">			persistXml(report, generator);</span>
-<span class="fc" id="L160">			DefaultXml2HtmlConverter converter = new DefaultXml2HtmlConverter();</span>
-<span class="fc" id="L161">			String output = converter.convert(generator.xml2String(report,true));</span>
-<span class="fc" id="L162">			sink.rawText(output);</span>
+<span class="nc" id="L151">			DefaultProjectProcessor dpp = new DefaultProjectProcessor(new Context());</span>
+<span class="nc" id="L152">			dpp.setLog(getLog());</span>
+<span class="nc" id="L153">			File sourceDir = new File(this.project.getModel().getBuild().getSourceDirectory().replace(&quot;\\&quot;, &quot;/&quot;));</span>
+<span class="nc" id="L154">			File objectDir = new File(this.project.getBuild().getDirectory() + &quot;/classes&quot;);</span>
+<span class="nc" id="L155">			getLog().debug(&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt; ObjectDir: &quot; + objectDir.getPath());</span>
+<span class="nc" id="L156">			Measurement projectMeasurement = dpp.process(this.getProject().getName(), sourceDir, objectDir);</span>
+<span class="nc" id="L157">			DefaultXmlGenerator generator = new DefaultXmlGenerator();</span>
+<span class="nc" id="L158">			Document report = generator.serialize(projectMeasurement);</span>
+<span class="nc" id="L159">			persistXml(report, generator);</span>
+<span class="nc" id="L160">			DefaultXml2HtmlConverter converter = new DefaultXml2HtmlConverter();</span>
+<span class="nc" id="L161">			String output = converter.convert(generator.xml2String(report,true));</span>
+<span class="nc" id="L162">			sink.rawText(output);</span>
 		}
 <span class="nc" id="L164">		catch (Exception ex) {</span>
 <span class="nc" id="L165">			getLog().error(ex);</span>
-<span class="fc" id="L166">		}</span>
-<span class="fc" id="L167">	}</span>
+<span class="nc" id="L166">		}</span>
+<span class="nc" id="L167">	}</span>
 	
 	private void persistXml(Document report, DefaultXmlGenerator generator) throws MavenReportException {
-<span class="fc" id="L170">		String targetPath = project.getBuild().getDirectory();</span>
-<span class="fc" id="L171">		File outputDir = new File(targetPath + &quot;\\jqana-output&quot;);</span>
-<span class="pc bpc" id="L172" title="1 of 2 branches missed.">		if (!outputDir.exists()) {</span>
-<span class="fc" id="L173">			outputDir.mkdirs();</span>
+<span class="nc" id="L170">		String targetPath = project.getBuild().getDirectory();</span>
+<span class="nc" id="L171">		File outputDir = new File(targetPath + &quot;\\jqana-output&quot;);</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">		if (!outputDir.exists()) {</span>
+<span class="nc" id="L173">			outputDir.mkdirs();</span>
 		}
 		try {
-<span class="fc" id="L176">			String xmlOutput = generator.xml2String(report, false);</span>
-<span class="fc" id="L177">			File outputXml = new File(outputDir.getPath() + &quot;\\jqana.xml&quot;);</span>
-<span class="pc bpc" id="L178" title="1 of 2 branches missed.">			if (outputXml.exists()) {</span>
+<span class="nc" id="L176">			String xmlOutput = generator.xml2String(report, false);</span>
+<span class="nc" id="L177">			File outputXml = new File(outputDir.getPath() + &quot;\\jqana.xml&quot;);</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">			if (outputXml.exists()) {</span>
 <span class="nc" id="L179">				outputXml.delete();</span>
 			}
-<span class="fc" id="L181">			outputXml.createNewFile();</span>
-<span class="fc" id="L182">			BufferedWriter bw = new BufferedWriter(new FileWriter(outputXml));</span>
-<span class="fc" id="L183">			bw.append(xmlOutput);</span>
-<span class="fc" id="L184">			bw.flush();</span>
-<span class="fc" id="L185">			bw.close();</span>
+<span class="nc" id="L181">			outputXml.createNewFile();</span>
+<span class="nc" id="L182">			BufferedWriter bw = new BufferedWriter(new FileWriter(outputXml));</span>
+<span class="nc" id="L183">			bw.append(xmlOutput);</span>
+<span class="nc" id="L184">			bw.flush();</span>
+<span class="nc" id="L185">			bw.close();</span>
 			
 <span class="nc" id="L187">		} catch (TransformerException e) {</span>
 <span class="nc" id="L188">			throw new MavenReportException(&quot;Xml transform error&quot;);</span>
 <span class="nc" id="L189">		} catch (IOException e) {</span>
 <span class="nc" id="L190">			throw new MavenReportException(&quot;Xml writing error&quot;);</span>
-<span class="fc" id="L191">		}</span>
-<span class="fc" id="L192">	}</span>
+<span class="nc" id="L191">		}</span>
+<span class="nc" id="L192">	}</span>
 
 	@Override
 	protected String getOutputDirectory() {
@@ -198,7 +198,7 @@ public class JqanaMojo extends AbstractMavenReport {
 
 	@Override
 	protected MavenProject getProject() {
-<span class="fc" id="L201">		return project;</span>
+<span class="nc" id="L201">		return project;</span>
 	}
 
 	@Override
@@ -207,7 +207,7 @@ public class JqanaMojo extends AbstractMavenReport {
 	}
 
     private ResourceBundle getBundle( Locale locale ) {
-<span class="fc" id="L210">        return ResourceBundle.getBundle( &quot;report&quot;, locale, this.getClass().getClassLoader() );</span>
+<span class="nc" id="L210">        return ResourceBundle.getBundle( &quot;report&quot;, locale, this.getClass().getClassLoader() );</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>

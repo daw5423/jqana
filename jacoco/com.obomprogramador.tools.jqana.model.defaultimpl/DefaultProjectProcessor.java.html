@@ -47,8 +47,8 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 	}
 
 	public void setLog(Log log) {
-<span class="fc" id="L50">		this.log = log;</span>
-<span class="fc" id="L51">	}</span>
+<span class="nc" id="L50">		this.log = log;</span>
+<span class="nc" id="L51">	}</span>
 
 	public DefaultProjectProcessor(Context context) {
 <span class="fc" id="L54">		super();</span>
@@ -239,26 +239,26 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 	  protected void logMsg(String msg, MSG_TYPE type) {
 <span class="pc bpc" id="L240" title="1 of 2 branches missed.">		  if (this.log == null) {</span>
 			  // using internal logger
-<span class="pc bnc" id="L242" title="All 4 branches missed.">			  switch (type) {</span>
+<span class="pc bpc" id="L242" title="3 of 4 branches missed.">			  switch (type) {</span>
 			  case INFO:
 <span class="nc" id="L244">				  logger.info(msg);</span>
 <span class="nc" id="L245">				  break;</span>
 			  case DEBUG:
-<span class="nc" id="L247">				  logger.debug(msg);</span>
-<span class="nc" id="L248">				  break;</span>
+<span class="fc" id="L247">				  logger.debug(msg);</span>
+<span class="fc" id="L248">				  break;</span>
 			  case ERROR:
-<span class="nc" id="L250">				  logger.error(msg);</span>
+<span class="pc" id="L250">				  logger.error(msg);</span>
 			  }
 		  }
 		  else {
 			  // using maven plugin logger
-<span class="pc bpc" id="L255" title="3 of 4 branches missed.">			  switch (type) {</span>
+<span class="nc bnc" id="L255" title="All 4 branches missed.">			  switch (type) {</span>
 			  case INFO:
 <span class="nc" id="L257">				  this.log.info(msg);</span>
 <span class="nc" id="L258">				  break;</span>
 			  case DEBUG:
-<span class="fc" id="L260">				  this.log.debug(msg);</span>
-<span class="fc" id="L261">				  break;</span>
+<span class="nc" id="L260">				  this.log.debug(msg);</span>
+<span class="nc" id="L261">				  break;</span>
 			  case ERROR:
 <span class="nc" id="L263">				  this.log.error(msg);</span>
 			  }
