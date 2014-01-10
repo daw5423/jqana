@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CycloListener.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.html" class="el_package">com.obomprogramador.tools.jqana.parsers</a> &gt; <span class="el_source">CycloListener.java</span></div><h1>CycloListener.java</h1><pre class="source lang-java linenums">/**
+ * jQana - Open Source Java(TM) code quality analyzer.
+ * 
+ * Copyright 2013 Cleuton Sampaio de Melo Jr
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * Project website: http://www.jqana.com
+ */
+package com.obomprogramador.tools.jqana.parsers;
+
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.List;
+
+import org.antlr.v4.runtime.misc.NotNull;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.TerminalNodeImpl;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.BlockContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.BlockStatementContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.CatchClauseContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ClassDeclarationContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.CompilationUnitContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ConstructorDeclarationContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ExpressionContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.FormalParametersContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.MethodBodyContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.MethodDeclarationContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.PackageDeclarationContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ParExpressionContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.PrimaryContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.StatementContext;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.SwitchLabelContext;
+import com.obomprogramador.tools.jqana.model.Measurement;
+import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
+import com.obomprogramador.tools.jqana.model.Metric;
+import com.obomprogramador.tools.jqana.model.defaultimpl.GetClassNameFromContext;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
+
+/**
+ * This is a JavaBaseListener (ANTLR4) implementation that calculates Cyclomatic Complexity
+ * measurement, according to McCabe's calculations (http://www.literateprogramming.com/mccabe.pdf).
+ * 
+ * The listener counts plus one for:
+ * a) Each method;
+ * b) Each switch label;
+ * c) Each occurence of: &quot;catch&quot;, &quot;do&quot;, &quot;for&quot;, &quot;else if&quot;, &quot;if&quot;, &quot;throws&quot;, &quot;while&quot;;
+ * d) Each &quot;return&quot; statement that is not the last command of a method;
+ * 
+ * @author Cleuton Sampaio.
+ *
+ */
+public class CycloListener extends JavaBaseListener {
+	
+	
+<span class="fc" id="L73">	protected String [] predicateNodes = {</span>
+			   &quot;do&quot;, &quot;for&quot;,  &quot;throw&quot;, &quot;while&quot;
+		};
+<span class="fc" id="L76">	protected List&lt;String&gt; listaNodes = Arrays.asList(predicateNodes);</span>
+	private Measurement measurement;
+	private org.antlr.v4.runtime.Parser parser;
+	protected String previousExpression;
+	protected Logger logger;
+	protected int returnCount;
+	protected Deque&lt;Measurement&gt; measurementsStack;
+	protected Metric metric;
+	protected String mainPackageName;
+	protected MetricValue currentMetricValue;
+	protected boolean alreadyGotFirstClass;
+	protected String lastStatement;
+<span class="fc" id="L88">	protected int constructorNumber = 1;</span>
+	
+	/**
+	 * Default constructor. 
+	 * @param metric The metric being used for analysis.
+	 * @param measurement The expected measurement to return to the Parser.
+	 * @param parser Instance of JavaParser (ANTLR4) used to get the AST.
+	 */
+<span class="fc" id="L96">	public CycloListener(Metric metric, Measurement measurement, JavaParser parser) {</span>
+<span class="fc" id="L97">		this.metric = metric;</span>
+<span class="fc" id="L98">		this.measurement = measurement;</span>
+<span class="fc" id="L99">		this.parser = parser;</span>
+<span class="fc" id="L100">		this.logger = LoggerFactory.getLogger(this.getClass());</span>
+<span class="fc" id="L101">		this.measurementsStack = new ArrayDeque&lt;Measurement&gt;();</span>
+<span class="fc" id="L102">		this.currentMetricValue = this.getMetricValue(this.measurement);</span>
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">		if (this.currentMetricValue == null) {</span>
+<span class="nc" id="L104">			throw new IllegalArgumentException(&quot;Measurement should have a MetricValue&quot;);</span>
+		}
+				
+<span class="fc" id="L107">	}</span>
+
+
+
+	@Override
+	public void enterConstructorDeclaration(
+			@NotNull ConstructorDeclarationContext ctx) {
+<span class="fc" id="L114">		this.previousExpression = null;</span>
+<span class="fc" id="L115">		String methodName = &quot;&lt;Constructor &quot; + this.constructorNumber++ + &quot;&gt;&quot;;</span>
+<span class="fc" id="L116">		this.newMeasurement(methodName, MEASUREMENT_TYPE.METHOD_MEASUREMENT);</span>
+<span class="fc" id="L117">		this.currentMetricValue.setValue(1);</span>
+<span class="fc" id="L118">		this.previousExpression = null;</span>
+<span class="fc" id="L119">		logger.debug(&quot;***** (CC) ENTERING CONSTUCTOR: &quot; + methodName);</span>
+<span class="fc" id="L120">	}</span>
+	
+	
+
+
+
+	@Override
+	public void exitConstructorDeclaration(
+			@NotNull ConstructorDeclarationContext ctx) {
+<span class="fc" id="L129">		logger.debug(&quot;***** (CC) EXITING CONSTRUCTOR. CC = &quot; + this.currentMetricValue.getValue());</span>
+<span class="fc" id="L130">		this.verifyMethodViolation(this.measurement);</span>
+<span class="fc" id="L131">		this.consolidateWithOwner();</span>
+<span class="fc" id="L132">		this.lastStatement = null;</span>
+<span class="fc" id="L133">	}</span>
+
+
+
+	@Override
+	public void exitClassDeclaration(@NotNull ClassDeclarationContext ctx) {
+<span class="fc" id="L139">		this.verifyClassViolation(this.measurement);</span>
+<span class="fc" id="L140">		logger.debug(&quot;*** (CC) EXITING CLASS. CC = &quot; + this.currentMetricValue.getValue());</span>
+<span class="fc" id="L141">		this.consolidateWithOwner();</span>
+<span class="fc" id="L142">		this.previousExpression = null;</span>
+		
+<span class="fc" id="L144">	}</span>
+
+
+	@Override
+	public void enterClassDeclaration(@NotNull ClassDeclarationContext ctx) {
+<span class="fc" id="L149">		String className = GetClassNameFromContext.getClassName(ctx);</span>
+		
+<span class="fc bfc" id="L151" title="All 2 branches covered.">		if (!alreadyGotFirstClass) {</span>
+			// It is the main class name
+<span class="fc" id="L153">			this.measurement.setName(className);</span>
+<span class="fc" id="L154">			alreadyGotFirstClass = true;</span>
+		}
+		else {
+<span class="fc" id="L157">			this.newMeasurement(className,MEASUREMENT_TYPE.CLASS_MEASUREMENT);</span>
+		}
+<span class="fc" id="L159">		this.previousExpression = null;</span>
+<span class="fc" id="L160">		logger.debug(&quot;*** (CC) ENTERING CLASS: &quot; + className);</span>
+<span class="fc" id="L161">	}</span>
+
+
+	@Override
+	public void enterMethodDeclaration(@NotNull MethodDeclarationContext ctx) {
+<span class="fc" id="L166">		String methodName = &quot;&lt;no name&gt;&quot;;</span>
+<span class="pc bpc" id="L167" title="1 of 2 branches missed.">		for (ParseTree subTree : ctx.children) {</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">			if (subTree instanceof TerminalNodeImpl) {</span>
+<span class="fc" id="L169">				methodName = subTree.toString();</span>
+			}
+<span class="fc bfc" id="L171" title="All 2 branches covered.">			else if (subTree instanceof FormalParametersContext) {</span>
+<span class="fc" id="L172">				break;</span>
+			}
+<span class="fc" id="L174">		}</span>
+<span class="fc" id="L175">		this.newMeasurement(methodName, MEASUREMENT_TYPE.METHOD_MEASUREMENT);</span>
+<span class="fc" id="L176">		this.currentMetricValue.setValue(1);</span>
+<span class="fc" id="L177">		this.previousExpression = null;</span>
+<span class="fc" id="L178">		logger.debug(&quot;***** (CC) ENTERING METHOD: &quot; + methodName);</span>
+<span class="fc" id="L179">	}</span>
+
+
+	@Override
+	public void exitMethodDeclaration(@NotNull MethodDeclarationContext ctx) {
+
+<span class="fc" id="L185">		logger.debug(&quot;***** (CC) EXITING METHOD. CC = &quot; + this.currentMetricValue.getValue());</span>
+<span class="fc" id="L186">		this.verifyMethodViolation(this.measurement);</span>
+<span class="fc" id="L187">		this.consolidateWithOwner();</span>
+<span class="fc" id="L188">		this.lastStatement = null;</span>
+<span class="fc" id="L189">	}</span>
+
+
+
+
+	@Override
+	public void enterExpression(@NotNull ExpressionContext ctx) {
+<span class="fc bfc" id="L196" title="All 2 branches covered.">		if (previousExpression != null) {</span>
+<span class="fc bfc" id="L197" title="All 2 branches covered.">			if (!previousExpression.contains(ctx.getText())) {</span>
+<span class="fc" id="L198">				checkExpression(ctx);</span>
+<span class="fc" id="L199">				previousExpression = ctx.getText();</span>
+			}
+		}
+		else {
+<span class="fc" id="L203">			checkExpression(ctx);</span>
+<span class="fc" id="L204">			previousExpression = ctx.getText();</span>
+		}
+<span class="fc" id="L206">	}</span>
+
+
+
+	private void checkExpression(ExpressionContext ctx) {
+<span class="pc bpc" id="L211" title="1 of 4 branches missed.">		if (ctx.getText().charAt(0) != '\&quot;' &amp;&amp; ctx.getText().charAt(0) != '\'') {</span>
+			
+<span class="fc" id="L213">			int count = countSymbols(ctx.getText(), &quot;:&quot;);</span>
+<span class="fc bfc" id="L214" title="All 2 branches covered.">			if (count &gt; 0) {</span>
+<span class="fc" id="L215">				incMetricValue(count);</span>
+<span class="fc" id="L216">				logger.debug(&quot;     - Ternaries found: &quot; + count);</span>
+			}
+
+<span class="fc" id="L219">			count = countSymbols(ctx.getText(), &quot;||&quot;);</span>
+<span class="fc bfc" id="L220" title="All 2 branches covered.">			if (count &gt; 0) {</span>
+<span class="fc" id="L221">				incMetricValue(count);</span>
+<span class="fc" id="L222">				logger.debug(&quot;     - OR found: &quot; + count);</span>
+			}
+<span class="fc" id="L224">			count = countSymbols(ctx.getText(), &quot;&amp;&amp;&quot;);</span>
+<span class="fc bfc" id="L225" title="All 2 branches covered.">			if (count &gt; 0) {</span>
+<span class="fc" id="L226">				incMetricValue(count);</span>
+<span class="fc" id="L227">				logger.debug(&quot;     - AND found: &quot; + count);</span>
+			}
+		}
+<span class="fc" id="L230">	}</span>
+
+	protected MetricValue newMetricValue() {
+<span class="fc" id="L233">		MetricValue mv = new MetricValue();</span>
+<span class="fc" id="L234">		mv.setName(this.metric.getMetricName());</span>
+<span class="fc" id="L235">		this.currentMetricValue = mv;</span>
+<span class="fc" id="L236">		return mv;</span>
+	}
+
+	protected MetricValue getMetricValue(Measurement m) {
+<span class="fc" id="L240">		MetricValue mv = new MetricValue();</span>
+<span class="fc" id="L241">		mv.setName(this.metric.getMetricName());</span>
+<span class="fc" id="L242">		int indx = m.getMetricValues().indexOf(mv);</span>
+<span class="pc bpc" id="L243" title="1 of 2 branches missed.">		if (indx &gt;= 0) {</span>
+<span class="fc" id="L244">			mv = m.getMetricValues().get(indx);</span>
+		}
+		else {
+<span class="nc" id="L247">			mv = null;</span>
+		}
+<span class="fc" id="L249">		return mv;</span>
+	}
+	
+	protected void consolidateWithOwner() {
+<span class="fc bfc" id="L253" title="All 2 branches covered.">		if (!this.measurementsStack.isEmpty()) {</span>
+<span class="fc" id="L254">			Measurement owner = this.measurementsStack.peek();</span>
+<span class="fc" id="L255">			MetricValue ownerMV = this.getMetricValue(owner);</span>
+<span class="fc" id="L256">			this.currentMetricValue = this.getMetricValue(this.measurement);</span>
+<span class="fc" id="L257">			ownerMV.setValue(ownerMV.getValue() + this.currentMetricValue.getValue());</span>
+<span class="fc" id="L258">			ownerMV.setQtdElements(ownerMV.getQtdElements() + 1);</span>
+<span class="fc" id="L259">			this.measurement = this.measurementsStack.pop();</span>
+<span class="fc" id="L260">			this.currentMetricValue = getMetricValue(this.measurement);</span>
+		}		
+<span class="fc" id="L262">	}</span>
+	
+	protected void newMeasurement(String name, MEASUREMENT_TYPE type) {
+<span class="fc" id="L265">		this.measurementsStack.push(this.measurement);</span>
+<span class="fc" id="L266">		this.measurement = new Measurement();</span>
+<span class="fc" id="L267">		this.measurement.setName(name);</span>
+<span class="fc" id="L268">		this.measurement.setType(type);</span>
+<span class="fc" id="L269">		Measurement owner = this.measurementsStack.peek();</span>
+<span class="fc" id="L270">		owner.getInnerMeasurements().add(this.measurement);</span>
+<span class="fc" id="L271">		this.measurement.getMetricValues().add(newMetricValue());		</span>
+<span class="fc" id="L272">	}</span>
+	
+	protected void incMetricValue(int inc) {
+<span class="fc" id="L275">		this.currentMetricValue.setValue(this.currentMetricValue.getValue() + inc);</span>
+<span class="fc" id="L276">	}</span>
+
+	@Override
+	public void enterStatement(@NotNull StatementContext ctx) {
+<span class="fc" id="L280">		String tipo = ctx.getParent().start.getText();</span>
+<span class="fc bfc" id="L281" title="All 2 branches covered.">		if (this.lastStatement != null) {</span>
+<span class="fc bfc" id="L282" title="All 2 branches covered.">			if (this.lastStatement.equals(&quot;return&quot;)) {</span>
+<span class="fc" id="L283">				this.incMetricValue(1);</span>
+<span class="fc" id="L284">				logger.debug(&quot;     - Return not last statement.&quot;);</span>
+			}
+		}
+<span class="fc" id="L287">		this.lastStatement = tipo;</span>
+<span class="fc" id="L288">	}</span>
+
+	@Override
+	public void enterSwitchLabel(@NotNull SwitchLabelContext ctx) {
+<span class="fc bfc" id="L292" title="All 2 branches covered.">		if (!ctx.children.get(0).toString().equals(&quot;default&quot;)) {</span>
+<span class="fc" id="L293">			incMetricValue(1);</span>
+<span class="fc" id="L294">			logger.debug(&quot;     - swith label.&quot;);</span>
+		}
+		else {
+<span class="fc" id="L297">			logger.debug(&quot;     - *** default label ignored.&quot;);</span>
+		}
+
+<span class="fc" id="L300">	}</span>
+
+	private int countSymbols(String originalText, String whatToFind) {
+<span class="fc" id="L303">		return StringUtils.countMatches(originalText, whatToFind);</span>
+	}
+
+	
+
+	@Override
+	public void enterBlock(@NotNull BlockContext ctx) {
+<span class="fc" id="L310">		String tipo = ctx.getParent().start.getText();</span>
+		
+<span class="fc bfc" id="L312" title="All 2 branches covered.">		if (tipo.equals(&quot;{&quot;)) {</span>
+<span class="fc" id="L313">			tipo = ctx.getParent().getParent().start.getText();</span>
+		}
+		
+<span class="fc bfc" id="L316" title="All 2 branches covered.">		if (listaNodes.contains(tipo)) {</span>
+<span class="fc" id="L317">			incMetricValue(1);</span>
+<span class="fc" id="L318">			logger.debug(&quot;     - Predicate node: &quot; + tipo + &quot; line: &quot; + ctx.getText());</span>
+		}
+<span class="fc" id="L320">	}</span>
+
+	
+	@Override
+	public void enterParExpression(@NotNull ParExpressionContext ctx) {
+<span class="fc bfc" id="L325" title="All 2 branches covered.">		if (ctx.getParent().start.getText().equals(&quot;if&quot;)) {</span>
+<span class="fc" id="L326">			incMetricValue(1);</span>
+<span class="fc" id="L327">			logger.debug(&quot;     - Predicate node IF: &quot; + ctx.getText());</span>
+		}
+<span class="fc" id="L329">	}</span>
+
+
+	@Override
+	public void enterCatchClause(@NotNull CatchClauseContext ctx) {
+<span class="fc" id="L334">		incMetricValue(1);</span>
+<span class="fc" id="L335">		logger.debug(&quot;     - Catch node: &quot;);</span>
+<span class="fc" id="L336">	}</span>
+
+
+
+	protected void verifyMethodViolation(Measurement measurement2) {
+<span class="fc" id="L341">		this.currentMetricValue.setViolated(</span>
+					this.metric.getVerificationAlgorithm().verify(this.currentMetricValue.getValue())
+				);
+<span class="fc" id="L344">	}</span>
+	
+	protected void verifyClassViolation(Measurement measurement2) {
+<span class="fc bfc" id="L347" title="All 2 branches covered.">		for (Measurement m : measurement2.getInnerMeasurements()) {</span>
+<span class="fc" id="L348">			MetricValue mv = this.getMetricValue(m);</span>
+<span class="fc bfc" id="L349" title="All 2 branches covered.">			if (mv.isViolated()) {</span>
+<span class="fc" id="L350">				this.getMetricValue(measurement2).setViolated(true);</span>
+<span class="fc" id="L351">				break;</span>
+			}
+<span class="fc" id="L353">		}</span>
+<span class="fc" id="L354">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>

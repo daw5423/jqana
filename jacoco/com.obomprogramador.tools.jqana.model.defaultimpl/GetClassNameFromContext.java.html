@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GetClassNameFromContext.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.html" class="el_package">com.obomprogramador.tools.jqana.model.defaultimpl</a> &gt; <span class="el_source">GetClassNameFromContext.java</span></div><h1>GetClassNameFromContext.java</h1><pre class="source lang-java linenums">package com.obomprogramador.tools.jqana.model.defaultimpl;
+
+import org.antlr.v4.runtime.tree.ParseTree;
+
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser.ClassDeclarationContext;
+
+/**
+ * Utility class to get a class name from a context.
+ * @author Cleuton Sampaio
+ *
+ */
+<span class="nc" id="L12">public class GetClassNameFromContext {</span>
+	/**
+	 * Get the class name.
+	 * Parses the Context children looking for the class name.
+	 * @param ctx ClassDeclaractionContext to get the class name from.
+	 * @return Class name.
+	 */
+	public static String getClassName(ClassDeclarationContext ctx) {
+<span class="fc" id="L20">		String className = null;</span>
+<span class="fc" id="L21">		boolean findClass = false;</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">		for (ParseTree p : ctx.children) {</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">			if (p.getText().equals(&quot;class&quot;)) {</span>
+<span class="fc" id="L24">				findClass = true;</span>
+			}
+			else {
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">				if (findClass) {</span>
+<span class="fc" id="L28">					className = p.getText();</span>
+<span class="fc" id="L29">					break;</span>
+				}
+			}
+<span class="fc" id="L32">		}</span>
+<span class="fc" id="L33">		return className;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>

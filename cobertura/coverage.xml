@@ -1,0 +1,919 @@
+<?xml version="1.0"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+
+<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="172" branches-covered="0" branches-valid="84" complexity="2.5714285714285716" version="1.9.4.1" timestamp="1389176588589">
+	<sources>
+		<source>C:/Users/55018335734/Documents/proj/anacoja/TesteRFC/src/main/java</source>
+		<source>--source</source>
+	</sources>
+	<packages>
+		<package name="abc" line-rate="0.0" branch-rate="0.0" complexity="2.032258064516129">
+			<classes>
+				<class name="abc.ClassA" filename="abc/ClassA.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="11" hits="0" branch="false"/>
+								<line number="12" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="doSomething" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="14" hits="0" branch="false"/>
+								<line number="15" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="doSomethingBasedOnClassB" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="17" hits="0" branch="false"/>
+								<line number="18" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="11" hits="0" branch="false"/>
+						<line number="12" hits="0" branch="false"/>
+						<line number="14" hits="0" branch="false"/>
+						<line number="15" hits="0" branch="false"/>
+						<line number="17" hits="0" branch="false"/>
+						<line number="18" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="abc.ClassAfilha" filename="abc/ClassAfilha.java" line-rate="0.0" branch-rate="1.0" complexity="0.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="3" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="3" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="abc.ClassB" filename="abc/ClassB.java" line-rate="0.0" branch-rate="1.0" complexity="0.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="3" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="3" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="abc.ConstructorCountSelf" filename="abc/ConstructorCountSelf.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="9" hits="0" branch="false"/>
+								<line number="12" hits="0" branch="false"/>
+								<line number="13" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="9" hits="0" branch="false"/>
+						<line number="12" hits="0" branch="false"/>
+						<line number="13" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="abc.DuplicateConstructor" filename="abc/DuplicateConstructor.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="10" hits="0" branch="false"/>
+								<line number="12" hits="0" branch="false"/>
+								<line number="13" hits="0" branch="false"/>
+								<line number="14" hits="0" branch="false"/>
+								<line number="15" hits="0" branch="false"/>
+								<line number="16" hits="0" branch="false"/>
+								<line number="17" hits="0" branch="false"/>
+								<line number="18" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="10" hits="0" branch="false"/>
+						<line number="12" hits="0" branch="false"/>
+						<line number="13" hits="0" branch="false"/>
+						<line number="14" hits="0" branch="false"/>
+						<line number="15" hits="0" branch="false"/>
+						<line number="16" hits="0" branch="false"/>
+						<line number="17" hits="0" branch="false"/>
+						<line number="18" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="abc.Teste2" filename="abc/Teste2.java" line-rate="0.0" branch-rate="0.0" complexity="7.25">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="14" hits="0" branch="false"/>
+								<line number="17" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodo1" signature="(II)I" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="42" hits="0" branch="false"/>
+								<line number="43" hits="0" branch="false"/>
+								<line number="44" hits="0" branch="false"/>
+								<line number="45" hits="0" branch="false"/>
+								<line number="46" hits="0" branch="false"/>
+								<line number="47" hits="0" branch="false"/>
+								<line number="61" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="62" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="63" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="65" hits="0" branch="false"/>
+								<line number="68" hits="0" branch="true" condition-coverage="0% (0/4)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+										<condition number="1" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="70" hits="0" branch="false"/>
+								<line number="71" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="73" hits="0" branch="true" condition-coverage="0% (0/4)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+										<condition number="1" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="74" hits="0" branch="false"/>
+								<line number="75" hits="0" branch="false"/>
+								<line number="78" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="79" hits="0" branch="false"/>
+								<line number="81" hits="0" branch="true" condition-coverage="0% (0/4)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+										<condition number="1" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="82" hits="0" branch="false"/>
+								<line number="85" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="86" hits="0" branch="false"/>
+								<line number="88" hits="0" branch="true" condition-coverage="0% (0/3)">
+									<conditions>
+										<condition number="0" type="switch" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="90" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="91" hits="0" branch="false"/>
+								<line number="95" hits="0" branch="false"/>
+								<line number="100" hits="0" branch="false"/>
+								<line number="103" hits="0" branch="false"/>
+								<line number="105" hits="0" branch="false"/>
+								<line number="107" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="14" hits="0" branch="false"/>
+						<line number="17" hits="0" branch="false"/>
+						<line number="42" hits="0" branch="false"/>
+						<line number="43" hits="0" branch="false"/>
+						<line number="44" hits="0" branch="false"/>
+						<line number="45" hits="0" branch="false"/>
+						<line number="46" hits="0" branch="false"/>
+						<line number="47" hits="0" branch="false"/>
+						<line number="61" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="62" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="63" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="65" hits="0" branch="false"/>
+						<line number="68" hits="0" branch="true" condition-coverage="0% (0/4)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+								<condition number="1" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="70" hits="0" branch="false"/>
+						<line number="71" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="73" hits="0" branch="true" condition-coverage="0% (0/4)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+								<condition number="1" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="74" hits="0" branch="false"/>
+						<line number="75" hits="0" branch="false"/>
+						<line number="78" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="79" hits="0" branch="false"/>
+						<line number="81" hits="0" branch="true" condition-coverage="0% (0/4)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+								<condition number="1" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="82" hits="0" branch="false"/>
+						<line number="85" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="86" hits="0" branch="false"/>
+						<line number="88" hits="0" branch="true" condition-coverage="0% (0/3)">
+							<conditions>
+								<condition number="0" type="switch" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="90" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="91" hits="0" branch="false"/>
+						<line number="95" hits="0" branch="false"/>
+						<line number="100" hits="0" branch="false"/>
+						<line number="103" hits="0" branch="false"/>
+						<line number="105" hits="0" branch="false"/>
+						<line number="107" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="abc.Teste2$1" filename="abc/Teste2.java" line-rate="0.0" branch-rate="0.0" complexity="7.25">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="48" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="actionPerformed" signature="(Ljava/awt/event/ActionEvent;)V" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="52" hits="0" branch="false"/>
+								<line number="53" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="54" hits="0" branch="false"/>
+								<line number="56" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="48" hits="0" branch="false"/>
+						<line number="52" hits="0" branch="false"/>
+						<line number="53" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="54" hits="0" branch="false"/>
+						<line number="56" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="abc.Teste2$Inner1" filename="abc/Teste2.java" line-rate="0.0" branch-rate="0.0" complexity="7.25">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Labc/Teste2;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="17" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="teste" signature="(I)I" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="29" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="31" hits="0" branch="false"/>
+								<line number="32" hits="0" branch="false"/>
+								<line number="34" hits="0" branch="false"/>
+								<line number="35" hits="0" branch="false"/>
+								<line number="36" hits="0" branch="false"/>
+								<line number="38" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="17" hits="0" branch="false"/>
+						<line number="29" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="31" hits="0" branch="false"/>
+						<line number="32" hits="0" branch="false"/>
+						<line number="34" hits="0" branch="false"/>
+						<line number="35" hits="0" branch="false"/>
+						<line number="36" hits="0" branch="false"/>
+						<line number="38" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="abc.Teste2$Inner1$1abx" filename="abc/Teste2.java" line-rate="0.0" branch-rate="0.0" complexity="7.25">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Labc/Teste2$Inner1;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="19" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="carregar" signature="(I)V" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="21" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="22" hits="0" branch="false"/>
+								<line number="24" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="25" hits="0" branch="false"/>
+								<line number="27" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="19" hits="0" branch="false"/>
+						<line number="21" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="22" hits="0" branch="false"/>
+						<line number="24" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="25" hits="0" branch="false"/>
+						<line number="27" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="abc.TesteLCom4Um" filename="abc/TesteLCom4Um.java" line-rate="0.0" branch-rate="0.0" complexity="1.5">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="5" hits="0" branch="false"/>
+								<line number="6" hits="0" branch="false"/>
+								<line number="7" hits="0" branch="false"/>
+								<line number="9" hits="0" branch="false"/>
+								<line number="11" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="chamaHerdado" signature="()I" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="25" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodoA" signature="()I" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="14" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodoB" signature="()I" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="29" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="30" hits="0" branch="false"/>
+								<line number="32" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodoC" signature="()I" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="36" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodoD" signature="()I" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="40" hits="0" branch="false"/>
+								<line number="41" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="42" hits="0" branch="false"/>
+								<line number="44" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodoE" signature="()I" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="48" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodoHerdado1" signature="(I)I" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="21" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="5" hits="0" branch="false"/>
+						<line number="6" hits="0" branch="false"/>
+						<line number="7" hits="0" branch="false"/>
+						<line number="9" hits="0" branch="false"/>
+						<line number="11" hits="0" branch="false"/>
+						<line number="14" hits="0" branch="false"/>
+						<line number="21" hits="0" branch="false"/>
+						<line number="25" hits="0" branch="false"/>
+						<line number="29" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="30" hits="0" branch="false"/>
+						<line number="32" hits="0" branch="false"/>
+						<line number="36" hits="0" branch="false"/>
+						<line number="40" hits="0" branch="false"/>
+						<line number="41" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="42" hits="0" branch="false"/>
+						<line number="44" hits="0" branch="false"/>
+						<line number="48" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="abc.TesteLcomMaiorQueUm" filename="abc/TesteLcomMaiorQueUm.java" line-rate="0.0" branch-rate="0.0" complexity="1.1">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="11" hits="0" branch="false"/>
+								<line number="13" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getX" signature="()I" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="16" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getY" signature="()I" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="25" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodoA" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="33" hits="0" branch="false"/>
+								<line number="34" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodoB" signature="()I" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="37" hits="0" branch="false"/>
+								<line number="38" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodoC" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="42" hits="0" branch="false"/>
+								<line number="43" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodoD" signature="()V" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="46" hits="0" branch="false"/>
+								<line number="47" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="48" hits="0" branch="false"/>
+								<line number="50" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodoE" signature="()I" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="53" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="setX" signature="(I)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="21" hits="0" branch="false"/>
+								<line number="22" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="setY" signature="(I)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="29" hits="0" branch="false"/>
+								<line number="30" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="11" hits="0" branch="false"/>
+						<line number="13" hits="0" branch="false"/>
+						<line number="16" hits="0" branch="false"/>
+						<line number="21" hits="0" branch="false"/>
+						<line number="22" hits="0" branch="false"/>
+						<line number="25" hits="0" branch="false"/>
+						<line number="29" hits="0" branch="false"/>
+						<line number="30" hits="0" branch="false"/>
+						<line number="33" hits="0" branch="false"/>
+						<line number="34" hits="0" branch="false"/>
+						<line number="37" hits="0" branch="false"/>
+						<line number="38" hits="0" branch="false"/>
+						<line number="42" hits="0" branch="false"/>
+						<line number="43" hits="0" branch="false"/>
+						<line number="46" hits="0" branch="false"/>
+						<line number="47" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="48" hits="0" branch="false"/>
+						<line number="50" hits="0" branch="false"/>
+						<line number="53" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="abc.TesteRfc" filename="abc/TesteRfc.java" line-rate="0.0" branch-rate="0.0" complexity="1.6666666666666667">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="7" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodo1" signature="()V" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="10" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="14" hits="0" branch="false"/>
+								<line number="15" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="18" hits="0" branch="false"/>
+								<line number="19" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodo2" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="22" hits="0" branch="false"/>
+								<line number="23" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodo3" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="26" hits="0" branch="false"/>
+								<line number="27" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="7" hits="0" branch="false"/>
+						<line number="10" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="14" hits="0" branch="false"/>
+						<line number="15" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="18" hits="0" branch="false"/>
+						<line number="19" hits="0" branch="false"/>
+						<line number="22" hits="0" branch="false"/>
+						<line number="23" hits="0" branch="false"/>
+						<line number="26" hits="0" branch="false"/>
+						<line number="27" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="abc.TesteSuperclass" filename="abc/TesteSuperclass.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="4" hits="0" branch="false"/>
+								<line number="6" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="metodoHerdado1" signature="(I)I" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="9" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="4" hits="0" branch="false"/>
+						<line number="6" hits="0" branch="false"/>
+						<line number="9" hits="0" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+		<package name="def" line-rate="0.0" branch-rate="0.0" complexity="6.75">
+			<classes>
+				<class name="def.Blocks" filename="def/Blocks.java" line-rate="0.0" branch-rate="0.0" complexity="5.666666666666667">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="18" hits="0" branch="false"/>
+								<line number="19" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(III)V" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="8" hits="0" branch="false"/>
+								<line number="9" hits="0" branch="false"/>
+								<line number="10" hits="0" branch="false"/>
+								<line number="11" hits="0" branch="false"/>
+								<line number="12" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="13" hits="0" branch="false"/>
+								<line number="15" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="teste" signature="(I)I" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="23" hits="0" branch="false"/>
+								<line number="25" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="26" hits="0" branch="false"/>
+								<line number="27" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="28" hits="0" branch="false"/>
+								<line number="31" hits="0" branch="false"/>
+								<line number="34" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="35" hits="0" branch="false"/>
+								<line number="39" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="40" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="41" hits="0" branch="false"/>
+								<line number="44" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="47" hits="0" branch="true" condition-coverage="0% (0/4)">
+									<conditions>
+										<condition number="0" type="switch" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="49" hits="0" branch="false"/>
+								<line number="51" hits="0" branch="false"/>
+								<line number="53" hits="0" branch="false"/>
+								<line number="59" hits="0" branch="true" condition-coverage="0% (0/3)">
+									<conditions>
+										<condition number="0" type="switch" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="61" hits="0" branch="false"/>
+								<line number="66" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="8" hits="0" branch="false"/>
+						<line number="9" hits="0" branch="false"/>
+						<line number="10" hits="0" branch="false"/>
+						<line number="11" hits="0" branch="false"/>
+						<line number="12" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="13" hits="0" branch="false"/>
+						<line number="15" hits="0" branch="false"/>
+						<line number="18" hits="0" branch="false"/>
+						<line number="19" hits="0" branch="false"/>
+						<line number="23" hits="0" branch="false"/>
+						<line number="25" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="26" hits="0" branch="false"/>
+						<line number="27" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="28" hits="0" branch="false"/>
+						<line number="31" hits="0" branch="false"/>
+						<line number="34" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="35" hits="0" branch="false"/>
+						<line number="39" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="40" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="41" hits="0" branch="false"/>
+						<line number="44" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="47" hits="0" branch="true" condition-coverage="0% (0/4)">
+							<conditions>
+								<condition number="0" type="switch" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="49" hits="0" branch="false"/>
+						<line number="51" hits="0" branch="false"/>
+						<line number="53" hits="0" branch="false"/>
+						<line number="59" hits="0" branch="true" condition-coverage="0% (0/3)">
+							<conditions>
+								<condition number="0" type="switch" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="61" hits="0" branch="false"/>
+						<line number="66" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="def.Teste" filename="def/Teste.java" line-rate="0.0" branch-rate="0.0" complexity="10.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="8" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="print" signature="(Ljava/awt/Graphics;Ljava/awt/print/PageFormat;I)I" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="14" hits="0" branch="false"/>
+								<line number="15" hits="0" branch="false"/>
+								<line number="16" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="17" hits="0" branch="false"/>
+								<line number="20" hits="0" branch="false"/>
+								<line number="22" hits="0" branch="false"/>
+								<line number="23" hits="0" branch="false"/>
+								<line number="24" hits="0" branch="false"/>
+								<line number="30" hits="0" branch="true" condition-coverage="0% (0/4)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+										<condition number="1" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="41" hits="0" branch="false"/>
+								<line number="42" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="43" hits="0" branch="false"/>
+								<line number="46" hits="0" branch="false"/>
+								<line number="47" hits="0" branch="false"/>
+								<line number="48" hits="0" branch="false"/>
+								<line number="49" hits="0" branch="false"/>
+								<line number="50" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="51" hits="0" branch="false"/>
+								<line number="52" hits="0" branch="true" condition-coverage="0% (0/4)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+										<condition number="1" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="53" hits="0" branch="false"/>
+								<line number="55" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="56" hits="0" branch="false"/>
+								<line number="58" hits="0" branch="false"/>
+								<line number="61" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="8" hits="0" branch="false"/>
+						<line number="14" hits="0" branch="false"/>
+						<line number="15" hits="0" branch="false"/>
+						<line number="16" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="17" hits="0" branch="false"/>
+						<line number="20" hits="0" branch="false"/>
+						<line number="22" hits="0" branch="false"/>
+						<line number="23" hits="0" branch="false"/>
+						<line number="24" hits="0" branch="false"/>
+						<line number="30" hits="0" branch="true" condition-coverage="0% (0/4)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+								<condition number="1" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="41" hits="0" branch="false"/>
+						<line number="42" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="43" hits="0" branch="false"/>
+						<line number="46" hits="0" branch="false"/>
+						<line number="47" hits="0" branch="false"/>
+						<line number="48" hits="0" branch="false"/>
+						<line number="49" hits="0" branch="false"/>
+						<line number="50" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="51" hits="0" branch="false"/>
+						<line number="52" hits="0" branch="true" condition-coverage="0% (0/4)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+								<condition number="1" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="53" hits="0" branch="false"/>
+						<line number="55" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="56" hits="0" branch="false"/>
+						<line number="58" hits="0" branch="false"/>
+						<line number="61" hits="0" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+	</packages>
+</coverage>

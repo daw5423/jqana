@@ -1,0 +1,839 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JavaBaseVisitor.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.html" class="el_package">com.obomprogramador.tools.jqana.antlrparser</a> &gt; <span class="el_source">JavaBaseVisitor.java</span></div><h1>JavaBaseVisitor.java</h1><pre class="source lang-java linenums">// Generated from Java.g4 by ANTLR 4.1
+package com.obomprogramador.tools.jqana.antlrparser;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
+
+/**
+ * This class provides an empty implementation of {@link JavaVisitor},
+ * which can be extended to create a visitor which only needs to handle a subset
+ * of the available methods.
+ *
+ * @param &lt;T&gt; The return type of the visit operation. Use {@link Void} for
+ * operations with no return type.
+ */
+<span class="nc" id="L14">public class JavaBaseVisitor&lt;T&gt; extends AbstractParseTreeVisitor&lt;T&gt; implements JavaVisitor&lt;T&gt; {</span>
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L21">	@Override public T visitInnerCreator(@NotNull JavaParser.InnerCreatorContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L29">	@Override public T visitGenericMethodDeclaration(@NotNull JavaParser.GenericMethodDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L37">	@Override public T visitExpressionList(@NotNull JavaParser.ExpressionListContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L45">	@Override public T visitTypeDeclaration(@NotNull JavaParser.TypeDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L53">	@Override public T visitForUpdate(@NotNull JavaParser.ForUpdateContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L61">	@Override public T visitAnnotation(@NotNull JavaParser.AnnotationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L69">	@Override public T visitEnumConstant(@NotNull JavaParser.EnumConstantContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L77">	@Override public T visitImportDeclaration(@NotNull JavaParser.ImportDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L85">	@Override public T visitAnnotationMethodOrConstantRest(@NotNull JavaParser.AnnotationMethodOrConstantRestContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L93">	@Override public T visitEnumConstantName(@NotNull JavaParser.EnumConstantNameContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L101">	@Override public T visitFinallyBlock(@NotNull JavaParser.FinallyBlockContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L109">	@Override public T visitVariableDeclarators(@NotNull JavaParser.VariableDeclaratorsContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L117">	@Override public T visitElementValuePairs(@NotNull JavaParser.ElementValuePairsContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L125">	@Override public T visitInterfaceMethodDeclaration(@NotNull JavaParser.InterfaceMethodDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L133">	@Override public T visitInterfaceBodyDeclaration(@NotNull JavaParser.InterfaceBodyDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L141">	@Override public T visitEnumConstants(@NotNull JavaParser.EnumConstantsContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L149">	@Override public T visitCatchClause(@NotNull JavaParser.CatchClauseContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L157">	@Override public T visitConstantExpression(@NotNull JavaParser.ConstantExpressionContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L165">	@Override public T visitEnumDeclaration(@NotNull JavaParser.EnumDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L173">	@Override public T visitExplicitGenericInvocationSuffix(@NotNull JavaParser.ExplicitGenericInvocationSuffixContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L181">	@Override public T visitTypeParameter(@NotNull JavaParser.TypeParameterContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L189">	@Override public T visitEnumBodyDeclarations(@NotNull JavaParser.EnumBodyDeclarationsContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L197">	@Override public T visitTypeBound(@NotNull JavaParser.TypeBoundContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L205">	@Override public T visitStatementExpression(@NotNull JavaParser.StatementExpressionContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L213">	@Override public T visitVariableInitializer(@NotNull JavaParser.VariableInitializerContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L221">	@Override public T visitBlock(@NotNull JavaParser.BlockContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L229">	@Override public T visitGenericInterfaceMethodDeclaration(@NotNull JavaParser.GenericInterfaceMethodDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L237">	@Override public T visitLocalVariableDeclarationStatement(@NotNull JavaParser.LocalVariableDeclarationStatementContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L245">	@Override public T visitSuperSuffix(@NotNull JavaParser.SuperSuffixContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L253">	@Override public T visitFieldDeclaration(@NotNull JavaParser.FieldDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L261">	@Override public T visitFormalParameterList(@NotNull JavaParser.FormalParameterListContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L269">	@Override public T visitExplicitGenericInvocation(@NotNull JavaParser.ExplicitGenericInvocationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L277">	@Override public T visitParExpression(@NotNull JavaParser.ParExpressionContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L285">	@Override public T visitSwitchLabel(@NotNull JavaParser.SwitchLabelContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L293">	@Override public T visitTypeParameters(@NotNull JavaParser.TypeParametersContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L301">	@Override public T visitQualifiedName(@NotNull JavaParser.QualifiedNameContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L309">	@Override public T visitClassDeclaration(@NotNull JavaParser.ClassDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L317">	@Override public T visitAnnotationConstantRest(@NotNull JavaParser.AnnotationConstantRestContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L325">	@Override public T visitTypeName(@NotNull JavaParser.TypeNameContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L333">	@Override public T visitArguments(@NotNull JavaParser.ArgumentsContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L341">	@Override public T visitConstructorBody(@NotNull JavaParser.ConstructorBodyContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L349">	@Override public T visitFormalParameters(@NotNull JavaParser.FormalParametersContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L357">	@Override public T visitTypeArgument(@NotNull JavaParser.TypeArgumentContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L365">	@Override public T visitForInit(@NotNull JavaParser.ForInitContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L373">	@Override public T visitVariableDeclarator(@NotNull JavaParser.VariableDeclaratorContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L381">	@Override public T visitAnnotationTypeDeclaration(@NotNull JavaParser.AnnotationTypeDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L389">	@Override public T visitExpression(@NotNull JavaParser.ExpressionContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L397">	@Override public T visitResources(@NotNull JavaParser.ResourcesContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L405">	@Override public T visitFormalParameter(@NotNull JavaParser.FormalParameterContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L413">	@Override public T visitType(@NotNull JavaParser.TypeContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L421">	@Override public T visitElementValueArrayInitializer(@NotNull JavaParser.ElementValueArrayInitializerContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L429">	@Override public T visitAnnotationName(@NotNull JavaParser.AnnotationNameContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L437">	@Override public T visitEnhancedForControl(@NotNull JavaParser.EnhancedForControlContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L445">	@Override public T visitAnnotationMethodRest(@NotNull JavaParser.AnnotationMethodRestContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L453">	@Override public T visitPrimary(@NotNull JavaParser.PrimaryContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L461">	@Override public T visitClassBody(@NotNull JavaParser.ClassBodyContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L469">	@Override public T visitClassOrInterfaceModifier(@NotNull JavaParser.ClassOrInterfaceModifierContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L477">	@Override public T visitDefaultValue(@NotNull JavaParser.DefaultValueContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L485">	@Override public T visitVariableModifier(@NotNull JavaParser.VariableModifierContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L493">	@Override public T visitConstDeclaration(@NotNull JavaParser.ConstDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L501">	@Override public T visitCreatedName(@NotNull JavaParser.CreatedNameContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L509">	@Override public T visitInterfaceDeclaration(@NotNull JavaParser.InterfaceDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L517">	@Override public T visitPackageDeclaration(@NotNull JavaParser.PackageDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L525">	@Override public T visitConstantDeclarator(@NotNull JavaParser.ConstantDeclaratorContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L533">	@Override public T visitCatchType(@NotNull JavaParser.CatchTypeContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L541">	@Override public T visitTypeArguments(@NotNull JavaParser.TypeArgumentsContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L549">	@Override public T visitClassCreatorRest(@NotNull JavaParser.ClassCreatorRestContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L557">	@Override public T visitModifier(@NotNull JavaParser.ModifierContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L565">	@Override public T visitStatement(@NotNull JavaParser.StatementContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L573">	@Override public T visitInterfaceBody(@NotNull JavaParser.InterfaceBodyContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L581">	@Override public T visitPackageOrTypeName(@NotNull JavaParser.PackageOrTypeNameContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L589">	@Override public T visitClassBodyDeclaration(@NotNull JavaParser.ClassBodyDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L597">	@Override public T visitLastFormalParameter(@NotNull JavaParser.LastFormalParameterContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L605">	@Override public T visitForControl(@NotNull JavaParser.ForControlContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L613">	@Override public T visitTypeList(@NotNull JavaParser.TypeListContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L621">	@Override public T visitLocalVariableDeclaration(@NotNull JavaParser.LocalVariableDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L629">	@Override public T visitVariableDeclaratorId(@NotNull JavaParser.VariableDeclaratorIdContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L637">	@Override public T visitCompilationUnit(@NotNull JavaParser.CompilationUnitContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L645">	@Override public T visitElementValue(@NotNull JavaParser.ElementValueContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L653">	@Override public T visitClassOrInterfaceType(@NotNull JavaParser.ClassOrInterfaceTypeContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L661">	@Override public T visitTypeArgumentsOrDiamond(@NotNull JavaParser.TypeArgumentsOrDiamondContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L669">	@Override public T visitAnnotationTypeElementDeclaration(@NotNull JavaParser.AnnotationTypeElementDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L677">	@Override public T visitBlockStatement(@NotNull JavaParser.BlockStatementContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L685">	@Override public T visitAnnotationTypeBody(@NotNull JavaParser.AnnotationTypeBodyContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L693">	@Override public T visitQualifiedNameList(@NotNull JavaParser.QualifiedNameListContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L701">	@Override public T visitCreator(@NotNull JavaParser.CreatorContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L709">	@Override public T visitMemberDeclaration(@NotNull JavaParser.MemberDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L717">	@Override public T visitMethodDeclaration(@NotNull JavaParser.MethodDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L725">	@Override public T visitAnnotationTypeElementRest(@NotNull JavaParser.AnnotationTypeElementRestContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L733">	@Override public T visitResourceSpecification(@NotNull JavaParser.ResourceSpecificationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L741">	@Override public T visitConstructorDeclaration(@NotNull JavaParser.ConstructorDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L749">	@Override public T visitResource(@NotNull JavaParser.ResourceContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L757">	@Override public T visitElementValuePair(@NotNull JavaParser.ElementValuePairContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L765">	@Override public T visitMethodBody(@NotNull JavaParser.MethodBodyContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L773">	@Override public T visitArrayInitializer(@NotNull JavaParser.ArrayInitializerContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L781">	@Override public T visitNonWildcardTypeArgumentsOrDiamond(@NotNull JavaParser.NonWildcardTypeArgumentsOrDiamondContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L789">	@Override public T visitPrimitiveType(@NotNull JavaParser.PrimitiveTypeContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L797">	@Override public T visitNonWildcardTypeArguments(@NotNull JavaParser.NonWildcardTypeArgumentsContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L805">	@Override public T visitArrayCreatorRest(@NotNull JavaParser.ArrayCreatorRestContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L813">	@Override public T visitInterfaceMemberDeclaration(@NotNull JavaParser.InterfaceMemberDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L821">	@Override public T visitGenericConstructorDeclaration(@NotNull JavaParser.GenericConstructorDeclarationContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L829">	@Override public T visitLiteral(@NotNull JavaParser.LiteralContext ctx) { return visitChildren(ctx); }</span>
+
+	/**
+	 * {@inheritDoc}
+	 * &lt;p/&gt;
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+<span class="nc" id="L837">	@Override public T visitSwitchBlockStatementGroup(@NotNull JavaParser.SwitchBlockStatementGroupContext ctx) { return visitChildren(ctx); }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>

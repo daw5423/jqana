@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DefaultXmlGenerator.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.html" class="el_package">com.obomprogramador.tools.jqana.model.defaultimpl</a> &gt; <span class="el_source">DefaultXmlGenerator.java</span></div><h1>DefaultXmlGenerator.java</h1><pre class="source lang-java linenums">/**
+ * jQana - Open Source Java(TM) code quality analyzer.
+ * 
+ * Copyright 2013 Cleuton Sampaio de Melo Jr
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * Project website: http://www.jqana.com
+ */
+package com.obomprogramador.tools.jqana.model.defaultimpl;
+
+import java.io.StringWriter;
+import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.PropertyException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+
+import com.obomprogramador.tools.jqana.model.Measurement;
+import com.obomprogramador.tools.jqana.model.XmlGenerator;
+
+/**
+ * Default implementation of XmlGenerator.
+ * 
+ * @see XmlGenerator
+ * 
+ *
+ * 
+ * @author Cleuton Sampaio
+ *
+ */
+public class DefaultXmlGenerator implements XmlGenerator {
+
+	public DefaultXmlGenerator() {
+<span class="fc" id="L57">		super();</span>
+<span class="fc" id="L58">	}</span>
+
+	/**
+	 * Get the list of measurements, and classifies it according to 
+	 * package and class. 
+	 * The aggregated values are calculated as simple average, i.e.
+	 * the Class value for Cyclomatic Complexity is the average of it's
+	 * methods Cyclomatic Complexity metrics.
+	 * @throws JAXBException 
+	 * @throws ParserConfigurationException 
+	 * @throws TransformerException 
+	 */
+	@Override
+	public Document serialize(Measurement measurement) throws JAXBException, ParserConfigurationException, TransformerException {
+<span class="fc" id="L72">		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span>
+<span class="fc" id="L73">	    dbf.setNamespaceAware(true);</span>
+<span class="fc" id="L74">	    DocumentBuilder db = dbf.newDocumentBuilder();</span>
+<span class="fc" id="L75">		Document report = db.newDocument();</span>
+<span class="fc" id="L76">	    JAXBContext context = JAXBContext.newInstance(Measurement.class);</span>
+
+<span class="fc" id="L78">	    Marshaller m = context.createMarshaller();</span>
+<span class="fc" id="L79">	    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);</span>
+
+<span class="fc" id="L81">	    m.marshal((Measurement)measurement, report);		</span>
+       
+<span class="fc" id="L83">		return report;</span>
+	}
+	
+	public String xml2String(Document report, boolean ommitXML) throws TransformerException {
+<span class="fc" id="L87">		TransformerFactory tf = TransformerFactory.newInstance();</span>
+<span class="fc" id="L88">		Transformer transformer = tf.newTransformer();</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">		if (ommitXML) {</span>
+<span class="fc" id="L90">			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, &quot;yes&quot;);	</span>
+		}
+<span class="fc" id="L92">		StringWriter writer = new StringWriter();</span>
+<span class="fc" id="L93">		transformer.transform(new DOMSource(report), new StreamResult(writer));</span>
+<span class="fc" id="L94">		String output = writer.getBuffer().toString().replaceAll(&quot;\n|\r&quot;, &quot;&quot;);</span>
+<span class="fc" id="L95">		return output;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>

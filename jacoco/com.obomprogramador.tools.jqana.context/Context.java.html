@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Context.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.html" class="el_package">com.obomprogramador.tools.jqana.context</a> &gt; <span class="el_source">Context.java</span></div><h1>Context.java</h1><pre class="source lang-java linenums">/**
+ * jQana - Open Source Java(TM) code quality analyzer.
+ * 
+ * Copyright 2013 Cleuton Sampaio de Melo Jr
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * Project website: http://www.jqana.com
+ */
+package com.obomprogramador.tools.jqana.context;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import com.obomprogramador.tools.jqana.model.LimitVerificationAlgorithm;
+import com.obomprogramador.tools.jqana.model.Metric;
+import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm;
+
+import static com.obomprogramador.tools.jqana.context.GlobalConstants.*;
+/**
+ * jQana - Open Source java source code quality analyzer.
+ * 
+ * This is the project's context class.
+ * 
+ * @author Cleuton Sampaio
+ *
+ */
+public class Context {
+
+	private String currentClassUri;
+	private Deque&lt;String&gt; errors;
+	private List&lt;Metric&gt; validMetrics;
+	private ResourceBundle bundle;
+	
+	public Context(ResourceBundle bundle) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+<span class="nc" id="L50">		super();</span>
+<span class="nc" id="L51">		getMetricConstants();</span>
+<span class="nc" id="L52">		this.errors = new ArrayDeque&lt;String&gt;();</span>
+<span class="nc" id="L53">	}</span>
+	
+<span class="fc" id="L55">	public Context() throws ClassNotFoundException, InstantiationException, IllegalAccessException {</span>
+<span class="fc" id="L56">		this.bundle = ResourceBundle.getBundle(&quot;report&quot;);</span>
+<span class="fc" id="L57">		getMetricConstants();</span>
+<span class="fc" id="L58">		this.errors = new ArrayDeque&lt;String&gt;();</span>
+<span class="fc" id="L59">	}</span>
+	
+	/* (non-Javadoc)
+	 * I need to think a better way to instantiate metrics in the future. But, for now, 
+	 * this will be enough.
+	 * Maybe some kind of bean control framework, like Spring. 
+	 */
+	private void getMetricConstants() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+<span class="fc" id="L67">		this.validMetrics = new ArrayList&lt;Metric&gt;();</span>
+		
+		// CC
+<span class="fc" id="L70">		Metric ccMetric = new DefaultMetric();</span>
+<span class="fc" id="L71">		ccMetric.setMetricName(bundle.getString(&quot;metric.cc.name&quot;));</span>
+<span class="fc" id="L72">		ccMetric.setMetricMessage(bundle.getString(&quot;metric.cc.message&quot;));</span>
+<span class="fc" id="L73">		int maxValue = Integer.parseInt(bundle.getString(&quot;metric.cc.limit&quot;));</span>
+<span class="fc" id="L74">		ccMetric.setVerificationAlgorithm(new MaxLimitVerificationAlgorithm(maxValue));</span>
+<span class="fc" id="L75">		this.validMetrics.add(ccMetric);</span>
+		
+		// LCOM4
+<span class="fc" id="L78">		Metric lcom4Metric = new DefaultMetric();</span>
+<span class="fc" id="L79">		lcom4Metric.setMetricName(bundle.getString(&quot;metric.lcom4.name&quot;));</span>
+<span class="fc" id="L80">		lcom4Metric.setMetricMessage(bundle.getString(&quot;metric.lcom4.message&quot;));</span>
+<span class="fc" id="L81">		maxValue = Integer.parseInt(bundle.getString(&quot;metric.lcom4.limit&quot;));</span>
+<span class="fc" id="L82">		lcom4Metric.setVerificationAlgorithm(new MaxLimitVerificationAlgorithm(maxValue));</span>
+<span class="fc" id="L83">		this.validMetrics.add(lcom4Metric);</span>
+		
+		// RFC
+<span class="fc" id="L86">		Metric rfcMetric = new DefaultMetric();</span>
+<span class="fc" id="L87">		rfcMetric.setMetricName(bundle.getString(&quot;metric.rfc.name&quot;));</span>
+<span class="fc" id="L88">		rfcMetric.setMetricMessage(bundle.getString(&quot;metric.rfc.message&quot;));</span>
+<span class="fc" id="L89">		maxValue = Integer.parseInt(bundle.getString(&quot;metric.rfc.limit&quot;));</span>
+<span class="fc" id="L90">		rfcMetric.setVerificationAlgorithm(new MaxLimitVerificationAlgorithm(maxValue));</span>
+<span class="fc" id="L91">		this.validMetrics.add(rfcMetric);</span>
+<span class="fc" id="L92">	}</span>
+
+	public List&lt;Metric&gt; getValidMetrics() {
+<span class="fc" id="L95">		return validMetrics;</span>
+	}
+
+	public void setValidMetrics(List&lt;Metric&gt; validMetrics) {
+<span class="nc" id="L99">		this.validMetrics = validMetrics;</span>
+<span class="nc" id="L100">	}</span>
+
+	public Deque&lt;String&gt; getErrors() {
+<span class="nc" id="L103">		return errors;</span>
+	}
+
+	public void setErrors(Deque&lt;String&gt; errors) {
+<span class="nc" id="L107">		this.errors = errors;</span>
+<span class="nc" id="L108">	}</span>
+	
+	public String getCurrentClassUri() {
+<span class="nc" id="L111">		return currentClassUri;</span>
+	}
+
+	public void setCurrentClassUri(String currentClassUri) {
+<span class="nc" id="L115">		this.currentClassUri = currentClassUri;</span>
+<span class="nc" id="L116">	}</span>
+	
+	public Metric getCurrentMetric(String metricName) {
+<span class="fc" id="L119">		Metric metric = new DefaultMetric();</span>
+<span class="fc" id="L120">		metric.setMetricName(metricName);</span>
+<span class="fc" id="L121">		int index = this.getValidMetrics().indexOf(metric);</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">		if (index &gt;= 0) {</span>
+<span class="fc" id="L123">			metric = this.getValidMetrics().get(index);</span>
+		}
+		else {
+<span class="nc" id="L126">			metric = null;</span>
+		}
+<span class="fc" id="L128">		return metric;</span>
+	}
+
+	public ResourceBundle getBundle() {
+<span class="fc" id="L132">		return bundle;</span>
+	}
+
+	public void setBundle(ResourceBundle bundle) {
+<span class="fc" id="L136">		this.bundle = bundle;</span>
+<span class="fc" id="L137">	}</span>
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>

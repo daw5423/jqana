@@ -1,0 +1,749 @@
+<?xml version="1.0"?>
+<JDepend>
+    <Packages>
+
+        <Package name="com.obomprogramador.tools.jqana.antlrparser">
+            <Stats>
+                <TotalClasses>109</TotalClasses>
+                <ConcreteClasses>107</ConcreteClasses>
+                <AbstractClasses>2</AbstractClasses>
+                <Ca>3</Ca>
+                <Ce>4</Ce>
+                <A>0.02</A>
+                <I>0.57</I>
+                <D>0.41</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+                <Class sourceFile="JavaListener.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaListener
+                </Class>
+                <Class sourceFile="JavaVisitor.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaVisitor
+                </Class>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="JavaBaseListener.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener
+                </Class>
+                <Class sourceFile="JavaBaseVisitor.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaBaseVisitor
+                </Class>
+                <Class sourceFile="JavaLexer.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaLexer
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationConstantRestContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationMethodOrConstantRestContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationMethodRestContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationNameContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationTypeBodyContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationTypeDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationTypeElementDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationTypeElementRestContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ArgumentsContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ArrayCreatorRestContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ArrayInitializerContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$BlockContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$BlockStatementContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$CatchClauseContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$CatchTypeContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ClassBodyContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ClassBodyDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ClassCreatorRestContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ClassDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ClassOrInterfaceModifierContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ClassOrInterfaceTypeContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$CompilationUnitContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ConstDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ConstantDeclaratorContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ConstantExpressionContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ConstructorBodyContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ConstructorDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$CreatedNameContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$CreatorContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$DefaultValueContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ElementValueArrayInitializerContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ElementValueContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ElementValuePairContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ElementValuePairsContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$EnhancedForControlContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$EnumBodyDeclarationsContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$EnumConstantContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$EnumConstantNameContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$EnumConstantsContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$EnumDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ExplicitGenericInvocationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ExplicitGenericInvocationSuffixContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ExpressionContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ExpressionListContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$FieldDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$FinallyBlockContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ForControlContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ForInitContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ForUpdateContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$FormalParameterContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$FormalParameterListContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$FormalParametersContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$GenericConstructorDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$GenericInterfaceMethodDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$GenericMethodDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ImportDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$InnerCreatorContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$InterfaceBodyContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$InterfaceBodyDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$InterfaceDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$InterfaceMemberDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$InterfaceMethodDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$LastFormalParameterContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$LiteralContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$LocalVariableDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$LocalVariableDeclarationStatementContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$MemberDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$MethodBodyContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$MethodDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ModifierContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$NonWildcardTypeArgumentsContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$NonWildcardTypeArgumentsOrDiamondContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$PackageDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$PackageOrTypeNameContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ParExpressionContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$PrimaryContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$PrimitiveTypeContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$QualifiedNameContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$QualifiedNameListContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ResourceContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ResourceSpecificationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$ResourcesContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$StatementContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$StatementExpressionContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$SuperSuffixContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$SwitchBlockStatementGroupContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$SwitchLabelContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeArgumentContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeArgumentsContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeArgumentsOrDiamondContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeBoundContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeDeclarationContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeListContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeNameContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeParameterContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeParametersContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$VariableDeclaratorContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$VariableDeclaratorIdContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$VariableDeclaratorsContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$VariableInitializerContext
+                </Class>
+                <Class sourceFile="JavaParser.java">
+                    com.obomprogramador.tools.jqana.antlrparser.JavaParser$VariableModifierContext
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>org.antlr.v4.runtime</Package>
+                <Package>org.antlr.v4.runtime.atn</Package>
+                <Package>org.antlr.v4.runtime.dfa</Package>
+                <Package>org.antlr.v4.runtime.tree</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>com.obomprogramador.tools.jqana.model</Package>
+                <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+                <Package>com.obomprogramador.tools.jqana.parsers</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="com.obomprogramador.tools.jqana.context">
+            <Stats>
+                <TotalClasses>2</TotalClasses>
+                <ConcreteClasses>2</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>4</Ca>
+                <Ce>2</Ce>
+                <A>0</A>
+                <I>0.33</I>
+                <D>0.67</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="Context.java">
+                    com.obomprogramador.tools.jqana.context.Context
+                </Class>
+                <Class sourceFile="GlobalConstants.java">
+                    com.obomprogramador.tools.jqana.context.GlobalConstants
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>com.obomprogramador.tools.jqana.model</Package>
+                <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>com.obomprogramador.tools.jqana.mavenplugin</Package>
+                <Package>com.obomprogramador.tools.jqana.model</Package>
+                <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+                <Package>com.obomprogramador.tools.jqana.parsers</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="com.obomprogramador.tools.jqana.mavenplugin">
+            <Stats>
+                <TotalClasses>2</TotalClasses>
+                <ConcreteClasses>2</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>0</Ca>
+                <Ce>11</Ce>
+                <A>0</A>
+                <I>1</I>
+                <D>0</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="HelpMojo.java">
+                    com.obomprogramador.tools.jqana.mavenplugin.HelpMojo
+                </Class>
+                <Class sourceFile="JqanaMojo.java">
+                    com.obomprogramador.tools.jqana.mavenplugin.JqanaMojo
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>com.obomprogramador.tools.jqana.context</Package>
+                <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+                <Package>org.apache.maven.doxia.sink</Package>
+                <Package>org.apache.maven.doxia.siterenderer</Package>
+                <Package>org.apache.maven.model</Package>
+                <Package>org.apache.maven.plugin</Package>
+                <Package>org.apache.maven.plugin.logging</Package>
+                <Package>org.apache.maven.project</Package>
+                <Package>org.apache.maven.reporting</Package>
+                <Package>org.w3c.dom</Package>
+                <Package>org.xml.sax</Package>
+            </DependsUpon>
+
+            <UsedBy>
+            </UsedBy>
+        </Package>
+
+        <Package name="com.obomprogramador.tools.jqana.model">
+            <Stats>
+                <TotalClasses>9</TotalClasses>
+                <ConcreteClasses>2</ConcreteClasses>
+                <AbstractClasses>7</AbstractClasses>
+                <Ca>3</Ca>
+                <Ce>7</Ce>
+                <A>0.78</A>
+                <I>0.7</I>
+                <D>0.48</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+                <Class sourceFile="AbstractMetricParser.java">
+                    com.obomprogramador.tools.jqana.model.AbstractMetricParser
+                </Class>
+                <Class sourceFile="LimitVerificationAlgorithm.java">
+                    com.obomprogramador.tools.jqana.model.LimitVerificationAlgorithm
+                </Class>
+                <Class sourceFile="Metric.java">
+                    com.obomprogramador.tools.jqana.model.Metric
+                </Class>
+                <Class sourceFile="Parser.java">
+                    com.obomprogramador.tools.jqana.model.Parser
+                </Class>
+                <Class sourceFile="ProjectProcessor.java">
+                    com.obomprogramador.tools.jqana.model.ProjectProcessor
+                </Class>
+                <Class sourceFile="Xml2HtmlConverter.java">
+                    com.obomprogramador.tools.jqana.model.Xml2HtmlConverter
+                </Class>
+                <Class sourceFile="XmlGenerator.java">
+                    com.obomprogramador.tools.jqana.model.XmlGenerator
+                </Class>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="Measurement.java">
+                    com.obomprogramador.tools.jqana.model.Measurement
+                </Class>
+                <Class sourceFile="Measurement.java">
+                    com.obomprogramador.tools.jqana.model.Measurement$MEASUREMENT_TYPE
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>com.obomprogramador.tools.jqana.antlrparser</Package>
+                <Package>com.obomprogramador.tools.jqana.context</Package>
+                <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+                <Package>org.antlr.v4.runtime</Package>
+                <Package>org.antlr.v4.runtime.tree</Package>
+                <Package>org.slf4j</Package>
+                <Package>org.w3c.dom</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>com.obomprogramador.tools.jqana.context</Package>
+                <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+                <Package>com.obomprogramador.tools.jqana.parsers</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="com.obomprogramador.tools.jqana.model.defaultimpl">
+            <Stats>
+                <TotalClasses>10</TotalClasses>
+                <ConcreteClasses>10</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>4</Ca>
+                <Ce>9</Ce>
+                <A>0</A>
+                <I>0.69</I>
+                <D>0.31</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="DefaultMetric.java">
+                    com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric
+                </Class>
+                <Class sourceFile="DefaultProjectProcessor.java">
+                    com.obomprogramador.tools.jqana.model.defaultimpl.DefaultProjectProcessor
+                </Class>
+                <Class sourceFile="DefaultProjectProcessor.java">
+                    com.obomprogramador.tools.jqana.model.defaultimpl.DefaultProjectProcessor$1
+                </Class>
+                <Class sourceFile="DefaultProjectProcessor.java">
+                    com.obomprogramador.tools.jqana.model.defaultimpl.DefaultProjectProcessor$MSG_TYPE
+                </Class>
+                <Class sourceFile="DefaultXml2HtmlConverter.java">
+                    com.obomprogramador.tools.jqana.model.defaultimpl.DefaultXml2HtmlConverter
+                </Class>
+                <Class sourceFile="DefaultXmlGenerator.java">
+                    com.obomprogramador.tools.jqana.model.defaultimpl.DefaultXmlGenerator
+                </Class>
+                <Class sourceFile="GetClassNameFromContext.java">
+                    com.obomprogramador.tools.jqana.model.defaultimpl.GetClassNameFromContext
+                </Class>
+                <Class sourceFile="MaxLimitVerificationAlgorithm.java">
+                    com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm
+                </Class>
+                <Class sourceFile="MetricValue.java">
+                    com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue
+                </Class>
+                <Class sourceFile="RetriveTestResults.java">
+                    com.obomprogramador.tools.jqana.model.defaultimpl.RetriveTestResults
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>com.obomprogramador.tools.jqana.antlrparser</Package>
+                <Package>com.obomprogramador.tools.jqana.context</Package>
+                <Package>com.obomprogramador.tools.jqana.model</Package>
+                <Package>com.obomprogramador.tools.jqana.parsers</Package>
+                <Package>org.antlr.v4.runtime.tree</Package>
+                <Package>org.apache.commons.io</Package>
+                <Package>org.apache.maven.plugin.logging</Package>
+                <Package>org.slf4j</Package>
+                <Package>org.w3c.dom</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>com.obomprogramador.tools.jqana.context</Package>
+                <Package>com.obomprogramador.tools.jqana.mavenplugin</Package>
+                <Package>com.obomprogramador.tools.jqana.model</Package>
+                <Package>com.obomprogramador.tools.jqana.parsers</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="com.obomprogramador.tools.jqana.parsers">
+            <Stats>
+                <TotalClasses>12</TotalClasses>
+                <ConcreteClasses>12</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>1</Ca>
+                <Ce>9</Ce>
+                <A>0</A>
+                <I>0.9</I>
+                <D>0.1</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="CycloListener.java">
+                    com.obomprogramador.tools.jqana.parsers.CycloListener
+                </Class>
+                <Class sourceFile="CyclomaticComplexityParser.java">
+                    com.obomprogramador.tools.jqana.parsers.CyclomaticComplexityParser
+                </Class>
+                <Class sourceFile="Lcom4Listener.java">
+                    com.obomprogramador.tools.jqana.parsers.Lcom4Listener
+                </Class>
+                <Class sourceFile="Lcom4Listener.java">
+                    com.obomprogramador.tools.jqana.parsers.Lcom4Listener$Lcom4MethodListener
+                </Class>
+                <Class sourceFile="Lcom4Parser.java">
+                    com.obomprogramador.tools.jqana.parsers.Lcom4Parser
+                </Class>
+                <Class sourceFile="Lcom4Parser.java">
+                    com.obomprogramador.tools.jqana.parsers.Lcom4Parser$Component
+                </Class>
+                <Class sourceFile="Member.java">
+                    com.obomprogramador.tools.jqana.parsers.Member
+                </Class>
+                <Class sourceFile="Member.java">
+                    com.obomprogramador.tools.jqana.parsers.Member$MEMBER_TYPE
+                </Class>
+                <Class sourceFile="RfcBcelParser.java">
+                    com.obomprogramador.tools.jqana.parsers.RfcBcelParser
+                </Class>
+                <Class sourceFile="RfcBcelParser.java">
+                    com.obomprogramador.tools.jqana.parsers.RfcBcelParser$RfcVisitor
+                </Class>
+                <Class sourceFile="RfcListener.java">
+                    com.obomprogramador.tools.jqana.parsers.RfcListener
+                </Class>
+                <Class sourceFile="RfcParser.java">
+                    com.obomprogramador.tools.jqana.parsers.RfcParser
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>com.obomprogramador.tools.jqana.antlrparser</Package>
+                <Package>com.obomprogramador.tools.jqana.context</Package>
+                <Package>com.obomprogramador.tools.jqana.model</Package>
+                <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+                <Package>org.antlr.v4.runtime</Package>
+                <Package>org.antlr.v4.runtime.tree</Package>
+                <Package>org.apache.bcel.classfile</Package>
+                <Package>org.apache.commons.lang</Package>
+                <Package>org.slf4j</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="org.antlr.v4.runtime">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.antlr.v4.runtime.atn">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.antlr.v4.runtime.dfa">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.antlr.v4.runtime.tree">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.bcel.classfile">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.commons.io">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.commons.lang">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.maven.doxia.sink">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.maven.doxia.siterenderer">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.maven.model">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.maven.plugin">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.maven.plugin.logging">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.maven.project">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.maven.reporting">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.slf4j">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.w3c.dom">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.xml.sax">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+    </Packages>
+
+    <Cycles>
+        <Package Name="com.obomprogramador.tools.jqana.context">
+            <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+            <Package>com.obomprogramador.tools.jqana.model</Package>
+            <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+        </Package>
+
+        <Package Name="com.obomprogramador.tools.jqana.mavenplugin">
+            <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+            <Package>com.obomprogramador.tools.jqana.model</Package>
+            <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+        </Package>
+
+        <Package Name="com.obomprogramador.tools.jqana.model">
+            <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+            <Package>com.obomprogramador.tools.jqana.model</Package>
+        </Package>
+
+        <Package Name="com.obomprogramador.tools.jqana.model.defaultimpl">
+            <Package>com.obomprogramador.tools.jqana.model</Package>
+            <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+        </Package>
+
+        <Package Name="com.obomprogramador.tools.jqana.parsers">
+            <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+            <Package>com.obomprogramador.tools.jqana.model</Package>
+            <Package>com.obomprogramador.tools.jqana.model.defaultimpl</Package>
+        </Package>
+
+    </Cycles>
+</JDepend>

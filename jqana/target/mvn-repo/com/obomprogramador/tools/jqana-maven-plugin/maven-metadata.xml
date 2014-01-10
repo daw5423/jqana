@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.obomprogramador.tools</groupId>
+  <artifactId>jqana-maven-plugin</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <versioning>
+    <latest>0.0.1-SNAPSHOT</latest>
+    <versions>
+      <version>0.0.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20140110113943</lastUpdated>
+  </versioning>
+</metadata>
