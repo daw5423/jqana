@@ -54,7 +54,7 @@ Examples
           <plugin>
 			<groupId>com.obomprogramador.tools</groupId>
 			<artifactId>jqana-maven-plugin</artifactId>
-			<version>0.0.1-SNAPSHOT</version>              
+			<version>0.0.1</version>              
           </plugin>
       </plugins>
   </reporting>
@@ -83,9 +83,9 @@ merge integration-tests with site generation, including jacoco reporting, but we
 
 Project status
 
-  Beta (0.0.1-SNAPSHOT).
+  Beta (0.0.1).
   
-  Currently the project is in its initial stage of development, and, although fully functional, with a reasonable set of tests, it is still considered an "Beta" or SNAPSHOT version in Maven jargon.
+  We consider the software as a Beta version (version number starting from zero). It is working, but it may have some issues yet. We have removed the SNAPSHOT suffix because we consider that it is ready for deployment. 
   
   We have released the first beta version, but we still working on to improve the source code. As we follow the TDD discipline, we considered that the project passed all tests, but it is necessary to refactor and improve the source code, 
 and improve the documentation. In spite of that, you can use jQana in your projects, and, if you find an error or problem, please

@@ -10,7 +10,8 @@
             <item name="Overview" href="index.html"/>
         </menu>
         <menu name="Help">
-            <item name="Wiki" href="https://github.com/cleuton/jqana/wiki/_pages"/>
+            <item name="Wiki pages" href="https://github.com/cleuton/jqana/wiki/_pages"/>
+            <item name="News" href="https://github.com/cleuton/jqana/wiki/"/>
             <item name="jQana report" href="https://github.com/cleuton/jqana/wiki/How-to-analyze-jQana-report"/>
             <item name="Cyclomatic Complexity" href="https://github.com/cleuton/jqana/wiki/CC-calculation"/>
             <item name="LCOM4" href="https://github.com/cleuton/jqana/wiki/LCOM4-Calculation"/>

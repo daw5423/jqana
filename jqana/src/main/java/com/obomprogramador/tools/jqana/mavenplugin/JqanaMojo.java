@@ -168,13 +168,13 @@ public class JqanaMojo extends AbstractMavenReport {
 	
 	private void persistXml(Document report, DefaultXmlGenerator generator) throws MavenReportException {
 		String targetPath = project.getBuild().getDirectory();
-		File outputDir = new File(targetPath + "\\jqana-output");
+		File outputDir = new File(targetPath + File.separator + "jqana-output");
 		if (!outputDir.exists()) {
 			outputDir.mkdirs();
 		}
 		try {
 			String xmlOutput = generator.xml2String(report, false);
-			File outputXml = new File(outputDir.getPath() + "\\jqana.xml");
+			File outputXml = new File(outputDir.getPath() +  File.separator +"jqana.xml");
 			if (outputXml.exists()) {
 				outputXml.delete();
 			}

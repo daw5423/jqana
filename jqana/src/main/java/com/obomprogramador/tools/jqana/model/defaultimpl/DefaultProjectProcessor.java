@@ -134,8 +134,12 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 		}
 		else {
 			int inx = sourceDir.getPath().indexOf("java\\");
+			if (inx < 0) {
+				inx = sourceDir.getPath().indexOf("java/");
+			}
 			packageName = sourceDir.getPath().substring(inx + 5);
 			packageName = packageName.replace("\\", ".");
+			packageName = packageName.replace("/", ".");
 		}
 		return packageName;
 	}
