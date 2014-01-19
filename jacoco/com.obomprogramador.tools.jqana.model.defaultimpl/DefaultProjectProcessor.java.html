@@ -47,8 +47,8 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 	}
 
 	public void setLog(Log log) {
-<span class="nc" id="L50">		this.log = log;</span>
-<span class="nc" id="L51">	}</span>
+<span class="fc" id="L50">		this.log = log;</span>
+<span class="fc" id="L51">	}</span>
 
 	public DefaultProjectProcessor(Context context) {
 <span class="fc" id="L54">		super();</span>
@@ -134,18 +134,22 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 		}
 		else {
 <span class="fc" id="L136">			int inx = sourceDir.getPath().indexOf(&quot;java\\&quot;);</span>
-<span class="fc" id="L137">			packageName = sourceDir.getPath().substring(inx + 5);</span>
-<span class="fc" id="L138">			packageName = packageName.replace(&quot;\\&quot;, &quot;.&quot;);</span>
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">			if (inx &lt; 0) {</span>
+<span class="fc" id="L138">				inx = sourceDir.getPath().indexOf(&quot;java/&quot;);</span>
+			}
+<span class="fc" id="L140">			packageName = sourceDir.getPath().substring(inx + 5);</span>
+<span class="fc" id="L141">			packageName = packageName.replace(&quot;\\&quot;, &quot;.&quot;);</span>
+<span class="fc" id="L142">			packageName = packageName.replace(&quot;/&quot;, &quot;.&quot;);</span>
 		}
-<span class="fc" id="L140">		return packageName;</span>
+<span class="fc" id="L144">		return packageName;</span>
 	}
 
 	protected boolean isJavaFile(File oneFile) {
-<span class="fc" id="L144">		boolean returnCode = false;</span>
-<span class="pc bpc" id="L145" title="1 of 2 branches missed.">		if (FileUtils.getExtension(oneFile.getName()).equalsIgnoreCase(&quot;java&quot;)) {</span>
-<span class="fc" id="L146">			returnCode = true;</span>
+<span class="fc" id="L148">		boolean returnCode = false;</span>
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">		if (FileUtils.getExtension(oneFile.getName()).equalsIgnoreCase(&quot;java&quot;)) {</span>
+<span class="fc" id="L150">			returnCode = true;</span>
 		}
-<span class="fc" id="L148">		return returnCode;</span>
+<span class="fc" id="L152">		return returnCode;</span>
 	}
 
 	/* (non javadoc)
@@ -153,117 +157,117 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 	 * 
 	 */
 	protected void processMetrics(Measurement packageMeasurement, File oneFile) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-<span class="fc" id="L156">		logger.debug(&quot;Source file: &quot; + oneFile.getName());</span>
-<span class="fc" id="L157">		String sourceCode = this.getSource(oneFile);</span>
-<span class="fc" id="L158">		processCyclomaticMetric(sourceCode, packageMeasurement);</span>
-<span class="fc" id="L159">		processLcom4Metric(sourceCode, packageMeasurement);</span>
-<span class="fc" id="L160">		processRfcMetric(oneFile, packageMeasurement);</span>
-<span class="fc" id="L161">	}</span>
+<span class="fc" id="L160">		logger.debug(&quot;Source file: &quot; + oneFile.getName());</span>
+<span class="fc" id="L161">		String sourceCode = this.getSource(oneFile);</span>
+<span class="fc" id="L162">		processCyclomaticMetric(sourceCode, packageMeasurement);</span>
+<span class="fc" id="L163">		processLcom4Metric(sourceCode, packageMeasurement);</span>
+<span class="fc" id="L164">		processRfcMetric(oneFile, packageMeasurement);</span>
+<span class="fc" id="L165">	}</span>
 	
 	/* (non javadoc)
 	 * Analyzes Cyclomatic complexity for a source file.
 	 */
 	protected void processCyclomaticMetric(String sourceFile, Measurement packageMeasurement) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		
-<span class="fc" id="L168">		Context context = new Context();</span>
-<span class="fc" id="L169">		ResourceBundle bundle = ResourceBundle.getBundle(&quot;report&quot;);</span>
-<span class="fc" id="L170">		context.setBundle(bundle);</span>
-<span class="fc" id="L171">		Parser parser = new CyclomaticComplexityParser(packageMeasurement, context);</span>
-<span class="fc" id="L172">		Measurement mt = parser.parse( null, sourceFile);</span>
+<span class="fc" id="L172">		Context context = new Context();</span>
+<span class="fc" id="L173">		ResourceBundle bundle = ResourceBundle.getBundle(&quot;report&quot;);</span>
+<span class="fc" id="L174">		context.setBundle(bundle);</span>
+<span class="fc" id="L175">		Parser parser = new CyclomaticComplexityParser(packageMeasurement, context);</span>
+<span class="fc" id="L176">		Measurement mt = parser.parse( null, sourceFile);</span>
 		
-<span class="fc" id="L174">	}</span>
+<span class="fc" id="L178">	}</span>
 	
 	/* (non javadoc)
 	 * Analyzes LCOM4 for a source file.
 	 */
 	protected void processLcom4Metric(String sourceFile, Measurement packageMeasurement) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-<span class="fc" id="L180">		Context context = new Context();</span>
-<span class="fc" id="L181">		ResourceBundle bundle = ResourceBundle.getBundle(&quot;report&quot;);</span>
-<span class="fc" id="L182">		context.setBundle(bundle);</span>
-<span class="fc" id="L183">		Parser parser = new Lcom4Parser(packageMeasurement, context);</span>
-<span class="fc" id="L184">		Measurement mt = parser.parse( null, sourceFile);</span>
-<span class="fc" id="L185">		logger.debug(mt.toString());</span>
-<span class="fc" id="L186">	}</span>
+<span class="fc" id="L184">		Context context = new Context();</span>
+<span class="fc" id="L185">		ResourceBundle bundle = ResourceBundle.getBundle(&quot;report&quot;);</span>
+<span class="fc" id="L186">		context.setBundle(bundle);</span>
+<span class="fc" id="L187">		Parser parser = new Lcom4Parser(packageMeasurement, context);</span>
+<span class="fc" id="L188">		Measurement mt = parser.parse( null, sourceFile);</span>
+<span class="fc" id="L189">		logger.debug(mt.toString());</span>
+<span class="fc" id="L190">	}</span>
 	
 	/* (non javadoc)
 	 * Analyzes RFC for a source file.
 	 * 
 	 */
 	protected void processRfcMetric(File oneFile, Measurement packageMeasurement) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-<span class="fc" id="L193">		Context context = new Context();</span>
-<span class="fc" id="L194">		String objectPath = getObjectFilePath(oneFile);</span>
-<span class="fc" id="L195">		ResourceBundle bundle = ResourceBundle.getBundle(&quot;report&quot;);</span>
-<span class="fc" id="L196">		context.setBundle(bundle);</span>
-<span class="fc" id="L197">		Parser parser = new RfcBcelParser(packageMeasurement, context);</span>
-<span class="fc" id="L198">		Measurement mt = parser.parse(objectPath, null);</span>
+<span class="fc" id="L197">		Context context = new Context();</span>
+<span class="fc" id="L198">		String objectPath = getObjectFilePath(oneFile);</span>
+<span class="fc" id="L199">		ResourceBundle bundle = ResourceBundle.getBundle(&quot;report&quot;);</span>
+<span class="fc" id="L200">		context.setBundle(bundle);</span>
+<span class="fc" id="L201">		Parser parser = new RfcBcelParser(packageMeasurement, context);</span>
+<span class="fc" id="L202">		Measurement mt = parser.parse(objectPath, null);</span>
 		
-<span class="fc" id="L200">	}</span>
+<span class="fc" id="L204">	}</span>
 	
 	protected String getObjectFilePath(File oneFile) {
-<span class="fc" id="L203">		String objectPath = oneFile.getPath().replace(&quot;.java&quot;, &quot;.class&quot;);</span>
-<span class="fc" id="L204">		objectPath = objectPath.replace(this.projectSourceRoot.getPath(), this.projectObjectRoot.getPath());</span>
-<span class="fc" id="L205">		return objectPath;</span>
+<span class="fc" id="L207">		String objectPath = oneFile.getPath().replace(&quot;.java&quot;, &quot;.class&quot;);</span>
+<span class="fc" id="L208">		objectPath = objectPath.replace(this.projectSourceRoot.getPath(), this.projectObjectRoot.getPath());</span>
+<span class="fc" id="L209">		return objectPath;</span>
 	}
 
 	protected String getSource(File oneFile) {
-<span class="fc" id="L209">		BufferedReader br = null;</span>
-<span class="fc" id="L210">	    StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L213">		BufferedReader br = null;</span>
+<span class="fc" id="L214">	    StringBuilder sb = new StringBuilder();</span>
 	    try {
-<span class="fc" id="L212">	    	br = new BufferedReader(new InputStreamReader(new FileInputStream(oneFile),&quot;UTF-8&quot;));</span>
-<span class="fc" id="L213">	        String line = br.readLine();</span>
+<span class="fc" id="L216">	    	br = new BufferedReader(new InputStreamReader(new FileInputStream(oneFile),&quot;UTF-8&quot;));</span>
+<span class="fc" id="L217">	        String line = br.readLine();</span>
 
-<span class="fc bfc" id="L215" title="All 2 branches covered.">	        while (line != null) {</span>
-<span class="fc" id="L216">	            sb.append(line);</span>
-<span class="fc" id="L217">	            sb.append(&quot;\n&quot;);</span>
-<span class="fc" id="L218">	            line = br.readLine();</span>
+<span class="fc bfc" id="L219" title="All 2 branches covered.">	        while (line != null) {</span>
+<span class="fc" id="L220">	            sb.append(line);</span>
+<span class="fc" id="L221">	            sb.append(&quot;\n&quot;);</span>
+<span class="fc" id="L222">	            line = br.readLine();</span>
 	        }
-<span class="fc" id="L220">	        return sb.toString();</span>
-<span class="nc" id="L221">	    } catch (IOException e) {</span>
-<span class="nc" id="L222">			e.printStackTrace();</span>
+<span class="fc" id="L224">	        return sb.toString();</span>
+<span class="nc" id="L225">	    } catch (IOException e) {</span>
+<span class="nc" id="L226">			e.printStackTrace();</span>
 		} finally {
-<span class="nc" id="L224">	        try {</span>
-<span class="pc" id="L225">				br.close();</span>
-<span class="nc" id="L226">			} catch (IOException e) {</span>
-<span class="nc" id="L227">				e.printStackTrace();</span>
-<span class="pc" id="L228">			}</span>
-<span class="nc" id="L229">	    }</span>
-<span class="nc" id="L230">	    return sb.toString();		</span>
+<span class="nc" id="L228">	        try {</span>
+<span class="pc" id="L229">				br.close();</span>
+<span class="nc" id="L230">			} catch (IOException e) {</span>
+<span class="nc" id="L231">				e.printStackTrace();</span>
+<span class="pc" id="L232">			}</span>
+<span class="nc" id="L233">	    }</span>
+<span class="nc" id="L234">	    return sb.toString();		</span>
 	}
 
 	protected InputStream getStream(String sourceFile) {
-<span class="nc" id="L234">		return this.getClass().getClassLoader().getResourceAsStream(sourceFile);</span>
+<span class="nc" id="L238">		return this.getClass().getClassLoader().getResourceAsStream(sourceFile);</span>
 	}
 	
 
 
 	  protected void logMsg(String msg, MSG_TYPE type) {
-<span class="pc bpc" id="L240" title="1 of 2 branches missed.">		  if (this.log == null) {</span>
+<span class="pc bpc" id="L244" title="1 of 2 branches missed.">		  if (this.log == null) {</span>
 			  // using internal logger
-<span class="pc bpc" id="L242" title="3 of 4 branches missed.">			  switch (type) {</span>
+<span class="pc bnc" id="L246" title="All 4 branches missed.">			  switch (type) {</span>
 			  case INFO:
-<span class="nc" id="L244">				  logger.info(msg);</span>
-<span class="nc" id="L245">				  break;</span>
+<span class="nc" id="L248">				  logger.info(msg);</span>
+<span class="nc" id="L249">				  break;</span>
 			  case DEBUG:
-<span class="fc" id="L247">				  logger.debug(msg);</span>
-<span class="fc" id="L248">				  break;</span>
+<span class="nc" id="L251">				  logger.debug(msg);</span>
+<span class="nc" id="L252">				  break;</span>
 			  case ERROR:
-<span class="pc" id="L250">				  logger.error(msg);</span>
+<span class="nc" id="L254">				  logger.error(msg);</span>
 			  }
 		  }
 		  else {
 			  // using maven plugin logger
-<span class="nc bnc" id="L255" title="All 4 branches missed.">			  switch (type) {</span>
+<span class="pc bpc" id="L259" title="3 of 4 branches missed.">			  switch (type) {</span>
 			  case INFO:
-<span class="nc" id="L257">				  this.log.info(msg);</span>
-<span class="nc" id="L258">				  break;</span>
+<span class="nc" id="L261">				  this.log.info(msg);</span>
+<span class="nc" id="L262">				  break;</span>
 			  case DEBUG:
-<span class="nc" id="L260">				  this.log.debug(msg);</span>
-<span class="nc" id="L261">				  break;</span>
+<span class="fc" id="L264">				  this.log.debug(msg);</span>
+<span class="fc" id="L265">				  break;</span>
 			  case ERROR:
-<span class="nc" id="L263">				  this.log.error(msg);</span>
+<span class="nc" id="L267">				  this.log.error(msg);</span>
 			  }
 		  }
-<span class="fc" id="L266">	  }</span>
+<span class="fc" id="L270">	  }</span>
 	  
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>

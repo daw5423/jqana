@@ -21,7 +21,7 @@ import com.obomprogramador.tools.jqana.context.Context;
 	 * @return String[][] String array.
 	 */
 	public static String[][] getResults(Context context) {
-<span class="pc bpc" id="L24" title="1 of 2 branches missed.">		if (context == null) {</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">		if (context == null) {</span>
 			try {
 <span class="nc" id="L26">				context = new Context();</span>
 <span class="nc" id="L27">			} catch (ClassNotFoundException e) {</span>
@@ -35,15 +35,15 @@ import com.obomprogramador.tools.jqana.context.Context;
 <span class="nc" id="L35">				e.printStackTrace();</span>
 <span class="nc" id="L36">			}</span>
 		}
-<span class="fc" id="L38">		String [] classes = context.getBundle().getString(&quot;test.results&quot;).split(&quot;@&quot;);</span>
-<span class="fc" id="L39">		String [][] results = new String[classes.length][5];</span>
-<span class="fc bfc" id="L40" title="All 2 branches covered.">		for (int x=0; x&lt;classes.length; x++) {</span>
-<span class="fc" id="L41">			String [] classMetrics = classes[x].split(&quot;:&quot;);</span>
-<span class="fc bfc" id="L42" title="All 2 branches covered.">			for (int y=0; y&lt;classMetrics.length; y++) {</span>
-<span class="fc" id="L43">				results[x][y] = new String(classMetrics[y]);</span>
+<span class="nc" id="L38">		String [] classes = context.getBundle().getString(&quot;test.results&quot;).split(&quot;@&quot;);</span>
+<span class="nc" id="L39">		String [][] results = new String[classes.length][5];</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">		for (int x=0; x&lt;classes.length; x++) {</span>
+<span class="nc" id="L41">			String [] classMetrics = classes[x].split(&quot;:&quot;);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">			for (int y=0; y&lt;classMetrics.length; y++) {</span>
+<span class="nc" id="L43">				results[x][y] = new String(classMetrics[y]);</span>
 			}
 		}
-<span class="fc" id="L46">		return results;</span>
+<span class="nc" id="L46">		return results;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>
