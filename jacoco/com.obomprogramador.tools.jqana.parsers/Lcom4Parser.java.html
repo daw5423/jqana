@@ -99,8 +99,8 @@ public class Lcom4Parser extends AbstractMetricParser {
 <span class="fc" id="L99">						checkMethodPair(connectedComponents,m, members.get(x));</span>
 					}
 				}
-<span class="fc" id="L102">			}</span>
-		}
+			}
+<span class="fc" id="L103">		}</span>
 		
 <span class="fc bfc" id="L105" title="All 2 branches covered.">		if (this.members.size() &gt; 0) {</span>
 <span class="fc" id="L106">			this.measurement.setName(this.members.get(0).className);</span>
@@ -170,7 +170,7 @@ public class Lcom4Parser extends AbstractMetricParser {
 		// Let's see if there is already a component to add them
 <span class="fc bfc" id="L171" title="All 2 branches covered.">		for (Component c : listC) {</span>
 <span class="fc" id="L172">			checkExists(listC, listComponentsFound, m, n);</span>
-		}
+<span class="fc" id="L173">		}</span>
 		
 <span class="fc bfc" id="L175" title="All 2 branches covered.">		if (listComponentsFound.size() == 0) {</span>
 			// No component found... Let's create a new one
@@ -205,7 +205,7 @@ public class Lcom4Parser extends AbstractMetricParser {
 <span class="fc" id="L205">			addMembers(consolidated, duplicate.members);</span>
 <span class="fc" id="L206">			listC.remove(duplicate);</span>
 <span class="fc" id="L207">			logger.debug(&quot;     Adding to Consolidate component: &quot; + duplicate);</span>
-		}
+<span class="fc" id="L208">		}</span>
 <span class="fc" id="L209">		addToComponent(consolidated,m,n);</span>
 <span class="fc" id="L210">		listC.add(consolidated);</span>
 <span class="fc" id="L211">	}</span>
@@ -225,7 +225,7 @@ public class Lcom4Parser extends AbstractMetricParser {
 <span class="fc bfc" id="L225" title="All 2 branches covered.">				if (!component.members.contains(cMember)) {</span>
 <span class="fc" id="L226">					component.members.add(cMember);</span>
 				}
-			}			
+<span class="fc" id="L228">			}			</span>
 		}
 <span class="fc" id="L230">	}</span>
 
@@ -236,7 +236,7 @@ public class Lcom4Parser extends AbstractMetricParser {
 <span class="nc bnc" id="L236" title="All 2 branches missed.">				if (!c.members.contains(rMember)) {</span>
 <span class="nc" id="L237">					c.members.add(rMember);</span>
 				}
-			}		
+<span class="nc" id="L239">			}		</span>
 		}
 <span class="nc" id="L241">	}</span>
 
@@ -279,8 +279,8 @@ public class Lcom4Parser extends AbstractMetricParser {
 					
 				}
 
-<span class="fc" id="L282">			}</span>
-		}
+			}
+<span class="fc" id="L283">		}</span>
 		
 <span class="fc" id="L285">	}</span>
 
@@ -290,9 +290,9 @@ public class Lcom4Parser extends AbstractMetricParser {
 <span class="fc bfc" id="L290" title="All 2 branches covered.">		for (Member m : componentMembers) {</span>
 <span class="pc bpc" id="L291" title="1 of 2 branches missed.">			if (refsAreMembers(m.referencedMembers, combinedRefs)) {</span>
 <span class="nc" id="L292">				returnCode = true;</span>
-<span class="pc" id="L293">				break;</span>
+<span class="nc" id="L293">				break;</span>
 			}
-		}
+<span class="fc" id="L295">		}</span>
 <span class="fc" id="L296">		return returnCode;</span>
 	}
 
@@ -318,7 +318,7 @@ public class Lcom4Parser extends AbstractMetricParser {
 <span class="fc bfc" id="L318" title="All 2 branches covered.">			for (Member m : members) {</span>
 <span class="fc" id="L319">				saida += conector + m.name;</span>
 <span class="fc" id="L320">				conector = &quot;; &quot;;</span>
-			}
+<span class="fc" id="L321">			}</span>
 <span class="fc" id="L322">			saida += &quot; ***]&quot;;</span>
 <span class="fc" id="L323">			return saida;</span>
 		}

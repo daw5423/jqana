@@ -135,7 +135,7 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 		else {
 <span class="fc" id="L136">			int inx = sourceDir.getPath().indexOf(&quot;java\\&quot;);</span>
 <span class="pc bpc" id="L137" title="1 of 2 branches missed.">			if (inx &lt; 0) {</span>
-<span class="fc" id="L138">				inx = sourceDir.getPath().indexOf(&quot;java/&quot;);</span>
+<span class="nc" id="L138">				inx = sourceDir.getPath().indexOf(&quot;java/&quot;);</span>
 			}
 <span class="fc" id="L140">			packageName = sourceDir.getPath().substring(inx + 5);</span>
 <span class="fc" id="L141">			packageName = packageName.replace(&quot;\\&quot;, &quot;.&quot;);</span>

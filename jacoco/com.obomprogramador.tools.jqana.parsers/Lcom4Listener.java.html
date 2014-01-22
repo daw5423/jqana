@@ -123,9 +123,9 @@ public class Lcom4Listener extends JavaBaseListener {
 <span class="pc bpc" id="L123" title="1 of 2 branches missed.">						for (ParseTree st3 : ((VariableDeclaratorContext) st2).children) {</span>
 <span class="pc bpc" id="L124" title="1 of 2 branches missed.">							if (st3 instanceof VariableDeclaratorIdContext) {</span>
 <span class="fc" id="L125">								name = st3.getText();</span>
-<span class="pc" id="L126">								break;</span>
+<span class="fc" id="L126">								break;</span>
 							}
-						}
+<span class="nc" id="L128">						}</span>
 <span class="pc bpc" id="L129" title="1 of 2 branches missed.">						if (name.length() &gt; 0) {</span>
 <span class="fc" id="L130">							break;</span>
 						}
@@ -133,12 +133,12 @@ public class Lcom4Listener extends JavaBaseListener {
 <span class="nc bnc" id="L133" title="All 2 branches missed.">					if (name.length() &gt; 0) {</span>
 <span class="nc" id="L134">						break;</span>
 					}
-				}
+<span class="nc" id="L136">				}</span>
 <span class="pc bpc" id="L137" title="1 of 2 branches missed.">				if (name.length() &gt; 0) {</span>
 <span class="fc" id="L138">					break;</span>
 				}
 			}
-		}
+<span class="fc" id="L141">		}</span>
 <span class="fc" id="L142">		Member member = new Member();</span>
 <span class="fc" id="L143">		member.className = mainClassName;</span>
 <span class="fc" id="L144">		member.name = name;</span>
@@ -172,7 +172,7 @@ public class Lcom4Listener extends JavaBaseListener {
 <span class="fc bfc" id="L172" title="All 2 branches covered.">			else if (subTree instanceof FormalParametersContext) {</span>
 <span class="fc" id="L173">				break;</span>
 			}
-		}
+<span class="fc" id="L175">		}</span>
 		
 <span class="fc" id="L177">		ParseTree body = null;</span>
 <span class="pc bpc" id="L178" title="1 of 2 branches missed.">		for (ParseTree subTree : ctx.children) {</span>
@@ -180,7 +180,7 @@ public class Lcom4Listener extends JavaBaseListener {
 <span class="fc" id="L180">				body = subTree;</span>
 <span class="fc" id="L181">				break;</span>
 			}
-		}
+<span class="fc" id="L183">		}</span>
 		
 <span class="fc bfc" id="L185" title="All 2 branches covered.">		if (this.overrideAnnotation) {</span>
 <span class="fc" id="L186">			logger.debug(&quot;*** Inherited method ignored: &quot; + methodName);</span>
@@ -280,7 +280,7 @@ public class Lcom4Listener extends JavaBaseListener {
 					break;
 				}
 			}
-		}
+<span class="fc" id="L283">		}</span>
 <span class="fc" id="L284">		return isGetterSetter;</span>
 	}
 	

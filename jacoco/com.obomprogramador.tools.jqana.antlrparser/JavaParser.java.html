@@ -753,10 +753,10 @@ public class JavaParser extends Parser {
 
 <span class="fc" id="L754">			setState(298);</span>
 <span class="fc" id="L755">			_la = _input.LA(1);</span>
-<span class="pc bpc" id="L756" title="1 of 2 branches missed.">			if (_la==IMPLEMENTS) {</span>
+<span class="fc bfc" id="L756" title="All 2 branches covered.">			if (_la==IMPLEMENTS) {</span>
 				{
-<span class="nc" id="L758">				setState(296); match(IMPLEMENTS);</span>
-<span class="nc" id="L759">				setState(297); typeList();</span>
+<span class="fc" id="L758">				setState(296); match(IMPLEMENTS);</span>
+<span class="fc" id="L759">				setState(297); typeList();</span>
 				}
 			}
 
@@ -1324,17 +1324,17 @@ public class JavaParser extends Parser {
 <span class="nc" id="L1324">			return getRuleContexts(TypeContext.class);</span>
 		}
 		public TypeListContext(ParserRuleContext parent, int invokingState) {
-<span class="nc" id="L1327">			super(parent, invokingState);</span>
-<span class="nc" id="L1328">		}</span>
+<span class="fc" id="L1327">			super(parent, invokingState);</span>
+<span class="fc" id="L1328">		}</span>
 <span class="nc" id="L1329">		@Override public int getRuleIndex() { return RULE_typeList; }</span>
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-<span class="nc bnc" id="L1332" title="All 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).enterTypeList(this);</span>
-<span class="nc" id="L1333">		}</span>
+<span class="pc bpc" id="L1332" title="1 of 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).enterTypeList(this);</span>
+<span class="fc" id="L1333">		}</span>
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-<span class="nc bnc" id="L1336" title="All 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).exitTypeList(this);</span>
-<span class="nc" id="L1337">		}</span>
+<span class="pc bpc" id="L1336" title="1 of 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).exitTypeList(this);</span>
+<span class="fc" id="L1337">		}</span>
 		@Override
 		public &lt;T&gt; T accept(ParseTreeVisitor&lt;? extends T&gt; visitor) {
 <span class="nc bnc" id="L1340" title="All 2 branches missed.">			if ( visitor instanceof JavaVisitor ) return ((JavaVisitor&lt;? extends T&gt;)visitor).visitTypeList(this);</span>
@@ -1343,17 +1343,17 @@ public class JavaParser extends Parser {
 	}
 
 	public final TypeListContext typeList() throws RecognitionException {
-<span class="nc" id="L1346">		TypeListContext _localctx = new TypeListContext(_ctx, getState());</span>
-<span class="nc" id="L1347">		enterRule(_localctx, 32, RULE_typeList);</span>
+<span class="fc" id="L1346">		TypeListContext _localctx = new TypeListContext(_ctx, getState());</span>
+<span class="fc" id="L1347">		enterRule(_localctx, 32, RULE_typeList);</span>
 		int _la;
 		try {
-<span class="nc" id="L1350">			enterOuterAlt(_localctx, 1);</span>
+<span class="fc" id="L1350">			enterOuterAlt(_localctx, 1);</span>
 			{
-<span class="nc" id="L1352">			setState(383); type();</span>
-<span class="nc" id="L1353">			setState(388);</span>
-<span class="nc" id="L1354">			_errHandler.sync(this);</span>
-<span class="nc" id="L1355">			_la = _input.LA(1);</span>
-<span class="nc bnc" id="L1356" title="All 2 branches missed.">			while (_la==COMMA) {</span>
+<span class="fc" id="L1352">			setState(383); type();</span>
+<span class="fc" id="L1353">			setState(388);</span>
+<span class="fc" id="L1354">			_errHandler.sync(this);</span>
+<span class="fc" id="L1355">			_la = _input.LA(1);</span>
+<span class="pc bpc" id="L1356" title="1 of 2 branches missed.">			while (_la==COMMA) {</span>
 				{
 				{
 <span class="nc" id="L1359">				setState(384); match(COMMA);</span>
@@ -1372,9 +1372,9 @@ public class JavaParser extends Parser {
 <span class="nc" id="L1372">			_errHandler.recover(this, re);</span>
 		}
 		finally {
-<span class="nc" id="L1375">			exitRule();</span>
-<span class="nc" id="L1376">		}</span>
-<span class="nc" id="L1377">		return _localctx;</span>
+<span class="pc" id="L1375">			exitRule();</span>
+<span class="pc" id="L1376">		}</span>
+<span class="fc" id="L1377">		return _localctx;</span>
 	}
 
 	public static class ClassBodyContext extends ParserRuleContext {
@@ -1927,10 +1927,10 @@ public class JavaParser extends Parser {
 <span class="fc" id="L1927">			setState(459); formalParameters();</span>
 <span class="fc" id="L1928">			setState(462);</span>
 <span class="fc" id="L1929">			_la = _input.LA(1);</span>
-<span class="pc bpc" id="L1930" title="1 of 2 branches missed.">			if (_la==THROWS) {</span>
+<span class="fc bfc" id="L1930" title="All 2 branches covered.">			if (_la==THROWS) {</span>
 				{
-<span class="nc" id="L1932">				setState(460); match(THROWS);</span>
-<span class="nc" id="L1933">				setState(461); qualifiedNameList();</span>
+<span class="fc" id="L1932">				setState(460); match(THROWS);</span>
+<span class="fc" id="L1933">				setState(461); qualifiedNameList();</span>
 				}
 			}
 
@@ -7863,7 +7863,7 @@ public class JavaParser extends Parser {
 <span class="fc" id="L7863">			setState(1293); match(LPAREN);</span>
 <span class="fc" id="L7864">			setState(1295);</span>
 <span class="fc" id="L7865">			_la = _input.LA(1);</span>
-<span class="pc bpc" id="L7866" title="4 of 8 branches missed.">			if ((((_la) &amp; ~0x3f) == 0 &amp;&amp; ((1L &lt;&lt; _la) &amp; ((1L &lt;&lt; BOOLEAN) | (1L &lt;&lt; BYTE) | (1L &lt;&lt; CHAR) | (1L &lt;&lt; DOUBLE) | (1L &lt;&lt; FLOAT) | (1L &lt;&lt; INT) | (1L &lt;&lt; LONG) | (1L &lt;&lt; NEW) | (1L &lt;&lt; SHORT) | (1L &lt;&lt; SUPER) | (1L &lt;&lt; THIS) | (1L &lt;&lt; VOID) | (1L &lt;&lt; IntegerLiteral) | (1L &lt;&lt; FloatingPointLiteral) | (1L &lt;&lt; BooleanLiteral) | (1L &lt;&lt; CharacterLiteral) | (1L &lt;&lt; StringLiteral) | (1L &lt;&lt; NullLiteral) | (1L &lt;&lt; LPAREN))) != 0) || ((((_la - 68)) &amp; ~0x3f) == 0 &amp;&amp; ((1L &lt;&lt; (_la - 68)) &amp; ((1L &lt;&lt; (LT - 68)) | (1L &lt;&lt; (BANG - 68)) | (1L &lt;&lt; (TILDE - 68)) | (1L &lt;&lt; (INC - 68)) | (1L &lt;&lt; (DEC - 68)) | (1L &lt;&lt; (ADD - 68)) | (1L &lt;&lt; (SUB - 68)) | (1L &lt;&lt; (Identifier - 68)))) != 0)) {</span>
+<span class="pc bpc" id="L7866" title="1 of 8 branches missed.">			if ((((_la) &amp; ~0x3f) == 0 &amp;&amp; ((1L &lt;&lt; _la) &amp; ((1L &lt;&lt; BOOLEAN) | (1L &lt;&lt; BYTE) | (1L &lt;&lt; CHAR) | (1L &lt;&lt; DOUBLE) | (1L &lt;&lt; FLOAT) | (1L &lt;&lt; INT) | (1L &lt;&lt; LONG) | (1L &lt;&lt; NEW) | (1L &lt;&lt; SHORT) | (1L &lt;&lt; SUPER) | (1L &lt;&lt; THIS) | (1L &lt;&lt; VOID) | (1L &lt;&lt; IntegerLiteral) | (1L &lt;&lt; FloatingPointLiteral) | (1L &lt;&lt; BooleanLiteral) | (1L &lt;&lt; CharacterLiteral) | (1L &lt;&lt; StringLiteral) | (1L &lt;&lt; NullLiteral) | (1L &lt;&lt; LPAREN))) != 0) || ((((_la - 68)) &amp; ~0x3f) == 0 &amp;&amp; ((1L &lt;&lt; (_la - 68)) &amp; ((1L &lt;&lt; (LT - 68)) | (1L &lt;&lt; (BANG - 68)) | (1L &lt;&lt; (TILDE - 68)) | (1L &lt;&lt; (INC - 68)) | (1L &lt;&lt; (DEC - 68)) | (1L &lt;&lt; (ADD - 68)) | (1L &lt;&lt; (SUB - 68)) | (1L &lt;&lt; (Identifier - 68)))) != 0)) {</span>
 				{
 <span class="fc" id="L7868">				setState(1294); expressionList();</span>
 				}
