@@ -3,6 +3,10 @@ Introduction
   This plugin calculates and reports project metrics in the Maven Site of your Java project. It calculates CC (Cyclomatic Complexity), LCOM4 (Hitz & Montazeri), and RFC (Response For Class).
   
   jQana plugin was tested with maven 2 (2.1.1) and 3 (3.1.1).
+  
+Current version
+  Number: 0.0.2
+  Date: 22 / Jan / 2014.
 
 Goals Overview
 
@@ -36,16 +40,12 @@ Examples
 
 ...
 
-<repositories>
-    <repository>
+<pluginRepositories>
+    <pluginRepository>
         <id>jqana-mvn-repo</id>
         <url>https://raw.github.com/cleuton/jqana/mvn-repo/</url>
-        <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-        </snapshots>
-    </repository>
-</repositories>
+    </pluginRepository>
+</pluginRepositories> 
 
 ...
 
@@ -54,7 +54,7 @@ Examples
           <plugin>
 			<groupId>com.obomprogramador.tools</groupId>
 			<artifactId>jqana-maven-plugin</artifactId>
-			<version>0.0.1</version>              
+			<version>0.0.2</version>              
           </plugin>
       </plugins>
   </reporting>
@@ -83,7 +83,7 @@ merge integration-tests with site generation, including jacoco reporting, but we
 
 Project status
 
-  Beta (0.0.1).
+  Beta (0.0.2).
   
   We consider the software as a Beta version (version number starting from zero). It is working, but it may have some issues yet. We have removed the SNAPSHOT suffix because we consider that it is ready for deployment. 
   

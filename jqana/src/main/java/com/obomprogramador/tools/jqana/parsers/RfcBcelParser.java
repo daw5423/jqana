@@ -18,9 +18,12 @@ import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 
 
 public class RfcBcelParser extends AbstractMetricParser {
+	
+
 
 	public RfcBcelParser(Measurement packageMeasurement, Context context) {
 		super(packageMeasurement, context, "metric.rfc.name");
+		this.context = context;
 	}
 
 	@Override
@@ -37,7 +40,11 @@ public class RfcBcelParser extends AbstractMetricParser {
 			RfcVisitor visitor = new RfcVisitor(javaClass);
 			DescendingVisitor classWalker = new DescendingVisitor(javaClass, visitor);
 			classWalker.visit();
-			
+			MetricValue mv = this.measurement.getMetricValue(this.getParserName());
+			int rfcLimit = Integer.parseInt(context.getBundle().getString("metric.rfc.limit"));
+			if (mv.getValue() > rfcLimit) {
+				mv.setViolated(true);
+			}
 			updatePackageMeasurement();
 			
 		} catch (Exception e) {
