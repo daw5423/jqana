@@ -5,8 +5,8 @@ Introduction
   jQana plugin was tested with maven 2 (2.1.1) and 3 (3.1.1).
   
 Current version
-  Number: 0.0.2
-  Date: 22 / Jan / 2014.
+
+   We will not show the current version here anymore. If you want to know the latest version, please check our {{{https://github.com/cleuton/jqana/wiki/Latest-version}LATEST VERSION PAGE}}.
 
 Goals Overview
 
@@ -34,7 +34,7 @@ Examples
 
   jQana is not hosted in Maven Central repository yet, so you need to configure the temporary repository in your pom.xml.
   
-  Here we have a basic example of using jQana:
+  Here we have a basic example of using jQana (please, check our {{{https://github.com/cleuton/jqana/wiki/Latest-version}LATEST VERSION PAGE}}):
   
 +--
 
@@ -83,7 +83,7 @@ merge integration-tests with site generation, including jacoco reporting, but we
 
 Project status
 
-  Beta (0.0.2).
+  Beta (0.0). Please check our {{{https://github.com/cleuton/jqana/wiki/Latest-version}LATEST VERSION PAGE}}.
   
   We consider the software as a Beta version (version number starting from zero). It is working, but it may have some issues yet. We have removed the SNAPSHOT suffix because we consider that it is ready for deployment. 
   

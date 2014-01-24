@@ -45,7 +45,18 @@ public class Context {
 	private Deque<String> errors;
 	private List<Metric> validMetrics;
 	private ResourceBundle bundle;
+	private String statusBeforeException;
 	
+	
+	
+	public String getStatusBeforeException() {
+		return statusBeforeException;
+	}
+
+	public void setStatusBeforeException(String statusBeforeException) {
+		this.statusBeforeException = statusBeforeException;
+	}
+
 	public Context(ResourceBundle bundle) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		super();
 		getMetricConstants();

@@ -102,10 +102,18 @@ public class JqanaMojo extends AbstractMavenReport {
 		return "jqana-report";
 	}
 	
-	
+	private Context context;
 
 	@Override
 	protected void executeReport(Locale locale) throws MavenReportException {
+		
+		try {
+			this.context = new Context();
+		} catch (Exception e) {
+			getLog().error("******************>>>>> Exception initializing context: " + e.getMessage());
+			throw new MavenReportException(e.getMessage());
+		}
+		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String reportDate = df.format(date);
@@ -148,21 +156,30 @@ public class JqanaMojo extends AbstractMavenReport {
 	private void reportPackageMetrics(Sink sink, Locale locale) {
 		
 		try {
-			DefaultProjectProcessor dpp = new DefaultProjectProcessor(new Context());
+			this.context.setStatusBeforeException("Instantiating DefaultProjectProcessor.");
+			DefaultProjectProcessor dpp = new DefaultProjectProcessor(this.context);
 			dpp.setLog(getLog());
 			File sourceDir = new File(this.project.getModel().getBuild().getSourceDirectory().replace("\\", "/"));
 			File objectDir = new File(this.project.getBuild().getDirectory() + "/classes");
 			getLog().debug(">>>>>>> ObjectDir: " + objectDir.getPath());
+			
+			this.context.setStatusBeforeException("Invoking Package processing. SourceDir: " + sourceDir.getName() + ", ObjectDir: " + objectDir.getName());
 			Measurement projectMeasurement = dpp.process(this.getProject().getName(), sourceDir, objectDir);
-			DefaultXmlGenerator generator = new DefaultXmlGenerator();
+			
+			this.context.setStatusBeforeException("Invoking XML Serialization.");
+			DefaultXmlGenerator generator = new DefaultXmlGenerator(this.context);
 			Document report = generator.serialize(projectMeasurement);
+			
+			this.context.setStatusBeforeException("Persisting XML file.");
 			persistXml(report, generator);
+			
+			this.context.setStatusBeforeException("Converting XML to HTML.");
 			DefaultXml2HtmlConverter converter = new DefaultXml2HtmlConverter();
 			String output = converter.convert(generator.xml2String(report,true));
 			sink.rawText(output);
 		}
 		catch (Exception ex) {
-			getLog().error(ex);
+			getLog().error(">>>>>>>>>> jQana Report Error: " + context.getStatusBeforeException() + ". Exception: " + ex.getMessage());
 		}
 	}
 	

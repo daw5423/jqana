@@ -15,6 +15,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.JavaClass;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.logging.Log;
 import org.slf4j.Logger;
@@ -28,7 +30,7 @@ import com.obomprogramador.tools.jqana.model.ProjectProcessor;
 import com.obomprogramador.tools.jqana.parsers.CyclomaticComplexityParser;
 import com.obomprogramador.tools.jqana.parsers.Lcom4Parser;
 import com.obomprogramador.tools.jqana.parsers.RfcBcelParser;
-import com.obomprogramador.tools.jqana.parsers.RfcParser;
+
 
 public class DefaultProjectProcessor implements ProjectProcessor {
 
@@ -97,6 +99,8 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 
 	/* (non javadoc)
 	 * Process each package and add it's measurement to the project's measurement.
+	 * Only packages containing valid java files are considered. If a package contains just one file, and it is not a java file or it has problems, 
+	 * then it must not be accounted. 
 	 * 
 	 */
 	protected void processFolder(File sourceDir) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -110,9 +114,10 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 			File oneFile = listFiles[x];
 			if (oneFile.isFile()) {
 				if (isJavaFile(oneFile)) {
-					hasJavaFiles = true;
+					if (processMetrics(packageMeasurement,oneFile)) {
+						hasJavaFiles = true;	
+					}
 				}
-				processMetrics(packageMeasurement,oneFile);
 			}
 			else {
 				// Is a directory (sub package)
@@ -154,16 +159,47 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 
 	/* (non javadoc)
 	 * Process the metric set for each source file.
+	 * It should handle exceptions and give error messages, but should not stop processing. 
 	 * 
 	 */
-	protected void processMetrics(Measurement packageMeasurement, File oneFile) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		logger.debug("Source file: " + oneFile.getName());
-		String sourceCode = this.getSource(oneFile);
-		processCyclomaticMetric(sourceCode, packageMeasurement);
-		processLcom4Metric(sourceCode, packageMeasurement);
-		processRfcMetric(oneFile, packageMeasurement);
+	protected boolean processMetrics(Measurement packageMeasurement, File oneFile)  {
+		boolean processingOk = true;
+		try {
+			logger.debug("Source file: " + oneFile.getName());
+			this.context.setStatusBeforeException("Verifying if it is a Java Class file: " + oneFile.getName() + ", package: " + packageMeasurement.getName());
+			if (isAclassFile(oneFile)) {
+				String sourceCode = this.getSource(oneFile);
+				this.context.setStatusBeforeException("Calculating CC for file: " + oneFile.getName() + ", package: " + packageMeasurement.getName());
+				processCyclomaticMetric(sourceCode, packageMeasurement);
+				this.context.setStatusBeforeException("Calculating LCOM4 for file: " + oneFile.getName() + ", package: " + packageMeasurement.getName());
+				processLcom4Metric(sourceCode, packageMeasurement);
+				this.context.setStatusBeforeException("Calculating RFC for file: " + oneFile.getName() + ", package: " + packageMeasurement.getName());
+				processRfcMetric(oneFile, packageMeasurement);				
+			}
+			else {
+				logger.debug(" ****  File ignored, not a java Class file, maybe an Interface type: "+ oneFile.getName() + ", package: " + packageMeasurement.getName());
+				processingOk = false;
+			}
+		}
+		catch (Exception ex) {
+			logger.error(">>>>>>>>>> Package Processing ERROR: " + context.getStatusBeforeException() + ". FILE IGNORED! Exception: " + ex.getClass().getSimpleName() + ", message: " + ex.getMessage());
+			processingOk = false;
+		}
+		return processingOk;
+		
 	}
 	
+	protected boolean isAclassFile(File oneFile) throws IOException {
+		boolean returnCode = true;
+		String objectPath = getObjectFilePath(oneFile);
+		ClassParser cParser = new ClassParser(objectPath);
+		JavaClass oneClass = cParser.parse();
+		if (oneClass.isInterface()) {
+			returnCode = false;
+		}
+		return returnCode;
+	}
+
 	/* (non javadoc)
 	 * Analyzes Cyclomatic complexity for a source file.
 	 */

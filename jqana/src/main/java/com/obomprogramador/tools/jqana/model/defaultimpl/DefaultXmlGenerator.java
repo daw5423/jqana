@@ -38,6 +38,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 
+import com.obomprogramador.tools.jqana.context.Context;
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.XmlGenerator;
 
@@ -52,9 +53,12 @@ import com.obomprogramador.tools.jqana.model.XmlGenerator;
  *
  */
 public class DefaultXmlGenerator implements XmlGenerator {
+	
+	private Context context;
 
-	public DefaultXmlGenerator() {
+	public DefaultXmlGenerator(Context context) {
 		super();
+		this.context = context;
 	}
 
 	/**
@@ -69,6 +73,9 @@ public class DefaultXmlGenerator implements XmlGenerator {
 	 */
 	@Override
 	public Document serialize(Measurement measurement) throws JAXBException, ParserConfigurationException, TransformerException {
+		
+		context.setStatusBeforeException("Marshalling measurement to XML. Measurement: " + measurement);
+		
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 	    dbf.setNamespaceAware(true);
 	    DocumentBuilder db = dbf.newDocumentBuilder();
@@ -84,6 +91,9 @@ public class DefaultXmlGenerator implements XmlGenerator {
 	}
 	
 	public String xml2String(Document report, boolean ommitXML) throws TransformerException {
+		
+		context.setStatusBeforeException("Transforming XML to String. Source XML: " + report.toString());
+		
 		TransformerFactory tf = TransformerFactory.newInstance();
 		Transformer transformer = tf.newTransformer();
 		if (ommitXML) {

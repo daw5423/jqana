@@ -36,16 +36,16 @@ public class TestUsingXmlGenerator {
 		try {
 			context = new Context();
 			testClasses = RetriveTestResults.getResults(context);
-			DefaultProjectProcessor dpp = new DefaultProjectProcessor(new Context());
+			DefaultProjectProcessor dpp = new DefaultProjectProcessor(context);
 			File sourceDir = new File(this.getClass().getClassLoader().getResource(rootTestResources).toURI());
 			File objectDir = sourceDir.getParentFile().getParentFile();
 			this.project = dpp.process("Teste", sourceDir, objectDir);
-			DefaultXmlGenerator generator = new DefaultXmlGenerator();
+			DefaultXmlGenerator generator = new DefaultXmlGenerator(context);
 			Document report = generator.serialize(this.project);
 			assertTrue(verifyResult(report));
 			logger.debug("Test OK! XML: " + generator.xml2String(report,true));
 		} catch (Exception ex) {
-			fail(ex.getMessage());
+			fail(">>>>>>>>>> jQana Report Error: " + context.getStatusBeforeException() + ". Exception: " + ex.getMessage());
 		}
 		
 	}

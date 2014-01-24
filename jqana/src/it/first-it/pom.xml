@@ -43,7 +43,7 @@
           <plugin>
 			<groupId>com.obomprogramador.tools</groupId>
 			<artifactId>jqana-maven-plugin</artifactId>
-			<version>0.0.1</version>              
+			<version>0.0.3</version>              
           </plugin>
       </plugins>
   </reporting>

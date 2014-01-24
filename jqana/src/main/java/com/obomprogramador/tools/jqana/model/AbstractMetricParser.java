@@ -13,7 +13,7 @@ import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
 import com.obomprogramador.tools.jqana.context.Context;
 import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
-import com.obomprogramador.tools.jqana.parsers.RfcListener;
+
 
 public abstract class AbstractMetricParser implements Parser {
 

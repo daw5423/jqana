@@ -8,6 +8,7 @@
     <body>
         <menu name="jQana Project">
             <item name="Overview" href="index.html"/>
+            <item name="Latest version" href="https://github.com/cleuton/jqana/wiki/Latest-version"/>
         </menu>
         <menu name="Help">
             <item name="Wiki pages" href="https://github.com/cleuton/jqana/wiki/_pages"/>

@@ -23,7 +23,7 @@ import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 import com.obomprogramador.tools.jqana.model.defaultimpl.RetriveTestResults;
 import com.obomprogramador.tools.jqana.parsers.Lcom4Parser;
 import com.obomprogramador.tools.jqana.parsers.RfcBcelParser;
-import com.obomprogramador.tools.jqana.parsers.RfcParser;
+
 
 public class TestRfc {
 	
