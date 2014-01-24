@@ -5,15 +5,13 @@ jqana,com.obomprogramador.tools.jqana.model,Metric,0,3,0,0,0,1,0,1,0,1
 jqana,com.obomprogramador.tools.jqana.model,AbstractMetricParser,47,242,3,9,13,55,5,9,3,5
 jqana,com.obomprogramador.tools.jqana.model,Measurement,56,98,5,1,20,21,9,11,6,11
 jqana,com.obomprogramador.tools.jqana.mavenplugin,HelpMojo,875,3,106,0,150,1,68,1,15,1
-jqana,com.obomprogramador.tools.jqana.mavenplugin,JqanaMojo,30,331,2,2,9,70,4,10,2,10
-jqana,com.obomprogramador.tools.jqana.context,Context,30,155,1,1,13,35,7,6,6,6
+jqana,com.obomprogramador.tools.jqana.mavenplugin,JqanaMojo,64,371,2,2,12,77,4,10,2,10
+jqana,com.obomprogramador.tools.jqana.context,Context,27,165,1,1,12,39,6,9,5,9
 jqana,com.obomprogramador.tools.jqana.context,GlobalConstants,3,0,0,0,1,0,1,0,1,0
 jqana,com.obomprogramador.tools.jqana.parsers,Lcom4Listener.Lcom4MethodListener,0,104,1,7,0,19,1,5,0,2
 jqana,com.obomprogramador.tools.jqana.parsers,Lcom4Listener,6,343,12,36,4,83,11,21,0,8
 jqana,com.obomprogramador.tools.jqana.parsers,Lcom4Parser,44,623,14,50,13,116,12,34,1,13
 jqana,com.obomprogramador.tools.jqana.parsers,Lcom4Parser.Component,0,47,0,2,0,9,0,3,0,2
-jqana,com.obomprogramador.tools.jqana.parsers,RfcListener,187,0,16,0,47,0,15,0,7,0
-jqana,com.obomprogramador.tools.jqana.parsers,RfcParser,17,0,0,0,4,0,2,0,2,0
 jqana,com.obomprogramador.tools.jqana.parsers,Member,16,40,0,0,2,5,2,3,2,3
 jqana,com.obomprogramador.tools.jqana.parsers,CyclomaticComplexityParser,0,42,0,2,0,9,0,4,0,3
 jqana,com.obomprogramador.tools.jqana.parsers,Member.MEMBER_TYPE,9,39,0,0,0,1,2,2,2,2
@@ -24,9 +22,9 @@ jqana,com.obomprogramador.tools.jqana.model.defaultimpl,GetClassNameFromContext,
 jqana,com.obomprogramador.tools.jqana.model.defaultimpl,RetriveTestResults,71,0,6,0,17,0,5,0,2,0
 jqana,com.obomprogramador.tools.jqana.model.defaultimpl,DefaultProjectProcessor.new Object() {...},6,23,0,0,0,1,0,1,0,1
 jqana,com.obomprogramador.tools.jqana.model.defaultimpl,DefaultProjectProcessor.MSG_TYPE,5,43,0,0,0,1,1,3,1,3
-jqana,com.obomprogramador.tools.jqana.model.defaultimpl,DefaultXmlGenerator,0,70,0,2,0,19,0,4,0,3
+jqana,com.obomprogramador.tools.jqana.model.defaultimpl,DefaultXmlGenerator,0,96,0,2,0,22,0,4,0,3
 jqana,com.obomprogramador.tools.jqana.model.defaultimpl,MetricValue,12,65,0,0,2,16,2,11,2,11
-jqana,com.obomprogramador.tools.jqana.model.defaultimpl,DefaultProjectProcessor,102,399,11,17,28,97,12,20,2,14
+jqana,com.obomprogramador.tools.jqana.model.defaultimpl,DefaultProjectProcessor,130,517,9,25,31,114,10,26,2,15
 jqana,com.obomprogramador.tools.jqana.model.defaultimpl,MaxLimitVerificationAlgorithm,10,17,0,2,5,7,3,3,3,2
 jqana,com.obomprogramador.tools.jqana.model.defaultimpl,DefaultMetric,55,28,0,0,14,11,9,7,9,7
 jqana,com.obomprogramador.tools.jqana.model.defaultimpl,DefaultXml2HtmlConverter,86,61,2,0,22,14,3,2,2,2
@@ -48,7 +46,7 @@ jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.MethodBodyContext,2
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.StatementExpressionContext,20,21,4,2,4,6,6,3,3,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.TypeDeclarationContext,48,21,4,2,9,6,11,3,8,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.ModifierContext,20,21,4,2,4,6,6,3,3,3
-jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser,8375,5778,478,292,1571,1039,392,172,49,62
+jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser,7962,6191,459,311,1480,1130,382,182,44,67
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.LiteralContext,39,21,4,2,8,6,10,3,7,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.ConstantDeclaratorContext,46,0,6,0,11,0,10,0,7,0
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.AnnotationNameContext,20,21,4,2,4,6,6,3,3,3
@@ -74,7 +72,7 @@ jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.EnumBodyDeclaration
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.ConstructorDeclarationContext,37,21,4,2,7,6,9,3,6,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.AnnotationMethodOrConstantRestContext,47,0,6,0,11,0,10,0,7,0
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.ArrayCreatorRestContext,51,0,6,0,12,0,11,0,8,0
-jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.InterfaceMemberDeclarationContext,77,0,6,0,16,0,15,0,12,0
+jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.InterfaceMemberDeclarationContext,56,21,4,2,10,6,12,3,9,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.EnhancedForControlContext,62,0,6,0,14,0,13,0,10,0
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.ElementValueArrayInitializerContext,45,0,6,0,11,0,10,0,7,0
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.CreatedNameContext,39,21,4,2,8,6,10,3,7,3
@@ -87,7 +85,7 @@ jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.ClassOrInterfaceTyp
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.VariableDeclaratorContext,26,21,4,2,5,6,7,3,4,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.ElementValueContext,53,0,6,0,12,0,11,0,8,0
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.PrimaryContext,55,21,4,2,10,6,12,3,9,3
-jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.InterfaceMethodDeclarationContext,58,0,6,0,13,0,12,0,9,0
+jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.InterfaceMethodDeclarationContext,37,21,4,2,7,6,9,3,6,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.GenericConstructorDeclarationContext,47,0,6,0,11,0,10,0,7,0
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.TypeArgumentsContext,24,21,4,2,5,6,7,3,4,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.DefaultValueContext,41,0,6,0,10,0,9,0,6,0
@@ -104,11 +102,11 @@ jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.ClassDeclarationCon
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.ImportDeclarationContext,20,21,4,2,4,6,6,3,3,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.AnnotationContext,32,21,4,2,6,6,8,3,5,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.ArgumentsContext,20,21,4,2,4,6,6,3,3,3
-jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.InterfaceBodyDeclarationContext,51,0,6,0,12,0,11,0,8,0
+jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.InterfaceBodyDeclarationContext,30,21,4,2,6,6,8,3,5,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.StatementContext,110,21,4,2,21,6,23,3,20,3
-jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.InterfaceDeclarationContext,58,0,6,0,13,0,12,0,9,0
+jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.InterfaceDeclarationContext,37,21,4,2,7,6,9,3,6,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.AnnotationConstantRestContext,41,0,6,0,10,0,9,0,6,0
-jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.InterfaceBodyContext,45,0,6,0,11,0,10,0,7,0
+jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.InterfaceBodyContext,24,21,4,2,5,6,7,3,4,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.VariableDeclaratorsContext,24,21,4,2,5,6,7,3,4,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.SwitchBlockStatementGroupContext,34,21,4,2,7,6,9,3,6,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.FieldDeclarationContext,26,21,4,2,5,6,7,3,4,3
@@ -131,7 +129,7 @@ jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.LocalVariableDeclar
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.ClassBodyContext,24,21,4,2,5,6,7,3,4,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.PackageDeclarationContext,30,21,4,2,6,6,8,3,5,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.EnumDeclarationContext,63,0,6,0,14,0,13,0,10,0
-jqana,com.obomprogramador.tools.jqana.antlrparser,JavaBaseListener,93,120,0,0,93,118,93,118,93,118
+jqana,com.obomprogramador.tools.jqana.antlrparser,JavaBaseListener,83,130,0,0,83,128,83,128,83,128
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.ClassBodyDeclarationContext,36,21,4,2,7,6,9,3,6,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.InnerCreatorContext,31,21,4,2,6,6,8,3,5,3
 jqana,com.obomprogramador.tools.jqana.antlrparser,JavaParser.QualifiedNameListContext,24,21,4,2,5,6,7,3,4,3

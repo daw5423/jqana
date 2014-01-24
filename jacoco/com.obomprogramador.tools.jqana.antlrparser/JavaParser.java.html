@@ -394,7 +394,7 @@ public class JavaParser extends Parser {
 		try {
 			int _alt;
 <span class="fc" id="L396">			setState(273);</span>
-<span class="pc bpc" id="L397" title="5 of 6 branches missed.">			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {</span>
+<span class="pc bpc" id="L397" title="4 of 6 branches missed.">			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {</span>
 			case 1:
 <span class="fc" id="L399">				enterOuterAlt(_localctx, 1);</span>
 				{
@@ -436,24 +436,24 @@ public class JavaParser extends Parser {
 <span class="nc" id="L436">				break;</span>
 
 			case 3:
-<span class="nc" id="L439">				enterOuterAlt(_localctx, 3);</span>
+<span class="fc" id="L439">				enterOuterAlt(_localctx, 3);</span>
 				{
-<span class="nc" id="L441">				setState(261);</span>
-<span class="nc" id="L442">				_errHandler.sync(this);</span>
-<span class="nc" id="L443">				_la = _input.LA(1);</span>
-<span class="nc bnc" id="L444" title="All 6 branches missed.">				while ((((_la) &amp; ~0x3f) == 0 &amp;&amp; ((1L &lt;&lt; _la) &amp; ((1L &lt;&lt; ABSTRACT) | (1L &lt;&lt; FINAL) | (1L &lt;&lt; PRIVATE) | (1L &lt;&lt; PROTECTED) | (1L &lt;&lt; PUBLIC) | (1L &lt;&lt; STATIC) | (1L &lt;&lt; STRICTFP))) != 0) || _la==AT) {</span>
+<span class="fc" id="L441">				setState(261);</span>
+<span class="fc" id="L442">				_errHandler.sync(this);</span>
+<span class="fc" id="L443">				_la = _input.LA(1);</span>
+<span class="pc bpc" id="L444" title="2 of 6 branches missed.">				while ((((_la) &amp; ~0x3f) == 0 &amp;&amp; ((1L &lt;&lt; _la) &amp; ((1L &lt;&lt; ABSTRACT) | (1L &lt;&lt; FINAL) | (1L &lt;&lt; PRIVATE) | (1L &lt;&lt; PROTECTED) | (1L &lt;&lt; PUBLIC) | (1L &lt;&lt; STATIC) | (1L &lt;&lt; STRICTFP))) != 0) || _la==AT) {</span>
 					{
 					{
-<span class="nc" id="L447">					setState(258); classOrInterfaceModifier();</span>
+<span class="fc" id="L447">					setState(258); classOrInterfaceModifier();</span>
 					}
 					}
-<span class="nc" id="L450">					setState(263);</span>
-<span class="nc" id="L451">					_errHandler.sync(this);</span>
-<span class="nc" id="L452">					_la = _input.LA(1);</span>
+<span class="fc" id="L450">					setState(263);</span>
+<span class="fc" id="L451">					_errHandler.sync(this);</span>
+<span class="fc" id="L452">					_la = _input.LA(1);</span>
 				}
-<span class="nc" id="L454">				setState(264); interfaceDeclaration();</span>
+<span class="fc" id="L454">				setState(264); interfaceDeclaration();</span>
 				}
-<span class="nc" id="L456">				break;</span>
+<span class="fc" id="L456">				break;</span>
 
 			case 4:
 <span class="nc" id="L459">				enterOuterAlt(_localctx, 4);</span>
@@ -1258,17 +1258,17 @@ public class JavaParser extends Parser {
 <span class="nc" id="L1258">			return getRuleContext(InterfaceBodyContext.class,0);</span>
 		}
 		public InterfaceDeclarationContext(ParserRuleContext parent, int invokingState) {
-<span class="nc" id="L1261">			super(parent, invokingState);</span>
-<span class="nc" id="L1262">		}</span>
+<span class="fc" id="L1261">			super(parent, invokingState);</span>
+<span class="fc" id="L1262">		}</span>
 <span class="nc" id="L1263">		@Override public int getRuleIndex() { return RULE_interfaceDeclaration; }</span>
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-<span class="nc bnc" id="L1266" title="All 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).enterInterfaceDeclaration(this);</span>
-<span class="nc" id="L1267">		}</span>
+<span class="pc bpc" id="L1266" title="1 of 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).enterInterfaceDeclaration(this);</span>
+<span class="fc" id="L1267">		}</span>
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-<span class="nc bnc" id="L1270" title="All 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).exitInterfaceDeclaration(this);</span>
-<span class="nc" id="L1271">		}</span>
+<span class="pc bpc" id="L1270" title="1 of 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).exitInterfaceDeclaration(this);</span>
+<span class="fc" id="L1271">		}</span>
 		@Override
 		public &lt;T&gt; T accept(ParseTreeVisitor&lt;? extends T&gt; visitor) {
 <span class="nc bnc" id="L1274" title="All 2 branches missed.">			if ( visitor instanceof JavaVisitor ) return ((JavaVisitor&lt;? extends T&gt;)visitor).visitInterfaceDeclaration(this);</span>
@@ -1277,32 +1277,32 @@ public class JavaParser extends Parser {
 	}
 
 	public final InterfaceDeclarationContext interfaceDeclaration() throws RecognitionException {
-<span class="nc" id="L1280">		InterfaceDeclarationContext _localctx = new InterfaceDeclarationContext(_ctx, getState());</span>
-<span class="nc" id="L1281">		enterRule(_localctx, 30, RULE_interfaceDeclaration);</span>
+<span class="fc" id="L1280">		InterfaceDeclarationContext _localctx = new InterfaceDeclarationContext(_ctx, getState());</span>
+<span class="fc" id="L1281">		enterRule(_localctx, 30, RULE_interfaceDeclaration);</span>
 		int _la;
 		try {
-<span class="nc" id="L1284">			enterOuterAlt(_localctx, 1);</span>
+<span class="fc" id="L1284">			enterOuterAlt(_localctx, 1);</span>
 			{
-<span class="nc" id="L1286">			setState(372); match(INTERFACE);</span>
-<span class="nc" id="L1287">			setState(373); match(Identifier);</span>
-<span class="nc" id="L1288">			setState(375);</span>
-<span class="nc" id="L1289">			_la = _input.LA(1);</span>
-<span class="nc bnc" id="L1290" title="All 2 branches missed.">			if (_la==LT) {</span>
+<span class="fc" id="L1286">			setState(372); match(INTERFACE);</span>
+<span class="fc" id="L1287">			setState(373); match(Identifier);</span>
+<span class="fc" id="L1288">			setState(375);</span>
+<span class="fc" id="L1289">			_la = _input.LA(1);</span>
+<span class="pc bpc" id="L1290" title="1 of 2 branches missed.">			if (_la==LT) {</span>
 				{
 <span class="nc" id="L1292">				setState(374); typeParameters();</span>
 				}
 			}
 
-<span class="nc" id="L1296">			setState(379);</span>
-<span class="nc" id="L1297">			_la = _input.LA(1);</span>
-<span class="nc bnc" id="L1298" title="All 2 branches missed.">			if (_la==EXTENDS) {</span>
+<span class="fc" id="L1296">			setState(379);</span>
+<span class="fc" id="L1297">			_la = _input.LA(1);</span>
+<span class="pc bpc" id="L1298" title="1 of 2 branches missed.">			if (_la==EXTENDS) {</span>
 				{
 <span class="nc" id="L1300">				setState(377); match(EXTENDS);</span>
 <span class="nc" id="L1301">				setState(378); typeList();</span>
 				}
 			}
 
-<span class="nc" id="L1305">			setState(381); interfaceBody();</span>
+<span class="fc" id="L1305">			setState(381); interfaceBody();</span>
 			}
 		}
 <span class="nc" id="L1308">		catch (RecognitionException re) {</span>
@@ -1311,9 +1311,9 @@ public class JavaParser extends Parser {
 <span class="nc" id="L1311">			_errHandler.recover(this, re);</span>
 		}
 		finally {
-<span class="nc" id="L1314">			exitRule();</span>
-<span class="nc" id="L1315">		}</span>
-<span class="nc" id="L1316">		return _localctx;</span>
+<span class="pc" id="L1314">			exitRule();</span>
+<span class="pc" id="L1315">		}</span>
+<span class="fc" id="L1316">		return _localctx;</span>
 	}
 
 	public static class TypeListContext extends ParserRuleContext {
@@ -1446,17 +1446,17 @@ public class JavaParser extends Parser {
 <span class="nc" id="L1446">			return getRuleContexts(InterfaceBodyDeclarationContext.class);</span>
 		}
 		public InterfaceBodyContext(ParserRuleContext parent, int invokingState) {
-<span class="nc" id="L1449">			super(parent, invokingState);</span>
-<span class="nc" id="L1450">		}</span>
+<span class="fc" id="L1449">			super(parent, invokingState);</span>
+<span class="fc" id="L1450">		}</span>
 <span class="nc" id="L1451">		@Override public int getRuleIndex() { return RULE_interfaceBody; }</span>
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-<span class="nc bnc" id="L1454" title="All 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).enterInterfaceBody(this);</span>
-<span class="nc" id="L1455">		}</span>
+<span class="pc bpc" id="L1454" title="1 of 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).enterInterfaceBody(this);</span>
+<span class="fc" id="L1455">		}</span>
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-<span class="nc bnc" id="L1458" title="All 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).exitInterfaceBody(this);</span>
-<span class="nc" id="L1459">		}</span>
+<span class="pc bpc" id="L1458" title="1 of 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).exitInterfaceBody(this);</span>
+<span class="fc" id="L1459">		}</span>
 		@Override
 		public &lt;T&gt; T accept(ParseTreeVisitor&lt;? extends T&gt; visitor) {
 <span class="nc bnc" id="L1462" title="All 2 branches missed.">			if ( visitor instanceof JavaVisitor ) return ((JavaVisitor&lt;? extends T&gt;)visitor).visitInterfaceBody(this);</span>
@@ -1465,27 +1465,27 @@ public class JavaParser extends Parser {
 	}
 
 	public final InterfaceBodyContext interfaceBody() throws RecognitionException {
-<span class="nc" id="L1468">		InterfaceBodyContext _localctx = new InterfaceBodyContext(_ctx, getState());</span>
-<span class="nc" id="L1469">		enterRule(_localctx, 36, RULE_interfaceBody);</span>
+<span class="fc" id="L1468">		InterfaceBodyContext _localctx = new InterfaceBodyContext(_ctx, getState());</span>
+<span class="fc" id="L1469">		enterRule(_localctx, 36, RULE_interfaceBody);</span>
 		int _la;
 		try {
-<span class="nc" id="L1472">			enterOuterAlt(_localctx, 1);</span>
+<span class="fc" id="L1472">			enterOuterAlt(_localctx, 1);</span>
 			{
-<span class="nc" id="L1474">			setState(400); match(LBRACE);</span>
-<span class="nc" id="L1475">			setState(404);</span>
-<span class="nc" id="L1476">			_errHandler.sync(this);</span>
-<span class="nc" id="L1477">			_la = _input.LA(1);</span>
-<span class="nc bnc" id="L1478" title="All 8 branches missed.">			while ((((_la) &amp; ~0x3f) == 0 &amp;&amp; ((1L &lt;&lt; _la) &amp; ((1L &lt;&lt; ABSTRACT) | (1L &lt;&lt; BOOLEAN) | (1L &lt;&lt; BYTE) | (1L &lt;&lt; CHAR) | (1L &lt;&lt; CLASS) | (1L &lt;&lt; DOUBLE) | (1L &lt;&lt; ENUM) | (1L &lt;&lt; FINAL) | (1L &lt;&lt; FLOAT) | (1L &lt;&lt; INT) | (1L &lt;&lt; INTERFACE) | (1L &lt;&lt; LONG) | (1L &lt;&lt; NATIVE) | (1L &lt;&lt; PRIVATE) | (1L &lt;&lt; PROTECTED) | (1L &lt;&lt; PUBLIC) | (1L &lt;&lt; SHORT) | (1L &lt;&lt; STATIC) | (1L &lt;&lt; STRICTFP) | (1L &lt;&lt; SYNCHRONIZED) | (1L &lt;&lt; TRANSIENT) | (1L &lt;&lt; VOID) | (1L &lt;&lt; VOLATILE) | (1L &lt;&lt; SEMI))) != 0) || ((((_la - 68)) &amp; ~0x3f) == 0 &amp;&amp; ((1L &lt;&lt; (_la - 68)) &amp; ((1L &lt;&lt; (LT - 68)) | (1L &lt;&lt; (Identifier - 68)) | (1L &lt;&lt; (AT - 68)))) != 0)) {</span>
+<span class="fc" id="L1474">			setState(400); match(LBRACE);</span>
+<span class="fc" id="L1475">			setState(404);</span>
+<span class="fc" id="L1476">			_errHandler.sync(this);</span>
+<span class="fc" id="L1477">			_la = _input.LA(1);</span>
+<span class="pc bpc" id="L1478" title="4 of 8 branches missed.">			while ((((_la) &amp; ~0x3f) == 0 &amp;&amp; ((1L &lt;&lt; _la) &amp; ((1L &lt;&lt; ABSTRACT) | (1L &lt;&lt; BOOLEAN) | (1L &lt;&lt; BYTE) | (1L &lt;&lt; CHAR) | (1L &lt;&lt; CLASS) | (1L &lt;&lt; DOUBLE) | (1L &lt;&lt; ENUM) | (1L &lt;&lt; FINAL) | (1L &lt;&lt; FLOAT) | (1L &lt;&lt; INT) | (1L &lt;&lt; INTERFACE) | (1L &lt;&lt; LONG) | (1L &lt;&lt; NATIVE) | (1L &lt;&lt; PRIVATE) | (1L &lt;&lt; PROTECTED) | (1L &lt;&lt; PUBLIC) | (1L &lt;&lt; SHORT) | (1L &lt;&lt; STATIC) | (1L &lt;&lt; STRICTFP) | (1L &lt;&lt; SYNCHRONIZED) | (1L &lt;&lt; TRANSIENT) | (1L &lt;&lt; VOID) | (1L &lt;&lt; VOLATILE) | (1L &lt;&lt; SEMI))) != 0) || ((((_la - 68)) &amp; ~0x3f) == 0 &amp;&amp; ((1L &lt;&lt; (_la - 68)) &amp; ((1L &lt;&lt; (LT - 68)) | (1L &lt;&lt; (Identifier - 68)) | (1L &lt;&lt; (AT - 68)))) != 0)) {</span>
 				{
 				{
-<span class="nc" id="L1481">				setState(401); interfaceBodyDeclaration();</span>
+<span class="fc" id="L1481">				setState(401); interfaceBodyDeclaration();</span>
 				}
 				}
-<span class="nc" id="L1484">				setState(406);</span>
-<span class="nc" id="L1485">				_errHandler.sync(this);</span>
-<span class="nc" id="L1486">				_la = _input.LA(1);</span>
+<span class="fc" id="L1484">				setState(406);</span>
+<span class="fc" id="L1485">				_errHandler.sync(this);</span>
+<span class="fc" id="L1486">				_la = _input.LA(1);</span>
 			}
-<span class="nc" id="L1488">			setState(407); match(RBRACE);</span>
+<span class="fc" id="L1488">			setState(407); match(RBRACE);</span>
 			}
 		}
 <span class="nc" id="L1491">		catch (RecognitionException re) {</span>
@@ -1494,9 +1494,9 @@ public class JavaParser extends Parser {
 <span class="nc" id="L1494">			_errHandler.recover(this, re);</span>
 		}
 		finally {
-<span class="nc" id="L1497">			exitRule();</span>
-<span class="nc" id="L1498">		}</span>
-<span class="nc" id="L1499">		return _localctx;</span>
+<span class="pc" id="L1497">			exitRule();</span>
+<span class="pc" id="L1498">		}</span>
+<span class="fc" id="L1499">		return _localctx;</span>
 	}
 
 	public static class ClassBodyDeclarationContext extends ParserRuleContext {
@@ -1647,7 +1647,7 @@ public class JavaParser extends Parser {
 <span class="fc" id="L1647">		enterRule(_localctx, 40, RULE_memberDeclaration);</span>
 		try {
 <span class="fc" id="L1649">			setState(432);</span>
-<span class="pc bpc" id="L1650" title="6 of 10 branches missed.">			switch ( getInterpreter().adaptivePredict(_input,37,_ctx) ) {</span>
+<span class="pc bpc" id="L1650" title="5 of 10 branches missed.">			switch ( getInterpreter().adaptivePredict(_input,37,_ctx) ) {</span>
 			case 1:
 <span class="fc" id="L1652">				enterOuterAlt(_localctx, 1);</span>
 				{
@@ -1684,11 +1684,11 @@ public class JavaParser extends Parser {
 <span class="nc" id="L1684">				break;</span>
 
 			case 6:
-<span class="nc" id="L1687">				enterOuterAlt(_localctx, 6);</span>
+<span class="fc" id="L1687">				enterOuterAlt(_localctx, 6);</span>
 				{
-<span class="nc" id="L1689">				setState(428); interfaceDeclaration();</span>
+<span class="fc" id="L1689">				setState(428); interfaceDeclaration();</span>
 				}
-<span class="nc" id="L1691">				break;</span>
+<span class="fc" id="L1691">				break;</span>
 
 			case 7:
 <span class="nc" id="L1694">				enterOuterAlt(_localctx, 7);</span>
@@ -2054,17 +2054,17 @@ public class JavaParser extends Parser {
 <span class="nc" id="L2054">			return getRuleContext(ModifierContext.class,i);</span>
 		}
 		public InterfaceBodyDeclarationContext(ParserRuleContext parent, int invokingState) {
-<span class="nc" id="L2057">			super(parent, invokingState);</span>
-<span class="nc" id="L2058">		}</span>
+<span class="fc" id="L2057">			super(parent, invokingState);</span>
+<span class="fc" id="L2058">		}</span>
 <span class="nc" id="L2059">		@Override public int getRuleIndex() { return RULE_interfaceBodyDeclaration; }</span>
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-<span class="nc bnc" id="L2062" title="All 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).enterInterfaceBodyDeclaration(this);</span>
-<span class="nc" id="L2063">		}</span>
+<span class="pc bpc" id="L2062" title="1 of 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).enterInterfaceBodyDeclaration(this);</span>
+<span class="fc" id="L2063">		}</span>
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-<span class="nc bnc" id="L2066" title="All 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).exitInterfaceBodyDeclaration(this);</span>
-<span class="nc" id="L2067">		}</span>
+<span class="pc bpc" id="L2066" title="1 of 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).exitInterfaceBodyDeclaration(this);</span>
+<span class="fc" id="L2067">		}</span>
 		@Override
 		public &lt;T&gt; T accept(ParseTreeVisitor&lt;? extends T&gt; visitor) {
 <span class="nc bnc" id="L2070" title="All 2 branches missed.">			if ( visitor instanceof JavaVisitor ) return ((JavaVisitor&lt;? extends T&gt;)visitor).visitInterfaceBodyDeclaration(this);</span>
@@ -2073,12 +2073,12 @@ public class JavaParser extends Parser {
 	}
 
 	public final InterfaceBodyDeclarationContext interfaceBodyDeclaration() throws RecognitionException {
-<span class="nc" id="L2076">		InterfaceBodyDeclarationContext _localctx = new InterfaceBodyDeclarationContext(_ctx, getState());</span>
-<span class="nc" id="L2077">		enterRule(_localctx, 52, RULE_interfaceBodyDeclaration);</span>
+<span class="fc" id="L2076">		InterfaceBodyDeclarationContext _localctx = new InterfaceBodyDeclarationContext(_ctx, getState());</span>
+<span class="fc" id="L2077">		enterRule(_localctx, 52, RULE_interfaceBodyDeclaration);</span>
 		try {
 			int _alt;
-<span class="nc" id="L2080">			setState(481);</span>
-<span class="nc bnc" id="L2081" title="All 3 branches missed.">			switch (_input.LA(1)) {</span>
+<span class="fc" id="L2080">			setState(481);</span>
+<span class="pc bpc" id="L2081" title="2 of 3 branches missed.">			switch (_input.LA(1)) {</span>
 			case ABSTRACT:
 			case BOOLEAN:
 			case BYTE:
@@ -2105,12 +2105,12 @@ public class JavaParser extends Parser {
 			case LT:
 			case Identifier:
 			case AT:
-<span class="nc" id="L2108">				enterOuterAlt(_localctx, 1);</span>
+<span class="fc" id="L2108">				enterOuterAlt(_localctx, 1);</span>
 				{
-<span class="nc" id="L2110">				setState(476);</span>
-<span class="nc" id="L2111">				_errHandler.sync(this);</span>
-<span class="nc" id="L2112">				_alt = getInterpreter().adaptivePredict(_input,43,_ctx);</span>
-<span class="nc bnc" id="L2113" title="All 4 branches missed.">				while ( _alt!=2 &amp;&amp; _alt!=-1 ) {</span>
+<span class="fc" id="L2110">				setState(476);</span>
+<span class="fc" id="L2111">				_errHandler.sync(this);</span>
+<span class="fc" id="L2112">				_alt = getInterpreter().adaptivePredict(_input,43,_ctx);</span>
+<span class="pc bpc" id="L2113" title="3 of 4 branches missed.">				while ( _alt!=2 &amp;&amp; _alt!=-1 ) {</span>
 <span class="nc bnc" id="L2114" title="All 2 branches missed.">					if ( _alt==1 ) {</span>
 						{
 						{
@@ -2122,9 +2122,9 @@ public class JavaParser extends Parser {
 <span class="nc" id="L2122">					_errHandler.sync(this);</span>
 <span class="nc" id="L2123">					_alt = getInterpreter().adaptivePredict(_input,43,_ctx);</span>
 				}
-<span class="nc" id="L2125">				setState(479); interfaceMemberDeclaration();</span>
+<span class="fc" id="L2125">				setState(479); interfaceMemberDeclaration();</span>
 				}
-<span class="nc" id="L2127">				break;</span>
+<span class="fc" id="L2127">				break;</span>
 			case SEMI:
 <span class="nc" id="L2129">				enterOuterAlt(_localctx, 2);</span>
 				{
@@ -2141,9 +2141,9 @@ public class JavaParser extends Parser {
 <span class="nc" id="L2141">			_errHandler.recover(this, re);</span>
 		}
 		finally {
-<span class="nc" id="L2144">			exitRule();</span>
-<span class="nc" id="L2145">		}</span>
-<span class="nc" id="L2146">		return _localctx;</span>
+<span class="pc" id="L2144">			exitRule();</span>
+<span class="pc" id="L2145">		}</span>
+<span class="fc" id="L2146">		return _localctx;</span>
 	}
 
 	public static class InterfaceMemberDeclarationContext extends ParserRuleContext {
@@ -2169,17 +2169,17 @@ public class JavaParser extends Parser {
 <span class="nc" id="L2169">			return getRuleContext(ClassDeclarationContext.class,0);</span>
 		}
 		public InterfaceMemberDeclarationContext(ParserRuleContext parent, int invokingState) {
-<span class="nc" id="L2172">			super(parent, invokingState);</span>
-<span class="nc" id="L2173">		}</span>
+<span class="fc" id="L2172">			super(parent, invokingState);</span>
+<span class="fc" id="L2173">		}</span>
 <span class="nc" id="L2174">		@Override public int getRuleIndex() { return RULE_interfaceMemberDeclaration; }</span>
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-<span class="nc bnc" id="L2177" title="All 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).enterInterfaceMemberDeclaration(this);</span>
-<span class="nc" id="L2178">		}</span>
+<span class="pc bpc" id="L2177" title="1 of 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).enterInterfaceMemberDeclaration(this);</span>
+<span class="fc" id="L2178">		}</span>
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-<span class="nc bnc" id="L2181" title="All 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).exitInterfaceMemberDeclaration(this);</span>
-<span class="nc" id="L2182">		}</span>
+<span class="pc bpc" id="L2181" title="1 of 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).exitInterfaceMemberDeclaration(this);</span>
+<span class="fc" id="L2182">		}</span>
 		@Override
 		public &lt;T&gt; T accept(ParseTreeVisitor&lt;? extends T&gt; visitor) {
 <span class="nc bnc" id="L2185" title="All 2 branches missed.">			if ( visitor instanceof JavaVisitor ) return ((JavaVisitor&lt;? extends T&gt;)visitor).visitInterfaceMemberDeclaration(this);</span>
@@ -2188,11 +2188,11 @@ public class JavaParser extends Parser {
 	}
 
 	public final InterfaceMemberDeclarationContext interfaceMemberDeclaration() throws RecognitionException {
-<span class="nc" id="L2191">		InterfaceMemberDeclarationContext _localctx = new InterfaceMemberDeclarationContext(_ctx, getState());</span>
-<span class="nc" id="L2192">		enterRule(_localctx, 54, RULE_interfaceMemberDeclaration);</span>
+<span class="fc" id="L2191">		InterfaceMemberDeclarationContext _localctx = new InterfaceMemberDeclarationContext(_ctx, getState());</span>
+<span class="fc" id="L2192">		enterRule(_localctx, 54, RULE_interfaceMemberDeclaration);</span>
 		try {
-<span class="nc" id="L2194">			setState(490);</span>
-<span class="nc bnc" id="L2195" title="All 8 branches missed.">			switch ( getInterpreter().adaptivePredict(_input,45,_ctx) ) {</span>
+<span class="fc" id="L2194">			setState(490);</span>
+<span class="pc bpc" id="L2195" title="7 of 8 branches missed.">			switch ( getInterpreter().adaptivePredict(_input,45,_ctx) ) {</span>
 			case 1:
 <span class="nc" id="L2197">				enterOuterAlt(_localctx, 1);</span>
 				{
@@ -2201,11 +2201,11 @@ public class JavaParser extends Parser {
 <span class="nc" id="L2201">				break;</span>
 
 			case 2:
-<span class="nc" id="L2204">				enterOuterAlt(_localctx, 2);</span>
+<span class="fc" id="L2204">				enterOuterAlt(_localctx, 2);</span>
 				{
-<span class="nc" id="L2206">				setState(484); interfaceMethodDeclaration();</span>
+<span class="fc" id="L2206">				setState(484); interfaceMethodDeclaration();</span>
 				}
-<span class="nc" id="L2208">				break;</span>
+<span class="fc" id="L2208">				break;</span>
 
 			case 3:
 <span class="nc" id="L2211">				enterOuterAlt(_localctx, 3);</span>
@@ -2249,9 +2249,9 @@ public class JavaParser extends Parser {
 <span class="nc" id="L2249">			_errHandler.recover(this, re);</span>
 		}
 		finally {
-<span class="nc" id="L2252">			exitRule();</span>
-<span class="nc" id="L2253">		}</span>
-<span class="nc" id="L2254">		return _localctx;</span>
+<span class="pc" id="L2252">			exitRule();</span>
+<span class="pc" id="L2253">		}</span>
+<span class="fc" id="L2254">		return _localctx;</span>
 	}
 
 	public static class ConstDeclarationContext extends ParserRuleContext {
@@ -2393,17 +2393,17 @@ public class JavaParser extends Parser {
 <span class="nc" id="L2393">			return getRuleContext(QualifiedNameListContext.class,0);</span>
 		}
 		public InterfaceMethodDeclarationContext(ParserRuleContext parent, int invokingState) {
-<span class="nc" id="L2396">			super(parent, invokingState);</span>
-<span class="nc" id="L2397">		}</span>
+<span class="fc" id="L2396">			super(parent, invokingState);</span>
+<span class="fc" id="L2397">		}</span>
 <span class="nc" id="L2398">		@Override public int getRuleIndex() { return RULE_interfaceMethodDeclaration; }</span>
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-<span class="nc bnc" id="L2401" title="All 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).enterInterfaceMethodDeclaration(this);</span>
-<span class="nc" id="L2402">		}</span>
+<span class="pc bpc" id="L2401" title="1 of 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).enterInterfaceMethodDeclaration(this);</span>
+<span class="fc" id="L2402">		}</span>
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-<span class="nc bnc" id="L2405" title="All 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).exitInterfaceMethodDeclaration(this);</span>
-<span class="nc" id="L2406">		}</span>
+<span class="pc bpc" id="L2405" title="1 of 2 branches missed.">			if ( listener instanceof JavaListener ) ((JavaListener)listener).exitInterfaceMethodDeclaration(this);</span>
+<span class="fc" id="L2406">		}</span>
 		@Override
 		public &lt;T&gt; T accept(ParseTreeVisitor&lt;? extends T&gt; visitor) {
 <span class="nc bnc" id="L2409" title="All 2 branches missed.">			if ( visitor instanceof JavaVisitor ) return ((JavaVisitor&lt;? extends T&gt;)visitor).visitInterfaceMethodDeclaration(this);</span>
@@ -2412,14 +2412,14 @@ public class JavaParser extends Parser {
 	}
 
 	public final InterfaceMethodDeclarationContext interfaceMethodDeclaration() throws RecognitionException {
-<span class="nc" id="L2415">		InterfaceMethodDeclarationContext _localctx = new InterfaceMethodDeclarationContext(_ctx, getState());</span>
-<span class="nc" id="L2416">		enterRule(_localctx, 60, RULE_interfaceMethodDeclaration);</span>
+<span class="fc" id="L2415">		InterfaceMethodDeclarationContext _localctx = new InterfaceMethodDeclarationContext(_ctx, getState());</span>
+<span class="fc" id="L2416">		enterRule(_localctx, 60, RULE_interfaceMethodDeclaration);</span>
 		int _la;
 		try {
-<span class="nc" id="L2419">			enterOuterAlt(_localctx, 1);</span>
+<span class="fc" id="L2419">			enterOuterAlt(_localctx, 1);</span>
 			{
-<span class="nc" id="L2421">			setState(516);</span>
-<span class="nc bnc" id="L2422" title="All 3 branches missed.">			switch (_input.LA(1)) {</span>
+<span class="fc" id="L2421">			setState(516);</span>
+<span class="pc bpc" id="L2422" title="2 of 3 branches missed.">			switch (_input.LA(1)) {</span>
 			case BOOLEAN:
 			case BYTE:
 			case CHAR:
@@ -2435,18 +2435,18 @@ public class JavaParser extends Parser {
 <span class="nc" id="L2435">				break;</span>
 			case VOID:
 				{
-<span class="nc" id="L2438">				setState(515); match(VOID);</span>
+<span class="fc" id="L2438">				setState(515); match(VOID);</span>
 				}
-<span class="nc" id="L2440">				break;</span>
+<span class="fc" id="L2440">				break;</span>
 			default:
 <span class="nc" id="L2442">				throw new NoViableAltException(this);</span>
 			}
-<span class="nc" id="L2444">			setState(518); match(Identifier);</span>
-<span class="nc" id="L2445">			setState(519); formalParameters();</span>
-<span class="nc" id="L2446">			setState(524);</span>
-<span class="nc" id="L2447">			_errHandler.sync(this);</span>
-<span class="nc" id="L2448">			_la = _input.LA(1);</span>
-<span class="nc bnc" id="L2449" title="All 2 branches missed.">			while (_la==LBRACK) {</span>
+<span class="fc" id="L2444">			setState(518); match(Identifier);</span>
+<span class="fc" id="L2445">			setState(519); formalParameters();</span>
+<span class="fc" id="L2446">			setState(524);</span>
+<span class="fc" id="L2447">			_errHandler.sync(this);</span>
+<span class="fc" id="L2448">			_la = _input.LA(1);</span>
+<span class="pc bpc" id="L2449" title="1 of 2 branches missed.">			while (_la==LBRACK) {</span>
 				{
 				{
 <span class="nc" id="L2452">				setState(520); match(LBRACK);</span>
@@ -2457,16 +2457,16 @@ public class JavaParser extends Parser {
 <span class="nc" id="L2457">				_errHandler.sync(this);</span>
 <span class="nc" id="L2458">				_la = _input.LA(1);</span>
 			}
-<span class="nc" id="L2460">			setState(529);</span>
-<span class="nc" id="L2461">			_la = _input.LA(1);</span>
-<span class="nc bnc" id="L2462" title="All 2 branches missed.">			if (_la==THROWS) {</span>
+<span class="fc" id="L2460">			setState(529);</span>
+<span class="fc" id="L2461">			_la = _input.LA(1);</span>
+<span class="fc bfc" id="L2462" title="All 2 branches covered.">			if (_la==THROWS) {</span>
 				{
-<span class="nc" id="L2464">				setState(527); match(THROWS);</span>
-<span class="nc" id="L2465">				setState(528); qualifiedNameList();</span>
+<span class="fc" id="L2464">				setState(527); match(THROWS);</span>
+<span class="fc" id="L2465">				setState(528); qualifiedNameList();</span>
 				}
 			}
 
-<span class="nc" id="L2469">			setState(531); match(SEMI);</span>
+<span class="fc" id="L2469">			setState(531); match(SEMI);</span>
 			}
 		}
 <span class="nc" id="L2472">		catch (RecognitionException re) {</span>
@@ -2475,9 +2475,9 @@ public class JavaParser extends Parser {
 <span class="nc" id="L2475">			_errHandler.recover(this, re);</span>
 		}
 		finally {
-<span class="nc" id="L2478">			exitRule();</span>
-<span class="nc" id="L2479">		}</span>
-<span class="nc" id="L2480">		return _localctx;</span>
+<span class="pc" id="L2478">			exitRule();</span>
+<span class="pc" id="L2479">		}</span>
+<span class="fc" id="L2480">		return _localctx;</span>
 	}
 
 	public static class GenericInterfaceMethodDeclarationContext extends ParserRuleContext {

@@ -38,6 +38,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 
+import com.obomprogramador.tools.jqana.context.Context;
 import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.XmlGenerator;
 
@@ -52,10 +53,13 @@ import com.obomprogramador.tools.jqana.model.XmlGenerator;
  *
  */
 public class DefaultXmlGenerator implements XmlGenerator {
+	
+	private Context context;
 
-	public DefaultXmlGenerator() {
-<span class="fc" id="L57">		super();</span>
-<span class="fc" id="L58">	}</span>
+	public DefaultXmlGenerator(Context context) {
+<span class="fc" id="L60">		super();</span>
+<span class="fc" id="L61">		this.context = context;</span>
+<span class="fc" id="L62">	}</span>
 
 	/**
 	 * Get the list of measurements, and classifies it according to 
@@ -69,30 +73,36 @@ public class DefaultXmlGenerator implements XmlGenerator {
 	 */
 	@Override
 	public Document serialize(Measurement measurement) throws JAXBException, ParserConfigurationException, TransformerException {
-<span class="fc" id="L72">		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span>
-<span class="fc" id="L73">	    dbf.setNamespaceAware(true);</span>
-<span class="fc" id="L74">	    DocumentBuilder db = dbf.newDocumentBuilder();</span>
-<span class="fc" id="L75">		Document report = db.newDocument();</span>
-<span class="fc" id="L76">	    JAXBContext context = JAXBContext.newInstance(Measurement.class);</span>
+		
+<span class="fc" id="L77">		context.setStatusBeforeException(&quot;Marshalling measurement to XML. Measurement: &quot; + measurement);</span>
+		
+<span class="fc" id="L79">		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span>
+<span class="fc" id="L80">	    dbf.setNamespaceAware(true);</span>
+<span class="fc" id="L81">	    DocumentBuilder db = dbf.newDocumentBuilder();</span>
+<span class="fc" id="L82">		Document report = db.newDocument();</span>
+<span class="fc" id="L83">	    JAXBContext context = JAXBContext.newInstance(Measurement.class);</span>
 
-<span class="fc" id="L78">	    Marshaller m = context.createMarshaller();</span>
-<span class="fc" id="L79">	    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);</span>
+<span class="fc" id="L85">	    Marshaller m = context.createMarshaller();</span>
+<span class="fc" id="L86">	    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);</span>
 
-<span class="fc" id="L81">	    m.marshal((Measurement)measurement, report);		</span>
+<span class="fc" id="L88">	    m.marshal((Measurement)measurement, report);		</span>
        
-<span class="fc" id="L83">		return report;</span>
+<span class="fc" id="L90">		return report;</span>
 	}
 	
 	public String xml2String(Document report, boolean ommitXML) throws TransformerException {
-<span class="fc" id="L87">		TransformerFactory tf = TransformerFactory.newInstance();</span>
-<span class="fc" id="L88">		Transformer transformer = tf.newTransformer();</span>
-<span class="fc bfc" id="L89" title="All 2 branches covered.">		if (ommitXML) {</span>
-<span class="fc" id="L90">			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, &quot;yes&quot;);	</span>
+		
+<span class="fc" id="L95">		context.setStatusBeforeException(&quot;Transforming XML to String. Source XML: &quot; + report.toString());</span>
+		
+<span class="fc" id="L97">		TransformerFactory tf = TransformerFactory.newInstance();</span>
+<span class="fc" id="L98">		Transformer transformer = tf.newTransformer();</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">		if (ommitXML) {</span>
+<span class="fc" id="L100">			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, &quot;yes&quot;);	</span>
 		}
-<span class="fc" id="L92">		StringWriter writer = new StringWriter();</span>
-<span class="fc" id="L93">		transformer.transform(new DOMSource(report), new StreamResult(writer));</span>
-<span class="fc" id="L94">		String output = writer.getBuffer().toString().replaceAll(&quot;\n|\r&quot;, &quot;&quot;);</span>
-<span class="fc" id="L95">		return output;</span>
+<span class="fc" id="L102">		StringWriter writer = new StringWriter();</span>
+<span class="fc" id="L103">		transformer.transform(new DOMSource(report), new StreamResult(writer));</span>
+<span class="fc" id="L104">		String output = writer.getBuffer().toString().replaceAll(&quot;\n|\r&quot;, &quot;&quot;);</span>
+<span class="fc" id="L105">		return output;</span>
 	}
 
 }
