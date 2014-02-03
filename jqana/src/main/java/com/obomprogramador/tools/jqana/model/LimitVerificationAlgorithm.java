@@ -21,14 +21,18 @@ package com.obomprogramador.tools.jqana.model;
 
 /**
  * This interface represents an algorithm for metric limit verification.
+ * 
  * @author Cleuton Sampaio
- *
+ * 
  */
 public abstract class LimitVerificationAlgorithm {
-	/**
-	 * Verifies whether the metric is inside desired limits or not. 
-	 * @param value metric's value
-	 * @return true if the metric complies with the specified limits false if not.
-	 */
-	public abstract boolean verify(double value);
+    /**
+     * Verifies whether the metric is inside desired limits or not.
+     * 
+     * @param value
+     *            metric's value
+     * @return true if the metric complies with the specified limits false if
+     *         not.
+     */
+    public abstract boolean verify(double value);
 }

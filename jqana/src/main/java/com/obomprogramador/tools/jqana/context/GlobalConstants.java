@@ -21,8 +21,9 @@ package com.obomprogramador.tools.jqana.context;
 
 /**
  * Global constants class.
+ * 
  * @author Cleuton Sampaio
- *
+ * 
  */
 public class GlobalConstants {
 

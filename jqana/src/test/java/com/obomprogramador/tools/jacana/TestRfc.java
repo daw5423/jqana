@@ -24,69 +24,75 @@ import com.obomprogramador.tools.jqana.model.defaultimpl.RetriveTestResults;
 import com.obomprogramador.tools.jqana.parsers.Lcom4Parser;
 import com.obomprogramador.tools.jqana.parsers.RfcBcelParser;
 
-
 public class TestRfc {
-	
-	private Context context;
 
-	
-	public String[][] testClasses;
-	
-	@Test
-	public void testAllClassesRFC() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		context = new Context();
-		testClasses = RetriveTestResults.getResults(context);
-		ResourceBundle bundle = ResourceBundle.getBundle("report");
-		context.setBundle(bundle);
-		for (int x=0; x<testClasses.length; x++) {
-			
-			String uri = this.getClass().getClassLoader().getResource(testClasses[x][0] + "/" + testClasses[x][1] + ".class").getFile();
-			Measurement packageMeasurement = new Measurement();
-			packageMeasurement.setName(testClasses[x][0]);
-			packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
-			Parser parser = new RfcBcelParser(packageMeasurement, context);
-			Measurement mt = parser.parse( uri, null);
-			MetricValue mv = packageMeasurement.getMetricValue(context.getBundle().getString("metric.rfc.name"));
-			assertTrue(mt != null);
-			double diffCC = Math.abs(mv.getValue() - Double.parseDouble(testClasses[x][4]));
-			System.out.println("Testing class: " + testClasses[x][0] + "." + testClasses[x][1] + " RFC: " + mv.getValue());
-			assertTrue(diffCC < 0.5);
+    private Context context;
 
-		}
-	}
+    public String[][] testClasses;
 
+    @Test
+    public void testAllClassesRFC() throws ClassNotFoundException,
+            InstantiationException, IllegalAccessException {
+        context = new Context();
+        testClasses = RetriveTestResults.getResults(context);
+        ResourceBundle bundle = ResourceBundle.getBundle("report");
+        context.setBundle(bundle);
+        for (int x = 0; x < testClasses.length; x++) {
 
-	
-	private String getSource(String string) {
-		String sourceUri = this.getClass().getClassLoader().getResource(string).getFile();
-		String sourceCode = null;
-		sourceCode = readFile(sourceUri);
-		return sourceCode;
-	}
-	
-	private String readFile(String fileName)  {
-		BufferedReader br = null;
-	    StringBuilder sb = new StringBuilder();
-	    try {
-	    	br = new BufferedReader(new FileReader(fileName));
-	        String line = br.readLine();
+            String uri = this
+                    .getClass()
+                    .getClassLoader()
+                    .getResource(
+                            testClasses[x][0] + "/" + testClasses[x][1]
+                                    + ".class").getFile();
+            Measurement packageMeasurement = new Measurement();
+            packageMeasurement.setName(testClasses[x][0]);
+            packageMeasurement.setType(MEASUREMENT_TYPE.PACKAGE_MEASUREMENT);
+            Parser parser = new RfcBcelParser(packageMeasurement, context);
+            Measurement mt = parser.parse(uri, null);
+            MetricValue mv = packageMeasurement.getMetricValue(context
+                    .getBundle().getString("metric.rfc.name"));
+            assertTrue(mt != null);
+            double diffCC = Math.abs(mv.getValue()
+                    - Double.parseDouble(testClasses[x][4]));
+            System.out.println("Testing class: " + testClasses[x][0] + "."
+                    + testClasses[x][1] + " RFC: " + mv.getValue());
+            assertTrue(diffCC < 0.5);
 
-	        while (line != null) {
-	            sb.append(line);
-	            sb.append("\n");
-	            line = br.readLine();
-	        }
-	        return sb.toString();
-	    } catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-	        try {
-				br.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	    }
-	    return sb.toString();
-	}
+        }
+    }
+
+    private String getSource(String string) {
+        String sourceUri = this.getClass().getClassLoader().getResource(string)
+                .getFile();
+        String sourceCode = null;
+        sourceCode = readFile(sourceUri);
+        return sourceCode;
+    }
+
+    private String readFile(String fileName) {
+        BufferedReader br = null;
+        StringBuilder sb = new StringBuilder();
+        try {
+            br = new BufferedReader(new FileReader(fileName));
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append("\n");
+                line = br.readLine();
+            }
+            return sb.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return sb.toString();
+    }
 
 }
