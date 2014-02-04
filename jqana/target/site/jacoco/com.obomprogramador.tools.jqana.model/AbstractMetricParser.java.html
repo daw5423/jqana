@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AbstractMetricParser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.source.html" class="el_package">com.obomprogramador.tools.jqana.model</a> &gt; <span class="el_source">AbstractMetricParser.java</span></div><h1>AbstractMetricParser.java</h1><pre class="source lang-java linenums">package com.obomprogramador.tools.jqana.model;
+
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener;
+import com.obomprogramador.tools.jqana.antlrparser.JavaLexer;
+import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
+import com.obomprogramador.tools.jqana.context.Context;
+import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
+import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
+
+/**
+ * This is the abstract parser used as a base class for all parsers.
+ * @author Cleuton Sampaio.
+ *
+ */
+public abstract class AbstractMetricParser implements Parser {
+
+    protected Context context;
+    protected Measurement measurement;
+    protected Measurement packageMeasurement;
+    protected Logger logger;
+    protected Metric metric;
+    protected MetricValue metricValue;
+    protected JavaBaseListener listener;
+    protected String metricResourceId;
+
+    /**
+     * Default constructor.
+     * @param packageMeasurement Measurement the measurement to be used.
+     * @param context Context the running context.
+     * @param metricResourceId String current metric's resource Id.
+     */
+    public AbstractMetricParser(Measurement packageMeasurement,
+<span class="fc" id="L40">            Context context, String metricResourceId) {</span>
+<span class="fc" id="L41">        logger = LoggerFactory.getLogger(this.getClass());</span>
+<span class="fc" id="L42">        this.context = context;</span>
+<span class="fc" id="L43">        this.packageMeasurement = packageMeasurement;</span>
+<span class="fc" id="L44">        this.metricResourceId = metricResourceId;</span>
+<span class="fc" id="L45">        this.metric = context.getCurrentMetric(context.getBundle().getString(</span>
+                metricResourceId));
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (this.metric == null) {</span>
+<span class="nc" id="L48">            throw new IllegalArgumentException(</span>
+                    &quot;Context is not valid. Metric is null.&quot;);
+        }
+<span class="fc" id="L51">    }</span>
+
+    @Override
+    public String getParserName() {
+<span class="fc" id="L55">        return this.metric.getMetricName();</span>
+    }
+
+    @Override
+    public Measurement parse(String compiledClassPath, String sourceCode) {
+<span class="fc" id="L60">        this.measurement = new Measurement(); // Class name will be set inside</span>
+                                              // listener.
+<span class="fc" id="L62">        this.measurement.setType(MEASUREMENT_TYPE.CLASS_MEASUREMENT);</span>
+<span class="fc" id="L63">        this.metricValue = new MetricValue();</span>
+<span class="fc" id="L64">        this.metricValue.setName(this.metric.getMetricName());</span>
+<span class="fc" id="L65">        this.measurement.getMetricValues().add(this.metricValue);</span>
+
+        JavaLexer lexer;
+        try {
+<span class="fc" id="L69">            lexer = new JavaLexer(new ANTLRInputStream(sourceCode));</span>
+<span class="fc" id="L70">            CommonTokenStream tokens = new CommonTokenStream(lexer);</span>
+<span class="fc" id="L71">            JavaParser p = new JavaParser(tokens);</span>
+<span class="fc" id="L72">            ParseTree tree = (ParseTree) (p.compilationUnit());</span>
+<span class="fc" id="L73">            ParseTreeWalker walker = new ParseTreeWalker();</span>
+
+            // Template method hook:
+<span class="fc" id="L76">            this.listener = getListener(p);</span>
+
+<span class="fc" id="L78">            walker.walk(this.listener, tree);</span>
+<span class="fc" id="L79">            logger.debug(&quot;**** &quot; + this.metric.getMetricName() + &quot;: &quot;</span>
+                    + this.measurement.toString());
+
+            // Template method hook:
+<span class="fc" id="L83">            afterProcessing();</span>
+
+<span class="fc" id="L85">            updatePackageMeasurement();</span>
+<span class="nc" id="L86">        } catch (Exception e) {</span>
+<span class="nc" id="L87">            context.getErrors().push(e.getMessage());</span>
+<span class="nc" id="L88">            logger.error(e.getMessage());</span>
+<span class="fc" id="L89">        }</span>
+
+<span class="fc" id="L91">        return this.measurement;</span>
+    }
+
+    /**
+     * This is a template method hook. It must return a listener instance.
+     * 
+     * @param p JavaParser the parser being used.
+     * @return JavaBaseListener this is only a hook for overrides.
+     */
+    public JavaBaseListener getListener(JavaParser p) {
+
+<span class="nc" id="L102">        return null;</span>
+    }
+
+    /**
+     * This is a template method hook. What do you want to do after parsing the
+     * source file?
+     */
+    public void afterProcessing() {
+
+<span class="nc" id="L111">    }</span>
+
+    /*
+     * (non-javadoc)
+     * 
+     * This is a template method that updates package measurement.
+     */
+    protected void updatePackageMeasurement() {
+
+<span class="fc" id="L120">        Measurement classMeasurement = null;</span>
+<span class="fc" id="L121">        MetricValue mv = null;</span>
+<span class="fc" id="L122">        MetricValue packageMv = null;</span>
+
+        // 1 - Add ths chass' measurements to the package's measurements
+        // collection:
+
+<span class="fc" id="L127">        int indx = this.packageMeasurement.getInnerMeasurements().indexOf(</span>
+                this.measurement);
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        if (indx &gt;= 0) {</span>
+            // Collection of inner measurements already has a measurement of
+            // this class. Ok.
+<span class="fc" id="L132">            classMeasurement = this.packageMeasurement.getInnerMeasurements()</span>
+                    .get(indx);
+        } else {
+            // It is the first measurement of this class:
+<span class="fc" id="L136">            classMeasurement = this.measurement;</span>
+<span class="fc" id="L137">            this.packageMeasurement.getInnerMeasurements()</span>
+                    .add(this.measurement);
+        }
+
+        // 2 - Add this class' metric value to package's metric values,
+        // calculating the average
+
+<span class="fc" id="L144">        mv = this.metricValue;</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">        if (classMeasurement.getMetricValues().contains(mv)) {</span>
+<span class="fc" id="L146">            classMeasurement.getMetricValues().remove(mv);</span>
+        }
+<span class="fc" id="L148">        classMeasurement.getMetricValues().add(mv);</span>
+
+<span class="fc bfc" id="L150" title="All 2 branches covered.">        if (this.packageMeasurement.getMetricValues().contains(mv)) {</span>
+            // This package already contains a CC metric value, so, lets add to
+            // it:
+<span class="fc" id="L153">            int mvIndx = this.packageMeasurement.getMetricValues().indexOf(mv);</span>
+<span class="fc" id="L154">            packageMv = this.packageMeasurement.getMetricValues().get(mvIndx);</span>
+
+<span class="fc" id="L156">            updatePackageMetrics(packageMv, mv);</span>
+
+            // Package average is calculated after all its classes.
+
+<span class="fc" id="L160">        } else {</span>
+<span class="fc" id="L161">            packageMv = new MetricValue();</span>
+<span class="fc" id="L162">            packageMv.setName(mv.getName());</span>
+<span class="fc" id="L163">            packageMv.setValue(mv.getValue());</span>
+<span class="fc" id="L164">            packageMv.setQtdElements(1);</span>
+<span class="fc" id="L165">            packageMv.setViolated(mv.isViolated());</span>
+<span class="fc" id="L166">            this.packageMeasurement.getMetricValues().add(packageMv);</span>
+        }
+<span class="fc" id="L168">    }</span>
+
+    /**
+     * Part of the template method &quot;updatePackageMeasurement()&quot; that aggregates
+     * the metric value.
+     * 
+     * @param packageMv MetricValue - the package's metrics. 
+     * @param mv MetricValue - Current metrics. 
+     */
+    public void updatePackageMetrics(MetricValue packageMv, MetricValue mv) {
+<span class="fc" id="L178">        packageMv.setValue(packageMv.getValue() + mv.getValue());</span>
+<span class="fc" id="L179">        packageMv.setQtdElements(packageMv.getQtdElements() + 1);</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">        if (mv.isViolated()) {</span>
+<span class="fc" id="L181">            packageMv.setViolated(true);</span>
+        }
+<span class="fc" id="L183">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.4.201312101107</span></div></body></html>

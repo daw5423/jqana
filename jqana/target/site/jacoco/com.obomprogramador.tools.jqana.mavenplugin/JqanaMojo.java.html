@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JqanaMojo.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.source.html" class="el_package">com.obomprogramador.tools.jqana.mavenplugin</a> &gt; <span class="el_source">JqanaMojo.java</span></div><h1>JqanaMojo.java</h1><pre class="source lang-java linenums">/**
+ * jQana - Open Source Java(TM) code quality analyzer.
+ * 
+ * Copyright 2013 Cleuton Sampaio de Melo Jr
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * Project website: http://www.jqana.com
+ */
+package com.obomprogramador.tools.jqana.mavenplugin;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import javax.xml.transform.TransformerException;
+
+import org.apache.maven.doxia.sink.Sink;
+import org.apache.maven.doxia.siterenderer.Renderer;
+import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
+import org.apache.maven.reporting.AbstractMavenReport;
+import org.apache.maven.reporting.MavenReportException;
+import org.w3c.dom.Document;
+
+import com.obomprogramador.tools.jqana.context.Context;
+import com.obomprogramador.tools.jqana.model.Measurement;
+import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultProjectProcessor;
+import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultXml2HtmlConverter;
+import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultXmlGenerator;
+
+/**
+ * This is the Mojo that implements jQana maven plugin.
+ * 
+ * @author Cleuton Sampaio
+ * 
+ */
+@Mojo(
+        name = &quot;report&quot;)
+public class JqanaMojo extends AbstractMavenReport {
+
+    /**
+     * Report output directory. Note that this parameter is only relevant if the
+     * goal is run from the command line or from the default build lifecycle. If
+     * the goal is run indirectly as part of a site generation, the output
+     * directory configured in the Maven Site Plugin is used instead.
+     */
+    @Parameter(
+            defaultValue = &quot;${project.reporting.outputDirectory}&quot;)
+    private File outputDirectory;
+
+    /**
+     * The source dir.
+     */
+    @Parameter(
+            defaultValue = &quot;${project.build.sourceDirectory}&quot;)
+    private File sourceDirectory;
+    /**
+     * The Maven Project.
+     */
+    @Component
+    private MavenProject project;
+
+    /**
+     * Doxia Site Renderer.
+     */
+    @Component
+    private Renderer siteRenderer;
+
+    /**
+     * Default Mojo constructor.
+     */
+    public JqanaMojo() {
+<span class="fc" id="L92">        super();</span>
+<span class="fc" id="L93">    }</span>
+
+    @Override
+    public String getDescription(Locale arg0) {
+<span class="fc" id="L97">        return getBundle(arg0).getString(&quot;report.description&quot;);</span>
+    }
+
+    @Override
+    public String getName(Locale arg0) {
+<span class="fc" id="L102">        return getBundle(arg0).getString(&quot;report.name&quot;);</span>
+    }
+
+    @Override
+    public String getOutputName() {
+<span class="fc" id="L107">        return &quot;jqana-report&quot;;</span>
+    }
+
+    private Context context;
+
+    @Override
+    protected void executeReport(Locale locale) throws MavenReportException {
+
+        try {
+<span class="fc" id="L116">            this.context = new Context();</span>
+<span class="nc" id="L117">        } catch (Exception e) {</span>
+<span class="nc" id="L118">            getLog().error(</span>
+                    &quot;******************&gt;&gt;&gt;&gt;&gt; Exception initializing context: &quot;
+                            + e.getMessage());
+<span class="nc" id="L121">            throw new MavenReportException(e.getMessage());</span>
+<span class="fc" id="L122">        }</span>
+
+<span class="fc" id="L124">        DateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span>
+<span class="fc" id="L125">        Date date = new Date();</span>
+<span class="fc" id="L126">        String reportDate = df.format(date);</span>
+
+<span class="fc" id="L128">        Sink sink = getSink();</span>
+<span class="fc" id="L129">        sink.head();</span>
+<span class="fc" id="L130">        sink.title();</span>
+<span class="fc" id="L131">        sink.text(this.getName(locale));</span>
+<span class="fc" id="L132">        sink.title_();</span>
+<span class="fc" id="L133">        sink.head_();</span>
+<span class="fc" id="L134">        sink.body();</span>
+<span class="fc" id="L135">        createReportBegin(sink, reportDate, locale);</span>
+<span class="fc" id="L136">        reportPackageMetrics(sink, locale);</span>
+<span class="fc" id="L137">        sink.lineBreak();</span>
+<span class="fc" id="L138">        sink.link(getBundle(locale).getString(&quot;jqana.link&quot;));</span>
+<span class="fc" id="L139">        sink.text(getBundle(locale).getString(&quot;jqana.url&quot;));</span>
+<span class="fc" id="L140">        sink.link_();</span>
+<span class="fc" id="L141">        sink.section1_();</span>
+<span class="fc" id="L142">        sink.body_();</span>
+<span class="fc" id="L143">        sink.flush();</span>
+<span class="fc" id="L144">        sink.close();</span>
+<span class="fc" id="L145">    }</span>
+
+    private void createReportBegin(Sink sink, String reportDate, Locale locale) {
+<span class="fc" id="L148">        sink.section1();</span>
+<span class="fc" id="L149">        sink.sectionTitle1();</span>
+<span class="fc" id="L150">        String rBegin = getBundle(locale).getString(&quot;report.begin&quot;);</span>
+<span class="fc" id="L151">        sink.text(rBegin);</span>
+<span class="fc" id="L152">        sink.sectionTitle1_();</span>
+<span class="fc" id="L153">        sink.lineBreak();</span>
+<span class="fc" id="L154">        sink.text(getBundle(locale).getString(&quot;report.dateHeader&quot;) + &quot;: &quot;</span>
+                + reportDate);
+<span class="fc" id="L156">        String jqanaVersion = getBundle(locale).getString(&quot;jqana.version&quot;);</span>
+<span class="fc" id="L157">        String jqanaRelease = getBundle(locale).getString(&quot;jqana.releaseDate&quot;);</span>
+<span class="fc" id="L158">        sink.lineBreak();</span>
+<span class="fc" id="L159">        sink.text(getBundle(locale).getString(&quot;report.jqana.version&quot;) + &quot;: &quot;</span>
+                + jqanaVersion);
+<span class="fc" id="L161">        sink.lineBreak();</span>
+<span class="fc" id="L162">        sink.text(getBundle(locale).getString(&quot;report.jqana.release.date&quot;)</span>
+                + &quot;: &quot; + jqanaRelease);
+<span class="fc" id="L164">    }</span>
+
+    private void reportPackageMetrics(Sink sink, Locale locale) {
+
+        try {
+<span class="fc" id="L169">            this.context</span>
+                    .setStatusBeforeException(&quot;Instantiating DefaultProjectProcessor.&quot;);
+<span class="fc" id="L171">            DefaultProjectProcessor dpp = new DefaultProjectProcessor(</span>
+                    this.context);
+<span class="fc" id="L173">            dpp.setLog(getLog());</span>
+<span class="fc" id="L174">            File sourceDir = new File(this.project.getModel().getBuild()</span>
+                    .getSourceDirectory().replace(&quot;\\&quot;, &quot;/&quot;));
+<span class="fc" id="L176">            File objectDir = new File(this.project.getBuild().getDirectory()</span>
+                    + &quot;/classes&quot;);
+<span class="fc" id="L178">            getLog().debug(&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt; ObjectDir: &quot; + objectDir.getPath());</span>
+
+<span class="fc" id="L180">            this.context</span>
+                    .setStatusBeforeException(&quot;Invoking Package processing. SourceDir: &quot;
+                            + sourceDir.getName()
+                            + &quot;, ObjectDir: &quot;
+                            + objectDir.getName());
+<span class="fc" id="L185">            Measurement projectMeasurement = dpp.process(this.getProject()</span>
+                    .getName(), sourceDir, objectDir);
+
+<span class="fc" id="L188">            this.context</span>
+                    .setStatusBeforeException(&quot;Invoking XML Serialization.&quot;);
+<span class="fc" id="L190">            DefaultXmlGenerator generator = new DefaultXmlGenerator(</span>
+                    this.context);
+<span class="fc" id="L192">            Document report = generator.serialize(projectMeasurement);</span>
+
+<span class="fc" id="L194">            this.context.setStatusBeforeException(&quot;Persisting XML file.&quot;);</span>
+<span class="fc" id="L195">            persistXml(report, generator);</span>
+
+<span class="fc" id="L197">            this.context.setStatusBeforeException(&quot;Converting XML to HTML.&quot;);</span>
+<span class="fc" id="L198">            DefaultXml2HtmlConverter converter = new DefaultXml2HtmlConverter();</span>
+<span class="fc" id="L199">            String output = converter.convert(generator</span>
+                    .xml2String(report, true));
+<span class="fc" id="L201">            sink.rawText(output);</span>
+<span class="nc" id="L202">        } catch (Exception ex) {</span>
+<span class="nc" id="L203">            getLog().error(</span>
+                    &quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; jQana Report Error: &quot;
+                            + context.getStatusBeforeException()
+                            + &quot;. Exception: &quot; + ex.getMessage());
+<span class="fc" id="L207">        }</span>
+<span class="fc" id="L208">    }</span>
+
+    private void persistXml(Document report, DefaultXmlGenerator generator)
+            throws MavenReportException {
+<span class="fc" id="L212">        String targetPath = project.getBuild().getDirectory();</span>
+<span class="fc" id="L213">        File outputDir = new File(targetPath + File.separator + &quot;jqana-output&quot;);</span>
+<span class="pc bpc" id="L214" title="1 of 2 branches missed.">        if (!outputDir.exists()) {</span>
+<span class="fc" id="L215">            outputDir.mkdirs();</span>
+        }
+        try {
+<span class="fc" id="L218">            String xmlOutput = generator.xml2String(report, false);</span>
+<span class="fc" id="L219">            File outputXml = new File(outputDir.getPath() + File.separator</span>
+                    + &quot;jqana.xml&quot;);
+<span class="pc bpc" id="L221" title="1 of 2 branches missed.">            if (outputXml.exists()) {</span>
+<span class="nc" id="L222">                outputXml.delete();</span>
+            }
+<span class="fc" id="L224">            outputXml.createNewFile();</span>
+<span class="fc" id="L225">            BufferedWriter bw = new BufferedWriter(new FileWriter(outputXml));</span>
+<span class="fc" id="L226">            bw.append(xmlOutput);</span>
+<span class="fc" id="L227">            bw.flush();</span>
+<span class="fc" id="L228">            bw.close();</span>
+
+<span class="nc" id="L230">        } catch (TransformerException e) {</span>
+<span class="nc" id="L231">            throw new MavenReportException(&quot;Xml transform error&quot;);</span>
+<span class="nc" id="L232">        } catch (IOException e) {</span>
+<span class="nc" id="L233">            throw new MavenReportException(&quot;Xml writing error&quot;);</span>
+<span class="fc" id="L234">        }</span>
+<span class="fc" id="L235">    }</span>
+
+    @Override
+    protected String getOutputDirectory() {
+<span class="nc" id="L239">        return outputDirectory.getAbsolutePath();</span>
+    }
+
+    @Override
+    protected MavenProject getProject() {
+<span class="fc" id="L244">        return project;</span>
+    }
+
+    @Override
+    protected Renderer getSiteRenderer() {
+<span class="nc" id="L249">        return siteRenderer;</span>
+    }
+
+    private ResourceBundle getBundle(Locale locale) {
+<span class="fc" id="L253">        return ResourceBundle.getBundle(&quot;report&quot;, locale, this.getClass()</span>
+                .getClassLoader());
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.4.201312101107</span></div></body></html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>jQana - JDepend Report Metrics</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <div id="banner">
+                  <a href="http://www.jqana.com" id="bannerLeft">
+    
+                                            <img src="images/jqana_logo.png" alt="" />
+    
+            </a>
+                        <a href="http://www.obomprogramador.com" id="bannerRight">
+    
+                                            <img src="images/inerd.png" alt="" />
+    
+            </a>
+            <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+    
+            <div class="xleft">
+        Last Published: 2014-02-04
+                      </div>
+            <div class="xright">      
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+    
+                   <h5>jQana Project</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="index.html">Overview</a>
+          </li>
+              
+    <li class="none">
+                    <a href="https://github.com/cleuton/jqana/wiki/Latest-version" class="externalLink">Latest version</a>
+          </li>
+          </ul>
+              <h5>Help</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="https://github.com/cleuton/jqana/wiki/_pages" class="externalLink">Wiki pages</a>
+          </li>
+              
+    <li class="none">
+                    <a href="https://github.com/cleuton/jqana/wiki/" class="externalLink">News</a>
+          </li>
+              
+    <li class="none">
+                    <a href="https://github.com/cleuton/jqana/wiki/How-to-analyze-jQana-report" class="externalLink">jQana report</a>
+          </li>
+              
+    <li class="none">
+                    <a href="https://github.com/cleuton/jqana/wiki/CC-calculation" class="externalLink">Cyclomatic Complexity</a>
+          </li>
+              
+    <li class="none">
+                    <a href="https://github.com/cleuton/jqana/wiki/LCOM4-Calculation" class="externalLink">LCOM4</a>
+          </li>
+              
+    <li class="none">
+                    <a href="https://github.com/cleuton/jqana/wiki/RFC-Calculation" class="externalLink">RFC</a>
+          </li>
+          </ul>
+              <h5>Download</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="https://raw.github.com/cleuton/jqana/mvn-repo/" class="externalLink">Our maven repo</a>
+          </li>
+          </ul>
+              <h5>Project Documentation</h5>
+            <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-info.html">Project Information</a>
+                </li>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+            
+            
+      
+            
+      
+              
+            <li class="expanded">
+                    <a href="project-reports.html">Project Reports</a>
+                  <ul>
+                  
+    <li class="none">
+                    <a href="checkstyle.html">Checkstyle</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="cpd.html">CPD Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="apidocs/index.html">JavaDocs</a>
+          </li>
+                  
+    <li class="none">
+              <strong>JDepend</strong>
+        </li>
+                  
+    <li class="none">
+                    <a href="pmd.html">PMD Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="testapidocs/index.html">Test JavaDocs</a>
+          </li>
+              </ul>
+        </li>
+          </ul>
+              <h5>Test coverage</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="jacoco/index.html">Jacoco report</a>
+          </li>
+          </ul>
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+    
+        </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <div class="section"><h2>Metric Results</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<br />
+The following document contains the results of a JDepend metric analysis. The various metrics are defined at the bottom of this document.<br />
+<br />
+<a name="summary"></a><h2>Summary</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<br />
+<table class="bodyTable"><tr class="a"><th>Package</th>
+<th>TC</th>
+<th>CC</th>
+<th>AC</th>
+<th>Ca</th>
+<th>Ce</th>
+<th>A</th>
+<th>I</th>
+<th>D</th>
+<th>V</th>
+</tr>
+<tr class="b"><td><a href="#com.obomprogramador.tools.jqana.antlrparser">com.obomprogramador.tools.jqana.antlrparser</a></td>
+<td>109</td>
+<td>107</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>2.0%</td>
+<td>57.0%</td>
+<td>41.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#com.obomprogramador.tools.jqana.context">com.obomprogramador.tools.jqana.context</a></td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>4</td>
+<td>2</td>
+<td>0.0%</td>
+<td>33.0%</td>
+<td>67.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#com.obomprogramador.tools.jqana.mavenplugin">com.obomprogramador.tools.jqana.mavenplugin</a></td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>11</td>
+<td>0.0%</td>
+<td>100.0%</td>
+<td>0.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#com.obomprogramador.tools.jqana.model">com.obomprogramador.tools.jqana.model</a></td>
+<td>9</td>
+<td>2</td>
+<td>7</td>
+<td>3</td>
+<td>7</td>
+<td>78.0%</td>
+<td>70.0%</td>
+<td>48.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#com.obomprogramador.tools.jqana.model.defaultimpl">com.obomprogramador.tools.jqana.model.defaultimpl</a></td>
+<td>10</td>
+<td>10</td>
+<td>0</td>
+<td>4</td>
+<td>10</td>
+<td>0.0%</td>
+<td>71.0%</td>
+<td>29.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#com.obomprogramador.tools.jqana.parsers">com.obomprogramador.tools.jqana.parsers</a></td>
+<td>10</td>
+<td>10</td>
+<td>0</td>
+<td>1</td>
+<td>9</td>
+<td>0.0%</td>
+<td>90.0%</td>
+<td>10.0%</td>
+<td>1</td>
+</tr>
+</table>
+<a name="packages"></a><h2>Packages</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<a name="com.obomprogramador.tools.jqana.antlrparser"></a><h3>com.obomprogramador.tools.jqana.antlrparser</h3>
+<table class="bodyTable"><tr class="b"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="a"><td>3</td>
+<td>4</td>
+<td>2.0%</td>
+<td>57.0%</td>
+<td>41.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="b"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="a"><td>com.obomprogramador.tools.jqana.antlrparser.JavaListener<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaVisitor<br />
+</td>
+<td>com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaBaseVisitor<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaLexer<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationConstantRestContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationMethodOrConstantRestContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationMethodRestContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationNameContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationTypeBodyContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationTypeDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationTypeElementDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$AnnotationTypeElementRestContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ArgumentsContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ArrayCreatorRestContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ArrayInitializerContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$BlockContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$BlockStatementContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$CatchClauseContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$CatchTypeContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ClassBodyContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ClassBodyDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ClassCreatorRestContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ClassDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ClassOrInterfaceModifierContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ClassOrInterfaceTypeContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$CompilationUnitContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ConstDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ConstantDeclaratorContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ConstantExpressionContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ConstructorBodyContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ConstructorDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$CreatedNameContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$CreatorContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$DefaultValueContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ElementValueArrayInitializerContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ElementValueContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ElementValuePairContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ElementValuePairsContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$EnhancedForControlContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$EnumBodyDeclarationsContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$EnumConstantContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$EnumConstantNameContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$EnumConstantsContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$EnumDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ExplicitGenericInvocationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ExplicitGenericInvocationSuffixContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ExpressionContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ExpressionListContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$FieldDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$FinallyBlockContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ForControlContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ForInitContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ForUpdateContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$FormalParameterContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$FormalParameterListContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$FormalParametersContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$GenericConstructorDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$GenericInterfaceMethodDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$GenericMethodDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ImportDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$InnerCreatorContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$InterfaceBodyContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$InterfaceBodyDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$InterfaceDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$InterfaceMemberDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$InterfaceMethodDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$LastFormalParameterContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$LiteralContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$LocalVariableDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$LocalVariableDeclarationStatementContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$MemberDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$MethodBodyContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$MethodDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ModifierContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$NonWildcardTypeArgumentsContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$NonWildcardTypeArgumentsOrDiamondContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$PackageDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$PackageOrTypeNameContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ParExpressionContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$PrimaryContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$PrimitiveTypeContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$QualifiedNameContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$QualifiedNameListContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ResourceContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ResourceSpecificationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$ResourcesContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$StatementContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$StatementExpressionContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$SuperSuffixContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$SwitchBlockStatementGroupContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$SwitchLabelContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeArgumentContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeArgumentsContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeArgumentsOrDiamondContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeBoundContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeDeclarationContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeListContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeNameContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeParameterContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$TypeParametersContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$VariableDeclaratorContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$VariableDeclaratorIdContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$VariableDeclaratorsContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$VariableInitializerContext<br />
+com.obomprogramador.tools.jqana.antlrparser.JavaParser$VariableModifierContext<br />
+</td>
+<td>com.obomprogramador.tools.jqana.model<br />
+com.obomprogramador.tools.jqana.model.defaultimpl<br />
+com.obomprogramador.tools.jqana.parsers<br />
+</td>
+<td>org.antlr.v4.runtime<br />
+org.antlr.v4.runtime.atn<br />
+org.antlr.v4.runtime.dfa<br />
+org.antlr.v4.runtime.tree<br />
+</td>
+</tr>
+</table>
+<a name="com.obomprogramador.tools.jqana.context"></a><h3>com.obomprogramador.tools.jqana.context</h3>
+<table class="bodyTable"><tr class="b"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="a"><td>4</td>
+<td>2</td>
+<td>0.0%</td>
+<td>33.0%</td>
+<td>67.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="b"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="a"><td><i>None</i></td>
+<td>com.obomprogramador.tools.jqana.context.Context<br />
+com.obomprogramador.tools.jqana.context.GlobalConstants<br />
+</td>
+<td>com.obomprogramador.tools.jqana.mavenplugin<br />
+com.obomprogramador.tools.jqana.model<br />
+com.obomprogramador.tools.jqana.model.defaultimpl<br />
+com.obomprogramador.tools.jqana.parsers<br />
+</td>
+<td>com.obomprogramador.tools.jqana.model<br />
+com.obomprogramador.tools.jqana.model.defaultimpl<br />
+</td>
+</tr>
+</table>
+<a name="com.obomprogramador.tools.jqana.mavenplugin"></a><h3>com.obomprogramador.tools.jqana.mavenplugin</h3>
+<table class="bodyTable"><tr class="b"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="a"><td>0</td>
+<td>11</td>
+<td>0.0%</td>
+<td>100.0%</td>
+<td>0.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="b"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="a"><td><i>None</i></td>
+<td>com.obomprogramador.tools.jqana.mavenplugin.HelpMojo<br />
+com.obomprogramador.tools.jqana.mavenplugin.JqanaMojo<br />
+</td>
+<td><i>None</i></td>
+<td>com.obomprogramador.tools.jqana.context<br />
+com.obomprogramador.tools.jqana.model.defaultimpl<br />
+org.apache.maven.doxia.sink<br />
+org.apache.maven.doxia.siterenderer<br />
+org.apache.maven.model<br />
+org.apache.maven.plugin<br />
+org.apache.maven.plugin.logging<br />
+org.apache.maven.project<br />
+org.apache.maven.reporting<br />
+org.w3c.dom<br />
+org.xml.sax<br />
+</td>
+</tr>
+</table>
+<a name="com.obomprogramador.tools.jqana.model"></a><h3>com.obomprogramador.tools.jqana.model</h3>
+<table class="bodyTable"><tr class="b"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="a"><td>3</td>
+<td>7</td>
+<td>78.0%</td>
+<td>70.0%</td>
+<td>48.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="b"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="a"><td>com.obomprogramador.tools.jqana.model.AbstractMetricParser<br />
+com.obomprogramador.tools.jqana.model.LimitVerificationAlgorithm<br />
+com.obomprogramador.tools.jqana.model.Metric<br />
+com.obomprogramador.tools.jqana.model.Parser<br />
+com.obomprogramador.tools.jqana.model.ProjectProcessor<br />
+com.obomprogramador.tools.jqana.model.Xml2HtmlConverter<br />
+com.obomprogramador.tools.jqana.model.XmlGenerator<br />
+</td>
+<td>com.obomprogramador.tools.jqana.model.Measurement<br />
+com.obomprogramador.tools.jqana.model.Measurement$MEASUREMENT_TYPE<br />
+</td>
+<td>com.obomprogramador.tools.jqana.context<br />
+com.obomprogramador.tools.jqana.model.defaultimpl<br />
+com.obomprogramador.tools.jqana.parsers<br />
+</td>
+<td>com.obomprogramador.tools.jqana.antlrparser<br />
+com.obomprogramador.tools.jqana.context<br />
+com.obomprogramador.tools.jqana.model.defaultimpl<br />
+org.antlr.v4.runtime<br />
+org.antlr.v4.runtime.tree<br />
+org.slf4j<br />
+org.w3c.dom<br />
+</td>
+</tr>
+</table>
+<a name="com.obomprogramador.tools.jqana.model.defaultimpl"></a><h3>com.obomprogramador.tools.jqana.model.defaultimpl</h3>
+<table class="bodyTable"><tr class="b"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="a"><td>4</td>
+<td>10</td>
+<td>0.0%</td>
+<td>71.0%</td>
+<td>29.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="b"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="a"><td><i>None</i></td>
+<td>com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric<br />
+com.obomprogramador.tools.jqana.model.defaultimpl.DefaultProjectProcessor<br />
+com.obomprogramador.tools.jqana.model.defaultimpl.DefaultProjectProcessor$1<br />
+com.obomprogramador.tools.jqana.model.defaultimpl.DefaultProjectProcessor$MSG_TYPE<br />
+com.obomprogramador.tools.jqana.model.defaultimpl.DefaultXml2HtmlConverter<br />
+com.obomprogramador.tools.jqana.model.defaultimpl.DefaultXmlGenerator<br />
+com.obomprogramador.tools.jqana.model.defaultimpl.GetClassNameFromContext<br />
+com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm<br />
+com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue<br />
+com.obomprogramador.tools.jqana.model.defaultimpl.RetriveTestResults<br />
+</td>
+<td>com.obomprogramador.tools.jqana.context<br />
+com.obomprogramador.tools.jqana.mavenplugin<br />
+com.obomprogramador.tools.jqana.model<br />
+com.obomprogramador.tools.jqana.parsers<br />
+</td>
+<td>com.obomprogramador.tools.jqana.antlrparser<br />
+com.obomprogramador.tools.jqana.context<br />
+com.obomprogramador.tools.jqana.model<br />
+com.obomprogramador.tools.jqana.parsers<br />
+org.antlr.v4.runtime.tree<br />
+org.apache.bcel.classfile<br />
+org.apache.commons.io<br />
+org.apache.maven.plugin.logging<br />
+org.slf4j<br />
+org.w3c.dom<br />
+</td>
+</tr>
+</table>
+<a name="com.obomprogramador.tools.jqana.parsers"></a><h3>com.obomprogramador.tools.jqana.parsers</h3>
+<table class="bodyTable"><tr class="b"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="a"><td>1</td>
+<td>9</td>
+<td>0.0%</td>
+<td>90.0%</td>
+<td>10.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="b"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="a"><td><i>None</i></td>
+<td>com.obomprogramador.tools.jqana.parsers.CycloListener<br />
+com.obomprogramador.tools.jqana.parsers.CyclomaticComplexityParser<br />
+com.obomprogramador.tools.jqana.parsers.Lcom4Listener<br />
+com.obomprogramador.tools.jqana.parsers.Lcom4Listener$Lcom4MethodListener<br />
+com.obomprogramador.tools.jqana.parsers.Lcom4Parser<br />
+com.obomprogramador.tools.jqana.parsers.Lcom4Parser$Component<br />
+com.obomprogramador.tools.jqana.parsers.Member<br />
+com.obomprogramador.tools.jqana.parsers.Member$MEMBER_TYPE<br />
+com.obomprogramador.tools.jqana.parsers.RfcBcelParser<br />
+com.obomprogramador.tools.jqana.parsers.RfcBcelParser$RfcVisitor<br />
+</td>
+<td>com.obomprogramador.tools.jqana.model.defaultimpl<br />
+</td>
+<td>com.obomprogramador.tools.jqana.antlrparser<br />
+com.obomprogramador.tools.jqana.context<br />
+com.obomprogramador.tools.jqana.model<br />
+com.obomprogramador.tools.jqana.model.defaultimpl<br />
+org.antlr.v4.runtime<br />
+org.antlr.v4.runtime.tree<br />
+org.apache.bcel.classfile<br />
+org.apache.commons.lang<br />
+org.slf4j<br />
+</td>
+</tr>
+</table>
+<a name="cycles"></a><h2>Cycles</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<br />
+<table class="bodyTable"><tr class="b"><th>Package</th>
+<th>Package Dependencies</th>
+</tr>
+<tr class="a"><td>com.obomprogramador.tools.jqana.context</td>
+<td>com.obomprogramador.tools.jqana.model.defaultimpl<br />
+com.obomprogramador.tools.jqana.model<br />
+com.obomprogramador.tools.jqana.model.defaultimpl<br />
+</td>
+</tr>
+<tr class="b"><td>com.obomprogramador.tools.jqana.mavenplugin</td>
+<td>com.obomprogramador.tools.jqana.model.defaultimpl<br />
+com.obomprogramador.tools.jqana.model<br />
+com.obomprogramador.tools.jqana.model.defaultimpl<br />
+</td>
+</tr>
+<tr class="a"><td>com.obomprogramador.tools.jqana.model</td>
+<td>com.obomprogramador.tools.jqana.model.defaultimpl<br />
+com.obomprogramador.tools.jqana.model<br />
+</td>
+</tr>
+<tr class="b"><td>com.obomprogramador.tools.jqana.model.defaultimpl</td>
+<td>com.obomprogramador.tools.jqana.model<br />
+com.obomprogramador.tools.jqana.model.defaultimpl<br />
+</td>
+</tr>
+<tr class="a"><td>com.obomprogramador.tools.jqana.parsers</td>
+<td>com.obomprogramador.tools.jqana.model.defaultimpl<br />
+com.obomprogramador.tools.jqana.model<br />
+com.obomprogramador.tools.jqana.model.defaultimpl<br />
+</td>
+</tr>
+</table>
+<a name="explanations"></a><h2>Explanation</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<br />
+The following explanations are for quick reference and are lifted directly from the original JDepend documentation.<br />
+<br />
+<table class="bodyTable"><tr class="b"><th>Term</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td>Number of Classes</td>
+<td>The number of concrete and abstract classes (and interfaces) in the package is an indicator of the extensibility of the package.</td>
+</tr>
+<tr class="b"><td>Afferent Couplings</td>
+<td>The number of other packages that depend upon classes within the package is an indicator of the package's responsibility.</td>
+</tr>
+<tr class="a"><td>Efferent Couplings</td>
+<td>The number of other packages that the classes in the package depend upon is an indicator of the package's independence.</td>
+</tr>
+<tr class="b"><td>Abstractness</td>
+<td>The ratio of the number of abstract classes (and interfaces) in the analyzed package to the total number of classes in the analyzed package. The range for this metric is 0 to 1, with A=0 indicating a completely concrete package and A=1 indicating a completely abstract package.</td>
+</tr>
+<tr class="a"><td>Instability</td>
+<td>The ratio of efferent coupling (Ce) to total coupling (Ce / (Ce + Ca)). This metric is an indicator of the package's resilience to change. The range for this metric is 0 to 1, with I=0 indicating a completely stable package and I=1 indicating a completely instable package.</td>
+</tr>
+<tr class="b"><td>Distance</td>
+<td>The perpendicular distance of a package from the idealized line A + I = 1. This metric is an indicator of the package's balance between abstractness and stability. A package squarely on the main sequence is optimally balanced with respect to its abstractness and stability. Ideal packages are either completely abstract and stable (x=0, y=1) or completely concrete and instable (x=1, y=0). The range for this metric is 0 to 1, with D=0 indicating a package that is coincident with the main sequence and D=1 indicating a package that is as far from the main sequence as possible.</td>
+</tr>
+<tr class="a"><td>Cycles</td>
+<td>Packages participating in a package dependency cycle are  in a deadly embrace with respect to reusability and their  release cycle. Package dependency cycles can be easily identified by reviewing the textual reports of dependency cycles. Once these dependency cycles have been identified with JDepend, they can be broken by employing various object-oriented techniques.</td>
+</tr>
+</table>
+</div>
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          2014
+    
+          O Bom Programador
+          
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>

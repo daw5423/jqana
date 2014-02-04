@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MetricValue.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.source.html" class="el_package">com.obomprogramador.tools.jqana.model.defaultimpl</a> &gt; <span class="el_source">MetricValue.java</span></div><h1>MetricValue.java</h1><pre class="source lang-java linenums">package com.obomprogramador.tools.jqana.model.defaultimpl;
+
+/**
+ * Class to hold a metric value. 
+ * @author Cleuton Sampaio
+ *
+ */
+public class MetricValue implements Comparable&lt;MetricValue&gt; {
+
+    protected String name;
+    protected double value;
+    protected int qtdElements;
+    protected boolean violated;
+    private static final int PRIME = 31;
+
+    /**
+     * Default constructor.
+     */
+    public MetricValue() {
+<span class="fc" id="L20">        super();</span>
+<span class="fc" id="L21">    }</span>
+
+    /**
+     * Getter for name.
+     * @return String the name.
+     */
+    public String getName() {
+<span class="fc" id="L28">        return name;</span>
+    }
+
+    /**
+     * Setter for name.
+     * @param name String the name.
+     */
+    public void setName(String name) {
+<span class="fc" id="L36">        this.name = name;</span>
+<span class="fc" id="L37">    }</span>
+
+    /**
+     * Getter for the value. 
+     * @return double the value.
+     */
+    public double getValue() {
+<span class="fc" id="L44">        return value;</span>
+    }
+
+    /**
+     * Setter for the value.
+     * @param value double The value.
+     */
+    public void setValue(double value) {
+<span class="fc" id="L52">        this.value = value;</span>
+<span class="fc" id="L53">    }</span>
+
+    /**
+     * Object to string.
+     * @return String the textual representation.
+     */
+    @Override
+    public String toString() {
+<span class="fc" id="L61">        return &quot;MetricValue [name=&quot; + name + &quot;, value=&quot; + value</span>
+                + &quot;, qtdElements=&quot; + qtdElements + &quot;, violated=&quot; + violated
+                + &quot;]&quot;;
+    }
+
+    /**
+     * Getter for quantity of elements.
+     * @return int QTDE O ELEMENTS.
+     */
+    public int getQtdElements() {
+<span class="fc" id="L71">        return qtdElements;</span>
+    }
+
+    /**
+     * Setter for quantity of elements.
+     * @param qtdElements int QTDE of Elements.
+     */
+    public void setQtdElements(int qtdElements) {
+<span class="fc" id="L79">        this.qtdElements = qtdElements;</span>
+<span class="fc" id="L80">    }</span>
+
+    /**
+     * Getter for metric violation.
+     * @return boolean whether is considered in violation or not.
+     */
+    public boolean isViolated() {
+<span class="fc" id="L87">        return violated;</span>
+    }
+
+    /**
+     * Setter for metric violation.
+     * @param violated boolean whether is violated (true) or not.
+     */
+    public void setViolated(boolean violated) {
+<span class="fc" id="L95">        this.violated = violated;</span>
+<span class="fc" id="L96">    }</span>
+
+    /**
+     * Object hash code.
+     * @return int the Calculated hashcode.
+     */
+    @Override
+    public int hashCode() {
+<span class="nc" id="L104">        return PRIME + this.getName().hashCode();</span>
+    }
+
+    /**
+     * Object equals.
+     * @param obj Object the object to compare with.
+     * @return boolean True if they are the same object.
+     */
+    @Override
+    public boolean equals(Object obj) {
+<span class="fc" id="L114">        return this.getName().equals(((MetricValue) obj).getName());</span>
+    }
+
+    /**
+     * Object comparison.
+     * @param other MetricValue the MetricValue to compare with.
+     * @return int the comparison result..
+     */
+    @Override
+    public int compareTo(MetricValue other) {
+<span class="nc" id="L124">        return this.getName().compareTo(other.getName());</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.4.201312101107</span></div></body></html>

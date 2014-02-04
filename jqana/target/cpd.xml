@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd>
+   <duplication lines="27" tokens="443">
+      <file line="14"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaLexer.java"/>
+      <file line="14"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[public class JavaLexer extends Lexer {
+    protected static final DFA[] _decisionToDFA;
+    protected static final PredictionContextCache _sharedContextCache = new PredictionContextCache();
+    public static final int ABSTRACT = 1, ASSERT = 2, BOOLEAN = 3, BREAK = 4,
+            BYTE = 5, CASE = 6, CATCH = 7, CHAR = 8, CLASS = 9, CONST = 10,
+            CONTINUE = 11, DEFAULT = 12, DO = 13, DOUBLE = 14, ELSE = 15,
+            ENUM = 16, EXTENDS = 17, FINAL = 18, FINALLY = 19, FLOAT = 20,
+            FOR = 21, IF = 22, GOTO = 23, IMPLEMENTS = 24, IMPORT = 25,
+            INSTANCEOF = 26, INT = 27, INTERFACE = 28, LONG = 29, NATIVE = 30,
+            NEW = 31, PACKAGE = 32, PRIVATE = 33, PROTECTED = 34, PUBLIC = 35,
+            RETURN = 36, SHORT = 37, STATIC = 38, STRICTFP = 39, SUPER = 40,
+            SWITCH = 41, SYNCHRONIZED = 42, THIS = 43, THROW = 44, THROWS = 45,
+            TRANSIENT = 46, TRY = 47, VOID = 48, VOLATILE = 49, WHILE = 50,
+            IntegerLiteral = 51, FloatingPointLiteral = 52,
+            BooleanLiteral = 53, CharacterLiteral = 54, StringLiteral = 55,
+            NullLiteral = 56, LPAREN = 57, RPAREN = 58, LBRACE = 59,
+            RBRACE = 60, LBRACK = 61, RBRACK = 62, SEMI = 63, COMMA = 64,
+            DOT = 65, ASSIGN = 66, GT = 67, LT = 68, BANG = 69, TILDE = 70,
+            QUESTION = 71, COLON = 72, EQUAL = 73, LE = 74, GE = 75,
+            NOTEQUAL = 76, AND = 77, OR = 78, INC = 79, DEC = 80, ADD = 81,
+            SUB = 82, MUL = 83, DIV = 84, BITAND = 85, BITOR = 86, CARET = 87,
+            MOD = 88, ADD_ASSIGN = 89, SUB_ASSIGN = 90, MUL_ASSIGN = 91,
+            DIV_ASSIGN = 92, AND_ASSIGN = 93, OR_ASSIGN = 94, XOR_ASSIGN = 95,
+            MOD_ASSIGN = 96, LSHIFT_ASSIGN = 97, RSHIFT_ASSIGN = 98,
+            URSHIFT_ASSIGN = 99, Identifier = 100, AT = 101, ELLIPSIS = 102,
+            WS = 103, COMMENT = 104, LINE_COMMENT = 105;
+    public static String[] modeNames = { "DEFAULT_MODE" };]]></codefragment>
+   </duplication>
+   <duplication lines="49" tokens="408">
+      <file line="6444"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="7790"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ABSTRACT)
+                        | (1L << ASSERT)
+                        | (1L << BOOLEAN)
+                        | (1L << BREAK)
+                        | (1L << BYTE)
+                        | (1L << CHAR)
+                        | (1L << CLASS)
+                        | (1L << CONTINUE)
+                        | (1L << DO)
+                        | (1L << DOUBLE)
+                        | (1L << ENUM)
+                        | (1L << FINAL)
+                        | (1L << FLOAT)
+                        | (1L << FOR)
+                        | (1L << IF)
+                        | (1L << INT)
+                        | (1L << INTERFACE)
+                        | (1L << LONG)
+                        | (1L << NEW)
+                        | (1L << PRIVATE)
+                        | (1L << PROTECTED)
+                        | (1L << PUBLIC)
+                        | (1L << RETURN)
+                        | (1L << SHORT)
+                        | (1L << STATIC)
+                        | (1L << STRICTFP)
+                        | (1L << SUPER)
+                        | (1L << SWITCH)
+                        | (1L << SYNCHRONIZED)
+                        | (1L << THIS)
+                        | (1L << THROW)
+                        | (1L << TRY)
+                        | (1L << VOID)
+                        | (1L << WHILE)
+                        | (1L << IntegerLiteral)
+                        | (1L << FloatingPointLiteral)
+                        | (1L << BooleanLiteral)
+                        | (1L << CharacterLiteral)
+                        | (1L << StringLiteral)
+                        | (1L << NullLiteral)
+                        | (1L << LPAREN) | (1L << LBRACE) | (1L << SEMI))) != 0)
+                        || ((((_la - 68)) & ~0x3f) == 0 && ((1L << (_la - 68)) & ((1L << (LT - 68))
+                                | (1L << (BANG - 68))
+                                | (1L << (TILDE - 68))
+                                | (1L << (INC - 68))
+                                | (1L << (DEC - 68))
+                                | (1L << (ADD - 68))
+                                | (1L << (SUB - 68))
+                                | (1L << (Identifier - 68)) | (1L << (AT - 68)))) != 0)) {]]></codefragment>
+   </duplication>
+   <duplication lines="28" tokens="267">
+      <file line="7106"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8042"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8076"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="9187"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="10489"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                    setState(910);
+                    _la = _input.LA(1);
+                    if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEAN)
+                            | (1L << BYTE)
+                            | (1L << CHAR)
+                            | (1L << DOUBLE)
+                            | (1L << FLOAT)
+                            | (1L << INT)
+                            | (1L << LONG)
+                            | (1L << NEW)
+                            | (1L << SHORT)
+                            | (1L << SUPER)
+                            | (1L << THIS)
+                            | (1L << VOID)
+                            | (1L << IntegerLiteral)
+                            | (1L << FloatingPointLiteral)
+                            | (1L << BooleanLiteral)
+                            | (1L << CharacterLiteral)
+                            | (1L << StringLiteral) | (1L << NullLiteral) | (1L << LPAREN))) != 0)
+                            || ((((_la - 68)) & ~0x3f) == 0 && ((1L << (_la - 68)) & ((1L << (LT - 68))
+                                    | (1L << (BANG - 68))
+                                    | (1L << (TILDE - 68))
+                                    | (1L << (INC - 68))
+                                    | (1L << (DEC - 68))
+                                    | (1L << (ADD - 68))
+                                    | (1L << (SUB - 68)) | (1L << (Identifier - 68)))) != 0)) {
+                        {
+                            setState(909);]]></codefragment>
+   </duplication>
+   <duplication lines="16" tokens="263">
+      <file line="3736"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="5602"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                setState(573);
+                _la = _input.LA(1);
+                if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEAN)
+                        | (1L << BYTE) | (1L << CHAR) | (1L << DOUBLE)
+                        | (1L << FLOAT) | (1L << INT) | (1L << LONG)
+                        | (1L << NEW) | (1L << SHORT) | (1L << SUPER)
+                        | (1L << THIS) | (1L << VOID) | (1L << IntegerLiteral)
+                        | (1L << FloatingPointLiteral) | (1L << BooleanLiteral)
+                        | (1L << CharacterLiteral) | (1L << StringLiteral)
+                        | (1L << NullLiteral) | (1L << LPAREN) | (1L << LBRACE))) != 0)
+                        || ((((_la - 68)) & ~0x3f) == 0 && ((1L << (_la - 68)) & ((1L << (LT - 68))
+                                | (1L << (BANG - 68))
+                                | (1L << (TILDE - 68))
+                                | (1L << (INC - 68))
+                                | (1L << (DEC - 68))
+                                | (1L << (ADD - 68)) | (1L << (SUB - 68)) | (1L << (Identifier - 68)))) != 0)) {]]></codefragment>
+   </duplication>
+   <duplication lines="30" tokens="260">
+      <file line="1607"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="1874"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                setState(369);
+                _errHandler.sync(this);
+                _la = _input.LA(1);
+                while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ABSTRACT)
+                        | (1L << BOOLEAN)
+                        | (1L << BYTE)
+                        | (1L << CHAR)
+                        | (1L << CLASS)
+                        | (1L << DOUBLE)
+                        | (1L << ENUM)
+                        | (1L << FINAL)
+                        | (1L << FLOAT)
+                        | (1L << INT)
+                        | (1L << INTERFACE)
+                        | (1L << LONG)
+                        | (1L << NATIVE)
+                        | (1L << PRIVATE)
+                        | (1L << PROTECTED)
+                        | (1L << PUBLIC)
+                        | (1L << SHORT)
+                        | (1L << STATIC)
+                        | (1L << STRICTFP)
+                        | (1L << SYNCHRONIZED)
+                        | (1L << TRANSIENT)
+                        | (1L << VOID) | (1L << VOLATILE) | (1L << LBRACE) | (1L << SEMI))) != 0)
+                        || ((((_la - 68)) & ~0x3f) == 0 && ((1L << (_la - 68)) & ((1L << (LT - 68))
+                                | (1L << (Identifier - 68)) | (1L << (AT - 68)))) != 0)) {
+                    {
+                        {
+                            setState(366);]]></codefragment>
+   </duplication>
+   <duplication lines="19" tokens="224">
+      <file line="42"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaLexer.java"/>
+      <file line="40"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[    public static final String[] tokenNames = { "<INVALID>", "'abstract'",
+            "'assert'", "'boolean'", "'break'", "'byte'", "'case'", "'catch'",
+            "'char'", "'class'", "'const'", "'continue'", "'default'", "'do'",
+            "'double'", "'else'", "'enum'", "'extends'", "'final'",
+            "'finally'", "'float'", "'for'", "'if'", "'goto'", "'implements'",
+            "'import'", "'instanceof'", "'int'", "'interface'", "'long'",
+            "'native'", "'new'", "'package'", "'private'", "'protected'",
+            "'public'", "'return'", "'short'", "'static'", "'strictfp'",
+            "'super'", "'switch'", "'synchronized'", "'this'", "'throw'",
+            "'throws'", "'transient'", "'try'", "'void'", "'volatile'",
+            "'while'", "IntegerLiteral", "FloatingPointLiteral",
+            "BooleanLiteral", "CharacterLiteral", "StringLiteral", "'null'",
+            "'('", "')'", "'{'", "'}'", "'['", "']'", "';'", "','", "'.'",
+            "'='", "'>'", "'<'", "'!'", "'~'", "'?'", "':'", "'=='", "'<='",
+            "'>='", "'!='", "'&&'", "'||'", "'++'", "'--'", "'+'", "'-'",
+            "'*'", "'/'", "'&'", "'|'", "'^'", "'%'", "'+='", "'-='", "'*='",
+            "'/='", "'&='", "'|='", "'^='", "'%='", "'<<='", "'>>='", "'>>>='",
+            "Identifier", "'@'", "'...'", "WS", "COMMENT", "LINE_COMMENT" };
+    public static final String[] ruleNames = { "ABSTRACT", "ASSERT", "BOOLEAN",]]></codefragment>
+   </duplication>
+   <duplication lines="21" tokens="204">
+      <file line="7111"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8012"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8047"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8081"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="9192"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="10492"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                            | (1L << DOUBLE)
+                            | (1L << FLOAT)
+                            | (1L << INT)
+                            | (1L << LONG)
+                            | (1L << NEW)
+                            | (1L << SHORT)
+                            | (1L << SUPER)
+                            | (1L << THIS)
+                            | (1L << VOID)
+                            | (1L << IntegerLiteral)
+                            | (1L << FloatingPointLiteral)
+                            | (1L << BooleanLiteral)
+                            | (1L << CharacterLiteral)
+                            | (1L << StringLiteral) | (1L << NullLiteral) | (1L << LPAREN))) != 0)
+                            || ((((_la - 68)) & ~0x3f) == 0 && ((1L << (_la - 68)) & ((1L << (LT - 68))
+                                    | (1L << (BANG - 68))
+                                    | (1L << (TILDE - 68))
+                                    | (1L << (INC - 68))
+                                    | (1L << (DEC - 68))
+                                    | (1L << (ADD - 68))
+                                    | (1L << (SUB - 68)) | (1L << (Identifier - 68)))) != 0)) {]]></codefragment>
+   </duplication>
+   <duplication lines="25" tokens="178">
+      <file line="1607"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="1874"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="1975"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                setState(369);
+                _errHandler.sync(this);
+                _la = _input.LA(1);
+                while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ABSTRACT)
+                        | (1L << BOOLEAN)
+                        | (1L << BYTE)
+                        | (1L << CHAR)
+                        | (1L << CLASS)
+                        | (1L << DOUBLE)
+                        | (1L << ENUM)
+                        | (1L << FINAL)
+                        | (1L << FLOAT)
+                        | (1L << INT)
+                        | (1L << INTERFACE)
+                        | (1L << LONG)
+                        | (1L << NATIVE)
+                        | (1L << PRIVATE)
+                        | (1L << PROTECTED)
+                        | (1L << PUBLIC)
+                        | (1L << SHORT)
+                        | (1L << STATIC)
+                        | (1L << STRICTFP)
+                        | (1L << SYNCHRONIZED)
+                        | (1L << TRANSIENT)
+                        | (1L << VOID) | (1L << VOLATILE) | (1L << LBRACE) | (1L << SEMI))) != 0)]]></codefragment>
+   </duplication>
+   <duplication lines="25" tokens="166">
+      <file line="1607"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="1874"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="1975"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="5791"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                setState(369);
+                _errHandler.sync(this);
+                _la = _input.LA(1);
+                while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ABSTRACT)
+                        | (1L << BOOLEAN)
+                        | (1L << BYTE)
+                        | (1L << CHAR)
+                        | (1L << CLASS)
+                        | (1L << DOUBLE)
+                        | (1L << ENUM)
+                        | (1L << FINAL)
+                        | (1L << FLOAT)
+                        | (1L << INT)
+                        | (1L << INTERFACE)
+                        | (1L << LONG)
+                        | (1L << NATIVE)
+                        | (1L << PRIVATE)
+                        | (1L << PROTECTED)
+                        | (1L << PUBLIC)
+                        | (1L << SHORT)
+                        | (1L << STATIC)
+                        | (1L << STRICTFP)
+                        | (1L << SYNCHRONIZED)
+                        | (1L << TRANSIENT)
+                        | (1L << VOID) | (1L << VOLATILE) | (1L << LBRACE) | (1L << SEMI))) != 0)]]></codefragment>
+   </duplication>
+   <duplication lines="10" tokens="144">
+      <file line="3736"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="5602"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="7106"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8042"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8076"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="9187"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="10489"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                setState(573);
+                _la = _input.LA(1);
+                if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEAN)
+                        | (1L << BYTE) | (1L << CHAR) | (1L << DOUBLE)
+                        | (1L << FLOAT) | (1L << INT) | (1L << LONG)
+                        | (1L << NEW) | (1L << SHORT) | (1L << SUPER)
+                        | (1L << THIS) | (1L << VOID) | (1L << IntegerLiteral)
+                        | (1L << FloatingPointLiteral) | (1L << BooleanLiteral)
+                        | (1L << CharacterLiteral) | (1L << StringLiteral)
+                        | (1L << NullLiteral) | (1L << LPAREN) | (1L << LBRACE))) != 0)]]></codefragment>
+   </duplication>
+   <duplication lines="11" tokens="134">
+      <file line="5611"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8025"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                        | (1L << NullLiteral) | (1L << LPAREN) | (1L << LBRACE))) != 0)
+                        || ((((_la - 68)) & ~0x3f) == 0 && ((1L << (_la - 68)) & ((1L << (LT - 68))
+                                | (1L << (BANG - 68))
+                                | (1L << (TILDE - 68))
+                                | (1L << (INC - 68))
+                                | (1L << (DEC - 68))
+                                | (1L << (ADD - 68))
+                                | (1L << (SUB - 68))
+                                | (1L << (Identifier - 68)) | (1L << (AT - 68)))) != 0)) {
+                    {
+                        setState(728);]]></codefragment>
+   </duplication>
+   <duplication lines="10" tokens="132">
+      <file line="5611"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="6484"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8025"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                        | (1L << NullLiteral) | (1L << LPAREN) | (1L << LBRACE))) != 0)
+                        || ((((_la - 68)) & ~0x3f) == 0 && ((1L << (_la - 68)) & ((1L << (LT - 68))
+                                | (1L << (BANG - 68))
+                                | (1L << (TILDE - 68))
+                                | (1L << (INC - 68))
+                                | (1L << (DEC - 68))
+                                | (1L << (ADD - 68))
+                                | (1L << (SUB - 68))
+                                | (1L << (Identifier - 68)) | (1L << (AT - 68)))) != 0)) {
+                    {]]></codefragment>
+   </duplication>
+   <duplication lines="9" tokens="130">
+      <file line="5611"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="7830"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8025"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                        | (1L << NullLiteral) | (1L << LPAREN) | (1L << LBRACE))) != 0)
+                        || ((((_la - 68)) & ~0x3f) == 0 && ((1L << (_la - 68)) & ((1L << (LT - 68))
+                                | (1L << (BANG - 68))
+                                | (1L << (TILDE - 68))
+                                | (1L << (INC - 68))
+                                | (1L << (DEC - 68))
+                                | (1L << (ADD - 68))
+                                | (1L << (SUB - 68))
+                                | (1L << (Identifier - 68)) | (1L << (AT - 68)))) != 0)) {]]></codefragment>
+   </duplication>
+   <duplication lines="9" tokens="124">
+      <file line="3745"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="7124"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8060"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8094"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="9206"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="10498"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                        | (1L << NullLiteral) | (1L << LPAREN) | (1L << LBRACE))) != 0)
+                        || ((((_la - 68)) & ~0x3f) == 0 && ((1L << (_la - 68)) & ((1L << (LT - 68))
+                                | (1L << (BANG - 68))
+                                | (1L << (TILDE - 68))
+                                | (1L << (INC - 68))
+                                | (1L << (DEC - 68))
+                                | (1L << (ADD - 68)) | (1L << (SUB - 68)) | (1L << (Identifier - 68)))) != 0)) {
+                    {
+                        setState(562);]]></codefragment>
+   </duplication>
+   <duplication lines="7" tokens="114">
+      <file line="3745"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="6484"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="7830"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8025"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                        | (1L << NullLiteral) | (1L << LPAREN) | (1L << LBRACE))) != 0)
+                        || ((((_la - 68)) & ~0x3f) == 0 && ((1L << (_la - 68)) & ((1L << (LT - 68))
+                                | (1L << (BANG - 68))
+                                | (1L << (TILDE - 68))
+                                | (1L << (INC - 68))
+                                | (1L << (DEC - 68))
+                                | (1L << (ADD - 68)) | (1L << (SUB - 68)) | (1L << (Identifier - 68)))) != 0)) {]]></codefragment>
+   </duplication>
+   <duplication lines="9" tokens="114">
+      <file line="5611"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="7124"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8060"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="8094"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="9206"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <file line="10498"
+            path="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java"/>
+      <codefragment><![CDATA[                        | (1L << NullLiteral) | (1L << LPAREN) | (1L << LBRACE))) != 0)
+                        || ((((_la - 68)) & ~0x3f) == 0 && ((1L << (_la - 68)) & ((1L << (LT - 68))
+                                | (1L << (BANG - 68))
+                                | (1L << (TILDE - 68))
+                                | (1L << (INC - 68))
+                                | (1L << (DEC - 68))
+                                | (1L << (ADD - 68))
+                                | (1L << (SUB - 68))
+                                | (1L << (Identifier - 68)) | (1L << (AT - 68)))) != 0)) {]]></codefragment>
+   </duplication>
+</pmd-cpd>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="5.0.2" timestamp="2014-02-04T08:10:59.734">
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaLexer.java">
+<violation beginline="4" endline="4" begincolumn="8" endcolumn="33" rule="DuplicateImports" ruleset="Import Statements" package="com.obomprogramador.tools.jqana.antlrparser" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/imports.html#DuplicateImports" priority="4">
+Avoid duplicate imports such as 'org.antlr.v4.runtime.Lexer'
+</violation>
+<violation beginline="5" endline="5" begincolumn="8" endcolumn="38" rule="DuplicateImports" ruleset="Import Statements" package="com.obomprogramador.tools.jqana.antlrparser" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/imports.html#DuplicateImports" priority="4">
+Avoid duplicate imports such as 'org.antlr.v4.runtime.CharStream'
+</violation>
+<violation beginline="6" endline="6" begincolumn="8" endcolumn="33" rule="DuplicateImports" ruleset="Import Statements" package="com.obomprogramador.tools.jqana.antlrparser" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/imports.html#DuplicateImports" priority="4">
+Avoid duplicate imports such as 'org.antlr.v4.runtime.Token'
+</violation>
+<violation beginline="6" endline="6" begincolumn="1" endcolumn="34" rule="UnusedImports" ruleset="Import Statements" package="com.obomprogramador.tools.jqana.antlrparser" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.antlr.v4.runtime.Token'
+</violation>
+<violation beginline="7" endline="7" begincolumn="8" endcolumn="39" rule="DuplicateImports" ruleset="Import Statements" package="com.obomprogramador.tools.jqana.antlrparser" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/imports.html#DuplicateImports" priority="4">
+Avoid duplicate imports such as 'org.antlr.v4.runtime.TokenStream'
+</violation>
+<violation beginline="7" endline="7" begincolumn="1" endcolumn="40" rule="UnusedImports" ruleset="Import Statements" package="com.obomprogramador.tools.jqana.antlrparser" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.antlr.v4.runtime.TokenStream'
+</violation>
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java">
+<violation beginline="10" endline="10" begincolumn="1" endcolumn="26" rule="UnusedImports" ruleset="Import Statements" package="com.obomprogramador.tools.jqana.antlrparser" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'java.util.Iterator'
+</violation>
+<violation beginline="11" endline="11" begincolumn="1" endcolumn="27" rule="UnusedImports" ruleset="Import Statements" package="com.obomprogramador.tools.jqana.antlrparser" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'java.util.ArrayList'
+</violation>
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\mavenplugin\JqanaMojo.java">
+<violation beginline="75" endline="75" begincolumn="18" endcolumn="32" rule="UnusedPrivateField" ruleset="Unused Code" package="com.obomprogramador.tools.jqana.mavenplugin" class="JqanaMojo" variable="sourceDirectory" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/unusedcode.html#UnusedPrivateField" priority="3">
+Avoid unused private fields such as 'sourceDirectory'.
+</violation>
+<violation beginline="166" endline="166" begincolumn="57" endcolumn="62" rule="UnusedFormalParameter" ruleset="Unused Code" package="com.obomprogramador.tools.jqana.mavenplugin" class="JqanaMojo" method="reportPackageMetrics" variable="locale" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/unusedcode.html#UnusedFormalParameter" priority="3">
+Avoid unused method parameters such as 'locale'.
+</violation>
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\parsers\CycloListener.java">
+<violation beginline="69" endline="69" begincolumn="41" endcolumn="46" rule="UnusedPrivateField" ruleset="Unused Code" package="com.obomprogramador.tools.jqana.parsers" class="CycloListener" variable="parser" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/unusedcode.html#UnusedPrivateField" priority="3">
+Avoid unused private fields such as 'parser'.
+</violation>
+<violation beginline="264" endline="267" begincolumn="13" endcolumn="13" rule="CollapsibleIfStatements" ruleset="Basic" package="com.obomprogramador.tools.jqana.parsers" class="CycloListener" method="enterStatement" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\parsers\Lcom4Listener.java">
+<violation beginline="236" endline="247" begincolumn="21" endcolumn="21" rule="CollapsibleIfStatements" ruleset="Basic" package="com.obomprogramador.tools.jqana.parsers" class="Lcom4Listener$Lcom4MethodListener" method="enterExpression" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="283" endline="292" begincolumn="17" endcolumn="17" rule="CollapsibleIfStatements" ruleset="Basic" package="com.obomprogramador.tools.jqana.parsers" class="Lcom4Listener" method="checkForGetterSetter" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\parsers\Lcom4Parser.java">
+<violation beginline="75" endline="75" begincolumn="29" endcolumn="46" rule="UselessParentheses" ruleset="Unnecessary" package="com.obomprogramador.tools.jqana.parsers" class="Lcom4Parser" method="processComponents" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="160" endline="160" begincolumn="24" endcolumn="24" rule="UnusedLocalVariable" ruleset="Unused Code" package="com.obomprogramador.tools.jqana.parsers" class="Lcom4Parser" method="verifyComponent" variable="c" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/unusedcode.html#UnusedLocalVariable" priority="3">
+Avoid unused local variables such as 'c'.
+</violation>
+<violation beginline="234" endline="234" begincolumn="19" endcolumn="23" rule="UnusedLocalVariable" ruleset="Unused Code" package="com.obomprogramador.tools.jqana.parsers" class="Lcom4Parser" method="checkExists" variable="found" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/unusedcode.html#UnusedLocalVariable" priority="3">
+Avoid unused local variables such as 'found'.
+</violation>
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\parsers\Member.java">
+<violation beginline="54" endline="54" begincolumn="17" endcolumn="39" rule="UselessParentheses" ruleset="Unnecessary" package="com.obomprogramador.tools.jqana.parsers" class="Member" method="hashCode" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.2/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+</file>
+</pmd>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.6">
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaBaseListener.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaBaseVisitor.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaLexer.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaListener.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaParser.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\antlrparser\JavaVisitor.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\context\Context.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\context\GlobalConstants.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\mavenplugin\JqanaMojo.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\AbstractMetricParser.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\defaultimpl\DefaultMetric.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\defaultimpl\DefaultProjectProcessor.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\defaultimpl\DefaultXml2HtmlConverter.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\defaultimpl\DefaultXmlGenerator.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\defaultimpl\GetClassNameFromContext.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\defaultimpl\MaxLimitVerificationAlgorithm.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\defaultimpl\MetricValue.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\defaultimpl\RetriveTestResults.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\LimitVerificationAlgorithm.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\Measurement.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\Metric.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\Parser.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\ProjectProcessor.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\Xml2HtmlConverter.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\model\XmlGenerator.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\parsers\CycloListener.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\parsers\CyclomaticComplexityParser.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\parsers\Lcom4Listener.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\parsers\Lcom4Parser.java">
+<error line="302" column="22" severity="error" message="Variable &apos;members&apos; must be private and have accessor methods." source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\parsers\Member.java">
+<error line="44" column="19" severity="error" message="Variable &apos;packageName&apos; must be private and have accessor methods." source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
+<error line="45" column="19" severity="error" message="Variable &apos;className&apos; must be private and have accessor methods." source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
+<error line="46" column="19" severity="error" message="Variable &apos;name&apos; must be private and have accessor methods." source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
+<error line="47" column="24" severity="error" message="Variable &apos;type&apos; must be private and have accessor methods." source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
+<error line="48" column="19" severity="error" message="Variable &apos;targetVariable&apos; must be private and have accessor methods." source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
+<error line="49" column="25" severity="error" message="Variable &apos;referencedMembers&apos; must be private and have accessor methods." source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
+<error line="50" column="22" severity="error" message="Variable &apos;body&apos; must be private and have accessor methods." source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
+<error line="54" column="39" severity="error" message="&apos;3&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\java\com\obomprogramador\tools\jqana\parsers\RfcBcelParser.java">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\resources\log4j.properties">
+</file>
+<file name="C:\Users\55018335734\git\jqana\src\main\resources\report.properties">
+</file>
+</checkstyle>

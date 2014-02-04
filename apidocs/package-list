@@ -1,0 +1,6 @@
+com.obomprogramador.tools.jqana.antlrparser
+com.obomprogramador.tools.jqana.context
+com.obomprogramador.tools.jqana.mavenplugin
+com.obomprogramador.tools.jqana.model
+com.obomprogramador.tools.jqana.model.defaultimpl
+com.obomprogramador.tools.jqana.parsers
