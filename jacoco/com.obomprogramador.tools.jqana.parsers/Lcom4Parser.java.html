@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Lcom4Parser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.html" class="el_package">com.obomprogramador.tools.jqana.parsers</a> &gt; <span class="el_source">Lcom4Parser.java</span></div><h1>Lcom4Parser.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Lcom4Parser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.source.html" class="el_package">com.obomprogramador.tools.jqana.parsers</a> &gt; <span class="el_source">Lcom4Parser.java</span></div><h1>Lcom4Parser.java</h1><pre class="source lang-java linenums">/**
  * jQana - Open Source Java(TM) code quality analyzer.
  * 
  * Copyright 2013 Cleuton Sampaio de Melo Jr
@@ -19,325 +19,318 @@
  */
 package com.obomprogramador.tools.jqana.parsers;
 
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import org.antlr.v4.runtime.ANTLRFileStream;
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener;
-import com.obomprogramador.tools.jqana.antlrparser.JavaLexer;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
 import com.obomprogramador.tools.jqana.context.Context;
 import com.obomprogramador.tools.jqana.model.AbstractMetricParser;
 import com.obomprogramador.tools.jqana.model.Measurement;
-import com.obomprogramador.tools.jqana.model.Metric;
-import com.obomprogramador.tools.jqana.model.Parser;
-
-import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
-import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 import com.obomprogramador.tools.jqana.parsers.Member.MEMBER_TYPE;
 
 /**
- * This is a Parser implementation that checks for LCOM4 value.
- * It uses a Listener that creates a class' members array. Then, it verifies the number of
+ * This is a Parser implementation that checks for LCOM4 value. It uses a
+ * Listener that creates a class' members array. Then, it verifies the number of
  * &quot;Connected components&quot; inside the class.
  * 
  * @author Cleuton Sampaio
- *
+ * 
  */
 public class Lcom4Parser extends AbstractMetricParser {
-	
-	protected List&lt;Member&gt; members;
 
-	public Lcom4Parser(Measurement packageMeasurement, Context context) {
-<span class="fc" id="L65">		super(packageMeasurement, context, &quot;metric.lcom4.name&quot;);</span>
+    protected List&lt;Member&gt; members;
 
-<span class="fc" id="L67">	}</span>
+    /**
+     * Constructor with parameters.
+     * 
+     * @param packageMeasurement Measurement the package's measurement.
+     * @param context Context the context to use.
+     */
+    public Lcom4Parser(Measurement packageMeasurement, Context context) {
+<span class="fc" id="L52">        super(packageMeasurement, context, &quot;metric.lcom4.name&quot;);</span>
 
+<span class="fc" id="L54">    }</span>
 
-	@Override
-	public JavaBaseListener getListener(JavaParser p) {
-<span class="fc" id="L72">		this.metricValue.setValue(1);</span>
-<span class="fc" id="L73">	    this.members = new ArrayList&lt;Member&gt;();</span>
-<span class="fc" id="L74">	    Lcom4Listener cl = new Lcom4Listener(members,p);</span>
-<span class="fc" id="L75">		return cl;</span>
-	}
+    @Override
+    public JavaBaseListener getListener(JavaParser p) {
+<span class="fc" id="L58">        this.metricValue.setValue(1);</span>
+<span class="fc" id="L59">        this.members = new ArrayList&lt;Member&gt;();</span>
+<span class="fc" id="L60">        Lcom4Listener cl = new Lcom4Listener(members, p);</span>
+<span class="fc" id="L61">        return cl;</span>
+    }
 
-	
+    @Override
+    public void afterProcessing() {
+<span class="fc" id="L66">        processComponents();</span>
+<span class="fc" id="L67">    }</span>
 
-	@Override
-	public void afterProcessing() {
-<span class="fc" id="L82">		processComponents();</span>
-<span class="fc" id="L83">	}</span>
+    private void processComponents() {
+<span class="fc" id="L70">        this.measurement.setName(((Lcom4Listener) this.listener).getMainClassName());</span>
+<span class="fc" id="L71">        List&lt;Component&gt; connectedComponents = new ArrayList&lt;Component&gt;();</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        for (Member m : members) {</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">            if (m.type == MEMBER_TYPE.METHOD) {</span>
+<span class="fc" id="L74">                int inx = members.indexOf(m);</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">                if (inx == (members.size() - 1)) {</span>
+<span class="fc" id="L76">                    break;</span>
+                }
+<span class="fc" id="L78">                logger.debug(&quot;Analyzing method: &quot; + m.name + &quot; &quot; + m.toString());</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">                for (int x = inx + 1; x &lt; members.size(); x++) {</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">                    if (members.get(x).type == MEMBER_TYPE.METHOD) {</span>
+<span class="fc" id="L81">                        logger.debug(&quot;Checking with method: &quot;</span>
+                                + members.get(x).name + &quot; &quot;
+                                + members.get(x).toString());
+<span class="fc" id="L84">                        checkMethodPair(connectedComponents, m, members.get(x));</span>
+                    }
+                }
+            }
+<span class="fc" id="L88">        }</span>
 
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        if (this.members.size() &gt; 0) {</span>
+<span class="fc" id="L91">            this.measurement.setName(this.members.get(0).className);</span>
+        }
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (connectedComponents.size() &gt; 0) {</span>
+<span class="fc" id="L94">            this.metricValue.setValue(connectedComponents.size());</span>
+        } else {
+<span class="fc" id="L96">            this.metricValue.setValue(1);</span>
+        }
 
-	private void processComponents() {
-<span class="fc" id="L87">		this.measurement.setName(((Lcom4Listener)this.listener).mainClassName);</span>
-<span class="fc" id="L88">		List&lt;Component&gt; connectedComponents = new ArrayList&lt;Component&gt;();</span>
-<span class="fc bfc" id="L89" title="All 2 branches covered.">		for (Member m : members) {</span>
-<span class="fc bfc" id="L90" title="All 2 branches covered.">			if (m.type == MEMBER_TYPE.METHOD) {</span>
-<span class="fc" id="L91">				int inx = members.indexOf(m);</span>
-<span class="fc bfc" id="L92" title="All 2 branches covered.">				if (inx == (members.size() - 1)) {</span>
-<span class="fc" id="L93">					break;</span>
-				}
-<span class="fc" id="L95">				logger.debug(&quot;Analyzing method: &quot; + m.name + &quot; &quot; + m.toString());</span>
-<span class="fc bfc" id="L96" title="All 2 branches covered.">				for (int x=inx + 1; x &lt; members.size(); x++) {</span>
-<span class="pc bpc" id="L97" title="1 of 2 branches missed.">					if (members.get(x).type == MEMBER_TYPE.METHOD) {</span>
-<span class="fc" id="L98">						logger.debug(&quot;Checking with method: &quot; + members.get(x).name + &quot; &quot; + members.get(x).toString());</span>
-<span class="fc" id="L99">						checkMethodPair(connectedComponents,m, members.get(x));</span>
-					}
-				}
-			}
-<span class="fc" id="L103">		}</span>
-		
-<span class="fc bfc" id="L105" title="All 2 branches covered.">		if (this.members.size() &gt; 0) {</span>
-<span class="fc" id="L106">			this.measurement.setName(this.members.get(0).className);</span>
-		}
-<span class="fc bfc" id="L108" title="All 2 branches covered.">		if (connectedComponents.size() &gt; 0) {</span>
-<span class="fc" id="L109">			this.metricValue.setValue(connectedComponents.size());</span>
-		}
-		else {
-<span class="fc" id="L112">			this.metricValue.setValue(1);</span>
-		}
-		
-<span class="fc" id="L115">		this.metricValue.setViolated(this.metric.getVerificationAlgorithm().verify(this.metricValue.getValue()));</span>
-<span class="fc bfc" id="L116" title="All 2 branches covered.">		if (this.metricValue.isViolated()) {</span>
-<span class="fc" id="L117">			this.metricValue.setQtdElements(1);</span>
-		}
-<span class="fc" id="L119">		updatePackageMeasurement();</span>
-<span class="fc" id="L120">		logger.debug(&quot;Connected components: &quot; + connectedComponents.toString());</span>
-<span class="fc" id="L121">	}</span>
-	
-	/* (non javadoc)
-	 * Check whether or not the pair of methods are related. If they are related, then we must add them to a logical component.
-	 * 
-	 */
-	private void checkMethodPair(List&lt;Component&gt; listC, Member m, Member n) {
-		
-<span class="fc" id="L129">		boolean connectedMethods = false;</span>
-		
-		// Do they call each other?
-<span class="pc bpc" id="L132" title="1 of 4 branches missed.">		if (m.referencedMembers.contains(n) || n.referencedMembers.contains(m)) {</span>
-			// YUP
-<span class="fc" id="L134">			logger.debug(&quot;Methods &quot; + m.name + &quot; and &quot; + n.name + &quot; reference each other&quot;);</span>
-<span class="fc" id="L135">			connectedMethods = true;</span>
-		}
-		else {
-			// Do they share another class member?
-<span class="fc" id="L139">			List&lt;Member&gt; mReferences = new ArrayList&lt;Member&gt;(m.referencedMembers.size());</span>
-<span class="fc" id="L140">			mReferences.addAll(m.referencedMembers);</span>
-<span class="fc" id="L141">			mReferences.retainAll(n.referencedMembers);</span>
-<span class="fc bfc" id="L142" title="All 2 branches covered.">			if (mReferences.size() &gt; 0) {</span>
-				// YES! They share at least one class member
-<span class="fc" id="L144">				logger.debug(&quot;Methods &quot; + m.name + &quot; and &quot; + n.name + &quot; share a common reference&quot;);</span>
-<span class="fc" id="L145">				connectedMethods = true;</span>
-			}
-		}
-		
-<span class="fc bfc" id="L149" title="All 2 branches covered.">		if (connectedMethods) {</span>
-<span class="fc" id="L150">			logger.debug(&quot;Related method pair: &quot; + m.name + &quot; and: &quot; + n.name);</span>
-<span class="fc" id="L151">			verifyComponent (listC, m, n);</span>
-		}
-<span class="fc" id="L153"> 	}</span>
-	
-	/* (non javadoc)
-	 * This method must add the related method pair to a logical component. First, the method tries to find a Component related to any of
-	 * methods. If such a Component is found, then the method pair and all their references are added as members of the component.
-	 * 
-	 * Three situations can happen:
-	 * 
-	 * a) A suitable component is found, so the method pair and their references are added to it.
-	 * b) No suitable component is found, then we need to create a new one.
-	 * c) More than one suitable component is found, then we need to consolidate them in one new component and add the 
-	 *    method pair and all their references to it.
-	 * 
-	 */
-	private void verifyComponent(List&lt;Component&gt; listC, Member m, Member n) {
-<span class="fc" id="L168">		List&lt;Component&gt; listComponentsFound = new ArrayList&lt;Component&gt;();</span>
-		
-		// Let's see if there is already a component to add them
-<span class="fc bfc" id="L171" title="All 2 branches covered.">		for (Component c : listC) {</span>
-<span class="fc" id="L172">			checkExists(listC, listComponentsFound, m, n);</span>
-<span class="fc" id="L173">		}</span>
-		
-<span class="fc bfc" id="L175" title="All 2 branches covered.">		if (listComponentsFound.size() == 0) {</span>
-			// No component found... Let's create a new one
-<span class="fc" id="L177">			Component component = new Component();</span>
-<span class="fc" id="L178">			component.members = new ArrayList&lt;Member&gt;();</span>
-<span class="fc" id="L179">			listC.add(component);</span>
-<span class="fc" id="L180">			addToComponent(component, m,n);</span>
-<span class="fc" id="L181">			logger.debug(&quot;Creating new Component: &quot; + component);</span>
-<span class="fc" id="L182">		}</span>
-<span class="fc bfc" id="L183" title="All 2 branches covered.">		else if (listComponentsFound.size() == 1) {</span>
-				// One component found... Let's add them to it
-<span class="fc" id="L185">				Component component = listComponentsFound.get(0);</span>
-<span class="fc" id="L186">				addToComponent(component, m,n);</span>
-<span class="fc" id="L187">				logger.debug(&quot;Adding to Component: &quot; + component);</span>
-<span class="fc" id="L188">		}</span>
-		else {
-				// Hmmm... Many components found... Let's consolidate them
-<span class="fc" id="L191">				ConsolidateComponents(listC, listComponentsFound, m, n);</span>
-<span class="fc" id="L192">				logger.debug(&quot;Consolidating Component...&quot;);</span>
-		}		
-<span class="fc" id="L194">	}</span>
+<span class="fc" id="L99">        this.metricValue.setViolated(this.metric.getVerificationAlgorithm()</span>
+                .verify(this.metricValue.getValue()));
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        if (this.metricValue.isViolated()) {</span>
+<span class="fc" id="L102">            this.metricValue.setQtdElements(1);</span>
+        }
+<span class="fc" id="L104">        updatePackageMeasurement();</span>
+<span class="fc" id="L105">        logger.debug(&quot;Connected components: &quot; + connectedComponents.toString());</span>
+<span class="fc" id="L106">    }</span>
 
-	/* (non javadoc)
-	 * We need to create a new component, containing all the other components' members and the 
-	 * method pair members (including references).
-	 */
-	private void ConsolidateComponents(List&lt;Component&gt; listC,
-			List&lt;Component&gt; listComponentsFound, Member m, Member n) {
-<span class="fc" id="L202">		Component consolidated = new Component();</span>
-<span class="fc" id="L203">		consolidated.members = new ArrayList&lt;Member&gt;();</span>
-<span class="fc bfc" id="L204" title="All 2 branches covered.">		for (Component duplicate : listComponentsFound) {</span>
-<span class="fc" id="L205">			addMembers(consolidated, duplicate.members);</span>
-<span class="fc" id="L206">			listC.remove(duplicate);</span>
-<span class="fc" id="L207">			logger.debug(&quot;     Adding to Consolidate component: &quot; + duplicate);</span>
-<span class="fc" id="L208">		}</span>
-<span class="fc" id="L209">		addToComponent(consolidated,m,n);</span>
-<span class="fc" id="L210">		listC.add(consolidated);</span>
-<span class="fc" id="L211">	}</span>
+    /*
+     * (non javadoc) Check whether or not the pair of methods are related. If
+     * they are related, then we must add them to a logical component.
+     */
+    private void checkMethodPair(List&lt;Component&gt; listC, Member m, Member n) {
 
-	private void addToComponent(Component component,Member m,Member n) {
-<span class="fc" id="L214">		List&lt;Member&gt; members2add = new ArrayList&lt;Member&gt;(2 + m.referencedMembers.size() + n.referencedMembers.size());</span>
-<span class="fc" id="L215">		members2add.add(m);</span>
-<span class="fc" id="L216">		members2add.add(n);</span>
-<span class="fc" id="L217">		members2add.addAll(m.referencedMembers);</span>
-<span class="fc" id="L218">		members2add.addAll(n.referencedMembers);</span>
-<span class="fc" id="L219">		addMembers(component, members2add);</span>
-<span class="fc" id="L220">	}</span>
+<span class="fc" id="L114">        boolean connectedMethods = false;</span>
 
-	private void addMembers(Component component, List&lt;Member&gt; members2add) {
-<span class="pc bpc" id="L223" title="1 of 2 branches missed.">		if (members2add != null) {</span>
-<span class="fc bfc" id="L224" title="All 2 branches covered.">			for (Member cMember : members2add) {</span>
-<span class="fc bfc" id="L225" title="All 2 branches covered.">				if (!component.members.contains(cMember)) {</span>
-<span class="fc" id="L226">					component.members.add(cMember);</span>
-				}
-<span class="fc" id="L228">			}			</span>
-		}
-<span class="fc" id="L230">	}</span>
+        // Do they call each other?
+<span class="pc bpc" id="L117" title="1 of 4 branches missed.">        if (m.referencedMembers.contains(n) || n.referencedMembers.contains(m)) {</span>
+            // YUP
+<span class="fc" id="L119">            logger.debug(&quot;Methods &quot; + m.name + &quot; and &quot; + n.name</span>
+                    + &quot; reference each other&quot;);
+<span class="fc" id="L121">            connectedMethods = true;</span>
+        } else {
+            // Do they share another class member?
+<span class="fc" id="L124">            List&lt;Member&gt; mReferences = new ArrayList&lt;Member&gt;(</span>
+                    m.referencedMembers.size());
+<span class="fc" id="L126">            mReferences.addAll(m.referencedMembers);</span>
+<span class="fc" id="L127">            mReferences.retainAll(n.referencedMembers);</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">            if (mReferences.size() &gt; 0) {</span>
+                // YES! They share at least one class member
+<span class="fc" id="L130">                logger.debug(&quot;Methods &quot; + m.name + &quot; and &quot; + n.name</span>
+                        + &quot; share a common reference&quot;);
+<span class="fc" id="L132">                connectedMethods = true;</span>
+            }
+        }
 
+<span class="fc bfc" id="L136" title="All 2 branches covered.">        if (connectedMethods) {</span>
+<span class="fc" id="L137">            logger.debug(&quot;Related method pair: &quot; + m.name + &quot; and: &quot; + n.name);</span>
+<span class="fc" id="L138">            verifyComponent(listC, m, n);</span>
+        }
+<span class="fc" id="L140">    }</span>
 
-	private void addAllReferenced(Component c, Member m) {
-<span class="nc bnc" id="L234" title="All 2 branches missed.">		if (m.referencedMembers != null) {</span>
-<span class="nc bnc" id="L235" title="All 2 branches missed.">			for (Member rMember : m.referencedMembers) {</span>
-<span class="nc bnc" id="L236" title="All 2 branches missed.">				if (!c.members.contains(rMember)) {</span>
-<span class="nc" id="L237">					c.members.add(rMember);</span>
-				}
-<span class="nc" id="L239">			}		</span>
-		}
-<span class="nc" id="L241">	}</span>
+    /*
+     * (non javadoc) This method must add the related method pair to a logical
+     * component. First, the method tries to find a Component related to any of
+     * methods. If such a Component is found, then the method pair and all their
+     * references are added as members of the component.
+     * 
+     * Three situations can happen:
+     * 
+     * a) A suitable component is found, so the method pair and their references
+     * are added to it. b) No suitable component is found, then we need to
+     * create a new one. c) More than one suitable component is found, then we
+     * need to consolidate them in one new component and add the method pair and
+     * all their references to it.
+     */
+    private void verifyComponent(List&lt;Component&gt; listC, Member m, Member n) {
+<span class="fc" id="L157">        List&lt;Component&gt; listComponentsFound = new ArrayList&lt;Component&gt;();</span>
 
-	/* (non javadoc)
-	 * Verify if the method pair is already referenced in any Component, adding the Component to the list of components where the 
-	 * method pair was found.
-	 * The method pair is considered as referenced by a component if any of three situations happen:
-	 * a) Any of the pair's methods exists as members of the component;
-	 * b) Any referenced class member of any of the pair's methods exists as members of the component;
-	 * c) Any referenced class member of any of the pair's methods exists as references of any members of the component; 
-	 */
-	private void checkExists(List&lt;Component&gt; listC, List&lt;Component&gt; listComponentsFound, Member m,
-			Member n) {
-<span class="fc" id="L253">		Component found = null;</span>
-<span class="fc bfc" id="L254" title="All 2 branches covered.">		for (Component c : listC) {</span>
-<span class="pc bpc" id="L255" title="1 of 4 branches missed.">			if (c.members.contains(m) || c.members.contains(n)) {</span>
-<span class="fc" id="L256">				found = c;</span>
-<span class="fc" id="L257">				listComponentsFound.add(c);</span>
-			}
-			else  {
-				
-				/*
-				 * If we do not find the method pair in a component, two situations can happen:
-				 * 1) Their references may be members of the component, so, we consider this component as found;
-				 * 2) Their references may be present in the references of the component's member, so, we consider this component as found.
-				 */
-<span class="fc" id="L266">				List&lt;Member&gt; combinedRefs = new ArrayList&lt;Member&gt;(m.referencedMembers.size() + n.referencedMembers.size());</span>
-<span class="fc" id="L267">				combinedRefs.addAll(m.referencedMembers);</span>
-<span class="fc" id="L268">				combinedRefs.addAll(n.referencedMembers);</span>
-<span class="pc bpc" id="L269" title="1 of 2 branches missed.">				if (refsAreMembers(c.members,combinedRefs)) {</span>
-<span class="nc" id="L270">					found = c;</span>
-<span class="nc" id="L271">					listComponentsFound.add(c);</span>
-				}
-				else {
-					// Well, now, we have to check if any of the method pair's references exists as references of any member of this component
-<span class="pc bpc" id="L275" title="1 of 2 branches missed.">					if (refsAreRefs(c.members,combinedRefs)) {</span>
-<span class="nc" id="L276">						found = c;</span>
-<span class="nc" id="L277">						listComponentsFound.add(c);</span>
-					}
-					
-				}
+        // Let's see if there is already a component to add them
+<span class="fc bfc" id="L160" title="All 2 branches covered.">        for (Component c : listC) {</span>
+<span class="fc" id="L161">            checkExists(listC, listComponentsFound, m, n);</span>
+<span class="fc" id="L162">        }</span>
 
-			}
-<span class="fc" id="L283">		}</span>
-		
-<span class="fc" id="L285">	}</span>
+<span class="fc bfc" id="L164" title="All 2 branches covered.">        if (listComponentsFound.size() == 0) {</span>
+            // No component found... Let's create a new one
+<span class="fc" id="L166">            Component component = new Component();</span>
+<span class="fc" id="L167">            component.members = new ArrayList&lt;Member&gt;();</span>
+<span class="fc" id="L168">            listC.add(component);</span>
+<span class="fc" id="L169">            addToComponent(component, m, n);</span>
+<span class="fc" id="L170">            logger.debug(&quot;Creating new Component: &quot; + component);</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">        } else if (listComponentsFound.size() == 1) {</span>
+            // One component found... Let's add them to it
+<span class="fc" id="L173">            Component component = listComponentsFound.get(0);</span>
+<span class="fc" id="L174">            addToComponent(component, m, n);</span>
+<span class="fc" id="L175">            logger.debug(&quot;Adding to Component: &quot; + component);</span>
+<span class="fc" id="L176">        } else {</span>
+            // Hmmm... Many components found... Let's consolidate them
+<span class="fc" id="L178">            consolidateComponents(listC, listComponentsFound, m, n);</span>
+<span class="fc" id="L179">            logger.debug(&quot;Consolidating Component...&quot;);</span>
+        }
+<span class="fc" id="L181">    }</span>
+
+    /*
+     * (non javadoc) We need to create a new component, containing all the other
+     * components' members and the method pair members (including references).
+     */
+    private void consolidateComponents(List&lt;Component&gt; listC,
+            List&lt;Component&gt; listComponentsFound, Member m, Member n) {
+<span class="fc" id="L189">        Component consolidated = new Component();</span>
+<span class="fc" id="L190">        consolidated.members = new ArrayList&lt;Member&gt;();</span>
+<span class="fc bfc" id="L191" title="All 2 branches covered.">        for (Component duplicate : listComponentsFound) {</span>
+<span class="fc" id="L192">            addMembers(consolidated, duplicate.members);</span>
+<span class="fc" id="L193">            listC.remove(duplicate);</span>
+<span class="fc" id="L194">            logger.debug(&quot;     Adding to Consolidate component: &quot; + duplicate);</span>
+<span class="fc" id="L195">        }</span>
+<span class="fc" id="L196">        addToComponent(consolidated, m, n);</span>
+<span class="fc" id="L197">        listC.add(consolidated);</span>
+<span class="fc" id="L198">    }</span>
+
+    private void addToComponent(Component component, Member m, Member n) {
+<span class="fc" id="L201">        List&lt;Member&gt; members2add = new ArrayList&lt;Member&gt;(2</span>
+                + m.referencedMembers.size() + n.referencedMembers.size());
+<span class="fc" id="L203">        members2add.add(m);</span>
+<span class="fc" id="L204">        members2add.add(n);</span>
+<span class="fc" id="L205">        members2add.addAll(m.referencedMembers);</span>
+<span class="fc" id="L206">        members2add.addAll(n.referencedMembers);</span>
+<span class="fc" id="L207">        addMembers(component, members2add);</span>
+<span class="fc" id="L208">    }</span>
+
+    private void addMembers(Component component, List&lt;Member&gt; members2add) {
+<span class="pc bpc" id="L211" title="1 of 2 branches missed.">        if (members2add != null) {</span>
+<span class="fc bfc" id="L212" title="All 2 branches covered.">            for (Member cMember : members2add) {</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">                if (!component.members.contains(cMember)) {</span>
+<span class="fc" id="L214">                    component.members.add(cMember);</span>
+                }
+<span class="fc" id="L216">            }</span>
+        }
+<span class="fc" id="L218">    }</span>
 
 
-	private boolean refsAreRefs(List&lt;Member&gt; componentMembers, List&lt;Member&gt; combinedRefs) {
-<span class="fc" id="L289">		boolean returnCode = false;</span>
-<span class="fc bfc" id="L290" title="All 2 branches covered.">		for (Member m : componentMembers) {</span>
-<span class="pc bpc" id="L291" title="1 of 2 branches missed.">			if (refsAreMembers(m.referencedMembers, combinedRefs)) {</span>
-<span class="nc" id="L292">				returnCode = true;</span>
-<span class="nc" id="L293">				break;</span>
-			}
-<span class="fc" id="L295">		}</span>
-<span class="fc" id="L296">		return returnCode;</span>
-	}
 
-	private boolean refsAreMembers(List&lt;Member&gt; originalMembers,List&lt;Member&gt; referencedMembers) {
-<span class="fc" id="L300">		boolean returnCode = false;</span>
-<span class="fc" id="L301">		List&lt;Member&gt; testList = new ArrayList&lt;Member&gt;(originalMembers.size());</span>
-<span class="fc" id="L302">		testList.addAll(originalMembers);</span>
-<span class="fc" id="L303">		testList.retainAll(referencedMembers);</span>
-<span class="pc bpc" id="L304" title="1 of 2 branches missed.">		if (testList.size() &gt; 0) {</span>
-<span class="nc" id="L305">			returnCode = true;</span>
-		}
-<span class="fc" id="L307">		return returnCode;</span>
-	}
+    /*
+     * (non javadoc) Verify if the method pair is already referenced in any
+     * Component, adding the Component to the list of components where the
+     * method pair was found. The method pair is considered as referenced by a
+     * component if any of three situations happen: a) Any of the pair's methods
+     * exists as members of the component; b) Any referenced class member of any
+     * of the pair's methods exists as members of the component; c) Any
+     * referenced class member of any of the pair's methods exists as references
+     * of any members of the component;
+     */
+    private void checkExists(List&lt;Component&gt; listC,
+            List&lt;Component&gt; listComponentsFound, Member m, Member n) {
+<span class="fc" id="L234">        Component found = null;</span>
+<span class="fc bfc" id="L235" title="All 2 branches covered.">        for (Component c : listC) {</span>
+<span class="pc bpc" id="L236" title="1 of 4 branches missed.">            if (c.members.contains(m) || c.members.contains(n)) {</span>
+<span class="fc" id="L237">                found = c;</span>
+<span class="fc" id="L238">                listComponentsFound.add(c);</span>
+            } else {
 
+                /*
+                 * If we do not find the method pair in a component, two
+                 * situations can happen: 1) Their references may be members of
+                 * the component, so, we consider this component as found; 2)
+                 * Their references may be present in the references of the
+                 * component's member, so, we consider this component as found.
+                 */
+<span class="fc" id="L248">                List&lt;Member&gt; combinedRefs = new ArrayList&lt;Member&gt;(</span>
+                        m.referencedMembers.size() + n.referencedMembers.size());
+<span class="fc" id="L250">                combinedRefs.addAll(m.referencedMembers);</span>
+<span class="fc" id="L251">                combinedRefs.addAll(n.referencedMembers);</span>
+<span class="pc bpc" id="L252" title="1 of 2 branches missed.">                if (refsAreMembers(c.members, combinedRefs)) {</span>
+<span class="nc" id="L253">                    found = c;</span>
+<span class="nc" id="L254">                    listComponentsFound.add(c);</span>
+                } else {
+                    // Well, now, we have to check if any of the method pair's
+                    // references exists as references of any member of this
+                    // component
+<span class="pc bpc" id="L259" title="1 of 2 branches missed.">                    if (refsAreRefs(c.members, combinedRefs)) {</span>
+<span class="nc" id="L260">                        found = c;</span>
+<span class="nc" id="L261">                        listComponentsFound.add(c);</span>
+                    }
 
-<span class="fc" id="L311">	class Component {</span>
-		List&lt;Member&gt; members;
+                }
 
-		@Override
-		public String toString() {
-<span class="fc" id="L316">			String conector = &quot;&quot;;</span>
-<span class="fc" id="L317">			String saida = &quot;[Component: &quot;;</span>
-<span class="fc bfc" id="L318" title="All 2 branches covered.">			for (Member m : members) {</span>
-<span class="fc" id="L319">				saida += conector + m.name;</span>
-<span class="fc" id="L320">				conector = &quot;; &quot;;</span>
-<span class="fc" id="L321">			}</span>
-<span class="fc" id="L322">			saida += &quot; ***]&quot;;</span>
-<span class="fc" id="L323">			return saida;</span>
-		}
-		
-	}
-	
-	@Override
-	public void updatePackageMetrics(MetricValue packageMv, MetricValue mv) {
-		// For package and project metrics, the value is the highest LCOM4 value found:
-<span class="fc bfc" id="L331" title="All 2 branches covered.">		if (mv.getValue() &gt; packageMv.getValue()) {</span>
-<span class="fc" id="L332">			packageMv.setValue(mv.getValue());</span>
-		}
-<span class="fc bfc" id="L334" title="All 2 branches covered.">		if (mv.isViolated()) {</span>
-<span class="fc" id="L335">			packageMv.setViolated(true);</span>
-		}
-		
-<span class="fc" id="L338">	}</span>
-	
-	
+            }
+<span class="fc" id="L267">        }</span>
+
+<span class="fc" id="L269">    }</span>
+
+    private boolean refsAreRefs(List&lt;Member&gt; componentMembers,
+            List&lt;Member&gt; combinedRefs) {
+<span class="fc" id="L273">        boolean returnCode = false;</span>
+<span class="fc bfc" id="L274" title="All 2 branches covered.">        for (Member m : componentMembers) {</span>
+<span class="pc bpc" id="L275" title="1 of 2 branches missed.">            if (refsAreMembers(m.referencedMembers, combinedRefs)) {</span>
+<span class="nc" id="L276">                returnCode = true;</span>
+<span class="nc" id="L277">                break;</span>
+            }
+<span class="fc" id="L279">        }</span>
+<span class="fc" id="L280">        return returnCode;</span>
+    }
+
+    private boolean refsAreMembers(List&lt;Member&gt; originalMembers,
+            List&lt;Member&gt; referencedMembers) {
+<span class="fc" id="L285">        boolean returnCode = false;</span>
+<span class="fc" id="L286">        List&lt;Member&gt; testList = new ArrayList&lt;Member&gt;(originalMembers.size());</span>
+<span class="fc" id="L287">        testList.addAll(originalMembers);</span>
+<span class="fc" id="L288">        testList.retainAll(referencedMembers);</span>
+<span class="pc bpc" id="L289" title="1 of 2 branches missed.">        if (testList.size() &gt; 0) {</span>
+<span class="nc" id="L290">            returnCode = true;</span>
+        }
+<span class="fc" id="L292">        return returnCode;</span>
+    }
+
+    /**
+     * This class aggregates a component. 
+     * @author Cleuton Sampaio
+     *
+     */
+<span class="fc" id="L300">    class Component {</span>
+        
+        List&lt;Member&gt; members;
+
+        /**
+         * Object to string.
+         * @return String the textual representation.
+         */
+        @Override
+        public String toString() {
+<span class="fc" id="L310">            String conector = &quot;&quot;;</span>
+<span class="fc" id="L311">            String saida = &quot;[Component: &quot;;</span>
+<span class="fc bfc" id="L312" title="All 2 branches covered.">            for (Member m : members) {</span>
+<span class="fc" id="L313">                saida += conector + m.name;</span>
+<span class="fc" id="L314">                conector = &quot;; &quot;;</span>
+<span class="fc" id="L315">            }</span>
+<span class="fc" id="L316">            saida += &quot; ***]&quot;;</span>
+<span class="fc" id="L317">            return saida;</span>
+        }
+
+    }
+
+    @Override
+    public void updatePackageMetrics(MetricValue packageMv, MetricValue mv) {
+        // For package and project metrics, the value is the highest LCOM4 value
+        // found:
+<span class="fc bfc" id="L326" title="All 2 branches covered.">        if (mv.getValue() &gt; packageMv.getValue()) {</span>
+<span class="fc" id="L327">            packageMv.setValue(mv.getValue());</span>
+        }
+<span class="fc bfc" id="L329" title="All 2 branches covered.">        if (mv.isViolated()) {</span>
+<span class="fc" id="L330">            packageMv.setViolated(true);</span>
+        }
+
+<span class="fc" id="L333">    }</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.4.201312101107</span></div></body></html>

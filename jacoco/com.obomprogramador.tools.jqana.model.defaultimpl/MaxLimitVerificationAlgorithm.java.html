@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MaxLimitVerificationAlgorithm.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.html" class="el_package">com.obomprogramador.tools.jqana.model.defaultimpl</a> &gt; <span class="el_source">MaxLimitVerificationAlgorithm.java</span></div><h1>MaxLimitVerificationAlgorithm.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MaxLimitVerificationAlgorithm.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.source.html" class="el_package">com.obomprogramador.tools.jqana.model.defaultimpl</a> &gt; <span class="el_source">MaxLimitVerificationAlgorithm.java</span></div><h1>MaxLimitVerificationAlgorithm.java</h1><pre class="source lang-java linenums">/**
  * jQana - Open Source Java(TM) code quality analyzer.
  * 
  * Copyright 2013 Cleuton Sampaio de Melo Jr
@@ -22,47 +22,63 @@ package com.obomprogramador.tools.jqana.model.defaultimpl;
 import com.obomprogramador.tools.jqana.model.LimitVerificationAlgorithm;
 
 /**
- * Implementation of LimitVerificationAlgorothm that checks whether a metric value is greater
- * than a max limit.
+ * Implementation of LimitVerificationAlgorothm that checks whether a metric
+ * value is greater than a max limit.
+ * 
  * @see LimitVerificationAlgorithm
- *
+ * 
  * @author Cleuton Sampaio.
- *
+ * 
  */
-public class MaxLimitVerificationAlgorithm extends
-		LimitVerificationAlgorithm {
+public class MaxLimitVerificationAlgorithm extends LimitVerificationAlgorithm {
 
-	private double maxLimit;
-	public MaxLimitVerificationAlgorithm(double maxLimit) {
-<span class="fc" id="L37">		super();</span>
-<span class="fc" id="L38">		this.maxLimit = maxLimit;</span>
-<span class="fc" id="L39">	}</span>
-	
-	public MaxLimitVerificationAlgorithm() {
-<span class="nc" id="L42">		super();</span>
-<span class="nc" id="L43">	}</span>
-	
-	
+    private double maxLimit;
 
-	public double getMaxLimit() {
-<span class="nc" id="L48">		return maxLimit;</span>
-	}
+    /**
+     * Constructor with field.
+     * @param maxLimit double The Maximum limit.
+     */
+    public MaxLimitVerificationAlgorithm(double maxLimit) {
+<span class="fc" id="L42">        super();</span>
+<span class="fc" id="L43">        this.maxLimit = maxLimit;</span>
+<span class="fc" id="L44">    }</span>
 
-	public void setMaxLimit(double maxLimit) {
-<span class="nc" id="L52">		this.maxLimit = maxLimit;</span>
-<span class="nc" id="L53">	}</span>
+    /**
+     * Default constructor.
+     */
+    public MaxLimitVerificationAlgorithm() {
+<span class="nc" id="L50">        super();</span>
+<span class="nc" id="L51">    }</span>
 
-	/**
-	 * Checks whether the metric's value is greater than the specified limit.
-	 */
-	@Override
-	public boolean verify(double value) {
-<span class="fc" id="L60">		boolean returnCode = false;</span>
-<span class="fc bfc" id="L61" title="All 2 branches covered.">		if (value &gt; maxLimit) {</span>
-<span class="fc" id="L62">			returnCode = true;</span>
-		}
-<span class="fc" id="L64">		return returnCode;</span>
-	}
+    /**
+     * Getter for maximum limit.
+     * @return double Maximum limit.
+     */
+    public double getMaxLimit() {
+<span class="nc" id="L58">        return maxLimit;</span>
+    }
+
+    /**
+     * Setter for max limit.
+     * @param maxLimit double the maximum limit.
+     */
+    public void setMaxLimit(double maxLimit) {
+<span class="nc" id="L66">        this.maxLimit = maxLimit;</span>
+<span class="nc" id="L67">    }</span>
+
+    /**
+     * Checks whether the metric's value is greater than the specified limit.
+     * @param value double the value to be checked.
+     * @return boolean whether the value is greather than the limit or not. 
+     */
+    @Override
+    public boolean verify(double value) {
+<span class="fc" id="L76">        boolean returnCode = false;</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (value &gt; maxLimit) {</span>
+<span class="fc" id="L78">            returnCode = true;</span>
+        }
+<span class="fc" id="L80">        return returnCode;</span>
+    }
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.4.201312101107</span></div></body></html>

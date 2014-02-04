@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Measurement.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.html" class="el_package">com.obomprogramador.tools.jqana.model</a> &gt; <span class="el_source">Measurement.java</span></div><h1>Measurement.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Measurement.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.source.html" class="el_package">com.obomprogramador.tools.jqana.model</a> &gt; <span class="el_source">Measurement.java</span></div><h1>Measurement.java</h1><pre class="source lang-java linenums">/**
  * jQana - Open Source Java(TM) code quality analyzer.
  * 
  * Copyright 2013 Cleuton Sampaio de Melo Jr
@@ -23,139 +23,219 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import com.obomprogramador.tools.jqana.context.GlobalConstants;
-import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 
 /**
- * This represents a measurement taken from source code. It may have some inner measurements.
+ * This represents a measurement taken from source code. It may have some inner
+ * measurements.
+ * 
  * @author Cleuton Sampaio
- *
+ * 
  */
 @XmlRootElement
-public class Measurement implements Comparable&lt;Measurement&gt;{
-	
-<span class="pc" id="L44">	public static enum MEASUREMENT_TYPE {</span>
-<span class="fc" id="L45">									PROJECT_MEASUREMENT,</span>
-<span class="fc" id="L46">									PACKAGE_MEASUREMENT,</span>
-<span class="fc" id="L47">									CLASS_MEASUREMENT,</span>
-<span class="fc" id="L48">									METHOD_MEASUREMENT</span>
-	};
-									
-	protected String name;
-	protected Date date;
-	protected MEASUREMENT_TYPE type;
-	
-	protected List&lt;MetricValue&gt; metricValues;
-	
-	protected List&lt;Measurement&gt; innerMeasurements;
-	
-	
-	
-	public Measurement() {
-<span class="fc" id="L62">		super();</span>
-<span class="fc" id="L63">		this.metricValues = new ArrayList&lt;MetricValue&gt;();</span>
-<span class="fc" id="L64">		this.innerMeasurements = new ArrayList&lt;Measurement&gt;();</span>
-<span class="fc" id="L65">	}</span>
-	
-	public Measurement(String name, Date date, MEASUREMENT_TYPE type,
-			List&lt;MetricValue&gt; metricValues, List&lt;Measurement&gt; innerMeasurements) {
-<span class="nc" id="L69">		super();</span>
-<span class="nc" id="L70">		this.name = name;</span>
-<span class="nc" id="L71">		this.date = date;</span>
-<span class="nc" id="L72">		this.type = type;</span>
-<span class="nc" id="L73">		this.metricValues = new ArrayList&lt;MetricValue&gt;();</span>
-<span class="nc" id="L74">		this.innerMeasurements = new ArrayList&lt;Measurement&gt;();</span>
-<span class="nc bnc" id="L75" title="All 2 branches missed.">		if (metricValues != null) {</span>
-<span class="nc" id="L76">			this.metricValues = metricValues;	</span>
-		}
-<span class="nc bnc" id="L78" title="All 2 branches missed.">		if (innerMeasurements != null) {</span>
-<span class="nc" id="L79">			this.innerMeasurements = innerMeasurements;</span>
-		}
-<span class="nc" id="L81">	}</span>
-	public String getName() {
-<span class="fc" id="L83">		return name;</span>
-	}
-	public void setName(String name) {
-<span class="fc" id="L86">		this.name = name;</span>
-<span class="fc" id="L87">	}</span>
-	public Date getDate() {
-<span class="fc" id="L89">		return date;</span>
-	}
-	public void setDate(Date date) {
-<span class="nc" id="L92">		this.date = date;</span>
-<span class="nc" id="L93">	}</span>
-	public MEASUREMENT_TYPE getType() {
-<span class="fc" id="L95">		return type;</span>
-	}
-	public void setType(MEASUREMENT_TYPE type) {
-<span class="fc" id="L98">		this.type = type;</span>
-<span class="fc" id="L99">	}</span>
-	
-	@XmlElementWrapper(name=&quot;metricsValues&quot;)
-	@XmlElement(name=&quot;metricValue&quot;)
-	public List&lt;MetricValue&gt; getMetricValues() {
-<span class="fc" id="L104">		return metricValues;</span>
-	}
-	public void setMetricValues(List&lt;MetricValue&gt; metricValues) {
-<span class="nc" id="L107">		this.metricValues = metricValues;</span>
-<span class="nc" id="L108">	}</span>
-	
-	@XmlElementWrapper(name=&quot;innerMeasurements&quot;)
-	@XmlElement(name=&quot;measurement&quot;)
-	public List&lt;Measurement&gt; getInnerMeasurements() {
-<span class="fc" id="L113">		return innerMeasurements;</span>
-	}
-	public void setInnerMeasurements(List&lt;Measurement&gt; innerMeasurements) {
-<span class="nc" id="L116">		this.innerMeasurements = innerMeasurements;</span>
-<span class="nc" id="L117">	}</span>
-	@Override
-	public final int hashCode() {
-<span class="nc" id="L120">		return this.getName().hashCode();</span>
-	}
-	@Override
-	public boolean equals(Object obj) {
-<span class="fc" id="L124">		return this.getName().equals(((Measurement) obj).getName());</span>
-	}
-	@Override
-	public String toString() {
-<span class="fc" id="L128">		return &quot;[Measurement. Name: &quot; </span>
-				+ this.getName()
-				+ &quot;, Type: &quot; + this.getType().toString()
-				+ &quot;, Metrics Values: &quot;
-				+ &quot; \r\n&quot; + this.metricValues
-				+ &quot;, Inner measurements: &quot; 
-				+ &quot;\r\n&quot; + this.innerMeasurements
-				+ &quot;]&quot;;
-	}
-	@Override
-	public int compareTo(Measurement o) {
-<span class="nc" id="L139">		return this.getName().compareTo(o.getName());</span>
-	}
-	
-	/**
-	 * Convenience method to return a metric value, based on its name.
-	 * @param metricName The metric name
-	 * @return Metric value or null, if it does not exist.
-	 */
-	public MetricValue getMetricValue(String metricName) {
-<span class="fc" id="L148">		MetricValue mv = new MetricValue();</span>
-<span class="fc" id="L149">		mv.setName(metricName);</span>
-<span class="fc" id="L150">		int indx = this.getMetricValues().indexOf(mv);</span>
-<span class="pc bpc" id="L151" title="1 of 2 branches missed.">		if (indx &gt;= 0) {</span>
-<span class="fc" id="L152">			mv = this.getMetricValues().get(indx);</span>
-		}
-		else {
-<span class="nc" id="L155">			mv = null;</span>
-		}
-<span class="fc" id="L157">		return mv;</span>
-	}
+public class Measurement implements Comparable&lt;Measurement&gt; {
+
+    /**
+     * Enum for Measurement Type.
+     * @author Cleuton Sampaio.
+     *
+     */
+<span class="pc" id="L47">    public static enum MEASUREMENT_TYPE {</span>
+<span class="fc" id="L48">        PROJECT_MEASUREMENT, PACKAGE_MEASUREMENT, CLASS_MEASUREMENT, METHOD_MEASUREMENT</span>
+    };
+
+    protected String name;
+    protected Date date;
+    protected MEASUREMENT_TYPE type;
+
+    protected List&lt;MetricValue&gt; metricValues;
+
+    protected List&lt;Measurement&gt; innerMeasurements;
+
+    /**
+     * Default constructor.
+     */
+    public Measurement() {
+<span class="fc" id="L63">        super();</span>
+<span class="fc" id="L64">        this.metricValues = new ArrayList&lt;MetricValue&gt;();</span>
+<span class="fc" id="L65">        this.innerMeasurements = new ArrayList&lt;Measurement&gt;();</span>
+<span class="fc" id="L66">    }</span>
+
+    /**
+     * Constructor with fields.
+     * @param name String the measurement's name.
+     * @param date Date the measurement date.
+     * @param type MEASUREMENT_TYPE the type.
+     * @param metricValues List&lt;MetricValue&gt; the list of metrics.
+     * @param innerMeasurements List&lt;Measurement&gt; inner measurements.
+     */
+    public Measurement(String name, Date date, MEASUREMENT_TYPE type,
+            List&lt;MetricValue&gt; metricValues, List&lt;Measurement&gt; innerMeasurements) {
+<span class="nc" id="L78">        super();</span>
+<span class="nc" id="L79">        this.name = name;</span>
+<span class="nc" id="L80">        this.date = date;</span>
+<span class="nc" id="L81">        this.type = type;</span>
+<span class="nc" id="L82">        this.metricValues = new ArrayList&lt;MetricValue&gt;();</span>
+<span class="nc" id="L83">        this.innerMeasurements = new ArrayList&lt;Measurement&gt;();</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (metricValues != null) {</span>
+<span class="nc" id="L85">            this.metricValues = metricValues;</span>
+        }
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        if (innerMeasurements != null) {</span>
+<span class="nc" id="L88">            this.innerMeasurements = innerMeasurements;</span>
+        }
+<span class="nc" id="L90">    }</span>
+
+    /**
+     * Getter for name.
+     * @return String name.
+     */
+    public String getName() {
+<span class="fc" id="L97">        return name;</span>
+    }
+
+    /**
+     * Setter for name.
+     * @param name String the name.
+     */
+    public void setName(String name) {
+<span class="fc" id="L105">        this.name = name;</span>
+<span class="fc" id="L106">    }</span>
+
+    /**
+     * Getter for Date.
+     * @return Date the date.
+     */
+    public Date getDate() {
+<span class="fc" id="L113">        return date;</span>
+    }
+
+    /**
+     * Setter for Date.
+     * @param date Date the date.
+     */
+    public void setDate(Date date) {
+<span class="nc" id="L121">        this.date = date;</span>
+<span class="nc" id="L122">    }</span>
+
+    /**
+     * Getter for type.
+     * @return MEASUREMENT_TYPE the type.
+     */
+    public MEASUREMENT_TYPE getType() {
+<span class="fc" id="L129">        return type;</span>
+    }
+
+    /**
+     * Setter for type.
+     * @param type MEASUREMENT_TYPE the type.
+     */
+    public void setType(MEASUREMENT_TYPE type) {
+<span class="fc" id="L137">        this.type = type;</span>
+<span class="fc" id="L138">    }</span>
+
+    /**
+     * Getter for metric values.
+     * @return List&lt;MetricValue&gt; the list.
+     */
+    @XmlElementWrapper(
+            name = &quot;metricsValues&quot;)
+    @XmlElement(
+            name = &quot;metricValue&quot;)
+    public List&lt;MetricValue&gt; getMetricValues() {
+<span class="fc" id="L149">        return metricValues;</span>
+    }
+
+    /**
+     * Setter for metric values.
+     * @param metricValues List&lt;MetricValue&gt; the list.
+     */
+    public void setMetricValues(List&lt;MetricValue&gt; metricValues) {
+<span class="nc" id="L157">        this.metricValues = metricValues;</span>
+<span class="nc" id="L158">    }</span>
+
+    /**
+     * Getter for inner measurements.
+     * @return List&lt;Measurement&gt; the inner measurements list.
+     */
+    @XmlElementWrapper(
+            name = &quot;innerMeasurements&quot;)
+    @XmlElement(
+            name = &quot;measurement&quot;)
+    public List&lt;Measurement&gt; getInnerMeasurements() {
+<span class="fc" id="L169">        return innerMeasurements;</span>
+    }
+
+    /**
+     * Setter for inner measurements.
+     * @param innerMeasurements List&lt;Measurement&gt; the inner measurements list.
+     */
+    public void setInnerMeasurements(List&lt;Measurement&gt; innerMeasurements) {
+<span class="nc" id="L177">        this.innerMeasurements = innerMeasurements;</span>
+<span class="nc" id="L178">    }</span>
+
+    /**
+     * Object hashcode override.
+     * @return int the hashcode.
+     */
+    @Override
+    public final int hashCode() {
+<span class="nc" id="L186">        return this.getName().hashCode();</span>
+    }
+
+    /**
+     * Object equals override.
+     * @param obj Object the other object to compare with. 
+     * @return boolean whether it is equal or not.
+     */
+    @Override
+    public boolean equals(Object obj) {
+<span class="fc" id="L196">        return this.getName().equals(((Measurement) obj).getName());</span>
+    }
+
+    /**
+     * Object toString override.
+     * @return String textual representation.
+     */
+    @Override
+    public String toString() {
+<span class="fc" id="L205">        return &quot;[Measurement. Name: &quot; + this.getName() + &quot;, Type: &quot;</span>
+                + this.getType().toString() + &quot;, Metrics Values: &quot; + &quot; \r\n&quot;
+                + this.metricValues + &quot;, Inner measurements: &quot; + &quot;\r\n&quot;
+                + this.innerMeasurements + &quot;]&quot;;
+    }
+
+    /**
+     * Comparison method.
+     * @param o Measurement the other Measurement instance. 
+     * @return int comparison result. 
+     */
+    @Override
+    public int compareTo(Measurement o) {
+<span class="nc" id="L218">        return this.getName().compareTo(o.getName());</span>
+    }
+
+    /**
+     * Convenience method to return a metric value, based on its name.
+     * 
+     * @param metricName
+     *            The metric name
+     * @return Metric value or null, if it does not exist.
+     */
+    public MetricValue getMetricValue(String metricName) {
+<span class="fc" id="L229">        MetricValue mv = new MetricValue();</span>
+<span class="fc" id="L230">        mv.setName(metricName);</span>
+<span class="fc" id="L231">        int indx = this.getMetricValues().indexOf(mv);</span>
+<span class="pc bpc" id="L232" title="1 of 2 branches missed.">        if (indx &gt;= 0) {</span>
+<span class="fc" id="L233">            mv = this.getMetricValues().get(indx);</span>
+        } else {
+<span class="nc" id="L235">            mv = null;</span>
+        }
+<span class="fc" id="L237">        return mv;</span>
+    }
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.4.201312101107</span></div></body></html>

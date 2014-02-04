@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CyclomaticComplexityParser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.html" class="el_package">com.obomprogramador.tools.jqana.parsers</a> &gt; <span class="el_source">CyclomaticComplexityParser.java</span></div><h1>CyclomaticComplexityParser.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CyclomaticComplexityParser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.source.html" class="el_package">com.obomprogramador.tools.jqana.parsers</a> &gt; <span class="el_source">CyclomaticComplexityParser.java</span></div><h1>CyclomaticComplexityParser.java</h1><pre class="source lang-java linenums">/**
  * jQana - Open Source Java(TM) code quality analyzer.
  * 
  * Copyright 2013 Cleuton Sampaio de Melo Jr
@@ -19,69 +19,59 @@
  */
 package com.obomprogramador.tools.jqana.parsers;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.antlr.v4.runtime.ANTLRFileStream;
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener;
-import com.obomprogramador.tools.jqana.antlrparser.JavaLexer;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
 import com.obomprogramador.tools.jqana.context.Context;
-import com.obomprogramador.tools.jqana.context.GlobalConstants;
 import com.obomprogramador.tools.jqana.model.AbstractMetricParser;
 import com.obomprogramador.tools.jqana.model.Measurement;
-import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
-import com.obomprogramador.tools.jqana.model.Metric;
-import com.obomprogramador.tools.jqana.model.Parser;
-
-import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
-import com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
-
-import static com.obomprogramador.tools.jqana.context.GlobalConstants.*;
 
 /**
  * Parser used to calculate cyclomatic complexity.
+ * 
  * @see Parser
  * @author Cleuton Sampaio
- *
+ * 
  */
 public class CyclomaticComplexityParser extends AbstractMetricParser {
 
 
-	
-	/**
-	 * 
-	 */
-	public CyclomaticComplexityParser(Measurement packageMeasurement,Context context) {
-<span class="fc" id="L65">		super(packageMeasurement,context,&quot;metric.cc.name&quot;);</span>
-<span class="fc" id="L66">	}</span>
+    /**
+     * Constructor with fields.
+     * @param packageMeasurement Measurement the package's measurement.
+     * @param context Context the context to use.
+     */
+    public CyclomaticComplexityParser(Measurement packageMeasurement,
+            Context context) {
+<span class="fc" id="L46">        super(packageMeasurement, context, &quot;metric.cc.name&quot;);</span>
+<span class="fc" id="L47">    }</span>
 
+    /**
+     * Listener getter.
+     * @param p JavaParser the parser to use.
+     * @return JavaBaseListener listener.
+     */
+    @Override
+    public JavaBaseListener getListener(JavaParser p) {
+<span class="fc" id="L56">        JavaBaseListener jbl = new CycloListener(this.metric, this.measurement,</span>
+                p);
+<span class="fc" id="L58">        return jbl;</span>
+    }
 
-	@Override
-	public JavaBaseListener getListener(JavaParser p) {
-<span class="fc" id="L71">		JavaBaseListener jbl = new CycloListener(this.metric, this.measurement, p);</span>
-<span class="fc" id="L72">		return jbl;</span>
-	}
-
-
-	@Override
-	public void afterProcessing() {
-		// Compute the average:
-<span class="fc" id="L79">        MetricValue mv = this.measurement.getMetricValue(context.getBundle().getString(this.metricResourceId));</span>
-<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (mv.getQtdElements() == 0) {</span>
-<span class="fc" id="L81">        	mv.setQtdElements(1);</span>
+    /**
+     * After processing override.
+     * 
+     */
+    @Override
+    public void afterProcessing() {
+        // Compute the average:
+<span class="fc" id="L68">        MetricValue mv = this.measurement.getMetricValue(context.getBundle()</span>
+                .getString(this.metricResourceId));
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (mv.getQtdElements() == 0) {</span>
+<span class="fc" id="L71">            mv.setQtdElements(1);</span>
         }
-<span class="fc" id="L83">        mv.setValue(mv.getValue() / mv.getQtdElements());</span>
-<span class="fc" id="L84">	}</span>
+<span class="fc" id="L73">        mv.setValue(mv.getValue() / mv.getQtdElements());</span>
+<span class="fc" id="L74">    }</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.4.201312101107</span></div></body></html>

@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>RfcBcelParser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.html" class="el_package">com.obomprogramador.tools.jqana.parsers</a> &gt; <span class="el_source">RfcBcelParser.java</span></div><h1>RfcBcelParser.java</h1><pre class="source lang-java linenums">package com.obomprogramador.tools.jqana.parsers;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>RfcBcelParser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.source.html" class="el_package">com.obomprogramador.tools.jqana.parsers</a> &gt; <span class="el_source">RfcBcelParser.java</span></div><h1>RfcBcelParser.java</h1><pre class="source lang-java linenums">package com.obomprogramador.tools.jqana.parsers;
 
-import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.ConstantMethodref;
 import org.apache.bcel.classfile.ConstantNameAndType;
@@ -16,83 +15,107 @@ import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 
-
+/**
+ * This is a BCEL parser class, used to analyze RFC metric.
+ * To avoid compiler optimizations, 
+ * I would have rather used only AST parsers (based on source code), 
+ * but in the case of the metric RFC, the resulting parser 
+ * would be very complex.
+ * 
+ * @author Cleuton Sampaio.
+ *
+ */
 public class RfcBcelParser extends AbstractMetricParser {
-	
 
+    /**
+     * Constructor with parameters.
+     * @param packageMeasurement Measurement the package's measurement.
+     * @param context Context the context in use.
+     */
+    public RfcBcelParser(Measurement packageMeasurement, Context context) {
+<span class="fc" id="L36">        super(packageMeasurement, context, &quot;metric.rfc.name&quot;);</span>
+<span class="fc" id="L37">        this.context = context;</span>
+<span class="fc" id="L38">    }</span>
 
-	public RfcBcelParser(Measurement packageMeasurement, Context context) {
-<span class="fc" id="L25">		super(packageMeasurement, context, &quot;metric.rfc.name&quot;);</span>
-<span class="fc" id="L26">		this.context = context;</span>
-<span class="fc" id="L27">	}</span>
+    @Override
+    public Measurement parse(String compiledClassPath, String sourceCode) {
+<span class="fc" id="L42">        this.measurement = new Measurement();</span>
+<span class="fc" id="L43">        this.measurement.setType(MEASUREMENT_TYPE.CLASS_MEASUREMENT);</span>
+<span class="fc" id="L44">        this.metricValue = new MetricValue();</span>
+<span class="fc" id="L45">        this.metricValue.setName(this.metric.getMetricName());</span>
+<span class="fc" id="L46">        this.measurement.getMetricValues().add(this.metricValue);</span>
+        try {
+<span class="fc" id="L48">            ClassParser cParser = new ClassParser(compiledClassPath);</span>
+<span class="fc" id="L49">            JavaClass javaClass = cParser.parse();</span>
+<span class="fc" id="L50">            this.measurement.setName(getClassNameFromJavaClass(javaClass));</span>
+<span class="fc" id="L51">            RfcVisitor visitor = new RfcVisitor(javaClass);</span>
+<span class="fc" id="L52">            DescendingVisitor classWalker = new DescendingVisitor(javaClass,</span>
+                    visitor);
+<span class="fc" id="L54">            classWalker.visit();</span>
+<span class="fc" id="L55">            MetricValue mv = this.measurement.getMetricValue(this</span>
+                    .getParserName());
+<span class="fc" id="L57">            int rfcLimit = Integer.parseInt(context.getBundle().getString(</span>
+                    &quot;metric.rfc.limit&quot;));
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            if (mv.getValue() &gt; rfcLimit) {</span>
+<span class="fc" id="L60">                mv.setViolated(true);</span>
+            }
+<span class="fc" id="L62">            updatePackageMeasurement();</span>
 
-	@Override
-	public Measurement parse(String compiledClassPath, String sourceCode) {
-<span class="fc" id="L31">		this.measurement = new Measurement(); </span>
-<span class="fc" id="L32">		this.measurement.setType(MEASUREMENT_TYPE.CLASS_MEASUREMENT);</span>
-<span class="fc" id="L33">		this.metricValue = new MetricValue();</span>
-<span class="fc" id="L34">		this.metricValue.setName(this.metric.getMetricName());</span>
-<span class="fc" id="L35">		this.measurement.getMetricValues().add(this.metricValue);</span>
-		try {
-<span class="fc" id="L37">			ClassParser cParser = new ClassParser(compiledClassPath);</span>
-<span class="fc" id="L38">			JavaClass javaClass = cParser.parse();</span>
-<span class="fc" id="L39">			this.measurement.setName(getClassNameFromJavaClass(javaClass));</span>
-<span class="fc" id="L40">			RfcVisitor visitor = new RfcVisitor(javaClass);</span>
-<span class="fc" id="L41">			DescendingVisitor classWalker = new DescendingVisitor(javaClass, visitor);</span>
-<span class="fc" id="L42">			classWalker.visit();</span>
-<span class="fc" id="L43">			MetricValue mv = this.measurement.getMetricValue(this.getParserName());</span>
-<span class="fc" id="L44">			int rfcLimit = Integer.parseInt(context.getBundle().getString(&quot;metric.rfc.limit&quot;));</span>
-<span class="fc bfc" id="L45" title="All 2 branches covered.">			if (mv.getValue() &gt; rfcLimit) {</span>
-<span class="fc" id="L46">				mv.setViolated(true);</span>
-			}
-<span class="fc" id="L48">			updatePackageMeasurement();</span>
-			
-<span class="nc" id="L50">		} catch (Exception e) {</span>
-<span class="nc" id="L51">			context.getErrors().push(e.getMessage());</span>
-<span class="nc" id="L52">			logger.error(e.getMessage());</span>
-<span class="fc" id="L53">		}</span>
-<span class="fc" id="L54">		return measurement;</span>
-	}
+<span class="nc" id="L64">        } catch (Exception e) {</span>
+<span class="nc" id="L65">            context.getErrors().push(e.getMessage());</span>
+<span class="nc" id="L66">            logger.error(e.getMessage());</span>
+<span class="fc" id="L67">        }</span>
+<span class="fc" id="L68">        return measurement;</span>
+    }
 
-	protected String getClassNameFromJavaClass(JavaClass javaClass) {
-<span class="fc" id="L58">		String className = javaClass.getClassName();</span>
-<span class="fc" id="L59">		int pos = className.lastIndexOf('.');</span>
-<span class="pc bpc" id="L60" title="1 of 2 branches missed.">		if (pos &gt;= 0) {</span>
-<span class="fc" id="L61">			className = className.substring(pos + 1);</span>
-		}
-<span class="fc" id="L63">		return className;</span>
-	}
+    protected String getClassNameFromJavaClass(JavaClass javaClass) {
+<span class="fc" id="L72">        String className = javaClass.getClassName();</span>
+<span class="fc" id="L73">        int pos = className.lastIndexOf('.');</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (pos &gt;= 0) {</span>
+<span class="fc" id="L75">            className = className.substring(pos + 1);</span>
+        }
+<span class="fc" id="L77">        return className;</span>
+    }
 
+    /**
+     * This is a Visitor class, used by BCEL framework.
+     * @author Cleuton Sampaio
+     *
+     */
+    class RfcVisitor extends EmptyVisitor {
+        private JavaClass javaClass;
+        private MetricValue mv;
 
+        /**
+         * Constructor with arguments.
+         * @param javaClass JavaClass the class to visit.
+         */
+<span class="fc" id="L93">        RfcVisitor(JavaClass javaClass) {</span>
+<span class="fc" id="L94">            this.javaClass = javaClass;</span>
+<span class="fc" id="L95">            mv = measurement.getMetricValue(context.getBundle().getString(</span>
+                    &quot;metric.rfc.name&quot;));
+<span class="fc" id="L97">        }</span>
 
+        @Override
+        public void visitConstantMethodref(ConstantMethodref obj) {
+<span class="fc" id="L101">            ConstantPool cp = javaClass.getConstantPool();</span>
+<span class="fc" id="L102">            String className = obj.getClass(cp);</span>
+<span class="fc" id="L103">            ConstantNameAndType constant = (ConstantNameAndType) cp</span>
+                    .getConstant(obj.getNameAndTypeIndex());
+<span class="fc" id="L105">            mv.setValue(mv.getValue() + 1);</span>
+<span class="fc" id="L106">            logger.debug(&quot;Method call: &quot; + className + &quot; : &quot;</span>
+                    + constant.getName(cp) + &quot; : &quot; + constant.getSignature(cp));
 
+<span class="fc" id="L109">        }</span>
 
-	class RfcVisitor extends EmptyVisitor {
-		private JavaClass javaClass;
-		private MetricValue mv;
-<span class="fc" id="L73">		RfcVisitor(JavaClass javaClass) {</span>
-<span class="fc" id="L74">			this.javaClass = javaClass;</span>
-<span class="fc" id="L75">			mv = measurement.getMetricValue(context.getBundle().getString(&quot;metric.rfc.name&quot;));</span>
-<span class="fc" id="L76">		}</span>
-		
-		@Override
-		public void visitConstantMethodref(ConstantMethodref obj) {
-<span class="fc" id="L80">			ConstantPool cp = javaClass.getConstantPool();</span>
-<span class="fc" id="L81">		    String className = obj.getClass(cp);</span>
-<span class="fc" id="L82">		    ConstantNameAndType constant = (ConstantNameAndType) cp.getConstant(obj.getNameAndTypeIndex());</span>
-<span class="fc" id="L83">		    mv.setValue(mv.getValue() + 1);</span>
-<span class="fc" id="L84">		    logger.debug(&quot;Method call: &quot; + className + &quot; : &quot; + constant.getName(cp) + &quot; : &quot; + constant.getSignature(cp));</span>
-			
-<span class="fc" id="L86">		}</span>
-		
-		@Override
-		public void visitMethod(Method obj) {
-<span class="fc" id="L90">			mv.setValue(mv.getValue() + 1);</span>
-<span class="fc" id="L91">			logger.debug(&quot;Method: &quot; + obj.getName() + &quot; : &quot; + obj.getSignature());</span>
-<span class="fc" id="L92">		}</span>
+        @Override
+        public void visitMethod(Method obj) {
+<span class="fc" id="L113">            mv.setValue(mv.getValue() + 1);</span>
+<span class="fc" id="L114">            logger.debug(&quot;Method: &quot; + obj.getName() + &quot; : &quot;</span>
+                    + obj.getSignature());
+<span class="fc" id="L116">        }</span>
 
-	}
-	
+    }
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.4.201312101107</span></div></body></html>

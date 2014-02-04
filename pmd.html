@@ -28,7 +28,12 @@
                                             <img src="images/jqana_logo.png" alt="" />
     
             </a>
-                    <div class="clear">
+                        <a href="http://www.obomprogramador.com" id="bannerRight">
+    
+                                            <img src="images/inerd.png" alt="" />
+    
+            </a>
+            <div class="clear">
         <hr/>
       </div>
     </div>
@@ -42,7 +47,7 @@
   
     
             <div class="xleft">
-        Last Published: 2014-01-24
+        Last Published: 2014-02-04
                       </div>
             <div class="xright">      
   
@@ -149,7 +154,11 @@
             
       
             
+      
             
+            
+            
+      
               
             <li class="expanded">
                     <a href="project-reports.html">Project Reports</a>
@@ -164,12 +173,20 @@
           </li>
                   
     <li class="none">
+                    <a href="apidocs/index.html">JavaDocs</a>
+          </li>
+                  
+    <li class="none">
                     <a href="jdepend-report.html">JDepend</a>
           </li>
                   
     <li class="none">
               <strong>PMD Report</strong>
         </li>
+                  
+    <li class="none">
+                    <a href="testapidocs/index.html">Test JavaDocs</a>
+          </li>
               </ul>
         </li>
           </ul>
@@ -196,7 +213,7 @@
     <div id="bodyColumn">
       <div id="contentBox">
         <div class="section"><h2>PMD Results</h2>
-<p>The following document contains the results of <a href="http://pmd.sourceforge.net/" class="externalLink">PMD</a> 5.0.2.</p>
+<p>The following document contains the results of <a class="externalLink" href="http://pmd.sourceforge.net/">PMD</a> 5.0.2.</p>
 </div>
 <div class="section"><h2>Files</h2>
 <div class="section"><h3>com/obomprogramador/tools/jqana/antlrparser/JavaLexer.java</h3>
@@ -204,22 +221,22 @@
 <th>Line</th>
 </tr>
 <tr class="b"><td>Avoid duplicate imports such as 'org.antlr.v4.runtime.Lexer'</td>
-<td>3</td>
-</tr>
-<tr class="a"><td>Avoid duplicate imports such as 'org.antlr.v4.runtime.CharStream'</td>
 <td>4</td>
 </tr>
-<tr class="b"><td>Avoid duplicate imports such as 'org.antlr.v4.runtime.Token'</td>
+<tr class="a"><td>Avoid duplicate imports such as 'org.antlr.v4.runtime.CharStream'</td>
 <td>5</td>
+</tr>
+<tr class="b"><td>Avoid duplicate imports such as 'org.antlr.v4.runtime.Token'</td>
+<td>6</td>
 </tr>
 <tr class="a"><td>Avoid unused imports such as 'org.antlr.v4.runtime.Token'</td>
-<td>5</td>
+<td>6</td>
 </tr>
 <tr class="b"><td>Avoid duplicate imports such as 'org.antlr.v4.runtime.TokenStream'</td>
-<td>6</td>
+<td>7</td>
 </tr>
 <tr class="a"><td>Avoid unused imports such as 'org.antlr.v4.runtime.TokenStream'</td>
-<td>6</td>
+<td>7</td>
 </tr>
 </table>
 </div>
@@ -228,190 +245,22 @@
 <th>Line</th>
 </tr>
 <tr class="a"><td>Avoid unused imports such as 'java.util.Iterator'</td>
-<td>9</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'java.util.ArrayList'</td>
 <td>10</td>
 </tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/context/Context.java</h3>
-<table class="bodyTable"><tr class="a"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.model.LimitVerificationAlgorithm'</td>
-<td>28</td>
-</tr>
-<tr class="a"><td>Avoid unused constructor parameters such as 'bundle'.</td>
-<td>60</td>
+<tr class="b"><td>Avoid unused imports such as 'java.util.ArrayList'</td>
+<td>11</td>
 </tr>
 </table>
 </div>
 <div class="section"><h3>com/obomprogramador/tools/jqana/mavenplugin/JqanaMojo.java</h3>
-<table class="bodyTable"><tr class="b"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="a"><td>Avoid unused private fields such as 'sourceDirectory'.</td>
-<td>73</td>
-</tr>
-<tr class="b"><td>Avoid unused method parameters such as 'locale'.</td>
-<td>156</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/model/AbstractMetricParser.java</h3>
 <table class="bodyTable"><tr class="a"><th>Violation</th>
 <th>Line</th>
 </tr>
-<tr class="b"><td>Avoid unused private methods such as 'getMetricValueForClass(Measurement)'.</td>
-<td>162</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/model/Measurement.java</h3>
-<table class="bodyTable"><tr class="a"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'javax.xml.bind.annotation.XmlAnyElement'</td>
-<td>26</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter'</td>
-<td>30</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.context.GlobalConstants'</td>
-<td>32</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric'</td>
-<td>33</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/model/Metric.java</h3>
-<table class="bodyTable"><tr class="b"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'javax.xml.bind.annotation.XmlAnyElement'</td>
-<td>22</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'javax.xml.bind.annotation.XmlRootElement'</td>
-<td>23</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'javax.xml.bind.annotation.XmlTransient'</td>
-<td>24</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/model/Parser.java</h3>
-<table class="bodyTable"><tr class="b"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'java.util.List'</td>
-<td>22</td>
-</tr>
-<tr class="b"><td>Avoid modifiers which are implied by the context</td>
-<td>34</td>
-</tr>
-<tr class="a"><td>Avoid modifiers which are implied by the context</td>
-<td>41</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/model/ProjectProcessor.java</h3>
-<table class="bodyTable"><tr class="b"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="a"><td>Avoid modifiers which are implied by the context</td>
-<td>32</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/model/Xml2HtmlConverter.java</h3>
-<table class="bodyTable"><tr class="b"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'org.w3c.dom.Document'</td>
-<td>8</td>
-</tr>
-<tr class="b"><td>Avoid modifiers which are implied by the context</td>
-<td>31</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/model/XmlGenerator.java</h3>
-<table class="bodyTable"><tr class="a"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'java.util.List'</td>
-<td>22</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'javax.xml.bind.PropertyException'</td>
-<td>25</td>
-</tr>
-<tr class="b"><td>Avoid modifiers which are implied by the context</td>
-<td>48</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/model/defaultimpl/DefaultMetric.java</h3>
-<table class="bodyTable"><tr class="a"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'javax.xml.bind.annotation.XmlAnyElement'</td>
-<td>22</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'javax.xml.bind.annotation.XmlElement'</td>
-<td>23</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/model/defaultimpl/DefaultProjectProcessor.java</h3>
-<table class="bodyTable"><tr class="b"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="a"><td>Useless parentheses.</td>
+<tr class="b"><td>Avoid unused private fields such as 'sourceDirectory'.</td>
 <td>75</td>
 </tr>
-<tr class="b"><td>Useless parentheses.</td>
-<td>78</td>
-</tr>
-<tr class="a"><td>Useless parentheses.</td>
-<td>81</td>
-</tr>
-<tr class="b"><td>These nested if statements could be combined</td>
-<td>117 - 119</td>
-</tr>
-<tr class="a"><td>Avoid unused local variables such as 'mt'.</td>
-<td>212</td>
-</tr>
-<tr class="b"><td>Avoid unused local variables such as 'mt'.</td>
-<td>238</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/model/defaultimpl/DefaultXml2HtmlConverter.java</h3>
-<table class="bodyTable"><tr class="a"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'org.w3c.dom.Document'</td>
-<td>19</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.context.Context'</td>
-<td>21</td>
-</tr>
-<tr class="b"><td>Avoid unused private methods such as 'getSource(String)'.</td>
-<td>54</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/model/defaultimpl/DefaultXmlGenerator.java</h3>
-<table class="bodyTable"><tr class="a"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'java.util.List'</td>
-<td>23</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'javax.xml.bind.PropertyException'</td>
-<td>28</td>
+<tr class="a"><td>Avoid unused method parameters such as 'locale'.</td>
+<td>166</td>
 </tr>
 </table>
 </div>
@@ -419,80 +268,11 @@
 <table class="bodyTable"><tr class="b"><th>Violation</th>
 <th>Line</th>
 </tr>
-<tr class="a"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.antlrparser.JavaParser.BlockStatementContext'</td>
-<td>37</td>
+<tr class="a"><td>Avoid unused private fields such as 'parser'.</td>
+<td>69</td>
 </tr>
-<tr class="b"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.antlrparser.JavaParser.CompilationUnitContext'</td>
-<td>40</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.antlrparser.JavaParser.MethodBodyContext'</td>
-<td>44</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.antlrparser.JavaParser.PackageDeclarationContext'</td>
-<td>46</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.antlrparser.JavaParser.PrimaryContext'</td>
-<td>48</td>
-</tr>
-<tr class="b"><td>Avoid unused private fields such as 'parser'.</td>
-<td>78</td>
-</tr>
-<tr class="a"><td>These nested if statements could be combined</td>
-<td>282 - 285</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/parsers/CyclomaticComplexityParser.java</h3>
-<table class="bodyTable"><tr class="b"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'java.io.IOException'</td>
-<td>22</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'java.util.ArrayList'</td>
-<td>23</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'java.util.List'</td>
-<td>24</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'org.antlr.v4.runtime.ANTLRFileStream'</td>
-<td>26</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'org.antlr.v4.runtime.ANTLRInputStream'</td>
-<td>27</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'org.antlr.v4.runtime.CommonTokenStream'</td>
-<td>28</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'org.antlr.v4.runtime.tree.ParseTree'</td>
-<td>29</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'org.antlr.v4.runtime.tree.ParseTreeWalker'</td>
-<td>30</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'org.slf4j.Logger'</td>
-<td>31</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'org.slf4j.LoggerFactory'</td>
-<td>32</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.antlrparser.JavaLexer'</td>
-<td>35</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.context.GlobalConstants'</td>
-<td>38</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE'</td>
-<td>41</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.model.Metric'</td>
-<td>42</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric'</td>
-<td>45</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm'</td>
-<td>46</td>
+<tr class="b"><td>These nested if statements could be combined</td>
+<td>264 - 267</td>
 </tr>
 </table>
 </div>
@@ -500,29 +280,11 @@
 <table class="bodyTable"><tr class="a"><th>Violation</th>
 <th>Line</th>
 </tr>
-<tr class="b"><td>Avoid unused imports such as 'org.antlr.v4.runtime.ParserRuleContext'</td>
-<td>26</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.antlrparser.JavaParser.LocalVariableDeclarationContext'</td>
-<td>43</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.antlrparser.JavaParser.LocalVariableDeclarationStatementContext'</td>
-<td>44</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.antlrparser.JavaParser.StatementContext'</td>
-<td>48</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.model.Measurement'</td>
-<td>52</td>
-</tr>
-<tr class="a"><td>An empty statement (semicolon) not part of a loop</td>
-<td>107</td>
-</tr>
 <tr class="b"><td>These nested if statements could be combined</td>
-<td>226 - 236</td>
+<td>236 - 247</td>
 </tr>
 <tr class="a"><td>These nested if statements could be combined</td>
-<td>273 - 281</td>
+<td>283 - 292</td>
 </tr>
 </table>
 </div>
@@ -530,83 +292,23 @@
 <table class="bodyTable"><tr class="b"><th>Violation</th>
 <th>Line</th>
 </tr>
-<tr class="a"><td>Avoid unused imports such as 'java.io.ByteArrayInputStream'</td>
-<td>23</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'java.io.IOException'</td>
-<td>24</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'java.io.InputStream'</td>
-<td>25</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'java.util.Collections'</td>
-<td>27</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'org.antlr.v4.runtime.ANTLRFileStream'</td>
-<td>30</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'org.antlr.v4.runtime.ANTLRInputStream'</td>
-<td>31</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'org.antlr.v4.runtime.CommonTokenStream'</td>
-<td>32</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'org.antlr.v4.runtime.tree.ParseTree'</td>
-<td>33</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'org.antlr.v4.runtime.tree.ParseTreeWalker'</td>
-<td>34</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'org.slf4j.Logger'</td>
-<td>35</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'org.slf4j.LoggerFactory'</td>
-<td>36</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.antlrparser.JavaLexer'</td>
-<td>39</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.model.Metric'</td>
-<td>44</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.model.Parser'</td>
-<td>45</td>
-</tr>
-<tr class="a"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE'</td>
-<td>47</td>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric'</td>
-<td>48</td>
-</tr>
 <tr class="a"><td>Useless parentheses.</td>
-<td>92</td>
+<td>75</td>
 </tr>
 <tr class="b"><td>Avoid unused local variables such as 'c'.</td>
-<td>171</td>
+<td>160</td>
 </tr>
-<tr class="a"><td>Avoid unused private methods such as 'addAllReferenced(Component,Member)'.</td>
-<td>233</td>
-</tr>
-<tr class="b"><td>Avoid unused local variables such as 'found'.</td>
-<td>253</td>
+<tr class="a"><td>Avoid unused local variables such as 'found'.</td>
+<td>234</td>
 </tr>
 </table>
 </div>
 <div class="section"><h3>com/obomprogramador/tools/jqana/parsers/Member.java</h3>
-<table class="bodyTable"><tr class="a"><th>Violation</th>
+<table class="bodyTable"><tr class="b"><th>Violation</th>
 <th>Line</th>
 </tr>
-<tr class="b"><td>Useless parentheses.</td>
-<td>44</td>
-</tr>
-</table>
-</div>
-<div class="section"><h3>com/obomprogramador/tools/jqana/parsers/RfcBcelParser.java</h3>
-<table class="bodyTable"><tr class="a"><th>Violation</th>
-<th>Line</th>
-</tr>
-<tr class="b"><td>Avoid unused imports such as 'org.apache.bcel.Repository'</td>
-<td>3</td>
+<tr class="a"><td>Useless parentheses.</td>
+<td>54</td>
 </tr>
 </table>
 </div>

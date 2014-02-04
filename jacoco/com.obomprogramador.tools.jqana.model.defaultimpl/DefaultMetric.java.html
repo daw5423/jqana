@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DefaultMetric.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.html" class="el_package">com.obomprogramador.tools.jqana.model.defaultimpl</a> &gt; <span class="el_source">DefaultMetric.java</span></div><h1>DefaultMetric.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DefaultMetric.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jqana</a> &gt; <a href="index.source.html" class="el_package">com.obomprogramador.tools.jqana.model.defaultimpl</a> &gt; <span class="el_source">DefaultMetric.java</span></div><h1>DefaultMetric.java</h1><pre class="source lang-java linenums">/**
  * jQana - Open Source Java(TM) code quality analyzer.
  * 
  * Copyright 2013 Cleuton Sampaio de Melo Jr
@@ -19,8 +19,6 @@
  */
 package com.obomprogramador.tools.jqana.model.defaultimpl;
 
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -29,122 +27,164 @@ import com.obomprogramador.tools.jqana.model.Metric;
 
 /**
  * Default Metric implementation.
+ * 
  * @see Metric
  * @author Cleuton Sampaio.
- *
+ * 
  */
 @XmlRootElement
 public class DefaultMetric extends Metric implements Comparable&lt;Metric&gt; {
-	
-	
-	private String metricName;
-	private String message;
-	private LimitVerificationAlgorithm lva;
 
-	public DefaultMetric() {
-<span class="fc" id="L45">		super();</span>
-<span class="fc" id="L46">	}</span>
-	
-	
+    private String metricName;
+    private String message;
+    private LimitVerificationAlgorithm lva;
 
-	public DefaultMetric(String metricName, String message) {
-<span class="nc" id="L51">		super();</span>
-<span class="nc" id="L52">		this.metricName = metricName;</span>
-<span class="nc" id="L53">		this.message = message;</span>
-<span class="nc" id="L54">	}</span>
+    /**
+     * Default constructor.
+     */
+    public DefaultMetric() {
+<span class="fc" id="L46">        super();</span>
+<span class="fc" id="L47">    }</span>
 
+    /**
+     * Constructor with fields.
+     * @param metricName String the metric name.
+     * @param message String the metric default message. 
+     */
+    public DefaultMetric(String metricName, String message) {
+<span class="nc" id="L55">        super();</span>
+<span class="nc" id="L56">        this.metricName = metricName;</span>
+<span class="nc" id="L57">        this.message = message;</span>
+<span class="nc" id="L58">    }</span>
 
-	public String getMessage() {
-<span class="nc" id="L58">		return message;</span>
-	}
+    /**
+     * Getter form message.
+     * @return String the metric's message.
+     */
+    public String getMessage() {
+<span class="nc" id="L65">        return message;</span>
+    }
 
+    /**
+     * Setter for message.
+     * @param message String the metric's message.
+     */
+    public void setMessage(String message) {
+<span class="nc" id="L73">        this.message = message;</span>
+<span class="nc" id="L74">    }</span>
 
+    /**
+     * Limit verification algorithm to be used.
+     * @return LimitVerificationAlgorithm the algorithm instance.
+     */
+    @XmlTransient
+    public LimitVerificationAlgorithm getLva() {
+<span class="nc" id="L82">        return lva;</span>
+    }
 
-	public void setMessage(String message) {
-<span class="nc" id="L64">		this.message = message;</span>
-<span class="nc" id="L65">	}</span>
+    /**
+     * Setter for LVA.
+     * @param lva LimitVerificationAlgorithm. 
+     */
+    public void setLva(LimitVerificationAlgorithm lva) {
+<span class="nc" id="L90">        this.lva = lva;</span>
+<span class="nc" id="L91">    }</span>
 
+    /**
+     * Object to String. 
+     * @return String the string representation.
+     */
+    @Override
+    public String toString() {
+<span class="nc" id="L99">        return &quot;[Metric:  metricName=&quot; + this.metricName</span>
+                + &quot;; limitVerificationAlgorithm=&quot;
+                + this.lva.getClass().getSimpleName() + &quot;]&quot;;
+    }
 
-	@XmlTransient
-	public LimitVerificationAlgorithm getLva() {
-<span class="nc" id="L70">		return lva;</span>
-	}
+    /**
+     * Getter for metric name.
+     * @return String the metric name.
+     */
+    @Override
+    public String getMetricName() {
+<span class="fc" id="L110">        return this.metricName;</span>
+    }
 
+    /**
+     * Setter for metric name.
+     * @param name String the metric name.
+     */
+    @Override
+    public void setMetricName(String name) {
+<span class="fc" id="L119">        this.metricName = name;</span>
+<span class="fc" id="L120">    }</span>
 
+    /**
+     * Getter for metric message.
+     * @return the metric message.
+     */
+    @Override
+    public String getMetricMessage() {
+<span class="nc" id="L128">        return this.message;</span>
+    }
 
-	public void setLva(LimitVerificationAlgorithm lva) {
-<span class="nc" id="L76">		this.lva = lva;</span>
-<span class="nc" id="L77">	}</span>
+    /**
+     * Setter for metric message.
+     * @param message String the metric message.
+     */
+    @Override
+    public void setMetricMessage(String message) {
+<span class="fc" id="L137">        this.message = message;</span>
+<span class="fc" id="L138">    }</span>
 
+    /**
+     * Getter for the LimitVerificationAlgorithm.
+     * @return LimitVerificationAlgorithm the lva.
+     */
+    @XmlTransient
+    @Override
+    public LimitVerificationAlgorithm getVerificationAlgorithm() {
+<span class="fc" id="L147">        return this.lva;</span>
+    }
 
+    /**
+     * Setter for the LimitVerificationAlgorithm.
+     * @param lva LimitVerificationAlgorithm.
+     */
+    @Override
+    public void setVerificationAlgorithm(LimitVerificationAlgorithm lva) {
+<span class="fc" id="L156">        this.lva = lva;</span>
+<span class="fc" id="L157">    }</span>
 
-	@Override
-	public String toString() {
-<span class="nc" id="L83">		return &quot;[Metric:  metricName=&quot;</span>
-				+ this.metricName
-				+ &quot;; limitVerificationAlgorithm=&quot; 
-				+ this.lva.getClass().getSimpleName()
-				+ &quot;]&quot;;
-	}
+    /**
+     * Object hashcode.
+     * @return int the calculated HashCode.
+     */
+    @Override
+    public int hashCode() {
+<span class="nc" id="L165">        return this.getMetricName().hashCode();</span>
+    }
 
+    /**
+     * Object equals.
+     * @param obj Object the object to compare with.
+     * @return boolean whether this is the same object. 
+     */
+    @Override
+    public boolean equals(Object obj) {
+<span class="fc" id="L175">        return this.getMetricName().equalsIgnoreCase(</span>
+                ((Metric) obj).getMetricName());
+    }
 
+    /**
+     * Object comparison.
+     * @param o Metric the Metric to compare with.
+     * @return int Comparison result.  
+     */
+    @Override
+    public int compareTo(Metric o) {
+<span class="nc" id="L186">        return this.getMetricName().compareToIgnoreCase(o.getMetricName());</span>
+    }
 
-	@Override
-	public String getMetricName() {
-<span class="fc" id="L94">		return this.metricName;</span>
-	}
-
-	@Override
-	public void setMetricName(String name) {
-<span class="fc" id="L99">		this.metricName = name;</span>
-<span class="fc" id="L100">	}</span>
-
-
-	@Override
-	public String getMetricMessage() {
-<span class="nc" id="L105">		return this.message;</span>
-	}
-
-	@Override
-	public void setMetricMessage(String message) {
-<span class="fc" id="L110">		this.message = message;</span>
-<span class="fc" id="L111">	}</span>
-
-
-	@XmlTransient
-	@Override
-	public LimitVerificationAlgorithm getVerificationAlgorithm() {
-<span class="fc" id="L117">		return this.lva;</span>
-	}
-
-
-
-	@Override
-	public void setVerificationAlgorithm(LimitVerificationAlgorithm lva) {
-<span class="fc" id="L124">		this.lva = lva;</span>
-<span class="fc" id="L125">	}</span>
-
-
-
-	@Override
-	public int hashCode() {
-<span class="nc" id="L131">		return this.getMetricName().hashCode();</span>
-	}
-
-
-
-	@Override
-	public boolean equals(Object obj) {
-<span class="fc" id="L138">		return this.getMetricName().equalsIgnoreCase(((Metric) obj).getMetricName());</span>
-	}
-
-
-
-	@Override
-	public int compareTo(Metric o) {
-<span class="nc" id="L145">		return this.getMetricName().compareToIgnoreCase(o.getMetricName());</span>
-	}
-
-	
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://jacoco.org">JaCoCo</a> 0.5.3.201107060350</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.4.201312101107</span></div></body></html>
