@@ -44,7 +44,7 @@ public class DefaultProjectProcessor implements ProjectProcessor {
     protected Measurement project;
     protected Logger logger;
     protected Log log;
-    private final int JAVAPATHSIZE = 5;
+    private static final int JAVAPATHSIZE = 5;
 
     /**
      * Enumeration form message type.
@@ -115,13 +115,13 @@ public class DefaultProjectProcessor implements ProjectProcessor {
 
         } catch (ClassNotFoundException e) {
             logger.error(e.getMessage());
-            throw (e);
+            throw e;
         } catch (InstantiationException e) {
             logger.error(e.getMessage());
-            throw (e);
+            throw e;
         } catch (IllegalAccessException e) {
             logger.error(e.getMessage());
-            throw (e);
+            throw e;
         }
 
         updatePackagesAggregates();
@@ -161,10 +161,8 @@ public class DefaultProjectProcessor implements ProjectProcessor {
         for (int x = 0; x < listFiles.length; x++) {
             File oneFile = listFiles[x];
             if (oneFile.isFile()) {
-                if (isJavaFile(oneFile)) {
-                    if (processMetrics(packageMeasurement, oneFile)) {
-                        hasJavaFiles = true;
-                    }
+                if (isJavaFile(oneFile) && processMetrics(packageMeasurement, oneFile)) {
+                    hasJavaFiles = true;
                 }
             } else {
                 // Is a directory (sub package)

@@ -31,6 +31,12 @@ import org.antlr.v4.runtime.tree.ParseTree;
  * 
  */
 public class Member implements Comparable<Member> {
+    
+    /**
+     * Enumeration for MEMBER_TYPE.
+     * @author Cleuton Sampaio.
+     *
+     */
     public enum MEMBER_TYPE {
         METHOD, VARIABLE, GETTER_SETTER
     };

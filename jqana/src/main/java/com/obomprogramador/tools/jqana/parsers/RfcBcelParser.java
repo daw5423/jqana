@@ -15,8 +15,23 @@ import com.obomprogramador.tools.jqana.model.Measurement;
 import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
 
+/**
+ * This is a BCEL parser class, used to analyze RFC metric.
+ * To avoid compiler optimizations, 
+ * I would have rather used only AST parsers (based on source code), 
+ * but in the case of the metric RFC, the resulting parser 
+ * would be very complex.
+ * 
+ * @author Cleuton Sampaio.
+ *
+ */
 public class RfcBcelParser extends AbstractMetricParser {
 
+    /**
+     * Constructor with parameters.
+     * @param packageMeasurement Measurement the package's measurement.
+     * @param context Context the context in use.
+     */
     public RfcBcelParser(Measurement packageMeasurement, Context context) {
         super(packageMeasurement, context, "metric.rfc.name");
         this.context = context;
@@ -62,10 +77,19 @@ public class RfcBcelParser extends AbstractMetricParser {
         return className;
     }
 
+    /**
+     * This is a Visitor class, used by BCEL framework.
+     * @author Cleuton Sampaio
+     *
+     */
     class RfcVisitor extends EmptyVisitor {
         private JavaClass javaClass;
         private MetricValue mv;
 
+        /**
+         * Constructor with arguments.
+         * @param javaClass JavaClass the class to visit.
+         */
         RfcVisitor(JavaClass javaClass) {
             this.javaClass = javaClass;
             mv = measurement.getMetricValue(context.getBundle().getString(

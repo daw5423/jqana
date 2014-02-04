@@ -42,6 +42,12 @@ public class Lcom4Parser extends AbstractMetricParser {
 
     protected List<Member> members;
 
+    /**
+     * Constructor with parameters.
+     * 
+     * @param packageMeasurement Measurement the package's measurement.
+     * @param context Context the context to use.
+     */
     public Lcom4Parser(Measurement packageMeasurement, Context context) {
         super(packageMeasurement, context, "metric.lcom4.name");
 
@@ -169,7 +175,7 @@ public class Lcom4Parser extends AbstractMetricParser {
             logger.debug("Adding to Component: " + component);
         } else {
             // Hmmm... Many components found... Let's consolidate them
-            ConsolidateComponents(listC, listComponentsFound, m, n);
+            consolidateComponents(listC, listComponentsFound, m, n);
             logger.debug("Consolidating Component...");
         }
     }
@@ -178,7 +184,7 @@ public class Lcom4Parser extends AbstractMetricParser {
      * (non javadoc) We need to create a new component, containing all the other
      * components' members and the method pair members (including references).
      */
-    private void ConsolidateComponents(List<Component> listC,
+    private void consolidateComponents(List<Component> listC,
             List<Component> listComponentsFound, Member m, Member n) {
         Component consolidated = new Component();
         consolidated.members = new ArrayList<Member>();
@@ -211,15 +217,7 @@ public class Lcom4Parser extends AbstractMetricParser {
         }
     }
 
-    private void addAllReferenced(Component c, Member m) {
-        if (m.referencedMembers != null) {
-            for (Member rMember : m.referencedMembers) {
-                if (!c.members.contains(rMember)) {
-                    c.members.add(rMember);
-                }
-            }
-        }
-    }
+
 
     /*
      * (non javadoc) Verify if the method pair is already referenced in any
@@ -294,9 +292,19 @@ public class Lcom4Parser extends AbstractMetricParser {
         return returnCode;
     }
 
+    /**
+     * This class aggregates a component. 
+     * @author Cleuton Sampaio
+     *
+     */
     class Component {
+        
         List<Member> members;
 
+        /**
+         * Object to string.
+         * @return String the textual representation.
+         */
         @Override
         public String toString() {
             String conector = "";

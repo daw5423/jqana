@@ -121,6 +121,7 @@ public class Lcom4Listener extends JavaBaseListener {
 
     /**
      * Get the field's name, which is a tricky task.
+     * @param ctx Context the context in use.
      */
     @Override
     public void enterFieldDeclaration(@NotNull FieldDeclarationContext ctx) {
@@ -167,6 +168,7 @@ public class Lcom4Listener extends JavaBaseListener {
     /**
      * We add each method to the members array. Then we will check for
      * references.
+     * @param ctx Context the context in use.
      */
     @Override
     public void enterMethodDeclaration(@NotNull MethodDeclarationContext ctx) {
@@ -253,6 +255,8 @@ public class Lcom4Listener extends JavaBaseListener {
      * Now, that we finished analysing the class, we need to verify each found
      * method's referencies. So, we instantiate our special listener and walk
      * each method's tree.
+     * 
+     * @param ctx Context the context to use.
      */
     @Override
     public void exitCompilationUnit(@NotNull CompilationUnitContext ctx) {

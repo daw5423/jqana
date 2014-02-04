@@ -48,6 +48,7 @@ public class CyclomaticComplexityParser extends AbstractMetricParser {
 
     /**
      * Listener getter.
+     * @param p JavaParser the parser to use.
      * @return JavaBaseListener listener.
      */
     @Override

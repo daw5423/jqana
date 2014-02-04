@@ -69,7 +69,7 @@ public class DefaultXmlGenerator implements XmlGenerator {
      * Class value for Cyclomatic Complexity is the average of it's methods
      * Cyclomatic Complexity metrics.
      * 
-     * @param Measurement measurement the Measurement to serialize. 
+     * @param measurement Measurement the Measurement to serialize. 
      * @throws JAXBException in case of a DOM error.
      * @throws ParserConfigurationException in case of a DOM configuration problem.
      * @throws TransformerException in case of an XML transformation error.
