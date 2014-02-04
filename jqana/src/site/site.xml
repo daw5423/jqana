@@ -5,6 +5,11 @@
         <src>images/jqana_logo.png</src>
         <href>http://www.jqana.com</href>
     </bannerLeft>
+    <bannerRight>
+        <name>jQanaLogo</name>
+        <src>images/inerd.png</src>
+        <href>http://www.obomprogramador.com</href>
+    </bannerRight>    
     <body>
         <menu name="jQana Project">
             <item name="Overview" href="index.html"/>

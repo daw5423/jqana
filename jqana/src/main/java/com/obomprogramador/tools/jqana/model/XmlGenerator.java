@@ -19,31 +19,29 @@
  */
 package com.obomprogramador.tools.jqana.model;
 
-import java.util.List;
-
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.PropertyException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.w3c.dom.Document;
 
-
-
 /**
  * Generate a XML Document with all metrics found.
+ * 
  * @author Cleuton Sampaio.
- *
+ * 
  */
 public interface XmlGenerator {
-	
-	/**
-	 * Generate a XML Document from a measurement. It uses JAXB to do that.
-	 * 
-	 *
-	 * @param measurements List of measurements from the source project.
-	 * @return XML Document.
-	 */
 
-	public Document serialize(Measurement measurement) throws JAXBException,ParserConfigurationException,TransformerException;
+    /**
+     * Generate a XML Document from a measurement. It uses JAXB to do that.
+     * @param measurement Measurement the measurement to save in XML. 
+     * @return XML Document.
+     * @throws JAXBException in case of Marshalling problems.
+     * @throws ParserConfigurationException in case of DOM parsing problem.
+     * @throws TransformerException in case of a XML transformation problem. 
+     */
+
+    Document serialize(Measurement measurement) throws JAXBException,
+            ParserConfigurationException, TransformerException;
 }

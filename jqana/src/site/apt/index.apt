@@ -54,7 +54,7 @@ Examples
           <plugin>
 			<groupId>com.obomprogramador.tools</groupId>
 			<artifactId>jqana-maven-plugin</artifactId>
-			<version>0.0.2</version>              
+			<version>0.0.4</version>              
           </plugin>
       </plugins>
   </reporting>
@@ -90,4 +90,16 @@ Project status
   We have released the first beta version, but we still working on to improve the source code. As we follow the TDD discipline, we considered that the project passed all tests, but it is necessary to refactor and improve the source code, 
 and improve the documentation. In spite of that, you can use jQana in your projects, and, if you find an error or problem, please
 open an issue. This will help us to improve the tool.
+
+Support jQana!
+
+  We do not make money with the development of jQana, and we want that to continue. If you want to contribute, please feel free to purchase our books on software quality. Unfortunatelly, they are in Portuguese, but we are negotiating translations with the publishers:
+
+[images/capa-qualidade.jpg]
+
+  {{{http://www.lcm.com.br/site/#livros/detalhesLivro/qualidade-de-software-na-pratica---como-reduzir-o-custo-de-manutencao-de-software-com-a-analise-de-codigo.html} Qualidade de Software na Prática}}
+
+[images/capa-guia-de-campo-reduzida.png]
+
+  {{{http://www.brasport.com.br/e-books/informatica-e-tecnologia-br/guia-de-campo-do-bom-programador-ebook.html} O Guia de Campo do Bom Programador}}
 

@@ -20,12 +20,10 @@
 package com.obomprogramador.tools.jqana.model.defaultimpl;
 
 import java.io.StringWriter;
-import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -47,62 +45,80 @@ import com.obomprogramador.tools.jqana.model.XmlGenerator;
  * 
  * @see XmlGenerator
  * 
- *
+ * 
  * 
  * @author Cleuton Sampaio
- *
+ * 
  */
 public class DefaultXmlGenerator implements XmlGenerator {
-	
-	private Context context;
 
-	public DefaultXmlGenerator(Context context) {
-		super();
-		this.context = context;
-	}
+    private Context context;
 
-	/**
-	 * Get the list of measurements, and classifies it according to 
-	 * package and class. 
-	 * The aggregated values are calculated as simple average, i.e.
-	 * the Class value for Cyclomatic Complexity is the average of it's
-	 * methods Cyclomatic Complexity metrics.
-	 * @throws JAXBException 
-	 * @throws ParserConfigurationException 
-	 * @throws TransformerException 
-	 */
-	@Override
-	public Document serialize(Measurement measurement) throws JAXBException, ParserConfigurationException, TransformerException {
-		
-		context.setStatusBeforeException("Marshalling measurement to XML. Measurement: " + measurement);
-		
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-	    dbf.setNamespaceAware(true);
-	    DocumentBuilder db = dbf.newDocumentBuilder();
-		Document report = db.newDocument();
-	    JAXBContext context = JAXBContext.newInstance(Measurement.class);
+    /**
+     * Constructor with context.
+     * @param context Context the context to use.
+     */
+    public DefaultXmlGenerator(Context context) {
+        super();
+        this.context = context;
+    }
 
-	    Marshaller m = context.createMarshaller();
-	    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+    /**
+     * Get the list of measurements, and classifies it according to package and
+     * class. The aggregated values are calculated as simple average, i.e. the
+     * Class value for Cyclomatic Complexity is the average of it's methods
+     * Cyclomatic Complexity metrics.
+     * 
+     * @param measurement Measurement the Measurement to serialize. 
+     * @throws JAXBException in case of a DOM error.
+     * @throws ParserConfigurationException in case of a DOM configuration problem.
+     * @throws TransformerException in case of an XML transformation error.
+     * @return Document the XML Document. 
+     */
+    @Override
+    public Document serialize(Measurement measurement) throws JAXBException,
+            ParserConfigurationException, TransformerException {
 
-	    m.marshal((Measurement)measurement, report);		
-       
-		return report;
-	}
-	
-	public String xml2String(Document report, boolean ommitXML) throws TransformerException {
-		
-		context.setStatusBeforeException("Transforming XML to String. Source XML: " + report.toString());
-		
-		TransformerFactory tf = TransformerFactory.newInstance();
-		Transformer transformer = tf.newTransformer();
-		if (ommitXML) {
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");	
-		}
-		StringWriter writer = new StringWriter();
-		transformer.transform(new DOMSource(report), new StreamResult(writer));
-		String output = writer.getBuffer().toString().replaceAll("\n|\r", "");
-		return output;
-	}
+        context.setStatusBeforeException("Marshalling measurement to XML. Measurement: "
+                + measurement);
+
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        dbf.setNamespaceAware(true);
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        Document report = db.newDocument();
+        JAXBContext jcontext = JAXBContext.newInstance(Measurement.class);
+
+        Marshaller m = jcontext.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+        m.marshal((Measurement) measurement, report);
+
+        return report;
+    }
+
+    /**
+     * Converts a Document into a String. 
+     * @param report Document the generated XML report.
+     * @param ommitXML boolean Whether is to ommit or not the XML processing statement.
+     * @return String the textual representation.
+     * @throws TransformerException in case of any XML to String transformation error.
+     */
+    public String xml2String(Document report, boolean ommitXML)
+            throws TransformerException {
+
+        context.setStatusBeforeException("Transforming XML to String. Source XML: "
+                + report.toString());
+
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer transformer = tf.newTransformer();
+        if (ommitXML) {
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION,
+                    "yes");
+        }
+        StringWriter writer = new StringWriter();
+        transformer.transform(new DOMSource(report), new StreamResult(writer));
+        String output = writer.getBuffer().toString().replaceAll("\n|\r", "");
+        return output;
+    }
 
 }

@@ -26,42 +26,49 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 /**
  * This is an auxiliary class, used to list each class' member.
+ * 
  * @author Cleuton Sampaio
- *
+ * 
  */
 public class Member implements Comparable<Member> {
-	public enum MEMBER_TYPE {METHOD, VARIABLE, GETTER_SETTER};
-	public String packageName;
-	public String className;
-	public String name;
-	public MEMBER_TYPE type;
-	public Member targetVariable;
-	public List<Member> referencedMembers = new ArrayList<Member>();
-	public ParseTree body;
-	
-	@Override
-	public int hashCode() {
-		return (this.type.ordinal() + 3) + this.name.hashCode(); 
-	}
+    
+    /**
+     * Enumeration for MEMBER_TYPE.
+     * @author Cleuton Sampaio.
+     *
+     */
+    public enum MEMBER_TYPE {
+        METHOD, VARIABLE, GETTER_SETTER
+    };
 
-	@Override
-	public boolean equals(Object obj) {
-		return this.name.equals(((Member) obj).name);
-	}
+    public String packageName;
+    public String className;
+    public String name;
+    public MEMBER_TYPE type;
+    public Member targetVariable;
+    public List<Member> referencedMembers = new ArrayList<Member>();
+    public ParseTree body;
 
-	@Override
-	public int compareTo(Member o) {
-		return this.name.compareTo(o.name);
-	}
+    @Override
+    public int hashCode() {
+        return (this.type.ordinal() + 3) + this.name.hashCode();
+    }
 
-	@Override
-	public String toString() {
-		String stringVersion = "[name: " + name 
-					+ ", type: " + type
-					+ ", references: [" + referencedMembers.toString()
-					+ "]]";
-		return stringVersion;
-	}
-	
-	
+    @Override
+    public boolean equals(Object obj) {
+        return this.name.equals(((Member) obj).name);
+    }
+
+    @Override
+    public int compareTo(Member o) {
+        return this.name.compareTo(o.name);
+    }
+
+    @Override
+    public String toString() {
+        String stringVersion = "[name: " + name + ", type: " + type
+                + ", references: [" + referencedMembers.toString() + "]]";
+        return stringVersion;
+    }
+
 }

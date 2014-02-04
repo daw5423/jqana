@@ -19,46 +19,57 @@
  */
 package com.obomprogramador.tools.jqana.model;
 
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-
 /**
  * Represents a metric.
+ * 
  * @author Cleuton Sampaio
- *
+ * 
  */
 
 public abstract class Metric {
-	/**
-	 * Metric name getter.
-	 * @return the metric's name.
-	 */
-	public abstract String 	getMetricName();
-	/**
-	 * Metric name setter.
-	 * @param name the metric's name.
-	 */
-	public abstract void     setMetricName(String name);
-	/**
-	 * Metric message getter.
-	 * @return the metric's violation message.
-	 */
-	public abstract String   getMetricMessage();
-	/**
-	 * Metric message setter.
-	 * @param message the metric's violation message.
-	 */
-	public abstract void     setMetricMessage(String message);
-	/**
-	 * Metric's verification algorithm getter.
-	 * @return The Metric's verification algorithm.
-	 */
-	
-	public abstract LimitVerificationAlgorithm getVerificationAlgorithm();
-	/**
-	 * Metric's verification algorithm setter.
-	 * @param lva The Metric's verification algorithm.
-	 */
-	public abstract void     setVerificationAlgorithm(LimitVerificationAlgorithm lva);
+    /**
+     * Metric name getter.
+     * 
+     * @return the metric's name.
+     */
+    public abstract String getMetricName();
+
+    /**
+     * Metric name setter.
+     * 
+     * @param name
+     *            the metric's name.
+     */
+    public abstract void setMetricName(String name);
+
+    /**
+     * Metric message getter.
+     * 
+     * @return the metric's violation message.
+     */
+    public abstract String getMetricMessage();
+
+    /**
+     * Metric message setter.
+     * 
+     * @param message
+     *            the metric's violation message.
+     */
+    public abstract void setMetricMessage(String message);
+
+    /**
+     * Metric's verification algorithm getter.
+     * 
+     * @return The Metric's verification algorithm.
+     */
+
+    public abstract LimitVerificationAlgorithm getVerificationAlgorithm();
+
+    /**
+     * Metric's verification algorithm setter.
+     * 
+     * @param lva
+     *            The Metric's verification algorithm.
+     */
+    public abstract void setVerificationAlgorithm(LimitVerificationAlgorithm lva);
 }

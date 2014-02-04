@@ -19,68 +19,58 @@
  */
 package com.obomprogramador.tools.jqana.parsers;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.antlr.v4.runtime.ANTLRFileStream;
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.obomprogramador.tools.jqana.antlrparser.JavaBaseListener;
-import com.obomprogramador.tools.jqana.antlrparser.JavaLexer;
 import com.obomprogramador.tools.jqana.antlrparser.JavaParser;
 import com.obomprogramador.tools.jqana.context.Context;
-import com.obomprogramador.tools.jqana.context.GlobalConstants;
 import com.obomprogramador.tools.jqana.model.AbstractMetricParser;
 import com.obomprogramador.tools.jqana.model.Measurement;
-import com.obomprogramador.tools.jqana.model.Measurement.MEASUREMENT_TYPE;
-import com.obomprogramador.tools.jqana.model.Metric;
-import com.obomprogramador.tools.jqana.model.Parser;
-
-import com.obomprogramador.tools.jqana.model.defaultimpl.DefaultMetric;
-import com.obomprogramador.tools.jqana.model.defaultimpl.MaxLimitVerificationAlgorithm;
 import com.obomprogramador.tools.jqana.model.defaultimpl.MetricValue;
-
-import static com.obomprogramador.tools.jqana.context.GlobalConstants.*;
 
 /**
  * Parser used to calculate cyclomatic complexity.
+ * 
  * @see Parser
  * @author Cleuton Sampaio
- *
+ * 
  */
 public class CyclomaticComplexityParser extends AbstractMetricParser {
 
 
-	
-	/**
-	 * 
-	 */
-	public CyclomaticComplexityParser(Measurement packageMeasurement,Context context) {
-		super(packageMeasurement,context,"metric.cc.name");
-	}
+    /**
+     * Constructor with fields.
+     * @param packageMeasurement Measurement the package's measurement.
+     * @param context Context the context to use.
+     */
+    public CyclomaticComplexityParser(Measurement packageMeasurement,
+            Context context) {
+        super(packageMeasurement, context, "metric.cc.name");
+    }
 
+    /**
+     * Listener getter.
+     * @param p JavaParser the parser to use.
+     * @return JavaBaseListener listener.
+     */
+    @Override
+    public JavaBaseListener getListener(JavaParser p) {
+        JavaBaseListener jbl = new CycloListener(this.metric, this.measurement,
+                p);
+        return jbl;
+    }
 
-	@Override
-	public JavaBaseListener getListener(JavaParser p) {
-		JavaBaseListener jbl = new CycloListener(this.metric, this.measurement, p);
-		return jbl;
-	}
-
-
-	@Override
-	public void afterProcessing() {
-		// Compute the average:
-        MetricValue mv = this.measurement.getMetricValue(context.getBundle().getString(this.metricResourceId));
+    /**
+     * After processing override.
+     * 
+     */
+    @Override
+    public void afterProcessing() {
+        // Compute the average:
+        MetricValue mv = this.measurement.getMetricValue(context.getBundle()
+                .getString(this.metricResourceId));
         if (mv.getQtdElements() == 0) {
-        	mv.setQtdElements(1);
+            mv.setQtdElements(1);
         }
         mv.setValue(mv.getValue() / mv.getQtdElements());
-	}
+    }
 
 }

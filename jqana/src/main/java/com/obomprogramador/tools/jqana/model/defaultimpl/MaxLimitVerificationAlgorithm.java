@@ -22,46 +22,62 @@ package com.obomprogramador.tools.jqana.model.defaultimpl;
 import com.obomprogramador.tools.jqana.model.LimitVerificationAlgorithm;
 
 /**
- * Implementation of LimitVerificationAlgorothm that checks whether a metric value is greater
- * than a max limit.
+ * Implementation of LimitVerificationAlgorothm that checks whether a metric
+ * value is greater than a max limit.
+ * 
  * @see LimitVerificationAlgorithm
- *
+ * 
  * @author Cleuton Sampaio.
- *
+ * 
  */
-public class MaxLimitVerificationAlgorithm extends
-		LimitVerificationAlgorithm {
+public class MaxLimitVerificationAlgorithm extends LimitVerificationAlgorithm {
 
-	private double maxLimit;
-	public MaxLimitVerificationAlgorithm(double maxLimit) {
-		super();
-		this.maxLimit = maxLimit;
-	}
-	
-	public MaxLimitVerificationAlgorithm() {
-		super();
-	}
-	
-	
+    private double maxLimit;
 
-	public double getMaxLimit() {
-		return maxLimit;
-	}
+    /**
+     * Constructor with field.
+     * @param maxLimit double The Maximum limit.
+     */
+    public MaxLimitVerificationAlgorithm(double maxLimit) {
+        super();
+        this.maxLimit = maxLimit;
+    }
 
-	public void setMaxLimit(double maxLimit) {
-		this.maxLimit = maxLimit;
-	}
+    /**
+     * Default constructor.
+     */
+    public MaxLimitVerificationAlgorithm() {
+        super();
+    }
 
-	/**
-	 * Checks whether the metric's value is greater than the specified limit.
-	 */
-	@Override
-	public boolean verify(double value) {
-		boolean returnCode = false;
-		if (value > maxLimit) {
-			returnCode = true;
-		}
-		return returnCode;
-	}
+    /**
+     * Getter for maximum limit.
+     * @return double Maximum limit.
+     */
+    public double getMaxLimit() {
+        return maxLimit;
+    }
+
+    /**
+     * Setter for max limit.
+     * @param maxLimit double the maximum limit.
+     */
+    public void setMaxLimit(double maxLimit) {
+        this.maxLimit = maxLimit;
+    }
+
+    /**
+     * Checks whether the metric's value is greater than the specified limit.
+     * @param value double the value to be checked.
+     * @return boolean whether the value is greather than the limit or not. 
+     */
+    @Override
+    public boolean verify(double value) {
+        boolean returnCode = false;
+        if (value > maxLimit) {
+            returnCode = true;
+        }
+        return returnCode;
+    }
 
 }

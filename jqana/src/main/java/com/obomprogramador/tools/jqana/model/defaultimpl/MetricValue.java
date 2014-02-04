@@ -1,72 +1,127 @@
 package com.obomprogramador.tools.jqana.model.defaultimpl;
 
+/**
+ * Class to hold a metric value. 
+ * @author Cleuton Sampaio
+ *
+ */
 public class MetricValue implements Comparable<MetricValue> {
 
-	protected String name;
-	protected double value;
-	protected int    qtdElements;
-	protected boolean violated;
-	
-	public MetricValue() {
-		super();
-	}
+    protected String name;
+    protected double value;
+    protected int qtdElements;
+    protected boolean violated;
+    private static final int PRIME = 31;
 
-	public String getName() {
-		return name;
-	}
+    /**
+     * Default constructor.
+     */
+    public MetricValue() {
+        super();
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Getter for name.
+     * @return String the name.
+     */
+    public String getName() {
+        return name;
+    }
 
-	public double getValue() {
-		return value;
-	}
+    /**
+     * Setter for name.
+     * @param name String the name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setValue(double value) {
-		this.value = value;
-	}
+    /**
+     * Getter for the value. 
+     * @return double the value.
+     */
+    public double getValue() {
+        return value;
+    }
 
-	
-	
-	@Override
-	public String toString() {
-		return "MetricValue [name=" + name + ", value=" + value
-				+ ", qtdElements=" + qtdElements + ", violated=" + violated
-				+ "]";
-	}
+    /**
+     * Setter for the value.
+     * @param value double The value.
+     */
+    public void setValue(double value) {
+        this.value = value;
+    }
 
-	public int getQtdElements() {
-		return qtdElements;
-	}
+    /**
+     * Object to string.
+     * @return String the textual representation.
+     */
+    @Override
+    public String toString() {
+        return "MetricValue [name=" + name + ", value=" + value
+                + ", qtdElements=" + qtdElements + ", violated=" + violated
+                + "]";
+    }
 
-	public void setQtdElements(int qtdElements) {
-		this.qtdElements = qtdElements;
-	}
+    /**
+     * Getter for quantity of elements.
+     * @return int QTDE O ELEMENTS.
+     */
+    public int getQtdElements() {
+        return qtdElements;
+    }
 
-	public boolean isViolated() {
-		return violated;
-	}
+    /**
+     * Setter for quantity of elements.
+     * @param qtdElements int QTDE of Elements.
+     */
+    public void setQtdElements(int qtdElements) {
+        this.qtdElements = qtdElements;
+    }
 
-	public void setViolated(boolean violated) {
-		this.violated = violated;
-	}
-	
-	@Override
-	public int hashCode() {
-		return 31 + this.getName().hashCode();
-	}
+    /**
+     * Getter for metric violation.
+     * @return boolean whether is considered in violation or not.
+     */
+    public boolean isViolated() {
+        return violated;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		return this.getName().equals(((MetricValue) obj).getName());
-	}
+    /**
+     * Setter for metric violation.
+     * @param violated boolean whether is violated (true) or not.
+     */
+    public void setViolated(boolean violated) {
+        this.violated = violated;
+    }
 
-	@Override
-	public int compareTo(MetricValue other) {
-		return this.getName().compareTo(other.getName());
-	}
-	
-	
+    /**
+     * Object hash code.
+     * @return int the Calculated hashcode.
+     */
+    @Override
+    public int hashCode() {
+        return PRIME + this.getName().hashCode();
+    }
+
+    /**
+     * Object equals.
+     * @param obj Object the object to compare with.
+     * @return boolean True if they are the same object.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return this.getName().equals(((MetricValue) obj).getName());
+    }
+
+    /**
+     * Object comparison.
+     * @param other MetricValue the MetricValue to compare with.
+     * @return int the comparison result..
+     */
+    @Override
+    public int compareTo(MetricValue other) {
+        return this.getName().compareTo(other.getName());
+    }
 
 }
