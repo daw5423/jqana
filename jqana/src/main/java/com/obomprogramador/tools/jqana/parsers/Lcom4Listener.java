@@ -21,6 +21,7 @@ package com.obomprogramador.tools.jqana.parsers;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -68,6 +69,9 @@ public class Lcom4Listener extends JavaBaseListener {
 
     protected Logger logger;
     protected List<Member> membersTable;
+    protected Map<String, String> parameterMap;  // Parameter variables and their type
+    protected Map<String, String> localMap;      // Local variables and their type
+    protected Map<String, String> blockMap;      // Block variables and their type
     protected JavaParser parser;
     protected String[] prefixos = {"get", "set", "is", "has"};
     protected List<String> getterSetterPrefix = Arrays.asList(prefixos);
@@ -158,6 +162,8 @@ public class Lcom4Listener extends JavaBaseListener {
         this.membersTable.add(member);
     }
 
+    
+    
     @Override
     public void enterAnnotation(@NotNull AnnotationContext ctx) {
         if (ctx.getText().equals("@Override")) {
@@ -188,6 +194,8 @@ public class Lcom4Listener extends JavaBaseListener {
                 break;
             }
         }
+        
+        
 
         if (this.overrideAnnotation) {
             logger.debug("*** Inherited method ignored: " + methodName);
@@ -199,11 +207,14 @@ public class Lcom4Listener extends JavaBaseListener {
             member.packageName = this.mainPackageName;
             member.type = MEMBER_TYPE.METHOD;
             member.body = body;
-            this.membersTable.add(member);
+            if (!this.membersTable.contains(member)) {
+                this.membersTable.add(member);    
+            }
         }
 
         this.overrideAnnotation = false;
     }
+
 
     /**
      * This is a special inner listener, used to check for a method's
