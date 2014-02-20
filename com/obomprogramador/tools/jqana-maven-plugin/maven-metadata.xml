@@ -2,12 +2,12 @@
 <metadata>
   <groupId>com.obomprogramador.tools</groupId>
   <artifactId>jqana-maven-plugin</artifactId>
-  <version>0.0.4</version>
+  <version>0.0.5</version>
   <versioning>
-    <latest>0.0.4</latest>
+    <latest>0.0.5</latest>
     <versions>
-      <version>0.0.4</version>
+      <version>0.0.5</version>
     </versions>
-    <lastUpdated>20140204105938</lastUpdated>
+    <lastUpdated>20140220163627</lastUpdated>
   </versioning>
 </metadata>
