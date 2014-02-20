@@ -34,6 +34,8 @@ public class Member implements Comparable<Member> {
     
     /**
      * Enumeration for MEMBER_TYPE.
+     * Member name is the key if it is a method, then its parameters are included in the form:
+     * <methodname>:<type 1>:<type 2>:...:<type 3>
      * @author Cleuton Sampaio.
      *
      */
