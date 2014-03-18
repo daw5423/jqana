@@ -68,9 +68,13 @@ public class Member implements Comparable<Member> {
 
     @Override
     public String toString() {
-        String stringVersion = "[name: " + name + ", type: " + type
-                + ", references: [" + referencedMembers.toString() + "]]";
-        return stringVersion;
+        StringBuilder stringVersion = new StringBuilder();
+        stringVersion.append("[name: " + name + ", type: " + type
+                + ", references: [");
+        for (Member m : this.referencedMembers) {
+            stringVersion.append(m.name + ";");
+        }
+        return stringVersion.toString();
     }
 
 }
