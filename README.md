@@ -22,8 +22,10 @@ The tool was originally created by <a href="https://plus.google.com/u/0/10484015
 <ul><a href="http://www.thecodebakers.org">The Code Bakers</a></ul>
 </li>
 
+
+[ ![Codeship Status for cleuton/jqana](https://www.codeship.io/projects/47d7a3d0-18d1-0132-1aba-4eb52c1571b2/status)](https://www.codeship.io/projects/34275)
+
 How to use jQana
 ----------------
 
 To use and download jQana, please consult our <a href="http://cleuton.github.io/jqana/">Website</a>.
-
