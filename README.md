@@ -29,3 +29,5 @@ How to use jQana
 ----------------
 
 To use and download jQana, please consult our <a href="http://cleuton.github.io/jqana/">Website</a>.
+
+Thanks
