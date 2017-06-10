@@ -22,7 +22,35 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
- 
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <source>1.6</source>
+    <github.global.server>github</github.global.server>
+	  <maven-plugin-api.version>2.0</maven-plugin-api.version>
+	  <maven-plugin-annotations.version>3.2</maven-plugin-annotations.version>
+	  <plexus-utils.version>3.0.8</plexus-utils.version>
+	  <junit.version>4.8.2</junit.version>
+	  <antlr4-runtime.version>4.1</antlr4-runtime.version>
+	  <commons-lang.version>2.6</commons-lang.version>
+	  <commons-io.version>20030203.000550</commons-io.version>
+	  <slf4j-log4j12.version>1.7.5</slf4j-log4j12.version>
+	  <maven-reporting-api.version>3.0</maven-reporting-api.version>
+	  <maven-reporting-impl.version>2.2</maven-reporting-impl.version>
+	  <bcel.version>5.2</bcel.version>
+	  <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+	  <maven-surefire-plugin.version>2.16</maven-surefire-plugin.version>
+	  <maven-plugin-plugin.version>3.2</maven-plugin-plugin.version>
+	  <maven-invoker-plugin.version>1.7</maven-invoker-plugin.version>
+	  <jacoco-maven-plugin.version>0.6.4.201312101107</jacoco-maven-plugin.version>
+	  <site-maven-plugin.version>0.9</site-maven-plugin.version>
+	  <lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
+	  <jdepend-maven-plugin.version>2.0-beta-2</jdepend-maven-plugin.version>
+	  <maven-checkstyle-plugin.version>2.10</maven-checkstyle-plugin.version>
+	  <maven-pmd-plugin.version>3.0.1</maven-pmd-plugin.version>
+	  <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+  </properties>
+
   <groupId>com.obomprogramador.tools</groupId>
   <artifactId>jqana-maven-plugin</artifactId>
   <version>0.0.6</version>
@@ -105,82 +133,76 @@
     <maven>2.2.1</maven>
   </prerequisites>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <source>1.6</source>
-    <github.global.server>github</github.global.server>
-  </properties>
-
   <dependencies>
   
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-plugin-api</artifactId>
-      <version>2.0</version>
+      <version>${maven-plugin-api.version}</version>
     </dependency>
     
     
     <dependency>
       <groupId>org.apache.maven.plugin-tools</groupId>
       <artifactId>maven-plugin-annotations</artifactId>
-      <version>3.2</version>
+      <version>${maven-plugin-annotations.version}</version>
       <scope>provided</scope>
     </dependency>
     
     <dependency>
       <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-utils</artifactId>
-      <version>3.0.8</version>
+      <version>${plexus-utils.version}</version>
     </dependency>
     
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.8.2</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>  
   
 	<dependency>
 		<groupId>org.antlr</groupId>
 		<artifactId>antlr4-runtime</artifactId>
-		<version>4.1</version>
+		<version>${antlr4-runtime.version}</version>
 	</dependency>
 	
 	<dependency>
 		<groupId>commons-lang</groupId>
 		<artifactId>commons-lang</artifactId>
-		<version>2.6</version>
+		<version>${commons-lang.version}</version>
 	</dependency>
 	
 	<dependency>
 		<groupId>commons-io</groupId>
 		<artifactId>commons-io</artifactId>
-		<version>20030203.000550</version>
+		<version>${commons-io.version}</version>
 	</dependency>
             
 	
 	<dependency>
 		<groupId>org.slf4j</groupId>
 		<artifactId>slf4j-log4j12</artifactId>
-		<version>1.7.5</version>
-	</dependency> 
-	
+		<version>${slf4j-log4j12.version}</version>
+	</dependency>
+
     <dependency>
 		<groupId>org.apache.maven.reporting</groupId>
 		<artifactId>maven-reporting-api</artifactId>
-		<version>3.0</version>
+		<version>${maven-reporting-api.version}</version>
 	</dependency>
             
     <dependency>
       <groupId>org.apache.maven.reporting</groupId>
       <artifactId>maven-reporting-impl</artifactId>
-      <version>2.2</version>
+      <version>${maven-reporting-impl.version}</version>
     </dependency>
     
     <dependency>
 		<groupId>org.apache.bcel</groupId>
 		<artifactId>bcel</artifactId>
-		<version>5.2</version>
+		<version>${bcel.version}</version>
 	</dependency>
     
   </dependencies>
@@ -194,7 +216,7 @@
           <plugin>
               	<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 				    <source>${source}</source>
 				    <target>${source}</target>
@@ -204,7 +226,7 @@
 	      <plugin>
 	        <groupId>org.apache.maven.plugins</groupId>
 	        <artifactId>maven-surefire-plugin</artifactId>
-	        <version>2.16</version>
+	        <version>${maven-surefire-plugin.version}</version>
 	        <configuration>
 	          <excludes>
 	            <exclude>**/abc/*.java</exclude>
@@ -216,7 +238,7 @@
 	      <plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
 		        <artifactId>maven-plugin-plugin</artifactId>
-		        <version>3.2</version>
+		        <version>${maven-plugin-plugin.version}</version>
 		        <configuration>
 		          	
 		          	<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
@@ -242,7 +264,7 @@
           <plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-invoker-plugin</artifactId>
-	            <version>1.7</version>
+	            <version>${maven-invoker-plugin.version}</version>
 	            <configuration>
 	              	<debug>true</debug>
 	              	<cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
@@ -273,7 +295,7 @@
                 <plugin>
 			        <groupId>org.jacoco</groupId>
 			        <artifactId>jacoco-maven-plugin</artifactId>
-			        <version>0.6.4.201312101107</version>
+			        <version>${jacoco-maven-plugin.version}</version>
 			        <configuration>
 						<excludes>
 							<exclude>**/HelpMojo.class</exclude>
@@ -324,7 +346,7 @@
         <plugin>
             <groupId>com.github.github</groupId>
             <artifactId>site-maven-plugin</artifactId>
-            <version>0.9</version>
+            <version>${site-maven-plugin.version}</version>
             <configuration>
                 <message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
                 <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
@@ -352,7 +374,7 @@
       		<plugin>
       			<groupId>org.eclipse.m2e</groupId>
       			<artifactId>lifecycle-mapping</artifactId>
-      			<version>1.0.0</version>
+      			<version>${lifecycle-mapping.version}</version>
       			<configuration>
       				<lifecycleMappingMetadata>
       					<pluginExecutions>
@@ -386,12 +408,12 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jdepend-maven-plugin</artifactId>
-				<version>2.0-beta-2</version>
-			</plugin> 
+				<version>${jdepend-maven-plugin.version}</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>2.10</version>
+				<version>${maven-checkstyle-plugin.version}</version>
 				<configuration>
 				    
 				    <configLocation>${project.basedir}/sun_checks.xml</configLocation>
@@ -402,17 +424,17 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.0.1</version>		    
+				<version>${maven-pmd-plugin.version}</version>
 			</plugin>
 			<plugin>
         		<groupId>org.jacoco</groupId>
         		<artifactId>jacoco-maven-plugin</artifactId>
-        		<version>0.5.3.201107060350</version>
+        		<version>${jacoco-maven-plugin.version}</version>
       		</plugin>
       		<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>      		    
+				<version>${maven-javadoc-plugin.version}</version>
       		</plugin>
       </plugins>
   </reporting> 
