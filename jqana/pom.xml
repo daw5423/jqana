@@ -1,7 +1,7 @@
-<!-- 
+<!--
 /**
  * jQana - Open Source Java(TM) code quality analyzer.
- * 
+ *
  * Copyright 2013 Cleuton Sampaio de Melo Jr
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * Project website: http://www.jqana.com
  */
  -->
@@ -42,7 +42,7 @@
 	  <maven-surefire-plugin.version>2.16</maven-surefire-plugin.version>
 	  <maven-plugin-plugin.version>3.2</maven-plugin-plugin.version>
 	  <maven-invoker-plugin.version>1.7</maven-invoker-plugin.version>
-	  <jacoco-maven-plugin.version>0.6.4.201312101107</jacoco-maven-plugin.version>
+	  <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
 	  <site-maven-plugin.version>0.9</site-maven-plugin.version>
 	  <lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
 	  <jdepend-maven-plugin.version>2.0-beta-2</jdepend-maven-plugin.version>
@@ -58,7 +58,7 @@
 
   <name>jqana</name>
   <url>http://http://jqana.com</url>
-  
+
   <licenses>
 	  <license>
 	    <name>The Apache Software License, Version 2.0</name>
@@ -67,12 +67,12 @@
 	    <comments>A business-friendly OSS license</comments>
 	  </license>
  </licenses>
- 
+
  <organization>
     <name>O Bom Programador</name>
     <url>http://obomprogramador.com</url>
   </organization>
-  
+
    <developers>
     <developer>
       <id>Cleuton</id>
@@ -105,14 +105,14 @@
       <properties>
         <picUrl></picUrl>
       </properties>
-    </developer>    
+    </developer>
   </developers>
-  
+
   <issueManagement>
     <system>GitHub</system>
     <url>https://github.com/cleuton/jqana/issues</url>
-  </issueManagement>  
-  
+  </issueManagement>
+
   <mailingLists>
     <mailingList>
       <name>General Mailing List</name>
@@ -121,66 +121,66 @@
       <post>jqana@googlegroups.com</post>
       <archive>https://groups.google.com/d/forum/jqana</archive>
     </mailingList>
-  </mailingLists>  
-  
+  </mailingLists>
+
  <scm>
 	<url>https://github.com/cleuton/jqana</url>
     <connection>scm:git:git://github.com/cleuton/jqana.git</connection>
-    <developerConnection>scm:git:git@github.com:cleuton/jqana.git</developerConnection>  
- </scm>  
- 
+    <developerConnection>scm:git:git@github.com:cleuton/jqana.git</developerConnection>
+ </scm>
+
  <prerequisites>
     <maven>2.2.1</maven>
   </prerequisites>
 
   <dependencies>
-  
+
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-plugin-api</artifactId>
       <version>${maven-plugin-api.version}</version>
     </dependency>
-    
-    
+
+
     <dependency>
       <groupId>org.apache.maven.plugin-tools</groupId>
       <artifactId>maven-plugin-annotations</artifactId>
       <version>${maven-plugin-annotations.version}</version>
       <scope>provided</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-utils</artifactId>
       <version>${plexus-utils.version}</version>
     </dependency>
-    
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>  
-  
+    </dependency>
+
 	<dependency>
 		<groupId>org.antlr</groupId>
 		<artifactId>antlr4-runtime</artifactId>
 		<version>${antlr4-runtime.version}</version>
 	</dependency>
-	
+
 	<dependency>
 		<groupId>commons-lang</groupId>
 		<artifactId>commons-lang</artifactId>
 		<version>${commons-lang.version}</version>
 	</dependency>
-	
+
 	<dependency>
 		<groupId>commons-io</groupId>
 		<artifactId>commons-io</artifactId>
 		<version>${commons-io.version}</version>
 	</dependency>
-            
-	
+
+
 	<dependency>
 		<groupId>org.slf4j</groupId>
 		<artifactId>slf4j-log4j12</artifactId>
@@ -192,27 +192,27 @@
 		<artifactId>maven-reporting-api</artifactId>
 		<version>${maven-reporting-api.version}</version>
 	</dependency>
-            
+
     <dependency>
       <groupId>org.apache.maven.reporting</groupId>
       <artifactId>maven-reporting-impl</artifactId>
       <version>${maven-reporting-impl.version}</version>
     </dependency>
-    
+
     <dependency>
 		<groupId>org.apache.bcel</groupId>
 		<artifactId>bcel</artifactId>
 		<version>${bcel.version}</version>
 	</dependency>
-    
+
   </dependencies>
 
   <build>
-	      
-      <plugins>
-          
 
-          
+      <plugins>
+
+
+
           <plugin>
               	<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -222,7 +222,7 @@
 				    <target>${source}</target>
 				</configuration>
           </plugin>
-          
+
 	      <plugin>
 	        <groupId>org.apache.maven.plugins</groupId>
 	        <artifactId>maven-surefire-plugin</artifactId>
@@ -233,14 +233,14 @@
 	            <exclude>**/def/*.java</exclude>
 	          </excludes>
 	        </configuration>
-	      </plugin>          
-          
+	      </plugin>
+
 	      <plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
 		        <artifactId>maven-plugin-plugin</artifactId>
 		        <version>${maven-plugin-plugin.version}</version>
 		        <configuration>
-		          	
+
 		          	<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
 		        </configuration>
 		        <executions>
@@ -260,7 +260,7 @@
 	      </plugin>
 
 		<!-- Integration test configuration -->
-	
+
           <plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-invoker-plugin</artifactId>
@@ -291,7 +291,7 @@
 	             	</execution>
 	            </executions>
           </plugin>
-          
+
                 <plugin>
 			        <groupId>org.jacoco</groupId>
 			        <artifactId>jacoco-maven-plugin</artifactId>
@@ -301,7 +301,7 @@
 							<exclude>**/HelpMojo.class</exclude>
 						    <exclude>**/RetriveTestResults.class</exclude>
 						    <exclude>com/obomprogramador/tools/jqana/antlrparser/*.class</exclude>
-						</excludes>			          
+						</excludes>
 			        </configuration>
 			        <executions>
 			          <execution>
@@ -340,7 +340,7 @@
 			            </configuration>
 			          </execution>
 			        </executions>
-		      </plugin>          
+		      </plugin>
 
 		<!-- This is to deploy the plugin to a maven repository inside Github -->
         <plugin>
@@ -402,7 +402,7 @@
       	</plugins>
       </pluginManagement>
   </build>
-  
+
   <reporting>
       <plugins>
 			<plugin>
@@ -415,11 +415,11 @@
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${maven-checkstyle-plugin.version}</version>
 				<configuration>
-				    
+
 				    <configLocation>${project.basedir}/sun_checks.xml</configLocation>
           			<suppressionsLocation>${project.basedir}/checkstylesuppressions.xml</suppressionsLocation>
           			<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
-        		</configuration>				
+        		</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -437,7 +437,7 @@
 				<version>${maven-javadoc-plugin.version}</version>
       		</plugin>
       </plugins>
-  </reporting> 
+  </reporting>
 
 	<distributionManagement>
 	    <repository>
@@ -446,5 +446,5 @@
 	        <url>file://${project.build.directory}/mvn-repo</url>
 	    </repository>
 	</distributionManagement>
-   
+
 </project>
